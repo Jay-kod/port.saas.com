@@ -15,14 +15,14 @@ use function Livewire\Volt\{state};
                 <span class="font-extrabold text-xl tracking-tight text-white">DevFolio<span class="text-amber-400">.AI</span></span>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                <a href="{{ route('home') }}" class="hover:text-amber-400 transition font-medium">Home</a>
-                <a href="{{ route('home') }}#features" class="hover:text-amber-400 transition">Features</a>
-                <a href="{{ route('pricing') }}" class="text-amber-400 font-semibold transition">Pricing</a>
-                <a href="{{ route('discover') }}" class="hover:text-amber-400 transition">Discover</a>
-            </nav>
+            <div class="flex items-center gap-6 sm:gap-8">
+                <nav class="flex items-center gap-6 sm:gap-8 text-sm font-medium text-gray-300">
+                    <a href="{{ route('home') }}" class="hover:text-amber-400 transition font-medium">Home</a>
+                    <a href="{{ route('home') }}#features" class="hover:text-amber-400 transition">Features</a>
+                    <a href="{{ route('pricing') }}" class="text-amber-400 font-semibold transition">Pricing</a>
+                    <a href="{{ route('discover') }}" class="hover:text-amber-400 transition">Discover</a>
+                </nav>
 
-            <div class="flex items-center gap-3">
                 <a href="/admin/login" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-bold transition shadow-lg shadow-amber-500/20">
                     <span>Get Started</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
