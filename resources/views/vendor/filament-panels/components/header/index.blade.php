@@ -9,7 +9,7 @@
 <header
     {{
         $attributes->class([
-            'fi-header sticky top-0 z-20 bg-white/75 dark:bg-gray-900/75 backdrop-blur-md py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8',
+            'fi-header',
             'fi-header-has-breadcrumbs' => $breadcrumbs,
         ])
     }}
@@ -19,26 +19,18 @@
             <x-filament::breadcrumbs :breadcrumbs="$breadcrumbs" />
         @endif
 
-        <div class="flex items-center gap-x-4">
-            <x-filament::icon-button
-                color="gray"
-                icon="heroicon-o-bars-3"
-                icon-size="lg"
-                x-cloak
-                x-data="{}"
-                x-on:click="$store.sidebar.isOpen ? $store.sidebar.close() : $store.sidebar.open()"
-            />
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_BEFORE, scopes: $this->getRenderHookScopes()) }}
 
-            {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_BEFORE, scopes: $this->getRenderHookScopes()) }}
-
-            @if (filled($heading))
-                <h1 class="fi-header-heading">
+        @if (filled($heading))
+            <template x-teleport="#custom-topbar-title">
+                <h1 class="text-xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-2xl truncate">
                     {{ $heading }}
                 </h1>
-            @endif
+            </template>
+        @endif
 
-            {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_AFTER, scopes: $this->getRenderHookScopes()) }}
-        </div>
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_AFTER, scopes: $this->getRenderHookScopes()) }}
+
 
         @if (filled($subheading))
             <p class="fi-header-subheading">
