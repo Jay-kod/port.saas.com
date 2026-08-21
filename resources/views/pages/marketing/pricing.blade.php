@@ -4,16 +4,16 @@ use function Livewire\Volt\{state};
 
 ?>
 
-<div class="min-h-screen text-gray-100 flex flex-col justify-between" style="background-color: var(--color-background, #0a0e14);">
+<div class="min-h-screen text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
     <x-marketing-header />
 
     {{-- Pricing Header --}}
     <section class="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
 
-        <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight">
+        <h1 class="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white tracking-tight">
             Simple plans for ambitious developers
         </h1>
-        <p class="mt-6 text-lg text-gray-400 max-w-2xl mx-auto">
+        <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Choose the plan that fits your career goals. Start free and upgrade whenever you need unlimited AI tailoring and custom domains.
         </p>
     </section>
@@ -22,19 +22,19 @@ use function Livewire\Volt\{state};
     <section class="pb-24 px-6 max-w-7xl mx-auto w-full">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {{-- Free Tier --}}
-            <div class="p-8 rounded-3xl border border-gray-800 bg-gray-900/50 flex flex-col justify-between">
+            <div class="p-8 rounded-3xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 flex flex-col justify-between">
                 <div>
                     <div class="flex justify-between items-baseline mb-4">
-                        <h3 class="text-xl font-bold text-white">Free</h3>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-gray-800 text-gray-400 font-medium">Starter</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Free</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 font-medium">Starter</span>
                     </div>
-                    <p class="text-xs text-gray-400 mb-6">Everything you need to launch a personal portfolio.</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mb-6">Everything you need to launch a personal portfolio.</p>
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-4xl font-extrabold text-white">$0</span>
-                        <span class="text-xs text-gray-400">/ forever</span>
+                        <span class="text-4xl font-extrabold text-gray-900 dark:text-white">$0</span>
+                        <span class="text-xs text-gray-600 dark:text-gray-400">/ forever</span>
                     </div>
 
-                    <ul class="space-y-3.5 text-xs text-gray-300 border-t border-gray-800 pt-6">
+                    <ul class="space-y-3.5 text-xs text-gray-600 dark:text-gray-300 border-t border-gray-200 dark:border-gray-800 pt-6">
                         <li class="flex items-center gap-2">
                             <span class="text-emerald-400">✓</span> 1 Published Portfolio Profile
                         </li>
@@ -54,47 +54,47 @@ use function Livewire\Volt\{state};
                 </div>
 
                 <div class="mt-8">
-                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-700 bg-gray-800/80 hover:bg-gray-800 text-white text-xs font-bold transition">
+                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-white text-xs font-bold transition">
                         Get Started Free
                     </a>
                 </div>
             </div>
 
             {{-- Pro Tier (Featured) --}}
-            <div class="p-8 rounded-3xl border-2 border-amber-500 bg-gray-900/90 flex flex-col justify-between relative shadow-2xl shadow-amber-500/10">
+            <div class="p-8 rounded-3xl border-2 border-amber-500 bg-white/90 dark:bg-gray-900/90 flex flex-col justify-between relative shadow-2xl shadow-amber-500/10">
                 <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-amber-500 text-gray-950 font-extrabold text-[10px] uppercase tracking-wider">
                     Most Popular
                 </div>
 
                 <div>
                     <div class="flex justify-between items-baseline mb-4">
-                        <h3 class="text-xl font-bold text-white">Pro Developer</h3>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 font-medium">Full Power</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Pro Developer</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-300 font-medium">Full Power</span>
                     </div>
-                    <p class="text-xs text-gray-400 mb-6">For developers actively applying and interviewing.</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mb-6">For developers actively applying and interviewing.</p>
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-4xl font-extrabold text-white">$12</span>
-                        <span class="text-xs text-gray-400">/ month</span>
+                        <span class="text-4xl font-extrabold text-gray-900 dark:text-white">$12</span>
+                        <span class="text-xs text-gray-600 dark:text-gray-400">/ month</span>
                     </div>
 
-                    <ul class="space-y-3.5 text-xs text-gray-300 border-t border-gray-800 pt-6">
-                        <li class="flex items-center gap-2 font-medium text-white">
-                            <span class="text-amber-400">✓</span> <strong>Unlimited</strong> AI Resume Tailoring
+                    <ul class="space-y-3.5 text-xs text-gray-600 dark:text-gray-300 border-t border-gray-200 dark:border-gray-800 pt-6">
+                        <li class="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
+                            <span class="text-amber-500 dark:text-amber-400">✓</span> <strong>Unlimited</strong> AI Resume Tailoring
                         </li>
-                        <li class="flex items-center gap-2 font-medium text-white">
-                            <span class="text-amber-400">✓</span> Custom Domain Support (SSL included)
+                        <li class="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
+                            <span class="text-amber-500 dark:text-amber-400">✓</span> Custom Domain Support (SSL included)
                         </li>
-                        <li class="flex items-center gap-2 font-medium text-white">
-                            <span class="text-amber-400">✓</span> Remove Platform Branding
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="text-amber-400">✓</span> All Premium Themes & Custom Accents
+                        <li class="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
+                            <span class="text-amber-500 dark:text-amber-400">✓</span> Remove Platform Branding
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-amber-400">✓</span> Priority GitHub Sync & Updates
+                            <span class="text-amber-500 dark:text-amber-400">✓</span> All Premium Themes & Custom Accents
                         </li>
                         <li class="flex items-center gap-2">
-                            <span class="text-amber-400">✓</span> Bring Your Own AI Key (BYOK) Exemptions
+                            <span class="text-amber-500 dark:text-amber-400">✓</span> Priority GitHub Sync & Updates
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-amber-500 dark:text-amber-400">✓</span> Bring Your Own AI Key (BYOK) Exemptions
                         </li>
                     </ul>
                 </div>
@@ -107,19 +107,19 @@ use function Livewire\Volt\{state};
             </div>
 
             {{-- Agency Tier --}}
-            <div class="p-8 rounded-3xl border border-gray-800 bg-gray-900/50 flex flex-col justify-between">
+            <div class="p-8 rounded-3xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 flex flex-col justify-between">
                 <div>
                     <div class="flex justify-between items-baseline mb-4">
-                        <h3 class="text-xl font-bold text-white">Agency / Team</h3>
-                        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 font-medium">Teams</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Agency / Team</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-600 dark:text-purple-300 font-medium">Teams</span>
                     </div>
-                    <p class="text-xs text-gray-400 mb-6">For bootcamps, agencies, and recruiter rosters.</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mb-6">For bootcamps, agencies, and recruiter rosters.</p>
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-4xl font-extrabold text-white">$49</span>
-                        <span class="text-xs text-gray-400">/ month</span>
+                        <span class="text-4xl font-extrabold text-gray-900 dark:text-white">$49</span>
+                        <span class="text-xs text-gray-600 dark:text-gray-400">/ month</span>
                     </div>
 
-                    <ul class="space-y-3.5 text-xs text-gray-300 border-t border-gray-800 pt-6">
+                    <ul class="space-y-3.5 text-xs text-gray-600 dark:text-gray-300 border-t border-gray-200 dark:border-gray-800 pt-6">
                         <li class="flex items-center gap-2">
                             <span class="text-purple-400">✓</span> <strong>Unlimited</strong> Profiles & Portfolios
                         </li>
@@ -139,7 +139,7 @@ use function Livewire\Volt\{state};
                 </div>
 
                 <div class="mt-8">
-                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-700 bg-gray-800/80 hover:bg-gray-800 text-white text-xs font-bold transition">
+                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-white text-xs font-bold transition">
                         Start Agency Trial
                     </a>
                 </div>
@@ -148,7 +148,7 @@ use function Livewire\Volt\{state};
     </section>
 
     {{-- Footer --}}
-    <footer class="border-t border-gray-800/80 py-10 px-6 bg-gray-950 text-xs text-gray-500">
+    <footer class="border-t border-gray-200 dark:border-gray-800/80 py-10 px-6 bg-gray-50 dark:bg-gray-950 text-xs text-gray-600 dark:text-gray-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
                 &copy; {{ date('Y') }} DevFolio AI Platform. Built for developers with Laravel, Livewire Volt & Filament.
