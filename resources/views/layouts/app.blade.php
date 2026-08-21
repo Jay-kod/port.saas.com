@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     @php
         $currentProfile = app(\App\Services\CurrentProfileResolver::class)->resolve();
         $pageTitle = $currentProfile?->full_name ? $currentProfile->full_name . ' | ' . ($currentProfile->headline ?: 'Portfolio') : config('app.name', 'DevFolio AI');
@@ -53,7 +56,7 @@
 </head>
 <body class="min-h-screen antialiased relative">
     {{-- Floating Theme Light/Dark Mode Switcher --}}
-    <div class="fixed top-4 right-4 z-50">
+    <div class="fixed bottom-20 right-4 sm:bottom-auto sm:top-20 sm:right-4 z-[55]">
         <button
             type="button"
             id="theme-mode-toggle"

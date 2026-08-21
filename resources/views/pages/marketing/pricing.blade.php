@@ -5,37 +5,11 @@ use function Livewire\Volt\{state};
 ?>
 
 <div class="min-h-screen text-gray-100 flex flex-col justify-between" style="background-color: var(--color-background, #0a0e14);">
-    {{-- Top Navigation --}}
-    <header class="border-b border-gray-800/80 bg-gray-950/60 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xl shadow-lg shadow-amber-500/5">
-                    ⚡
-                </div>
-                <span class="font-extrabold text-xl tracking-tight text-white">DevFolio<span class="text-amber-400">.AI</span></span>
-            </a>
-
-            <div class="flex items-center gap-6 sm:gap-8">
-                <nav class="flex items-center gap-6 sm:gap-8 text-sm font-medium text-gray-300">
-                    <a href="{{ route('home') }}" class="hover:text-amber-400 transition font-medium">Home</a>
-                    <a href="{{ route('home') }}#features" class="hover:text-amber-400 transition">Features</a>
-                    <a href="{{ route('pricing') }}" class="text-amber-400 font-semibold transition">Pricing</a>
-                    <a href="{{ route('discover') }}" class="hover:text-amber-400 transition">Discover</a>
-                </nav>
-
-                <a href="/admin/login" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-bold transition shadow-lg shadow-amber-500/20">
-                    <span>Get Started</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </a>
-            </div>
-        </div>
-    </header>
+    <x-marketing-header />
 
     {{-- Pricing Header --}}
     <section class="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-6">
-            Transparent Pricing
-        </div>
+
         <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight">
             Simple plans for ambitious developers
         </h1>

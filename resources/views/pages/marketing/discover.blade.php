@@ -41,36 +41,11 @@ $categories = computed(function () {
 ?>
 
 <div class="min-h-screen text-gray-100 flex flex-col justify-between" style="background-color: var(--color-background, #0a0e14);">
-    {{-- Top Navigation --}}
-    <header class="border-b border-gray-800/80 bg-gray-950/60 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xl shadow-lg shadow-amber-500/5">
-                    ⚡
-                </div>
-                <span class="font-extrabold text-xl tracking-tight text-white">DevFolio<span class="text-amber-400">.AI</span></span>
-            </a>
-
-            <div class="flex items-center gap-6 sm:gap-8">
-                <nav class="flex items-center gap-6 sm:gap-8 text-sm font-medium text-gray-300">
-                    <a href="{{ route('home') }}" class="hover:text-amber-400 transition font-medium">Home</a>
-                    <a href="{{ route('discover') }}" class="text-amber-400 font-bold transition">Discover Developers</a>
-                    <a href="{{ route('pricing') }}" class="hover:text-amber-400 transition">Pricing</a>
-                </nav>
-
-                <a href="/admin/login" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-bold transition shadow-lg shadow-amber-500/20">
-                    <span>Get Started</span>
-                </a>
-            </div>
-        </div>
-    </header>
+    <x-marketing-header />
 
     {{-- Hero & Search Header --}}
     <section class="relative pt-16 pb-12 px-6">
         <div class="max-w-5xl mx-auto text-center space-y-4">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider shadow-sm">
-                <span>🌐 Public Developer Directory</span>
-            </div>
 
             <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tight">
                 Discover world-class <br class="hidden sm:inline" />
