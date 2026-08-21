@@ -9,7 +9,7 @@
 <header
     {{
         $attributes->class([
-            'fi-header',
+            'fi-header sticky top-0 z-20 bg-white/75 dark:bg-gray-900/75 backdrop-blur-md py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8',
             'fi-header-has-breadcrumbs' => $breadcrumbs,
         ])
     }}
