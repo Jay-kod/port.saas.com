@@ -17,7 +17,25 @@ class SocialAuthController extends Controller
     /**
      * Supported OAuth providers.
      */
-    protected array $allowedProviders = ['github', 'google'];
+    /**
+     * Dynamically inject OAuth credentials from DB settings or config.
+     */
+    public static function configureProvider(string $provider): bool
+    {
+        $credentials = \App\Models\OauthSetting::getCredentials($provider);
+
+        if ($credentials) {
+            config([
+                "services.{$provider}.client_id" => $credentials['client_id'],
+                "services.{$provider}.client_secret" => $credentials['client_secret'],
+                "services.{$provider}.redirect" => url("/auth/callback/{$provider}"),
+            ]);
+
+            return (bool) ($credentials['is_enabled'] ?? true);
+        }
+
+        return false;
+    }
 
     /**
      * Redirect the user to the OAuth provider authentication page.
@@ -26,6 +44,13 @@ class SocialAuthController extends Controller
     {
         if (! in_array($provider, $this->allowedProviders)) {
             abort(404, 'Unsupported OAuth provider.');
+        }
+
+        $isEnabled = static::configureProvider($provider);
+
+        if (! $isEnabled) {
+            return redirect()->route('filament.admin.auth.login')
+                ->with('error', ucfirst($provider) . ' sign-in is not yet configured or is disabled.');
         }
 
         return Socialite::driver($provider)->redirect();
@@ -39,6 +64,8 @@ class SocialAuthController extends Controller
         if (! in_array($provider, $this->allowedProviders)) {
             abort(404, 'Unsupported OAuth provider.');
         }
+
+        static::configureProvider($provider);
 
         try {
             $socialUser = Socialite::driver($provider)->user();
