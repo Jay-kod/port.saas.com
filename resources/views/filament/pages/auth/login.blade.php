@@ -17,10 +17,10 @@
             }
         }
     }" 
-    class="w-full max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/40 bg-gray-950 grid grid-cols-1 lg:grid-cols-12 min-h-[680px]"
+    class="w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/40 bg-gray-950 grid grid-cols-1 lg:grid-cols-12 max-h-[94vh] h-full"
 >
     {{-- Left Side: Emerald Gradient Showcase & Feature Cards --}}
-    <div class="lg:col-span-6 p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden" 
+    <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden h-full" 
          style="background: radial-gradient(circle at 20% 20%, #064e3b 0%, #022c22 50%, #03130d 100%);">
         
         {{-- Ambient Glowing Orb --}}
@@ -29,52 +29,52 @@
 
         {{-- Top Brand Logo --}}
         <div class="relative z-10">
-            <a href="/" class="inline-flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-300 text-gray-950 flex items-center justify-center font-black text-base shadow-lg shadow-emerald-500/20">
+            <a href="/" class="inline-flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-300 text-gray-950 flex items-center justify-center font-black text-sm shadow-lg shadow-emerald-500/20">
                     ⚡
                 </div>
-                <span class="font-extrabold text-xl tracking-tight text-white">DevFolio<span class="text-emerald-400">.AI</span></span>
+                <span class="font-extrabold text-lg tracking-tight text-white">DevFolio<span class="text-emerald-400">.AI</span></span>
             </a>
         </div>
 
         {{-- Middle Hero Text --}}
-        <div class="my-10 relative z-10 space-y-4">
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+        <div class="my-4 sm:my-6 relative z-10 space-y-2">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
                 Welcome Back<br>to DevFolio
             </h1>
-            <p class="text-sm sm:text-base text-emerald-200/80 max-w-md leading-relaxed">
-                Sign in to manage your personal developer portfolio, run AI resume tailoring, and track applications.
+            <p class="text-xs sm:text-sm text-emerald-200/80 max-w-md leading-relaxed">
+                Sign in to manage your developer portfolio, run AI resume tailoring, and track applications.
             </p>
         </div>
 
         {{-- Bottom Step Cards (Exact 3-Card layout from design) --}}
-        <div class="grid grid-cols-3 gap-3 relative z-10">
+        <div class="grid grid-cols-3 gap-2.5 relative z-10">
             {{-- Card 1 (Active White Card) --}}
-            <div class="p-4 rounded-2xl bg-white text-gray-950 shadow-xl flex flex-col justify-between min-h-[110px] transform transition hover:scale-[1.02]">
-                <div class="w-6 h-6 rounded-full bg-gray-950 text-white font-bold text-xs flex items-center justify-center">
+            <div class="p-3 rounded-2xl bg-white text-gray-950 shadow-xl flex flex-col justify-between min-h-[90px] transform transition hover:scale-[1.02]">
+                <div class="w-5 h-5 rounded-full bg-gray-950 text-white font-bold text-[10px] flex items-center justify-center">
                     🚀
                 </div>
-                <span class="text-xs font-bold leading-tight">
+                <span class="text-[11px] font-bold leading-tight">
                     AI Resume<br>Tailoring
                 </span>
             </div>
 
             {{-- Card 2 (Frosted Emerald Glass Card) --}}
-            <div class="p-4 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[110px] transform transition hover:scale-[1.02]">
-                <div class="w-6 h-6 rounded-full bg-emerald-800/80 text-emerald-300 font-bold text-xs flex items-center justify-center border border-emerald-500/30">
+            <div class="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[90px] transform transition hover:scale-[1.02]">
+                <div class="w-5 h-5 rounded-full bg-emerald-800/80 text-emerald-300 font-bold text-[10px] flex items-center justify-center border border-emerald-500/30">
                     🎨
                 </div>
-                <span class="text-xs font-semibold leading-tight text-emerald-200/90">
+                <span class="text-[11px] font-semibold leading-tight text-emerald-200/90">
                     7 Handcrafted<br>Themes
                 </span>
             </div>
 
             {{-- Card 3 (Frosted Emerald Glass Card) --}}
-            <div class="p-4 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[110px] transform transition hover:scale-[1.02]">
-                <div class="w-6 h-6 rounded-full bg-emerald-800/80 text-emerald-300 font-bold text-xs flex items-center justify-center border border-emerald-500/30">
+            <div class="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[90px] transform transition hover:scale-[1.02]">
+                <div class="w-5 h-5 rounded-full bg-emerald-800/80 text-emerald-300 font-bold text-[10px] flex items-center justify-center border border-emerald-500/30">
                     📊
                 </div>
-                <span class="text-xs font-semibold leading-tight text-emerald-200/90">
+                <span class="text-[11px] font-semibold leading-tight text-emerald-200/90">
                     Job Tracker<br>Kanban
                 </span>
             </div>
@@ -82,11 +82,11 @@
     </div>
 
     {{-- Right Side: Dark Elegant Login Form --}}
-    <div class="lg:col-span-6 p-8 sm:p-12 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80">
-        <div class="w-full max-w-md mx-auto space-y-6">
+    <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80 overflow-y-auto h-full">
+        <div class="w-full max-w-sm mx-auto space-y-4">
             {{-- Form Header --}}
-            <div class="space-y-1.5 text-center lg:text-left">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <div class="space-y-1 text-center lg:text-left">
+                <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                     Sign In to Account
                 </h2>
                 <p class="text-xs sm:text-sm text-gray-400">
