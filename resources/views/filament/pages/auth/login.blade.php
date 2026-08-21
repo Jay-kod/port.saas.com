@@ -1,18 +1,33 @@
 <div 
     x-data="{ 
         activeRole: 'user',
+        init() {
+            this.$nextTick(() => {
+                this.selectRole('user', 'developer@example.com');
+            });
+        },
         selectRole(role, email) {
             this.activeRole = role;
             if (email) {
-                const emailInput = document.querySelector('input[type=\'email\'], input[name*=\'email\']');
-                const passInput = document.querySelector('input[type=\'password\'], input[name*=\'password\']');
+                try {
+                    const wireComponent = this.$wire || (window.Livewire ? window.Livewire.first() : null);
+                    if (wireComponent && wireComponent.set) {
+                        wireComponent.set('data.email', email);
+                        wireComponent.set('data.password', 'password');
+                    }
+                } catch(e) {}
+
+                const emailInput = document.querySelector('input[id*=\'email\'], input[type=\'email\'], input[name*=\'email\']');
+                const passInput = document.querySelector('input[id*=\'password\'], input[type=\'password\'], input[name*=\'password\']');
                 if (emailInput) {
                     emailInput.value = email;
                     emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    emailInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
                 if (passInput) {
                     passInput.value = 'password';
                     passInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    passInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
             }
         }
