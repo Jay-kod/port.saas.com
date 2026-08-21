@@ -90,7 +90,7 @@
                     Sign In to Account
                 </h2>
                 <p class="text-xs sm:text-sm text-gray-400">
-                    Enter your credentials to access your account.
+                    Enter your credentials, or <a href="/admin/register" class="font-semibold text-amber-400 hover:text-amber-300 underline">create a free account</a>.
                 </p>
             </div>
 
@@ -174,6 +174,16 @@
             {{-- Filament Login Form --}}
             <div class="filament-custom-auth-form">
                 {{ $this->content }}
+            </div>
+
+            {{-- Switch to Register Link --}}
+            <div class="text-center pt-3 border-t border-gray-900">
+                <p class="text-xs text-gray-400">
+                    Don't have an account? 
+                    <a href="/admin/register" class="font-bold text-amber-400 hover:text-amber-300 hover:underline transition ml-1">
+                        Sign up for free &rarr;
+                    </a>
+                </p>
             </div>
         </div>
     </div>
