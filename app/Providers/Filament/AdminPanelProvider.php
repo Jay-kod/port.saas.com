@@ -52,7 +52,6 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->viteTheme('resources/css/app.css')
             ->brandName('DevFolio.AI')
             ->brandLogo(fn () => view('filament.components.brand-logo'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
