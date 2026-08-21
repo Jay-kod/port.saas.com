@@ -15,6 +15,18 @@ use Illuminate\Support\Str;
  */
 class Register extends BaseRegister
 {
+    protected string $view = 'filament.pages.auth.register';
+
+    public function getMaxWidth(): ?string
+    {
+        return '6xl';
+    }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
+
     protected function handleRegistration(array $data): Model
     {
         $user = parent::handleRegistration($data);
