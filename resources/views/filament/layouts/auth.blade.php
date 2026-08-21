@@ -6,9 +6,18 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        /* Custom styling overrides for split auth page */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100% !important;
+            width: 100% !important;
+            overflow: hidden !important;
+            background-color: #030712 !important;
+        }
         .fi-simple-main, .fi-simple-main-ctn, .fi-simple-layout {
             max-width: 100% !important;
+            width: 100% !important;
+            height: 100% !important;
             padding: 0 !important;
             margin: 0 !important;
             background: transparent !important;
@@ -23,7 +32,7 @@
             border-color: #1f2937 !important;
             color: #f3f4f6 !important;
             border-radius: 0.75rem !important;
-            padding: 0.75rem 1rem !important;
+            padding: 0.65rem 0.9rem !important;
         }
         .filament-custom-auth-form input:focus {
             border-color: #10b981 !important;
@@ -34,7 +43,7 @@
             color: #030712 !important;
             font-weight: 700 !important;
             border-radius: 0.75rem !important;
-            padding: 0.75rem 1.5rem !important;
+            padding: 0.7rem 1.5rem !important;
             transition: all 0.2s ease-in-out !important;
         }
         .filament-custom-auth-form button[type="submit"]:hover {
@@ -42,10 +51,18 @@
             transform: translateY(-1px) !important;
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15) !important;
         }
+        /* Hide internal scrollbars */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 
-    <div class="h-[98vh] max-h-[98vh] w-full flex items-center justify-center p-2 sm:p-3 bg-[#070b0e] text-gray-100 overflow-hidden">
-        <main id="fi-main-content" tabindex="-1" class="w-full max-w-5xl h-full max-h-full flex items-center justify-center">
+    <div class="h-screen w-screen min-h-screen min-w-full m-0 p-0 overflow-hidden bg-gray-950 text-gray-100">
+        <main id="fi-main-content" tabindex="-1" class="w-full h-full m-0 p-0">
             {{ $slot }}
         </main>
     </div>
