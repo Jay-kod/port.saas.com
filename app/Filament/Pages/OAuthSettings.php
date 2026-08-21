@@ -7,6 +7,7 @@ use BackedEnum;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
+use UnitEnum;
 
 class OAuthSettings extends Page
 {
@@ -16,7 +17,7 @@ class OAuthSettings extends Page
 
     protected static ?string $title = 'OAuth & Social Login Settings';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static string|UnitEnum|null $navigationGroup = 'Settings';
 
     protected static ?int $navigationSort = 96;
 
