@@ -163,15 +163,15 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
 
     {{-- Bottom CTA Banner --}}
     <section class="py-12 sm:py-20 px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto rounded-2xl sm:rounded-3xl p-8 sm:p-10 lg:p-16 border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-gray-900 to-gray-950 text-center relative overflow-hidden shadow-2xl">
+        <div class="max-w-5xl mx-auto rounded-2xl sm:rounded-3xl p-8 sm:p-10 lg:p-16 border border-amber-500/30 bg-gradient-to-br from-amber-500/5 via-gray-100 to-gray-200 dark:from-amber-500/10 dark:via-gray-900 dark:to-gray-950 text-center relative overflow-hidden shadow-2xl">
             {{-- Decorative glow --}}
             <div class="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white relative">
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white relative">
                 Ready to elevate your developer career?
             </h2>
-            <p class="mt-3 sm:mt-4 text-gray-400 max-w-xl mx-auto text-xs sm:text-sm lg:text-base relative">
+            <p class="mt-3 sm:mt-4 text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-xs sm:text-sm lg:text-base relative">
                 Join developers creating high-impact personal portfolios and landing roles with AI-tailored applications.
             </p>
             <div class="mt-6 sm:mt-8 flex justify-center relative">
@@ -184,7 +184,7 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
     </section>
 
     {{-- Footer --}}
-    <footer class="border-t border-gray-800/80 py-8 sm:py-10 px-4 sm:px-6 bg-gray-950 text-xs text-gray-500">
+    <footer class="border-t border-gray-200 dark:border-gray-800/80 py-8 sm:py-10 px-4 sm:px-6 bg-gray-50 dark:bg-gray-950 text-xs text-gray-600 dark:text-gray-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>
                 &copy; {{ date('Y') }} DevFolio AI Platform. Built for developers with Laravel, Livewire Volt & Filament.
