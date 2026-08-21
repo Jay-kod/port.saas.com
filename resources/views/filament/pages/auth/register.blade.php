@@ -1,6 +1,6 @@
-<div class="w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/40 bg-gray-950 grid grid-cols-1 lg:grid-cols-12 max-h-[94vh] h-full">
+<div class="w-full h-screen min-h-screen grid grid-cols-1 lg:grid-cols-12 m-0 p-0 rounded-none border-none overflow-hidden bg-gray-950">
     {{-- Left Side: Emerald Gradient Showcase & Step Cards --}}
-    <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden h-full" 
+    <div class="lg:col-span-6 p-8 sm:p-10 lg:p-14 flex flex-col justify-between relative overflow-hidden h-full" 
          style="background: radial-gradient(circle at 20% 20%, #064e3b 0%, #022c22 50%, #03130d 100%);">
         
         {{-- Ambient Glowing Orb --}}
@@ -62,8 +62,8 @@
     </div>
 
     {{-- Right Side: Dark Elegant Registration Form --}}
-    <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80 overflow-y-auto h-full">
-        <div class="w-full max-w-sm mx-auto space-y-4">
+    <div class="lg:col-span-6 p-8 sm:p-10 lg:p-14 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80 overflow-hidden h-full">
+        <div class="w-full max-w-md mx-auto space-y-3.5">
             {{-- Form Header --}}
             <div class="space-y-1 text-center lg:text-left">
                 <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
