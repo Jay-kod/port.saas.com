@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('oauth_settings', function (Blueprint $table) {
             $table->id();
+            $table->string('provider')->unique(); // 'github', 'google'
+            $table->string('client_id')->nullable();
+            $table->text('client_secret')->nullable();
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }
