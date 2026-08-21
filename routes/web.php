@@ -1,5 +1,4 @@
-<?php
-
+use App\Http\Controllers\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -16,6 +15,12 @@ use Livewire\Volt\Volt;
 | "/{slug}/..." or directly via verified custom domains.
 |
 */
+// Socialite OAuth Routes (GitHub & Google)
+Route::get('/auth/redirect/{provider}', [SocialAuthController::class, 'redirect'])
+    ->name('social.redirect');
+Route::get('/auth/callback/{provider}', [SocialAuthController::class, 'callback'])
+    ->name('social.callback');
+
 // Universal static routes available in both SaaS and Self-Hosted modes
 Volt::route('/terms', 'marketing.terms')->name('terms');
 Volt::route('/privacy', 'marketing.privacy')->name('privacy');
