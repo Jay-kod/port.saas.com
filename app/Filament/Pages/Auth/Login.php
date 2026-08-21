@@ -8,6 +8,8 @@ use Illuminate\Support\HtmlString;
 
 class Login extends BaseLogin
 {
+    protected string $view = 'filament.pages.auth.login';
+
     public function getHeading(): string|Htmlable
     {
         return 'DevFolio Portal Sign In';
