@@ -1,3 +1,5 @@
+<?php
+
 use App\Http\Controllers\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
