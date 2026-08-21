@@ -52,7 +52,6 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->topbar(false)
             ->sidebarCollapsibleOnDesktop()
             ->brandName('DevFolio.AI')
             ->brandLogo(fn () => view('filament.components.brand-logo'))
