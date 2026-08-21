@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 class Register extends BaseRegister
 {
     protected string $view = 'filament.pages.auth.register';
+    protected static string $layout = 'filament.layouts.auth';
 
     public function getMaxWidth(): ?string
     {
