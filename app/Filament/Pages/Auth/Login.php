@@ -9,6 +9,7 @@ use Illuminate\Support\HtmlString;
 class Login extends BaseLogin
 {
     protected string $view = 'filament.pages.auth.login';
+    protected static string $layout = 'filament.layouts.auth';
 
     public function getMaxWidth(): ?string
     {
