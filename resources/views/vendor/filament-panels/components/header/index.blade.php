@@ -19,15 +19,26 @@
             <x-filament::breadcrumbs :breadcrumbs="$breadcrumbs" />
         @endif
 
-        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_BEFORE, scopes: $this->getRenderHookScopes()) }}
+        <div class="flex items-center gap-x-4">
+            <x-filament::icon-button
+                color="gray"
+                icon="heroicon-o-bars-3"
+                icon-size="lg"
+                x-cloak
+                x-data="{}"
+                x-on:click="$store.sidebar.isOpen ? $store.sidebar.close() : $store.sidebar.open()"
+            />
 
-        @if (filled($heading))
-            <h1 class="fi-header-heading">
-                {{ $heading }}
-            </h1>
-        @endif
+            {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_BEFORE, scopes: $this->getRenderHookScopes()) }}
 
-        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_AFTER, scopes: $this->getRenderHookScopes()) }}
+            @if (filled($heading))
+                <h1 class="fi-header-heading">
+                    {{ $heading }}
+                </h1>
+            @endif
+
+            {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_HEADER_HEADING_AFTER, scopes: $this->getRenderHookScopes()) }}
+        </div>
 
         @if (filled($subheading))
             <p class="fi-header-subheading">
