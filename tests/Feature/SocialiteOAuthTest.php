@@ -116,4 +116,34 @@ class SocialiteOAuthTest extends TestCase
             'github_id' => 'gh_987654',
         ]);
     }
+
+    public function test_oauth_settings_page_renders_and_saves_keys_to_database(): void
+    {
+        $user = User::factory()->create(['email' => 'admin@example.com']);
+        $account = Account::factory()->create(['owner_user_id' => $user->id]);
+
+        \Livewire\Livewire::actingAs($user)
+            ->test(\App\Filament\Pages\OAuthSettings::class, ['tenant' => $account])
+            ->assertSuccessful()
+            ->set('github_client_id', 'test_gh_client_id')
+            ->set('github_client_secret', 'test_gh_client_secret')
+            ->set('google_client_id', 'test_google_client_id')
+            ->set('google_client_secret', 'test_google_client_secret')
+            ->call('save')
+            ->assertHasNoErrors();
+
+        $this->assertDatabaseHas('oauth_settings', [
+            'provider' => 'github',
+            'client_id' => 'test_gh_client_id',
+        ]);
+
+        $this->assertDatabaseHas('oauth_settings', [
+            'provider' => 'google',
+            'client_id' => 'test_google_client_id',
+        ]);
+
+        $credentials = \App\Models\OauthSetting::getCredentials('github');
+        $this->assertEquals('test_gh_client_id', $credentials['client_id']);
+        $this->assertEquals('test_gh_client_secret', $credentials['client_secret']);
+    }
 }
