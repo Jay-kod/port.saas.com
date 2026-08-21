@@ -17,6 +17,8 @@ class SocialAuthController extends Controller
     /**
      * Supported OAuth providers.
      */
+    protected array $allowedProviders = ['github', 'google'];
+
     /**
      * Dynamically inject OAuth credentials from DB settings or config.
      */
