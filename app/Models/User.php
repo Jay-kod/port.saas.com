@@ -25,7 +25,7 @@ use Illuminate\Support\Collection;
  * `account_user` pivot table for editor/viewer members, at which point
  * these two methods should also check that pivot, not just ownership.
  */
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'github_id', 'google_id', 'avatar'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements HasDefaultTenant, HasTenants
 {
