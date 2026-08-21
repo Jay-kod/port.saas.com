@@ -94,13 +94,13 @@
                 </p>
             </div>
 
-            {{-- Role Selection Tabs with Distinct Colors --}}
+            {{-- Role Selection Tabs with Distinct Colors & Auto-Fill --}}
             <div class="space-y-2">
                 <div class="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-gray-900/90 border border-gray-800">
                     {{-- 1. Developer Tab (Cyan) --}}
                     <button
                         type="button"
-                        @click="selectRole('user', '')"
+                        @click="selectRole('user', 'developer@example.com')"
                         :class="activeRole === 'user' 
                             ? 'bg-cyan-500/15 border-cyan-500/50 text-cyan-400 shadow-md shadow-cyan-500/10' 
                             : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'"
@@ -113,7 +113,7 @@
                     {{-- 2. Admin Tab (Amber) --}}
                     <button
                         type="button"
-                        @click="selectRole('admin', '')"
+                        @click="selectRole('admin', 'agency@example.com')"
                         :class="activeRole === 'admin' 
                             ? 'bg-amber-500/15 border-amber-500/50 text-amber-400 shadow-md shadow-amber-500/10' 
                             : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'"
@@ -137,9 +137,22 @@
                     </button>
                 </div>
 
-                {{-- Role Banner --}}
-                <div x-show="activeRole === 'super_admin'" class="p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] text-purple-300 flex items-center justify-between">
-                    <span>Super Admin: <code class="text-purple-200">admin@example.com</code></span>
+                {{-- Role Autofill Banners --}}
+                {{-- Developer Banner (Cyan) --}}
+                <div x-show="activeRole === 'user'" class="p-2 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-[11px] text-cyan-300 flex items-center justify-between">
+                    <span>Developer Demo: <code class="text-cyan-200 font-semibold">developer@example.com</code></span>
+                    <button type="button" @click="selectRole('user', 'developer@example.com')" class="underline text-cyan-400 font-bold hover:text-cyan-200">Auto-fill</button>
+                </div>
+
+                {{-- Admin Banner (Amber) --}}
+                <div x-show="activeRole === 'admin'" class="p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 text-[11px] text-amber-300 flex items-center justify-between">
+                    <span>Agency Admin Demo: <code class="text-amber-200 font-semibold">agency@example.com</code></span>
+                    <button type="button" @click="selectRole('admin', 'agency@example.com')" class="underline text-amber-400 font-bold hover:text-amber-200">Auto-fill</button>
+                </div>
+
+                {{-- Super Admin Banner (Purple) --}}
+                <div x-show="activeRole === 'super_admin'" class="p-2 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] text-purple-300 flex items-center justify-between">
+                    <span>Super Admin: <code class="text-purple-200 font-semibold">admin@example.com</code></span>
                     <button type="button" @click="selectRole('super_admin', 'admin@example.com')" class="underline text-purple-400 font-bold hover:text-purple-200">Auto-fill</button>
                 </div>
             </div>
