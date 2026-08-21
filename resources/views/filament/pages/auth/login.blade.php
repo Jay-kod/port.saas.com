@@ -82,8 +82,8 @@
     </div>
 
     {{-- Right Side: Dark Elegant Login Form --}}
-    <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80 overflow-y-auto h-full">
-        <div class="w-full max-w-sm mx-auto space-y-4">
+    <div class="lg:col-span-6 p-8 sm:p-10 lg:p-14 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80 overflow-hidden h-full">
+        <div class="w-full max-w-md mx-auto space-y-3.5">
             {{-- Form Header --}}
             <div class="space-y-1 text-center lg:text-left">
                 <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
