@@ -54,14 +54,14 @@ $categories = computed(function () {
             </div>
 
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="{{ route('home') }}" class="hover:text-amber-400 transition font-medium">Home</a>
                 <a href="{{ route('discover') }}" class="text-amber-400 font-bold transition">Discover Developers</a>
                 <a href="{{ route('pricing') }}" class="hover:text-amber-400 transition">Pricing</a>
-                <a href="/admin/login" class="hover:text-white transition">Sign In</a>
             </nav>
 
             <div class="flex items-center gap-3">
-                <a href="/admin/register" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-bold transition shadow-lg shadow-amber-500/20">
-                    <span>Join Directory</span>
+                <a href="/admin/login" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-bold transition shadow-lg shadow-amber-500/20">
+                    <span>Get Started</span>
                 </a>
             </div>
         </div>
