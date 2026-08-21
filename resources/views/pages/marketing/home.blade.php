@@ -93,67 +93,67 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 {{-- Feature 1 --}}
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-800/80 bg-gray-900/60 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-300 group hover:-translate-y-1">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         🤖
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">AI Resume Tailoring</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">AI Resume Tailoring</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         Paste any target job description. Our AI analyzes the role and crafts a precisely tailored resume highlighting your matching skills and accomplishments.
                     </p>
                 </div>
 
                 {{-- Feature 2 --}}
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-800/80 bg-gray-900/60 backdrop-blur-sm hover:border-emerald-500/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm hover:border-emerald-500/30 transition-all duration-300 group hover:-translate-y-1">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         🐙
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Automated GitHub Sync</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">Automated GitHub Sync</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         Connect your GitHub profile once. Your repositories, tech stack tags, stars, and descriptions stay effortlessly updated on your public site.
                     </p>
                 </div>
 
                 {{-- Feature 3 --}}
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-800/80 bg-gray-900/60 backdrop-blur-sm hover:border-cyan-500/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm hover:border-cyan-500/30 transition-all duration-300 group hover:-translate-y-1">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         📄
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">ATS-Ready PDF Export</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">ATS-Ready PDF Export</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         Generate clean, beautifully typeset PDF resumes with a single click. Formats are engineered to easily parse through recruiter applicant tracking systems.
                     </p>
                 </div>
 
                 {{-- Feature 4 --}}
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-800/80 bg-gray-900/60 backdrop-blur-sm hover:border-pink-500/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm hover:border-pink-500/30 transition-all duration-300 group hover:-translate-y-1">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         🎨
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Curated Developer Themes</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">Curated Developer Themes</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         Choose from custom-crafted dark mode palettes including Cyber Matrix, Bioluminescent, and Toxic Cyberpunk for an unforgettable first impression.
                     </p>
                 </div>
 
                 {{-- Feature 5 --}}
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-800/80 bg-gray-900/60 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300 group hover:-translate-y-1">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         🌐
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Dedicated URL & Custom Domains</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
-                        Get your own clean web address like <code class="px-1.5 py-0.5 bg-gray-800 rounded text-[11px] text-amber-300">devfolio.ai/your-name</code>, or connect your personal domain with automatic SSL and fast global CDN edge delivery.
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">Dedicated URL & Custom Domains</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Get your own clean web address like <code class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-[11px] text-amber-500 dark:text-amber-300">devfolio.ai/your-name</code>, or connect your personal domain with automatic SSL and fast global CDN edge delivery.
                     </p>
                 </div>
 
                 {{-- Feature 6 --}}
-                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-800/80 bg-gray-900/60 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-300 group hover:-translate-y-1">
+                <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm hover:border-amber-500/30 transition-all duration-300 group hover:-translate-y-1">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                         ⚡
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Powerful Admin Control</h3>
-                    <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">Powerful Admin Control</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         Manage your projects, experience, skills, certificates, and bring-your-own AI API keys seamlessly through a blazing fast admin dashboard.
                     </p>
                 </div>
