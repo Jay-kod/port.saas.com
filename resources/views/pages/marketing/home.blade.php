@@ -37,7 +37,7 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
         <div class="max-w-5xl mx-auto text-center">
 
             {{-- Heading --}}
-            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-tight">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
                 Turn your code into an
                 <br class="hidden sm:inline"/>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-emerald-400 to-cyan-400">
@@ -46,7 +46,7 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
             </h1>
 
             {{-- Subheading --}}
-            <p class="mt-5 sm:mt-8 text-sm sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
+            <p class="mt-5 sm:mt-8 text-sm sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
                 Effortlessly showcase your projects with automated GitHub sync, create tailored ATS-optimized resumes for any job description in seconds, and share your personal developer website.
             </p>
 
@@ -56,39 +56,39 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
                     <span>Create Your Portfolio Free</span>
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
-                <a href="{{ route('pricing') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-gray-700 bg-gray-900/60 hover:bg-gray-800 hover:border-gray-600 text-white text-sm sm:text-base font-semibold transition-all duration-200">
+                <a href="{{ route('pricing') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50/60 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 text-gray-900 dark:text-white text-sm sm:text-base font-semibold transition-all duration-200">
                     View Pricing & Plans
                 </a>
             </div>
 
             {{-- Metric Highlights --}}
-            <div class="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-8 sm:pt-10 border-t border-gray-800/80 max-w-4xl mx-auto">
+            <div class="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-8 sm:pt-10 border-t border-gray-200 dark:border-gray-800/80 max-w-4xl mx-auto">
                 <div class="text-center sm:text-left p-3 sm:p-0">
-                    <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white">100%</p>
-                    <p class="text-[11px] sm:text-xs text-gray-400 mt-1">ATS-Optimized Resumes</p>
+                    <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white">100%</p>
+                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">ATS-Optimized Resumes</p>
                 </div>
                 <div class="text-center sm:text-left p-3 sm:p-0">
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400">&lt; 30s</p>
-                    <p class="text-[11px] sm:text-xs text-gray-400 mt-1">AI Tailoring Time</p>
+                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">AI Tailoring Time</p>
                 </div>
                 <div class="text-center sm:text-left p-3 sm:p-0">
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-emerald-400">GitHub</p>
-                    <p class="text-[11px] sm:text-xs text-gray-400 mt-1">Auto Repo Sync</p>
+                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Auto Repo Sync</p>
                 </div>
                 <div class="text-center sm:text-left p-3 sm:p-0">
                     <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-cyan-400">Multi-Tenant</p>
-                    <p class="text-[11px] sm:text-xs text-gray-400 mt-1">Custom URLs & Domains</p>
+                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Custom URLs & Domains</p>
                 </div>
             </div>
         </div>
     </section>
 
     {{-- Features Section --}}
-    <section id="features" class="py-16 sm:py-24 px-4 sm:px-6 border-t border-gray-800/80 bg-gray-950/40">
+    <section id="features" class="py-16 sm:py-24 px-4 sm:px-6 border-t border-gray-200 dark:border-gray-800/80 bg-gray-50/40 dark:bg-gray-950/40">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
                 <h2 class="text-xs font-bold text-amber-400 uppercase tracking-widest">Engineered for Developers</h2>
-                <p class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">Everything you need to land your next high-impact role</p>
+                <p class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white leading-tight">Everything you need to land your next high-impact role</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
