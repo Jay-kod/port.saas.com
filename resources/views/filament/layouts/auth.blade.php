@@ -44,8 +44,8 @@
         }
     </style>
 
-    <div class="min-h-screen w-full flex items-center justify-center p-3 sm:p-6 lg:p-10 bg-[#070b0e] text-gray-100">
-        <main id="fi-main-content" tabindex="-1" class="w-full max-w-5xl">
+    <div class="h-[98vh] max-h-[98vh] w-full flex items-center justify-center p-2 sm:p-3 bg-[#070b0e] text-gray-100 overflow-hidden">
+        <main id="fi-main-content" tabindex="-1" class="w-full max-w-5xl h-full max-h-full flex items-center justify-center">
             {{ $slot }}
         </main>
     </div>
