@@ -30,4 +30,17 @@ class Login extends BaseLogin
     {
         return new HtmlString('Sign in to access your <strong>Portfolio Workspace</strong>, <strong>Team Dashboard</strong>, or <strong>Admin Console</strong>.');
     }
+
+    public function authenticate(): ?\Illuminate\Http\RedirectResponse
+    {
+        $response = parent::authenticate();
+
+        $user = filament()->auth()->user();
+
+        if ($user && $user->is_super_admin) {
+            return redirect()->intended(route('super-admin.dashboard'));
+        }
+
+        return redirect()->intended(route('dashboard'));
+    }
 }
