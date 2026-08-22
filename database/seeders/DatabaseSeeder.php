@@ -21,8 +21,10 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Super Admin',
                 'password' => bcrypt('password'),
+                'is_super_admin' => true,
             ]
         );
+        $superAdmin->update(['is_super_admin' => true]);
 
         // 2. Developer / User
         $developer = User::firstOrCreate(
