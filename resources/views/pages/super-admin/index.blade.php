@@ -44,23 +44,23 @@ $resolveReport = function (int $reportId, string $status) {
     }
 };
 
-$usersList = fn () => User::query()
-    ->when($this->searchQuery, function ($q) {
-        $q->where('name', 'like', '%' . $this->searchQuery . '%')
-          ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
-    })
-    ->with(['defaultTenant', 'profile'])
-    ->latest()
-    ->paginate(10);
-
-$reportsList = fn () => PortfolioReport::query()->with('profile')->latest()->take(10)->get();
-
-$totalUsersCount = fn () => User::count();
-$totalAccountsCount = fn () => Account::count();
-$totalProfilesCount = fn () => Profile::count();
-$totalResumesCount = fn () => ResumeGeneration::count();
-$totalCoverLettersCount = fn () => CoverLetterGeneration::count();
-$pendingReportsCount = fn () => PortfolioReport::where('status', 'pending')->count();
+with(fn () => [
+    'usersList' => User::query()
+        ->when($this->searchQuery, function ($q) {
+            $q->where('name', 'like', '%' . $this->searchQuery . '%')
+              ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
+        })
+        ->with(['defaultTenant', 'profile'])
+        ->latest()
+        ->paginate(10),
+    'reportsList' => PortfolioReport::query()->with('profile')->latest()->take(10)->get(),
+    'totalUsersCount' => User::count(),
+    'totalAccountsCount' => Account::count(),
+    'totalProfilesCount' => Profile::count(),
+    'totalResumesCount' => ResumeGeneration::count(),
+    'totalCoverLettersCount' => CoverLetterGeneration::count(),
+    'pendingReportsCount' => PortfolioReport::where('status', 'pending')->count(),
+]);
 
 ?>
 
