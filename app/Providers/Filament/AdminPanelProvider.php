@@ -66,6 +66,20 @@ class AdminPanelProvider extends PanelProvider
                 FilamentInfoWidget::class,
             ])
             ->sidebarCollapsibleOnDesktop()
+            ->userMenuItems([
+                'profile' => \Filament\Navigation\MenuItem::make()
+                    ->label('Dashboard')
+                    ->icon('heroicon-o-squares-2x2')
+                    ->url(fn (): string => route('dashboard')),
+                'billing' => \Filament\Navigation\MenuItem::make()
+                    ->label('Billing & Usage')
+                    ->icon('heroicon-o-credit-card')
+                    ->url(fn (): string => \App\Filament\Pages\BillingSettings::getUrl()),
+                'domains' => \Filament\Navigation\MenuItem::make()
+                    ->label('Custom Domains')
+                    ->icon('heroicon-o-globe-alt')
+                    ->url(fn (): string => \App\Filament\Pages\DomainSettings::getUrl()),
+            ])
             ->renderHook(
                 \Filament\View\PanelsRenderHook::HEAD_END,
                 fn (): string => \Illuminate\Support\Facades\Blade::render('
@@ -74,6 +88,13 @@ class AdminPanelProvider extends PanelProvider
                         .fi-topbar-collapse-sidebar-btn-ctn { display: none !important; }
                         .fi-sidebar-header-collapse-btn { display: none !important; }
                     </style>
+                    <script>
+                        window.addEventListener("pageshow", function(event) {
+                            if (event.persisted || (window.performance && window.performance.navigation && window.performance.navigation.type === 2)) {
+                                window.location.reload();
+                            }
+                        });
+                    </script>
                 ')
             )
             ->middleware([
@@ -86,6 +107,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                \App\Http\Middleware\PreventBackHistory::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
