@@ -31,16 +31,23 @@ class Login extends BaseLogin
         return new HtmlString('Sign in to access your <strong>Portfolio Workspace</strong>, <strong>Team Dashboard</strong>, or <strong>Admin Console</strong>.');
     }
 
-    public function authenticate(): ?\Illuminate\Http\RedirectResponse
+    public function authenticate(): ?\Filament\Http\Responses\Auth\Contracts\LoginResponse
     {
         $response = parent::authenticate();
+
+        // The parent authenticate method might throw a Livewire Redirect exception
+        // if Filament forces a redirect to the tenant URL.
+        // We catch it and throw our own. But actually, parent::authenticate()
+        // will throw an exception for the redirect BEFORE reaching this code.
 
         $user = filament()->auth()->user();
 
         if ($user && $user->is_super_admin) {
-            return redirect()->intended(route('super-admin.dashboard'));
+            redirect()->intended(route('super-admin.dashboard'));
         }
 
-        return redirect()->intended(route('dashboard'));
+        redirect()->intended(route('dashboard'));
+        
+        return null;
     }
 }
