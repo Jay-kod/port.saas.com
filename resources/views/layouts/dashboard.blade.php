@@ -12,7 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted || (window.performance && window.performance.navigation && window.performance.navigation.type === 2)) {
+                window.location.reload();
+            }
+        });
+    </script>
 
     @php
         $user = auth()->user();
@@ -24,6 +30,17 @@
         $userRole = $account ? $account->getUserRole($user) : 'owner';
         $isAgencyRoute = request()->routeIs('agency*');
         $isAgencyPlan = ($account?->plan_slug === 'agency');
+
+        // Initials calculation for top-right user menu
+        $userInitials = 'U';
+        if ($user && $user->name) {
+            $nameParts = preg_split('/\s+/', trim($user->name));
+            if (count($nameParts) >= 2) {
+                $userInitials = strtoupper(substr($nameParts[0], 0, 1) . substr($nameParts[count($nameParts) - 1], 0, 1));
+            } else {
+                $userInitials = strtoupper(substr($nameParts[0], 0, min(2, strlen($nameParts[0]))));
+            }
+        }
 
         if ($userRole === 'editor' || $userRole === 'viewer') {
             $panelType = 'member';
