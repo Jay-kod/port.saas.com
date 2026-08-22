@@ -25,6 +25,23 @@ class AgencyBrandingSettings extends Page
 
     protected string $view = 'filament.pages.agency-branding-settings';
 
+    public static function canAccess(): bool
+    {
+        /** @var Account|null $account */
+        $account = Filament::getTenant();
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        if (! $account || ! $user) {
+            return false;
+        }
+
+        if ($user->is_super_admin || $account->owner_user_id === $user->id || $account->getUserRole($user) === 'owner') {
+            return true;
+        }
+
+        return false;
+    }
+
     public ?string $custom_brand_name = '';
 
     public ?string $custom_logo_path = '';
