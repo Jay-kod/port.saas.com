@@ -11,6 +11,29 @@ class Login extends BaseLogin
     protected string $view = 'filament.pages.auth.login';
     protected static string $layout = 'filament.layouts.auth';
 
+    public string $selectedRole = 'user';
+
+    public function mount(): void
+    {
+        parent::mount();
+
+        $this->form->fill([
+            'email' => 'developer@example.com',
+            'password' => 'password',
+            'remember' => true,
+        ]);
+    }
+
+    public function selectRole(string $role, string $email): void
+    {
+        $this->selectedRole = $role;
+        $this->form->fill([
+            'email' => $email,
+            'password' => 'password',
+            'remember' => true,
+        ]);
+    }
+
     public function getMaxWidth(): ?string
     {
         return '6xl';
