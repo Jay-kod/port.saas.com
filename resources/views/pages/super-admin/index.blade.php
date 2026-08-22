@@ -1,6 +1,6 @@
 <?php
 
-use function Livewire\Volt\{state, layout, title, usesPagination};
+use function Livewire\Volt\{state, layout, title, usesPagination, computed};
 use App\Models\User;
 use App\Models\Account;
 use App\Models\Profile;
@@ -19,22 +19,27 @@ state([
     'activeTab' => 'telemetry',
     'searchQuery' => '',
     'userActionMessage' => null,
-    'totalUsersCount' => fn () => User::count(),
-    'totalAccountsCount' => fn () => Account::count(),
-    'totalProfilesCount' => fn () => Profile::count(),
-    'totalResumesCount' => fn () => ResumeGeneration::count(),
-    'totalCoverLettersCount' => fn () => CoverLetterGeneration::count(),
-    'pendingReportsCount' => fn () => PortfolioReport::where('status', 'pending')->count(),
-    'reportsList' => fn () => PortfolioReport::query()->with('profile')->latest()->take(10)->get(),
-    'usersList' => fn () => User::query()
+]);
+
+$totalUsersCount = computed(fn () => User::count());
+$totalAccountsCount = computed(fn () => Account::count());
+$totalProfilesCount = computed(fn () => Profile::count());
+$totalResumesCount = computed(fn () => ResumeGeneration::count());
+$totalCoverLettersCount = computed(fn () => CoverLetterGeneration::count());
+$pendingReportsCount = computed(fn () => PortfolioReport::where('status', 'pending')->count());
+
+$reportsList = computed(fn () => PortfolioReport::query()->with('profile')->latest()->take(10)->get());
+
+$usersList = computed(function () {
+    return User::query()
         ->when($this->searchQuery, function ($q) {
             $q->where('name', 'like', '%' . $this->searchQuery . '%')
               ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
         })
         ->with(['accounts', 'profile'])
         ->latest()
-        ->paginate(10),
-]);
+        ->paginate(10);
+});
 
 $toggleSuperAdmin = function (int $userId) {
     if (auth()->id() === $userId) {
