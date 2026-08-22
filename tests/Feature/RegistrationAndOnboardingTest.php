@@ -131,7 +131,7 @@ class RegistrationAndOnboardingTest extends TestCase
             ->set('selected_theme_id', $theme->id)
             ->call('saveAndFinish')
             ->assertHasNoErrors()
-            ->assertRedirect('/admin');
+            ->assertRedirect(route('dashboard'));
 
         $profile->refresh();
         $this->assertEquals('dev-superstar', $profile->slug);
