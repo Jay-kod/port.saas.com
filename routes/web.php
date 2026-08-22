@@ -65,3 +65,13 @@ if (! config('saas.mode')) {
         Volt::route('/{slug}/contact', 'contact')->name('contact');
     });
 }
+
+// Custom Dashboards
+Route::middleware(['auth'])->group(function () {
+    Volt::route('/dashboard', 'dashboard.index')->name('dashboard');
+    Volt::route('/agency', 'agency.index')->name('agency');
+});
+
+Route::middleware(['auth', 'super_admin'])->group(function () {
+    Volt::route('/super-admin', 'super-admin.index')->name('super-admin.dashboard');
+});
