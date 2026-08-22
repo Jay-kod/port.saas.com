@@ -25,16 +25,16 @@ state([
     'totalResumesCount' => fn () => ResumeGeneration::count(),
     'totalCoverLettersCount' => fn () => CoverLetterGeneration::count(),
     'pendingReportsCount' => fn () => PortfolioReport::where('status', 'pending')->count(),
+    'reportsList' => fn () => PortfolioReport::query()->with('profile')->latest()->take(10)->get(),
+    'usersList' => fn () => User::query()
+        ->when($this->searchQuery, function ($q) {
+            $q->where('name', 'like', '%' . $this->searchQuery . '%')
+              ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
+        })
+        ->with(['defaultTenant', 'profile'])
+        ->latest()
+        ->paginate(10),
 ]);
-
-$usersList = fn () => User::query()
-    ->when($this->searchQuery, function ($q) {
-        $q->where('name', 'like', '%' . $this->searchQuery . '%')
-          ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
-    })
-    ->with(['defaultTenant', 'profile'])
-    ->latest()
-    ->paginate(10);
 
 $toggleSuperAdmin = function (int $userId) {
     if (auth()->id() === $userId) {
@@ -58,11 +58,6 @@ $resolveReport = function (int $reportId, string $status) {
         $this->userActionMessage = "Report #{$reportId} status updated to {$status}.";
     }
 };
-
-with(fn () => [
-    'usersList' => $usersList(),
-    'reportsList' => $reportsList(),
-]);
 
 ?>
 
