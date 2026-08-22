@@ -23,6 +23,7 @@ class ResolveTenantFromSlug
 
         // 1. Attempt resolution via verified custom domain
         $domain = Domain::query()
+            ->with(['profile.account', 'profile.theme'])
             ->where('domain', $host)
             ->whereNotNull('verified_at')
             ->first();
@@ -42,6 +43,7 @@ class ResolveTenantFromSlug
 
         if ($slug) {
             $profile = Profile::query()
+                ->with(['account', 'theme'])
                 ->where('slug', $slug)
                 ->where('is_published', true)
                 ->first();
