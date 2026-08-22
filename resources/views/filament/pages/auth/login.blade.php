@@ -126,7 +126,7 @@
                         <span>Developer</span>
                     </button>
 
-                    {{-- 2. Admin Tab (Amber) --}}
+                    {{-- 2. Agency Admin Tab (Amber) --}}
                     <button
                         type="button"
                         wire:click="selectRole('admin', 'agency@example.com')"
@@ -137,7 +137,7 @@
                         class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center cursor-pointer"
                     >
                         <span class="text-sm">🏢</span>
-                        <span>Admin</span>
+                        <span>Agency Admin</span>
                     </button>
 
                     {{-- 3. Super Admin Tab (Purple) --}}
