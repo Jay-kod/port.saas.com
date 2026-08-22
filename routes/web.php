@@ -28,9 +28,6 @@ Volt::route('/terms', 'marketing.terms')->name('terms');
 Volt::route('/privacy', 'marketing.privacy')->name('privacy');
 Volt::route('/onboarding', 'onboarding')->name('onboarding')->middleware('auth');
 
-// New Custom Dashboard
-Volt::route('/dashboard', 'dashboard.index')->name('dashboard.index')->middleware('auth');
-
 if (! config('saas.mode')) {
     Volt::route('/', 'home')->name('home');
     Volt::route('/about', 'about')->name('about');
