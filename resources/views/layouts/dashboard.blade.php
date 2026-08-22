@@ -16,8 +16,10 @@
 
     @php
         $user = auth()->user();
-        $tenantId = $user?->defaultTenant?->id ?? $user?->accounts->first()?->id ?? 1;
-        $account = $user?->defaultTenant ?? $user?->accounts->first();
+        $account = (session('active_tenant_id') ? \App\Models\Account::find(session('active_tenant_id')) : null)
+            ?? $user?->accounts()->first()
+            ?? $user?->memberAccounts()->first();
+        $tenantId = $account?->id ?? 1;
         $userProfile = $user?->profile;
         $userRole = $account ? $account->getUserRole($user) : 'owner';
         $isAgencyRoute = request()->routeIs('agency*');
