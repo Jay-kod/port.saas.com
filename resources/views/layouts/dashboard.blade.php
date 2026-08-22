@@ -498,9 +498,15 @@
 
             <!-- Top Right Section -->
             <div class="flex items-center gap-3">
+                <!-- Role Status Pill -->
+                <div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold panel-role-badge">
+                    <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background-color: var(--panel-accent-dark);"></span>
+                    <span>{{ $panelBadge }}</span>
+                </div>
+
                 <!-- Live Portfolio Link Badge -->
                 @if($userProfile && $userProfile->is_published)
-                <a href="{{ url('/' . $userProfile->slug) }}" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all">
+                <a href="{{ url('/' . $userProfile->slug) }}" target="_blank" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                     <span>Live Portfolio</span>
                     <svg class="w-3.5 h-3.5 ml-0.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -511,7 +517,7 @@
 
                 <!-- User Profile Pill -->
                 <div class="flex items-center gap-2 pl-2 border-l border-white/10">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-yellow-500 flex items-center justify-center text-slate-950 font-bold text-xs shadow-md">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr {{ $logoGradient }} flex items-center justify-center text-slate-950 font-bold text-xs shadow-md">
                         {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 1)) }}
                     </div>
                     <span class="text-sm font-semibold text-slate-200 hidden md:inline">{{ auth()->user()->name ?? 'User' }}</span>
