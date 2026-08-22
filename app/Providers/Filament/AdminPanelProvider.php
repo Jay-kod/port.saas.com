@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->brandName('DevFolio.AI')
-            ->brandLogo(fn () => view('filament.components.brand-logo'))
+            ->brandLogo(fn () => view('filament.components.header-title'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -65,7 +65,17 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
-            ->topbar(false)
+            ->sidebarCollapsibleOnDesktop()
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::HEAD,
+                fn (): string => \Illuminate\Support\Facades\Blade::render('
+                    <style>
+                        /* Hide duplicate sidebar collapse buttons so only the main topbar hamburger remains */
+                        .fi-topbar-collapse-sidebar-btn-ctn { display: none !important; }
+                        .fi-sidebar-header-collapse-btn { display: none !important; }
+                    </style>
+                ')
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
