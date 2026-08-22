@@ -11,6 +11,9 @@ use App\Models\Theme;
  */
 class ThemeService
 {
+    protected static ?Theme $defaultThemeCache = null;
+    protected array $cssCache = [];
+
     public function getActiveTheme(?Profile $profile = null): ?Theme
     {
         // Live preview override via ?preview_theme=slug query param
@@ -26,8 +29,12 @@ class ThemeService
             return $profile->theme;
         }
 
-        // Platform default theme fallback
-        return Theme::query()->where('is_active', true)->first()
+        // Platform default theme fallback (cached per request)
+        if (static::$defaultThemeCache !== null) {
+            return static::$defaultThemeCache;
+        }
+
+        return static::$defaultThemeCache = Theme::query()->where('is_active', true)->first()
             ?? Theme::query()->where('is_default', true)->first()
             ?? Theme::query()->first();
     }
@@ -60,6 +67,11 @@ class ThemeService
      */
     public function getCssVariableString(?Profile $profile = null): string
     {
+        $cacheKey = ($profile?->id ?? 'global') . '_' . ($profile?->theme_id ?? 'default') . '_' . (request('preview_theme') ?? 'none');
+        if (isset($this->cssCache[$cacheKey])) {
+            return $this->cssCache[$cacheKey];
+        }
+
         $theme = $this->getActiveTheme($profile);
         $colors = $theme?->colors;
 
@@ -81,7 +93,7 @@ class ThemeService
             $lightVars[] = '--color-'.str_replace('_', '-', $token).': '.$value.';';
         }
 
-        return ':root, [data-theme-mode="dark"] { ' . implode(' ', $darkVars) . ' } '
+        return $this->cssCache[$cacheKey] = ':root, [data-theme-mode="dark"] { ' . implode(' ', $darkVars) . ' } '
             . '[data-theme-mode="light"] { ' . implode(' ', $lightVars) . ' }';
     }
 
