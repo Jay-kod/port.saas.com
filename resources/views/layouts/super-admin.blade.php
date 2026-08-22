@@ -1,80 +1,200 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-black text-slate-100">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - @yield('title', 'Super Admin')</title>
+    <title>{{ config('app.name', 'DevFolio') }} - @yield('title', 'Super Admin Master Control')</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
+    <!-- Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-    <!-- Alpine.js -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
-<body class="font-sans antialiased bg-black text-gray-100" x-data="{ sidebarOpen: false }">
 
-    <!-- Header (Red & Amoled Black Theme) -->
-    <header class="fixed top-0 inset-x-0 h-16 bg-black text-white z-50 flex items-center px-4 shadow-lg border-b border-red-600">
-        <button @click="sidebarOpen = !sidebarOpen" class="p-2 mr-4 rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600">
-            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-        <h1 class="text-xl font-bold tracking-tight text-red-500">@yield('title', 'Super Admin')</h1>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000000;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+        .super-admin-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.15), transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(159, 18, 57, 0.08), transparent 40%);
+        }
+        .glass-card-dark {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 63, 94, 0.15);
+        }
+        .glass-card-dark-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-dark-hover:hover {
+            border-color: rgba(244, 63, 94, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(225, 29, 72, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100 selection:bg-rose-600 selection:text-white" x-data="{ sidebarOpen: false, sidebarCollapsed: false }">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div x-show="sidebarOpen" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden" 
+         @click="sidebarOpen = false" style="display: none;"></div>
+
+    <!-- Sidebar (Clima Super Admin Master Control: Red & AMOLED Black) -->
+    <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen, 'lg:w-20': sidebarCollapsed }" 
+           class="w-64 fixed inset-y-0 left-0 z-50 glass-card-dark border-r border-rose-950/60 bg-black/95 transition-all duration-300 ease-in-out lg:translate-x-0 flex flex-col h-screen overflow-hidden">
         
-        <div class="ml-auto flex items-center space-x-4">
-            <span class="text-sm font-medium text-red-400">Super Admin: {{ auth()->user()->name ?? 'Admin' }}</span>
-            <form method="POST" action="{{ route('filament.admin.auth.logout') }}" class="inline">
+        <!-- Sidebar Header / Master Control Logo -->
+        <div class="h-16 flex items-center border-b border-rose-950/60 transition-all duration-300" :class="sidebarCollapsed ? 'justify-center px-0' : 'px-6'">
+            <a href="{{ route('super-admin.dashboard') }}" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-rose-600 to-red-700 flex items-center justify-center shadow-lg shadow-rose-600/30 group-hover:scale-105 transition-transform duration-200">
+                    <svg class="w-5 h-5 text-white font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <div x-show="!sidebarCollapsed" class="flex flex-col">
+                    <span class="text-lg font-extrabold font-heading tracking-tight text-white whitespace-nowrap">
+                        Master Control
+                    </span>
+                    <span class="text-[9px] font-mono tracking-widest text-rose-500 uppercase font-bold">
+                        Super Admin
+                    </span>
+                </div>
+            </a>
+            <button @click="sidebarOpen = false" class="ml-auto lg:hidden text-rose-400 hover:text-white shrink-0">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Sidebar Navigation Links -->
+        <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1.5">
+            <div class="px-3 mb-2" x-show="!sidebarCollapsed">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-rose-500/70 font-mono">Platform Telemetry</span>
+            </div>
+
+            <!-- Master Dashboard -->
+            <a href="{{ route('super-admin.dashboard') }}" 
+               :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
+               class="flex items-center py-2.5 rounded-xl text-sm font-medium {{ request()->routeIs('super-admin.dashboard') ? 'bg-rose-500/10 text-rose-300 border border-rose-500/30 shadow-md shadow-rose-950/50' : 'text-slate-400 hover:bg-rose-950/30 hover:text-rose-200' }} transition-all"
+               title="Platform Health">
+                <svg class="w-5 h-5 shrink-0 {{ request()->routeIs('super-admin.dashboard') ? 'text-rose-400' : 'text-slate-500' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <span x-show="!sidebarCollapsed" class="whitespace-nowrap">Platform Health</span>
+            </a>
+
+            <!-- User Dashboard Switcher -->
+            <div class="pt-4 mt-4 border-t border-rose-950/60">
+                <div class="px-3 mb-2" x-show="!sidebarCollapsed">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-slate-500">Tenant Views</span>
+                </div>
+
+                <a href="{{ route('dashboard') }}" 
+                   :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
+                   class="flex items-center py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition-all"
+                   title="User Dashboard">
+                    <svg class="w-5 h-5 shrink-0 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    <span x-show="!sidebarCollapsed" class="whitespace-nowrap">User Dashboard</span>
+                </a>
+
+                <a href="{{ route('agency') }}" 
+                   :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
+                   class="flex items-center py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900 hover:text-slate-200 transition-all"
+                   title="Agency Dashboard">
+                    <svg class="w-5 h-5 shrink-0 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span x-show="!sidebarCollapsed" class="whitespace-nowrap">Agency Workspace</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Sidebar Footer (Sign out) -->
+        <div class="p-4 border-t border-rose-950/60 bg-black">
+            <form method="POST" action="{{ route('filament.admin.auth.logout') }}" class="block w-full">
                 @csrf
-                <button type="submit" class="text-xs bg-red-950 hover:bg-red-900 text-red-300 border border-red-800 px-3 py-1.5 rounded font-semibold transition-colors">
-                    Sign Out
+                <button type="submit" 
+                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-4'" 
+                        class="w-full flex items-center justify-center text-sm font-medium py-2.5 rounded-xl border border-rose-950 bg-rose-950/30 text-rose-300 hover:bg-rose-900/60 hover:text-white transition-all shadow-sm font-mono" 
+                        title="Sign Out">
+                    <svg class="w-4 h-4 shrink-0 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-bold">Terminate Session</span>
                 </button>
             </form>
         </div>
-    </header>
+    </aside>
 
-    <!-- Sidebar & Content Wrapper -->
-    <div class="flex h-screen pt-16">
-        
-        <!-- Sidebar -->
-        <aside 
-            :class="sidebarOpen ? 'w-64' : 'w-16'" 
-            class="fixed inset-y-0 left-0 pt-16 bg-black border-r border-red-900 transition-all duration-300 z-40 overflow-y-auto shadow-md"
-        >
-            <nav class="flex flex-col p-2 space-y-1">
-                <!-- Super Admin Dashboard Link -->
-                <a href="{{ route('super-admin.dashboard') }}" class="flex items-center p-2 rounded-md hover:bg-red-950 hover:text-red-400 group transition-colors">
-                    <svg class="w-6 h-6 flex-shrink-0 text-red-700 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+    <!-- Main Content Shell -->
+    <div :class="sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'" class="flex flex-col min-h-screen transition-all duration-300">
+        <div :class="sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'" class="super-admin-glow flex-1 absolute inset-0 z-[-1] hidden lg:block transition-all duration-300"></div>
+        <div class="super-admin-glow flex-1 absolute inset-0 z-[-1] lg:hidden"></div>
+
+        <!-- Top Header (Red & AMOLED Black with Hamburger & Title) -->
+        <header class="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 border-b border-rose-950/60 glass-card-dark bg-black/85 backdrop-blur-md">
+            <div class="flex items-center gap-4">
+                <!-- Hamburger Button -->
+                <button @click="window.innerWidth < 1024 ? sidebarOpen = true : sidebarCollapsed = !sidebarCollapsed" 
+                        class="text-rose-400 hover:text-white focus:outline-none p-2 -ml-2 rounded-xl hover:bg-rose-950/50 transition-colors"
+                        title="Toggle Sidebar">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">System Health</span>
-                </a>
-
-                <!-- User Dashboard Link -->
-                <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded-md hover:bg-red-950 hover:text-red-400 group transition-colors">
-                    <svg class="w-6 h-6 flex-shrink-0 text-red-700 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                    </svg>
-                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">User Dashboard</span>
-                </a>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main 
-            :class="sidebarOpen ? 'ml-64' : 'ml-16'" 
-            class="flex-1 transition-all duration-300 p-6 bg-black overflow-y-auto"
-        >
-            <div class="max-w-7xl mx-auto">
-                {{ $slot }}
+                </button>
+                <!-- Header Title -->
+                <div class="flex items-center gap-3">
+                    <h1 class="text-lg font-bold font-heading text-white tracking-tight">
+                        @yield('title', 'Master Control')
+                    </h1>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/30">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+                        Elevated
+                    </span>
+                </div>
             </div>
+
+            <!-- Top Right Section -->
+            <div class="flex items-center gap-3">
+                <!-- Super Admin Identity -->
+                <div class="flex items-center gap-2 pl-2 border-l border-rose-950">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-rose-600 to-red-700 flex items-center justify-center text-white font-bold text-xs shadow-md shadow-rose-900/50">
+                        SA
+                    </div>
+                    <span class="text-sm font-semibold text-rose-300 hidden md:inline">{{ auth()->user()->name ?? 'Super Admin' }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+            {{ $slot }}
         </main>
+
+        <!-- Footer -->
+        <footer class="py-6 border-t border-rose-950/60 text-center text-xs text-rose-500/60 bg-black mt-auto font-mono">
+            DevFolio Master Operations &bull; AMOLED Secure Shell
+        </footer>
     </div>
+
 </body>
 </html>
