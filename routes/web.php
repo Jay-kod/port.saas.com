@@ -26,15 +26,28 @@ Route::get('/auth/callback/{provider}', [SocialAuthController::class, 'callback'
 // Universal static routes available in both SaaS and Self-Hosted modes
 Volt::route('/terms', 'marketing.terms')->name('terms');
 Volt::route('/privacy', 'marketing.privacy')->name('privacy');
-Volt::route('/onboarding', 'onboarding')->name('onboarding')->middleware('auth');
+Volt::route('/onboarding', 'onboarding')->name('onboarding')->middleware(['auth', 'prevent.back']);
+
+// Universal Logout Route with deliberate session invalidation & anti-cache headers
+Route::post('/logout', function (\Illuminate\Http\Request $request) {
+    \Illuminate\Support\Facades\Auth::guard('web')->logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->to('/admin/login')->withHeaders([
+        'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0',
+        'Pragma' => 'no-cache',
+        'Expires' => 'Sun, 02 Jan 1990 00:00:00 GMT',
+    ]);
+})->name('logout');
 
 // Custom Dashboards (must be registered before wildcard /{slug} routes)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'prevent.back'])->group(function () {
     Volt::route('/dashboard', 'dashboard.index')->name('dashboard');
     Volt::route('/agency', 'agency.index')->name('agency');
 });
 
-Route::middleware(['auth', 'super_admin'])->group(function () {
+Route::middleware(['auth', 'super_admin', 'prevent.back'])->group(function () {
     Volt::route('/super-admin', 'super-admin.index')->name('super-admin.dashboard');
 });
 
