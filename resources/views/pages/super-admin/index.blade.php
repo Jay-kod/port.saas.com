@@ -311,7 +311,7 @@ with(fn () => [
             </div>
 
             <div class="pt-4">
-                {{ $this->usersList->links() }}
+                {{ $usersList->links() }}
             </div>
         </div>
     </div>
@@ -336,7 +336,7 @@ with(fn () => [
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-rose-950/40">
-                        @forelse($this->reportsList as $report)
+                        @forelse($reportsList as $report)
                         <tr class="hover:bg-rose-950/20 transition-colors">
                             <td class="px-4 py-3.5 font-bold text-white">
                                 @if($report->profile)
