@@ -313,7 +313,7 @@ $resolveReport = function (int $reportId, string $status) {
             </div>
 
             <div class="pt-4">
-                {{ $usersList->links() }}
+                {{ $this->usersList->links() }}
             </div>
         </div>
     </div>
@@ -338,7 +338,7 @@ $resolveReport = function (int $reportId, string $status) {
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-rose-950/40">
-                        @forelse($reportsList as $report)
+                        @forelse($this->reportsList as $report)
                         <tr class="hover:bg-rose-950/20 transition-colors">
                             <td class="px-4 py-3.5 font-bold text-white">
                                 @if($report->profile)
