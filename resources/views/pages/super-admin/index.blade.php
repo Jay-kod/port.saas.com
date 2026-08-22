@@ -31,7 +31,7 @@ state([
             $q->where('name', 'like', '%' . $this->searchQuery . '%')
               ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
         })
-        ->with(['defaultTenant', 'profile'])
+        ->with(['accounts', 'profile'])
         ->latest()
         ->paginate(10),
 ]);
