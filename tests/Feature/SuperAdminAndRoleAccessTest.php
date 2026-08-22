@@ -20,7 +20,6 @@ class SuperAdminAndRoleAccessTest extends TestCase
         ]);
 
         $account = Account::factory()->create(['owner_user_id' => $superAdmin->id]);
-        $superAdmin->accounts()->attach($account);
 
         $response = $this->actingAs($superAdmin)->get('/super-admin');
 
@@ -36,7 +35,6 @@ class SuperAdminAndRoleAccessTest extends TestCase
         ]);
 
         $account = Account::factory()->create(['owner_user_id' => $regularUser->id]);
-        $regularUser->accounts()->attach($account);
 
         $response = $this->actingAs($regularUser)->get('/super-admin');
 
@@ -61,7 +59,6 @@ class SuperAdminAndRoleAccessTest extends TestCase
             'owner_user_id' => $superAdmin->id,
             'plan_slug' => 'agency',
         ]);
-        $superAdmin->accounts()->attach($account);
 
         Profile::factory()->create([
             'account_id' => $account->id,
@@ -93,7 +90,6 @@ class SuperAdminAndRoleAccessTest extends TestCase
         ]);
 
         $account = Account::factory()->create(['owner_user_id' => $superAdmin->id]);
-        $superAdmin->accounts()->attach($account);
 
         $profile = Profile::factory()->create([
             'account_id' => $account->id,
