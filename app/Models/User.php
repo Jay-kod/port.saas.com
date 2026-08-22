@@ -50,6 +50,16 @@ class User extends Authenticatable implements HasDefaultTenant, HasTenants
         return $this->hasMany(Account::class, 'owner_user_id');
     }
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
+
     public function memberAccounts()
     {
         return $this->belongsToMany(Account::class, 'account_user')
