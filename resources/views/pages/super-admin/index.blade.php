@@ -265,8 +265,8 @@ $resolveReport = function (int $reportId, string $status) {
                                 <div class="text-[10px] text-slate-400">{{ $userItem->email }}</div>
                             </td>
                             <td class="px-4 py-3.5 whitespace-nowrap">
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase {{ $userItem->defaultTenant?->plan_slug === 'agency' ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30' : ($userItem->defaultTenant?->plan_slug === 'pro' ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-900 text-slate-400 border border-slate-800') }}">
-                                    {{ $userItem->defaultTenant?->plan_slug ?: 'Free' }}
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase {{ $userItem->accounts->first()?->plan_slug === 'agency' ? 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30' : ($userItem->accounts->first()?->plan_slug === 'pro' ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-900 text-slate-400 border border-slate-800') }}">
+                                    {{ $userItem->accounts->first()?->plan_slug ?: 'Free' }}
                                 </span>
                             </td>
                             <td class="px-4 py-3.5 whitespace-nowrap">
@@ -295,7 +295,7 @@ $resolveReport = function (int $reportId, string $status) {
                                         class="px-2.5 py-1 rounded-lg text-[10px] font-bold {{ $userItem->is_super_admin ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/40' }} transition-all">
                                     {{ $userItem->is_super_admin ? 'Demote' : 'Promote to SA' }}
                                 </button>
-                                <a href="/admin/{{ $userItem->defaultTenant?->id ?? 1 }}" target="_blank" class="text-slate-400 hover:text-white underline text-[10px]">Studio</a>
+                                <a href="/admin/{{ $userItem->accounts->first()?->id ?? 1 }}" target="_blank" class="text-slate-400 hover:text-white underline text-[10px]">Studio</a>
                             </td>
                         </tr>
                         @empty
