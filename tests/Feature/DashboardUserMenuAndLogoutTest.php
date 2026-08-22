@@ -15,8 +15,8 @@ class DashboardUserMenuAndLogoutTest extends TestCase
     public function test_authenticated_dashboard_has_anti_cache_headers(): void
     {
         $user = User::factory()->create(['name' => 'Jane Developer']);
-        $account = Account::create([
-            'user_id' => $user->id,
+        $account = Account::factory()->create([
+            'owner_user_id' => $user->id,
             'name' => 'Jane Workspace',
             'plan_slug' => 'free',
         ]);
@@ -41,8 +41,8 @@ class DashboardUserMenuAndLogoutTest extends TestCase
             'name' => 'Alex Rivera',
             'email' => 'alex@example.com',
         ]);
-        $account = Account::create([
-            'user_id' => $user->id,
+        $account = Account::factory()->create([
+            'owner_user_id' => $user->id,
             'name' => 'Alex Workspace',
             'plan_slug' => 'free',
         ]);
@@ -74,8 +74,8 @@ class DashboardUserMenuAndLogoutTest extends TestCase
             'email' => 'root@example.com',
             'is_super_admin' => true,
         ]);
-        $account = Account::create([
-            'user_id' => $admin->id,
+        $account = Account::factory()->create([
+            'owner_user_id' => $admin->id,
             'name' => 'Admin Workspace',
             'plan_slug' => 'agency',
         ]);
@@ -100,8 +100,8 @@ class DashboardUserMenuAndLogoutTest extends TestCase
     public function test_logout_terminates_session_and_blocks_subsequent_dashboard_access(): void
     {
         $user = User::factory()->create(['name' => 'Morgan Reed']);
-        $account = Account::create([
-            'user_id' => $user->id,
+        $account = Account::factory()->create([
+            'owner_user_id' => $user->id,
             'name' => 'Morgan Workspace',
             'plan_slug' => 'pro',
         ]);
