@@ -14,10 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Bind CurrentProfileResolver
-        $this->app->singleton(CurrentProfileResolver::class, function ($app) {
-            return new CurrentProfileResolver();
-        });
+        // Scoped per-request: Phase 3's tenant-resolution middleware
+        // pins this to a specific Profile for the request's lifetime.
+        $this->app->scoped(CurrentProfileResolver::class);
 
         // Bind custom LoginResponse for Filament
         $this->app->bind(
