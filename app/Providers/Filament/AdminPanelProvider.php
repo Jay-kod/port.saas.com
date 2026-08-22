@@ -67,7 +67,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->renderHook(
-                \Filament\View\PanelsRenderHook::HEAD,
+                \Filament\View\PanelsRenderHook::HEAD_END,
                 fn (): string => \Illuminate\Support\Facades\Blade::render('
                     <style>
                         /* Hide duplicate sidebar collapse buttons so only the main topbar hamburger remains */
