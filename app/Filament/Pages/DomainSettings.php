@@ -27,6 +27,23 @@ class DomainSettings extends Page
 
     protected string $view = 'filament.pages.domain-settings';
 
+    public static function canAccess(): bool
+    {
+        /** @var Account|null $account */
+        $account = Filament::getTenant();
+        $user = \Illuminate\Support\Facades\Auth::user();
+
+        if (! $account || ! $user) {
+            return false;
+        }
+
+        if ($user->is_super_admin || $account->owner_user_id === $user->id || $account->getUserRole($user) === 'owner') {
+            return true;
+        }
+
+        return false;
+    }
+
     public string $newDomain = '';
 
     public function getAccount(): ?Account
