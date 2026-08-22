@@ -351,10 +351,11 @@ deployment**).
 
 ---
 
-## The four phase guides
+## The four phase guides & design references
 
 | File | Covers | Depends on |
 |---|---|---|
+| `01_AGENT_GUIDE.md` / `docs/agents/01_AGENT_GUIDE.md` | **Canonical Design Reference** — 4-tier dashboard visual hierarchy & color cues (Portfolio Owner: Green, Agency Owner: Teal, Team Member: Slate Blue, Super Admin: Amber/Orange) | Baseline CSS & Layouts |
 | `docs/agents/01-GROUNDWORK.md` | Phase 0 — already done; read for historical context and to understand `CurrentProfileResolver`'s contract before you touch it | — |
 | `docs/agents/02-MULTI-TENANCY-FOUNDATION.md` | Phase 1 — `accounts` table, `profile_id`/`account_id` columns, data backfill, Filament native tenancy | Phase 0 |
 | `docs/agents/03-BILLING-ONBOARDING-ROUTING.md` | Phases 2, 3, 4 — registration/onboarding, `SAAS_MODE=true` routing + marketing site, Stripe billing + AI usage metering | Phase 1 |
