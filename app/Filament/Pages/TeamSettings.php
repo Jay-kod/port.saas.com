@@ -29,6 +29,23 @@ class TeamSettings extends Page
 
     protected string $view = 'filament.pages.team-settings';
 
+    public static function canAccess(): bool
+    {
+        /** @var Account|null $account */
+        $account = Filament::getTenant();
+        $user = Auth::user();
+
+        if (! $account || ! $user) {
+            return false;
+        }
+
+        if ($user->is_super_admin || $account->owner_user_id === $user->id || $account->getUserRole($user) === 'owner') {
+            return true;
+        }
+
+        return false;
+    }
+
     public string $inviteName = '';
 
     public string $inviteEmail = '';
