@@ -139,14 +139,14 @@ $resolveReport = function (int $reportId, string $status) {
                 :class="activeTab === 'users' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
                 class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-            <span>2. Users & Accounts ({{ $totalUsersCount }})</span>
+            <span>2. Users & Accounts ({{ $this->totalUsersCount }})</span>
         </button>
 
         <button @click="activeTab = 'moderation'" 
                 :class="activeTab === 'moderation' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
                 class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-            <span>3. Reported Portfolios @if($pendingReportsCount > 0) <span class="px-1.5 py-0.2 rounded-full bg-red-500 text-white text-[10px]">{{ $pendingReportsCount }}</span> @endif</span>
+            <span>3. Reported Portfolios @if($this->pendingReportsCount > 0) <span class="px-1.5 py-0.2 rounded-full bg-red-500 text-white text-[10px]">{{ $this->pendingReportsCount }}</span> @endif</span>
         </button>
 
         <button @click="activeTab = 'integrations'" 
@@ -170,26 +170,26 @@ $resolveReport = function (int $reportId, string $status) {
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="glass-card-dark glass-card-dark-hover rounded-2xl p-5 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Total Users</div>
-                <div class="text-3xl font-extrabold font-heading text-white">{{ $totalUsersCount }}</div>
+                <div class="text-3xl font-extrabold font-heading text-white">{{ $this->totalUsersCount }}</div>
                 <div class="text-[10px] text-slate-500 font-mono">Registered accounts</div>
             </div>
 
             <div class="glass-card-dark glass-card-dark-hover rounded-2xl p-5 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Tenant Workspaces</div>
-                <div class="text-3xl font-extrabold font-heading text-rose-400">{{ $totalAccountsCount }}</div>
+                <div class="text-3xl font-extrabold font-heading text-rose-400">{{ $this->totalAccountsCount }}</div>
                 <div class="text-[10px] text-slate-500 font-mono">Active tenants</div>
             </div>
 
             <div class="glass-card-dark glass-card-dark-hover rounded-2xl p-5 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Portfolios</div>
-                <div class="text-3xl font-extrabold font-heading text-red-300">{{ $totalProfilesCount }}</div>
+                <div class="text-3xl font-extrabold font-heading text-red-300">{{ $this->totalProfilesCount }}</div>
                 <div class="text-[10px] text-slate-500 font-mono">Live & draft sites</div>
             </div>
 
             <div class="glass-card-dark glass-card-dark-hover rounded-2xl p-5 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">AI Generation Pipeline</div>
-                <div class="text-3xl font-extrabold font-heading text-emerald-400">{{ $totalResumesCount + $totalCoverLettersCount }}</div>
-                <div class="text-[10px] text-slate-500 font-mono">{{ $totalResumesCount }} Resumes &bull; {{ $totalCoverLettersCount }} Letters</div>
+                <div class="text-3xl font-extrabold font-heading text-emerald-400">{{ $this->totalResumesCount + $this->totalCoverLettersCount }}</div>
+                <div class="text-[10px] text-slate-500 font-mono">{{ $this->totalResumesCount }} Resumes &bull; {{ $this->totalCoverLettersCount }} Letters</div>
             </div>
         </div>
 
