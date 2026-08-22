@@ -27,6 +27,7 @@ class CurrentProfileResolver
             // Check if current host matches a verified custom domain
             $host = strtolower(trim(request()->getHost()));
             $domain = Domain::query()
+                ->with(['profile.account', 'profile.theme'])
                 ->where('domain', $host)
                 ->whereNotNull('verified_at')
                 ->first();
@@ -39,7 +40,7 @@ class CurrentProfileResolver
         }
 
         // SAAS_MODE=false (default / self-hosted): always the first profile.
-        return $this->resolved = Profile::query()->first();
+        return $this->resolved = Profile::query()->with(['account', 'theme'])->first();
     }
 
     /**
