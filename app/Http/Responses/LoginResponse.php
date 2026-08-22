@@ -10,6 +10,12 @@ class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request): RedirectResponse|Redirector
     {
+        $user = auth()->user();
+
+        if ($user && $user->is_super_admin) {
+            return redirect()->intended(route('super-admin.dashboard'));
+        }
+
         return redirect()->intended(route('dashboard'));
     }
 }
