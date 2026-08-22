@@ -36,7 +36,28 @@ $usersList = fn () => User::query()
     ->latest()
     ->paginate(10);
 
-$reportsList = fn () => PortfolioReport::query()->with('profile')->latest()->take(10)->get();
+$toggleSuperAdmin = function (int $userId) {
+    if (auth()->id() === $userId) {
+        $this->userActionMessage = "Security restriction: You cannot demote your own Super Admin root account.";
+        return;
+    }
+
+    $targetUser = User::find($userId);
+    if ($targetUser) {
+        $targetUser->is_super_admin = ! $targetUser->is_super_admin;
+        $targetUser->save();
+        $this->userActionMessage = "Successfully updated Super Admin privileges for {$targetUser->name}.";
+    }
+};
+
+$resolveReport = function (int $reportId, string $status) {
+    $report = PortfolioReport::find($reportId);
+    if ($report) {
+        $report->status = $status;
+        $report->save();
+        $this->userActionMessage = "Report #{$reportId} status updated to {$status}.";
+    }
+};
 
 with(fn () => [
     'usersList' => $usersList(),
