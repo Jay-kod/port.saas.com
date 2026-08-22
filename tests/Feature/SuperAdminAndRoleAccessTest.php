@@ -2,11 +2,17 @@
 
 namespace Tests\Feature;
 
+use App\Filament\Pages\AgencyBrandingSettings;
+use App\Filament\Pages\BillingSettings;
+use App\Filament\Pages\DomainSettings;
+use App\Filament\Pages\TeamSettings;
 use App\Models\Account;
 use App\Models\PortfolioReport;
 use App\Models\Profile;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Volt\Volt;
 use Tests\TestCase;
 
 class SuperAdminAndRoleAccessTest extends TestCase
@@ -109,5 +115,95 @@ class SuperAdminAndRoleAccessTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Commercial spam content detected');
+    }
+
+    public function test_editor_and_viewer_roles_are_denied_access_to_owner_pages(): void
+    {
+        $owner = User::factory()->create();
+        $editor = User::factory()->create();
+        $viewer = User::factory()->create();
+
+        $account = Account::factory()->create([
+            'owner_user_id' => $owner->id,
+            'plan_slug' => 'agency',
+        ]);
+
+        $account->members()->attach($editor->id, ['role' => 'editor']);
+        $account->members()->attach($viewer->id, ['role' => 'viewer']);
+
+        // Set tenant context for Filament
+        Filament::setTenant($account);
+
+        // Owner has access
+        $this->actingAs($owner);
+        $this->assertTrue(BillingSettings::canAccess());
+        $this->assertTrue(TeamSettings::canAccess());
+        $this->assertTrue(DomainSettings::canAccess());
+        $this->assertTrue(AgencyBrandingSettings::canAccess());
+
+        // Editor is blocked
+        $this->actingAs($editor);
+        $this->assertFalse(BillingSettings::canAccess());
+        $this->assertFalse(TeamSettings::canAccess());
+        $this->assertFalse(DomainSettings::canAccess());
+        $this->assertFalse(AgencyBrandingSettings::canAccess());
+
+        // Viewer is blocked
+        $this->actingAs($viewer);
+        $this->assertFalse(BillingSettings::canAccess());
+        $this->assertFalse(TeamSettings::canAccess());
+        $this->assertFalse(DomainSettings::canAccess());
+        $this->assertFalse(AgencyBrandingSettings::canAccess());
+    }
+
+    public function test_volt_super_admin_livewire_actions_work_correctly(): void
+    {
+        $superAdmin = User::factory()->create(['is_super_admin' => true]);
+        $targetUser = User::factory()->create(['is_super_admin' => false]);
+        $account = Account::factory()->create(['owner_user_id' => $superAdmin->id]);
+
+        $profile = Profile::factory()->create([
+            'account_id' => $account->id,
+            'user_id' => $targetUser->id,
+            'slug' => 'flagged-site-2',
+        ]);
+
+        $report = PortfolioReport::create([
+            'profile_id' => $profile->id,
+            'reporter_ip' => '127.0.0.1',
+            'reason' => 'inappropriate',
+            'details' => 'Offensive material',
+            'status' => 'pending',
+        ]);
+
+        $this->actingAs($superAdmin);
+
+        // Test Promote target user to Super Admin
+        Volt::test('super-admin.index')
+            ->call('toggleSuperAdmin', $targetUser->id)
+            ->assertSee("Successfully updated Super Admin privileges for {$targetUser->name}");
+
+        $this->assertTrue($targetUser->fresh()->is_super_admin);
+
+        // Test Demote target user back
+        Volt::test('super-admin.index')
+            ->call('toggleSuperAdmin', $targetUser->id)
+            ->assertSee("Successfully updated Super Admin privileges for {$targetUser->name}");
+
+        $this->assertFalse($targetUser->fresh()->is_super_admin);
+
+        // Test Self-Demote Protection
+        Volt::test('super-admin.index')
+            ->call('toggleSuperAdmin', $superAdmin->id)
+            ->assertSee('Security restriction: You cannot demote your own Super Admin root account');
+
+        $this->assertTrue($superAdmin->fresh()->is_super_admin);
+
+        // Test Resolve Report action
+        Volt::test('super-admin.index')
+            ->call('resolveReport', $report->id, 'resolved')
+            ->assertSee("Report #{$report->id} status updated to resolved");
+
+        $this->assertEquals('resolved', $report->fresh()->status);
     }
 }
