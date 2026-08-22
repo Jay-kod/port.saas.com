@@ -30,6 +30,12 @@
         
         <div class="ml-auto flex items-center space-x-4">
             <span class="text-sm font-medium text-red-400">Super Admin: {{ auth()->user()->name ?? 'Admin' }}</span>
+            <form method="POST" action="{{ route('filament.admin.auth.logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="text-xs bg-red-950 hover:bg-red-900 text-red-300 border border-red-800 px-3 py-1.5 rounded font-semibold transition-colors">
+                    Sign Out
+                </button>
+            </form>
         </div>
     </header>
 
@@ -42,20 +48,20 @@
             class="fixed inset-y-0 left-0 pt-16 bg-black border-r border-red-900 transition-all duration-300 z-40 overflow-y-auto shadow-md"
         >
             <nav class="flex flex-col p-2 space-y-1">
-                <!-- Dashboard Link -->
+                <!-- Super Admin Dashboard Link -->
                 <a href="{{ route('super-admin.dashboard') }}" class="flex items-center p-2 rounded-md hover:bg-red-950 hover:text-red-400 group transition-colors">
                     <svg class="w-6 h-6 flex-shrink-0 text-red-700 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
                     </svg>
-                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Platform Settings</span>
+                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">System Health</span>
                 </a>
 
-                <!-- Users Link -->
-                <a href="#" class="flex items-center p-2 rounded-md hover:bg-red-950 hover:text-red-400 group transition-colors">
-                    <svg class="w-6 h-6 flex-shrink-0 text-red-700 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                <!-- User Dashboard Link -->
+                <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded-md hover:bg-red-950 hover:text-red-400 group transition-colors">
+                    <svg class="w-6 h-6 flex-shrink-0 text-red-700 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
-                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Manage Users</span>
+                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">User Dashboard</span>
                 </a>
             </nav>
         </aside>
