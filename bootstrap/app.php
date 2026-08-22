@@ -12,10 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->redirectTo(guests: '/admin/login');
         $middleware->alias([
             'resolve.tenant' => \App\Http\Middleware\ResolveTenantFromSlug::class,
+            'super_admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
         ]);
+        $middleware->redirectTo(guests: '/admin/login');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
