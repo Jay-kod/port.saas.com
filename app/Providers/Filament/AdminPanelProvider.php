@@ -49,6 +49,16 @@ class AdminPanelProvider extends PanelProvider
             ->login(Login::class)
             ->registration(Register::class)
             ->tenant(Account::class, slugAttribute: 'id')
+            ->homeUrl(function (): string {
+                $user = auth()->user();
+                if ($user && ($user->is_super_admin || $user->email === 'admin@example.com')) {
+                    return route('super-admin.dashboard');
+                }
+                if ($user && ($user->accounts()->where('plan_slug', 'agency')->exists() || $user->email === 'agency@example.com')) {
+                    return route('agency');
+                }
+                return route('dashboard');
+            })
             ->colors([
                 'primary' => Color::Amber,
             ])
