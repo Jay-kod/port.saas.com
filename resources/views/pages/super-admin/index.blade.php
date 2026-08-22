@@ -72,11 +72,11 @@ $resolveReport = function (int $reportId, string $status) {
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <div class="flex items-center gap-2 mb-2">
-                <span class="px-3 py-1 rounded-full text-xs font-mono font-black bg-rose-600 text-white shadow-md shadow-rose-900/50">
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-black bg-amber-600 text-slate-950 shadow-md shadow-amber-900/50">
                     SUPER ADMIN MASTER CONTROL
                 </span>
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-300 border border-rose-500/30 font-mono">
-                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 font-mono">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
                     TIER 0 / ROOT ELEVATED
                 </span>
             </div>
@@ -105,21 +105,21 @@ $resolveReport = function (int $reportId, string $status) {
 
     <!-- Alert / Message Banner -->
     @if($userActionMessage)
-    <div class="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-200 text-sm flex items-center justify-between font-mono animate-fadeIn">
+    <div class="p-4 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-sm flex items-center justify-between font-mono animate-fadeIn">
         <div class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-rose-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-5 h-5 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span>{{ $userActionMessage }}</span>
         </div>
-        <button wire:click="$set('userActionMessage', null)" class="text-rose-400 hover:text-white text-xs underline">Dismiss</button>
+        <button wire:click="$set('userActionMessage', null)" class="text-amber-400 hover:text-white text-xs underline">Dismiss</button>
     </div>
     @endif
 
     <!-- Root Privileges Notice -->
-    <div class="p-4 rounded-2xl bg-black border border-rose-950 text-rose-400 text-xs flex items-center justify-between font-mono">
+    <div class="p-4 rounded-2xl bg-black border border-amber-950 text-amber-400 text-xs flex items-center justify-between font-mono">
         <div class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-rose-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-5 h-5 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
             <span><strong>SUPER ADMIN SECURITY PROTOCOL ACTIVE:</strong> You have unrestricted system authority to manage tenants, inspect audit logs, rotate API keys, and moderate portfolios globally.</span>
@@ -127,38 +127,38 @@ $resolveReport = function (int $reportId, string $status) {
     </div>
 
     <!-- Master Navigation Tabs -->
-    <div class="flex flex-wrap items-center gap-2 border-b border-rose-950/70 pb-3 font-mono text-xs">
+    <div class="flex flex-wrap items-center gap-2 border-b border-amber-950/70 pb-3 font-mono text-xs">
         <button @click="activeTab = 'telemetry'" 
-                :class="activeTab === 'telemetry' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
-                class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
+                :class="activeTab === 'telemetry' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'"
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
             <span>1. Telemetry & Health</span>
         </button>
 
         <button @click="activeTab = 'users'" 
-                :class="activeTab === 'users' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
-                class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
+                :class="activeTab === 'users' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'"
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
             <span>2. Users & Accounts ({{ $this->totalUsersCount }})</span>
         </button>
 
         <button @click="activeTab = 'moderation'" 
-                :class="activeTab === 'moderation' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
-                class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
+                :class="activeTab === 'moderation' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'"
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
             <span>3. Reported Portfolios @if($this->pendingReportsCount > 0) <span class="px-1.5 py-0.2 rounded-full bg-red-500 text-white text-[10px]">{{ $this->pendingReportsCount }}</span> @endif</span>
         </button>
 
         <button @click="activeTab = 'integrations'" 
-                :class="activeTab === 'integrations' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
-                class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
+                :class="activeTab === 'integrations' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'"
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
             <span>4. API Integrations Hub</span>
         </button>
 
         <button @click="activeTab = 'settings'" 
-                :class="activeTab === 'settings' ? 'bg-rose-600 text-white shadow-md shadow-rose-900/50' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800'"
-                class="px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2">
+                :class="activeTab === 'settings' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'"
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
             <span>5. System Settings</span>
         </button>
@@ -176,13 +176,13 @@ $resolveReport = function (int $reportId, string $status) {
 
             <div class="glass-card-dark glass-card-dark-hover rounded-2xl p-5 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Tenant Workspaces</div>
-                <div class="text-3xl font-extrabold font-heading text-rose-400">{{ $this->totalAccountsCount }}</div>
+                <div class="text-3xl font-extrabold font-heading text-amber-400">{{ $this->totalAccountsCount }}</div>
                 <div class="text-[10px] text-slate-500 font-mono">Active tenants</div>
             </div>
 
             <div class="glass-card-dark glass-card-dark-hover rounded-2xl p-5 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Portfolios</div>
-                <div class="text-3xl font-extrabold font-heading text-red-300">{{ $this->totalProfilesCount }}</div>
+                <div class="text-3xl font-extrabold font-heading text-orange-300">{{ $this->totalProfilesCount }}</div>
                 <div class="text-[10px] text-slate-500 font-mono">Live & draft sites</div>
             </div>
 
@@ -194,17 +194,17 @@ $resolveReport = function (int $reportId, string $status) {
         </div>
 
         <!-- Infrastructure Watcher & Daemon Heartbeat -->
-        <div class="p-6 rounded-3xl bg-black border border-rose-950/80 space-y-4">
+        <div class="p-6 rounded-3xl bg-black border border-amber-950/80 space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
                     <span class="flex h-3 w-3 relative">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-rose-600"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
                     </span>
                     <div>
                         <div class="text-sm font-bold text-white flex items-center gap-2 font-mono">
                             <span>SaaS Engine Watcher:</span>
-                            <span class="text-rose-400 font-bold">ONLINE & SECURE</span>
+                            <span class="text-amber-400 font-bold">ONLINE & SECURE</span>
                         </div>
                         <div class="text-xs text-slate-400">
                             Single-schema multi-tenancy &bull; Stripe Cashier billing &bull; Custom Domain Host Resolver
@@ -213,18 +213,18 @@ $resolveReport = function (int $reportId, string $status) {
                 </div>
 
                 <div class="text-xs font-mono text-slate-400 bg-slate-950 px-3 py-1.5 rounded-xl border border-white/5">
-                    Server Clock: <span class="text-rose-300 font-bold">{{ now()->toDateTimeString() }} UTC</span>
+                    Server Clock: <span class="text-amber-300 font-bold">{{ now()->toDateTimeString() }} UTC</span>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-rose-950/50 text-xs font-mono">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-amber-950/50 text-xs font-mono">
                 <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1">
                     <div class="text-slate-500 uppercase text-[10px]">Database Engine</div>
                     <div class="text-white font-bold">{{ config('database.default') }} (Connected)</div>
                 </div>
                 <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1">
                     <div class="text-slate-500 uppercase text-[10px]">SaaS Operating Mode</div>
-                    <div class="text-rose-400 font-bold">{{ config('saas.mode') ? 'Multi-Tenant SaaS' : 'Self-Hosted Single' }}</div>
+                    <div class="text-amber-400 font-bold">{{ config('saas.mode') ? 'Multi-Tenant SaaS' : 'Self-Hosted Single' }}</div>
                 </div>
                 <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1">
                     <div class="text-slate-500 uppercase text-[10px]">Cache & Session</div>
@@ -247,7 +247,7 @@ $resolveReport = function (int $reportId, string $status) {
                     <input type="text" 
                            wire:model.live.debounce.300ms="searchQuery" 
                            placeholder="Search by name or email..." 
-                           class="w-full px-4 py-2 rounded-xl bg-black border border-rose-950 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 font-mono">
+                           class="w-full px-4 py-2 rounded-xl bg-black border border-amber-950 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono">
                 </div>
             </div>
 
