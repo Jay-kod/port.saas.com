@@ -14,6 +14,32 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <script>
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted || (window.performance && window.performance.navigation && window.performance.navigation.type === 2)) {
+                window.location.reload();
+            }
+        });
+    </script>
+
+    @php
+        $user = auth()->user();
+        $tenantId = (session('active_tenant_id') ? \App\Models\Account::find(session('active_tenant_id')) : null)?->id 
+            ?? $user?->accounts()->first()?->id 
+            ?? 1;
+        $userProfile = $user?->profile;
+
+        $userInitials = 'SA';
+        if ($user && $user->name) {
+            $nameParts = preg_split('/\s+/', trim($user->name));
+            if (count($nameParts) >= 2) {
+                $userInitials = strtoupper(substr($nameParts[0], 0, 1) . substr($nameParts[count($nameParts) - 1], 0, 1));
+            } else {
+                $userInitials = strtoupper(substr($nameParts[0], 0, min(2, strlen($nameParts[0]))));
+            }
+        }
+    @endphp
+
     <style>
         :root {
             --panel-accent: #D97706;
@@ -73,11 +99,7 @@
         }
     </style>
 </head>
-<body class="bg-black text-gray-100 selection:bg-amber-500 selection:text-slate-950" x-data="{ sidebarOpen: false, sidebarCollapsed: false }">
-
-    @php
-        $tenantId = auth()->user()?->defaultTenant?->id ?? auth()->user()?->accounts->first()?->id ?? 1;
-    @endphp
+<body class="bg-black text-slate-100 selection:bg-amber-500 selection:text-black font-sans" x-data="{ sidebarOpen: false, sidebarCollapsed: false, showLogoutModal: false }">
 
     <!-- Mobile Sidebar Overlay -->
     <div x-show="sidebarOpen" 
@@ -87,66 +109,67 @@
          x-transition:leave="transition-opacity ease-linear duration-300"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden" 
+         class="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden" 
          @click="sidebarOpen = false" style="display: none;"></div>
 
-    <!-- Sidebar (Clima Super Admin Master Control: Amber & AMOLED Black) -->
+    <!-- Sidebar (Super Admin Master Control) -->
     <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen, 'lg:w-20': sidebarCollapsed }" 
-           class="w-64 fixed inset-y-0 left-0 z-50 glass-card-dark border-r border-amber-950/70 bg-black/95 transition-all duration-300 ease-in-out lg:translate-x-0 flex flex-col h-screen overflow-hidden">
+           class="w-64 fixed inset-y-0 left-0 z-50 glass-card-dark border-r border-amber-950/70 bg-black transition-all duration-300 ease-in-out lg:translate-x-0 flex flex-col h-screen overflow-hidden">
         
-        <!-- Sidebar Header / Master Control Logo -->
+        <!-- Sidebar Header (Amber Shield) -->
         <div class="h-20 flex flex-col justify-center border-b border-amber-950/70 transition-all duration-300" :class="sidebarCollapsed ? 'items-center px-0' : 'px-5'">
-            <a href="{{ route('super-admin.dashboard') }}" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-amber-600 via-orange-500 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-600/30 group-hover:scale-105 transition-transform duration-200 border border-amber-500/40">
-                    <svg class="w-5 h-5 text-slate-950 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            <div class="flex items-center gap-3">
+                <a href="{{ route('super-admin.dashboard') }}" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-900/40 border border-amber-400/40 group-hover:scale-105 transition-transform">
+                        <svg class="w-5 h-5 text-slate-950 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <div x-show="!sidebarCollapsed" class="flex flex-col">
+                        <span class="text-lg font-black font-heading tracking-tight bg-gradient-to-r from-amber-400 via-amber-200 to-orange-400 bg-clip-text text-transparent uppercase font-mono">
+                            MASTER
+                        </span>
+                        <span class="text-[10px] font-mono font-bold tracking-wider text-amber-500">
+                            CONTROL CENTER
+                        </span>
+                    </div>
+                </a>
+                <button @click="sidebarOpen = false" class="ml-auto lg:hidden text-amber-400 hover:text-white shrink-0">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                </div>
-                <div x-show="!sidebarCollapsed" class="flex flex-col">
-                    <span class="text-base font-black font-heading tracking-wider text-white whitespace-nowrap">
-                        SUPER ADMIN
-                    </span>
-                    <span class="text-[9px] font-mono tracking-widest text-amber-400 uppercase font-bold">
-                        ROOT CONTROL
-                    </span>
-                </div>
-            </a>
-            <button @click="sidebarOpen = false" class="ml-auto lg:hidden text-amber-400 hover:text-white shrink-0">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+                </button>
+            </div>
         </div>
 
         <!-- Sidebar Navigation Links -->
-        <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-4">
-            
-            <!-- SECTION 1: MASTER ROOT OPERATIONS -->
+        <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-4 font-sans">
+            <!-- SECTION 1: PLATFORM OVERVIEW -->
             <div>
                 <div class="px-3 mb-1.5" x-show="!sidebarCollapsed">
-                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400/80 font-mono">Master Operations</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-500/80 font-mono">Root Operations</span>
                 </div>
-                <div class="space-y-1">
+                <div class="space-y-0.5">
                     <!-- Master Dashboard -->
                     <a href="{{ route('super-admin.dashboard') }}" 
                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="flex items-center py-2 rounded-xl text-xs font-medium {{ request()->routeIs('super-admin.dashboard') ? 'active-nav-pill-amber font-bold' : 'text-slate-400 hover:bg-amber-950/30 hover:text-amber-200' }} transition-all"
-                       title="Platform Health">
-                        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                       class="flex items-center py-2.5 rounded-xl text-xs font-semibold {{ request()->routeIs('super-admin.dashboard') ? 'active-nav-pill-amber' : 'text-slate-300 hover:bg-amber-950/30 hover:text-amber-200' }} transition-all"
+                       title="Master Overview">
+                        <svg class="w-4 h-4 shrink-0 {{ request()->routeIs('super-admin.dashboard') ? 'text-amber-400' : 'text-slate-500' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
-                        <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-bold">Master Control</span>
+                        <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-mono">Platform Telemetry</span>
                     </a>
                 </div>
             </div>
 
-            <!-- SECTION 2: MODERATION & GLOBAL CATALOGS -->
+            <!-- SECTION 2: GLOBAL AUDIT & GOVERNANCE -->
             <div class="pt-2 border-t border-amber-950/70">
                 <div class="px-3 mb-1.5" x-show="!sidebarCollapsed">
-                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-400/80 font-mono">Platform Catalogs</span>
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-500/80 font-mono">Platform Moderation</span>
                 </div>
                 <div class="space-y-0.5">
-                    <!-- Portfolio Reports Moderation -->
+                    <!-- Abuse Reports -->
                     <a href="/admin/{{ $tenantId }}/portfolio-reports" 
                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
                        class="flex items-center py-2 rounded-xl text-xs font-medium text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 transition-all"
@@ -237,18 +260,16 @@
 
         <!-- Sidebar Footer (Sign out) -->
         <div class="p-3 border-t border-amber-950/70 bg-black">
-            <form method="POST" action="{{ route('filament.admin.auth.logout') }}" class="block w-full">
-                @csrf
-                <button type="submit" 
-                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-3'" 
-                        class="w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-amber-950 bg-amber-950/30 text-amber-300 hover:bg-amber-900/60 hover:text-white transition-all shadow-sm font-mono" 
-                        title="Sign Out">
-                    <svg class="w-4 h-4 shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                    <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-bold">Terminate Session</span>
-                </button>
-            </form>
+            <button type="button" 
+                    @click="showLogoutModal = true"
+                    :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-3'" 
+                    class="w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-amber-950 bg-amber-950/30 text-amber-300 hover:bg-amber-900/60 hover:text-white transition-all shadow-sm font-mono group" 
+                    title="Sign Out">
+                <svg class="w-4 h-4 shrink-0 text-amber-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-bold">Terminate Session</span>
+            </button>
         </div>
     </aside>
 
@@ -283,13 +304,104 @@
                 </div>
             </div>
 
-            <!-- Top Right Section -->
+            <!-- Top Right Section with Interactive Initials Dropdown -->
             <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 pl-2 border-l border-amber-950">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-600 to-orange-600 flex items-center justify-center text-slate-950 font-bold text-xs shadow-md shadow-amber-900/50 font-mono">
-                        SA
+                <div class="relative pl-2 border-l border-amber-950" x-data="{ userMenuOpen: false }">
+                    <button @click="userMenuOpen = !userMenuOpen" 
+                            type="button" 
+                            class="flex items-center gap-2.5 p-1 sm:px-2 rounded-xl hover:bg-amber-950/30 border border-transparent hover:border-amber-500/20 transition-all focus:outline-none group"
+                            id="super-admin-menu-button" 
+                            aria-expanded="false" 
+                            aria-haspopup="true">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-600 to-orange-600 flex items-center justify-center text-slate-950 font-bold text-xs shadow-md shadow-amber-900/50 font-mono group-hover:scale-105 transition-transform border border-amber-400/40">
+                            {{ $userInitials }}
+                        </div>
+                        <span class="text-sm font-semibold text-amber-300 hidden md:inline group-hover:text-amber-200">{{ $user->name ?? 'Super Admin' }}</span>
+                        <svg class="w-3.5 h-3.5 text-amber-400 transition-transform duration-200" :class="{ 'rotate-180': userMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="userMenuOpen" 
+                         @click.outside="userMenuOpen = false"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+                         class="absolute right-0 mt-2 w-64 rounded-2xl glass-card-dark bg-black/95 border border-amber-500/30 shadow-2xl shadow-black/90 py-2 z-50 divide-y divide-amber-950/60"
+                         style="display: none;">
+                        
+                        <!-- User Info Header -->
+                        <div class="px-4 py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 shrink-0 rounded-full bg-gradient-to-tr from-amber-600 to-orange-600 flex items-center justify-center text-slate-950 font-bold text-sm shadow-md border border-amber-400/40 font-mono">
+                                    {{ $userInitials }}
+                                </div>
+                                <div class="flex flex-col min-w-0">
+                                    <p class="text-sm font-bold text-white truncate">{{ $user->name ?? 'Super Admin' }}</p>
+                                    <p class="text-[11px] text-amber-400/80 truncate font-mono">{{ $user->email ?? '' }}</p>
+                                </div>
+                            </div>
+                            <div class="mt-2.5">
+                                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 font-mono">
+                                    <span class="w-1 h-1 rounded-full bg-amber-500 animate-pulse"></span>
+                                    ROOT / TIER 0
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Menu Items: Profile & Settings -->
+                        <div class="py-1.5 px-1.5 space-y-0.5 font-sans">
+                            <!-- Profile Link -->
+                            <a href="/admin/{{ $tenantId }}/profiles" 
+                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-amber-950/30 rounded-xl transition-colors group">
+                                <div class="w-7 h-7 rounded-lg bg-amber-950/30 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:bg-amber-950/60 transition-all">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-semibold text-slate-200 group-hover:text-white">Profile</span>
+                                    <span class="text-[10px] text-slate-400">View profile configurations</span>
+                                </div>
+                            </a>
+
+                            <!-- Settings Link -->
+                            <a href="/admin/{{ $tenantId }}/billing-settings" 
+                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-amber-950/30 rounded-xl transition-colors group">
+                                <div class="w-7 h-7 rounded-lg bg-amber-950/30 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:bg-amber-950/60 transition-all">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-semibold text-slate-200 group-hover:text-white">Settings</span>
+                                    <span class="text-[10px] text-slate-400">Billing, accounts & platform</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Logout Button (triggers modal) -->
+                        <div class="py-1.5 px-1.5">
+                            <button @click="userMenuOpen = false; showLogoutModal = true" 
+                                    type="button" 
+                                    class="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-amber-400 hover:text-white hover:bg-red-500/10 rounded-xl transition-colors group text-left">
+                                <div class="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 group-hover:bg-red-500/20 transition-all">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col text-left">
+                                    <span class="font-semibold text-amber-300 group-hover:text-red-300 font-mono">Terminate Session</span>
+                                    <span class="text-[10px] text-amber-500/70">Sign out of master control</span>
+                                </div>
+                            </button>
+                        </div>
                     </div>
-                    <span class="text-sm font-semibold text-amber-300 hidden md:inline">{{ auth()->user()->name ?? 'Super Admin' }}</span>
                 </div>
             </div>
         </header>
@@ -303,6 +415,76 @@
         <footer class="py-6 border-t border-amber-950/70 text-center text-xs text-amber-500/60 bg-black mt-auto font-mono">
             DevFolio Master Operations &bull; Root Privileges Activated &bull; Zero Interference Architecture
         </footer>
+    </div>
+
+    <!-- Custom Super Admin Logout Verification Modal -->
+    <div x-show="showLogoutModal" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md" 
+         style="display: none;"
+         @keydown.escape.window="showLogoutModal = false">
+        
+        <!-- Modal Card -->
+        <div @click.outside="showLogoutModal = false"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             class="relative w-full max-w-md p-6 rounded-3xl glass-card-dark bg-black/95 border border-amber-500/40 shadow-2xl shadow-amber-950/60 overflow-hidden">
+            
+            <!-- Ambient Amber Glow -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative flex flex-col items-center text-center font-sans">
+                <!-- Icon -->
+                <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-4 shadow-lg shadow-amber-500/10 animate-pulse">
+                    <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+
+                <!-- Title & Description -->
+                <h3 class="text-xl font-bold font-heading text-white tracking-tight font-mono">
+                    Terminate Root Session?
+                </h3>
+                <p class="mt-2 text-xs leading-relaxed text-slate-400">
+                    Are you sure you want to end your Super Admin session? Master control privileges will be securely closed and you will be returned to the sign-in portal.
+                </p>
+
+                <!-- User Pill inside Modal -->
+                <div class="mt-4 w-full py-2 px-3 rounded-xl bg-amber-950/30 border border-amber-500/20 flex items-center justify-center gap-2 text-xs text-amber-300 font-mono">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span>Elevated Account: <strong class="text-white">{{ $user->email ?? 'Super Admin' }}</strong></span>
+                </div>
+
+                <!-- Modal Action Buttons -->
+                <div class="mt-6 grid grid-cols-2 gap-3 w-full font-mono">
+                    <button type="button" 
+                            @click="showLogoutModal = false"
+                            class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all">
+                        Cancel
+                    </button>
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                        @csrf
+                        <button type="submit" 
+                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 border border-amber-400/50 shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Terminate</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
