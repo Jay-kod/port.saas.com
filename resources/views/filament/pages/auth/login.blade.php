@@ -115,11 +115,12 @@
                     {{-- 1. Developer Tab (Cyan) --}}
                     <button
                         type="button"
+                        wire:click="selectRole('user', 'developer@example.com')"
                         @click="selectRole('user', 'developer@example.com')"
-                        :class="activeRole === 'user' 
+                        :class="(activeRole === 'user' || $wire.selectedRole === 'user') 
                             ? 'bg-cyan-500/15 border-cyan-500/50 text-cyan-400 shadow-md shadow-cyan-500/10' 
                             : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'"
-                        class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center"
+                        class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center cursor-pointer"
                     >
                         <span class="text-sm">👤</span>
                         <span>Developer</span>
@@ -128,11 +129,12 @@
                     {{-- 2. Admin Tab (Amber) --}}
                     <button
                         type="button"
+                        wire:click="selectRole('admin', 'agency@example.com')"
                         @click="selectRole('admin', 'agency@example.com')"
-                        :class="activeRole === 'admin' 
+                        :class="(activeRole === 'admin' || $wire.selectedRole === 'admin') 
                             ? 'bg-amber-500/15 border-amber-500/50 text-amber-400 shadow-md shadow-amber-500/10' 
                             : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'"
-                        class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center"
+                        class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center cursor-pointer"
                     >
                         <span class="text-sm">🏢</span>
                         <span>Admin</span>
@@ -141,11 +143,12 @@
                     {{-- 3. Super Admin Tab (Purple) --}}
                     <button
                         type="button"
+                        wire:click="selectRole('super_admin', 'admin@example.com')"
                         @click="selectRole('super_admin', 'admin@example.com')"
-                        :class="activeRole === 'super_admin' 
+                        :class="(activeRole === 'super_admin' || $wire.selectedRole === 'super_admin') 
                             ? 'bg-purple-500/15 border-purple-500/50 text-purple-400 shadow-md shadow-purple-500/10' 
                             : 'border-transparent text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'"
-                        class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center"
+                        class="py-2 px-1.5 rounded-xl border flex flex-col items-center justify-center gap-1 transition text-xs font-bold text-center cursor-pointer"
                     >
                         <span class="text-sm">👑</span>
                         <span>Super Admin</span>
@@ -154,21 +157,21 @@
 
                 {{-- Role Autofill Banners --}}
                 {{-- Developer Banner (Cyan) --}}
-                <div x-show="activeRole === 'user'" class="p-2 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-[11px] text-cyan-300 flex items-center justify-between">
+                <div x-show="activeRole === 'user' || $wire.selectedRole === 'user'" class="p-2 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-[11px] text-cyan-300 flex items-center justify-between">
                     <span>Developer Demo: <code class="text-cyan-200 font-semibold">developer@example.com</code></span>
-                    <button type="button" @click="selectRole('user', 'developer@example.com')" class="underline text-cyan-400 font-bold hover:text-cyan-200">Auto-fill</button>
+                    <button type="button" wire:click="selectRole('user', 'developer@example.com')" @click="selectRole('user', 'developer@example.com')" class="underline text-cyan-400 font-bold hover:text-cyan-200 cursor-pointer">Auto-fill</button>
                 </div>
 
                 {{-- Admin Banner (Amber) --}}
-                <div x-show="activeRole === 'admin'" class="p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 text-[11px] text-amber-300 flex items-center justify-between">
+                <div x-show="activeRole === 'admin' || $wire.selectedRole === 'admin'" class="p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 text-[11px] text-amber-300 flex items-center justify-between">
                     <span>Agency Admin Demo: <code class="text-amber-200 font-semibold">agency@example.com</code></span>
-                    <button type="button" @click="selectRole('admin', 'agency@example.com')" class="underline text-amber-400 font-bold hover:text-amber-200">Auto-fill</button>
+                    <button type="button" wire:click="selectRole('admin', 'agency@example.com')" @click="selectRole('admin', 'agency@example.com')" class="underline text-amber-400 font-bold hover:text-amber-200 cursor-pointer">Auto-fill</button>
                 </div>
 
                 {{-- Super Admin Banner (Purple) --}}
-                <div x-show="activeRole === 'super_admin'" class="p-2 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] text-purple-300 flex items-center justify-between">
+                <div x-show="activeRole === 'super_admin' || $wire.selectedRole === 'super_admin'" class="p-2 rounded-xl bg-purple-950/40 border border-purple-500/30 text-[11px] text-purple-300 flex items-center justify-between">
                     <span>Super Admin: <code class="text-purple-200 font-semibold">admin@example.com</code></span>
-                    <button type="button" @click="selectRole('super_admin', 'admin@example.com')" class="underline text-purple-400 font-bold hover:text-purple-200">Auto-fill</button>
+                    <button type="button" wire:click="selectRole('super_admin', 'admin@example.com')" @click="selectRole('super_admin', 'admin@example.com')" class="underline text-purple-400 font-bold hover:text-purple-200 cursor-pointer">Auto-fill</button>
                 </div>
             </div>
 
