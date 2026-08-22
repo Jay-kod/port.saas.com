@@ -19,47 +19,28 @@ state([
     'activeTab' => 'telemetry',
     'searchQuery' => '',
     'userActionMessage' => null,
+    'totalUsersCount' => fn () => User::count(),
+    'totalAccountsCount' => fn () => Account::count(),
+    'totalProfilesCount' => fn () => Profile::count(),
+    'totalResumesCount' => fn () => ResumeGeneration::count(),
+    'totalCoverLettersCount' => fn () => CoverLetterGeneration::count(),
+    'pendingReportsCount' => fn () => PortfolioReport::where('status', 'pending')->count(),
 ]);
 
-$toggleSuperAdmin = function (int $userId) {
-    if (auth()->id() === $userId) {
-        $this->userActionMessage = "Security restriction: You cannot demote your own Super Admin root account.";
-        return;
-    }
+$usersList = fn () => User::query()
+    ->when($this->searchQuery, function ($q) {
+        $q->where('name', 'like', '%' . $this->searchQuery . '%')
+          ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
+    })
+    ->with(['defaultTenant', 'profile'])
+    ->latest()
+    ->paginate(10);
 
-    $targetUser = User::find($userId);
-    if ($targetUser) {
-        $targetUser->is_super_admin = ! $targetUser->is_super_admin;
-        $targetUser->save();
-        $this->userActionMessage = "Successfully updated Super Admin privileges for {$targetUser->name}.";
-    }
-};
-
-$resolveReport = function (int $reportId, string $status) {
-    $report = PortfolioReport::find($reportId);
-    if ($report) {
-        $report->status = $status;
-        $report->save();
-        $this->userActionMessage = "Report #{$reportId} status updated to {$status}.";
-    }
-};
+$reportsList = fn () => PortfolioReport::query()->with('profile')->latest()->take(10)->get();
 
 with(fn () => [
-    'usersList' => User::query()
-        ->when($this->searchQuery, function ($q) {
-            $q->where('name', 'like', '%' . $this->searchQuery . '%')
-              ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
-        })
-        ->with(['defaultTenant', 'profile'])
-        ->latest()
-        ->paginate(10),
-    'reportsList' => PortfolioReport::query()->with('profile')->latest()->take(10)->get(),
-    'totalUsersCount' => User::count(),
-    'totalAccountsCount' => Account::count(),
-    'totalProfilesCount' => Profile::count(),
-    'totalResumesCount' => ResumeGeneration::count(),
-    'totalCoverLettersCount' => CoverLetterGeneration::count(),
-    'pendingReportsCount' => PortfolioReport::where('status', 'pending')->count(),
+    'usersList' => $usersList(),
+    'reportsList' => $reportsList(),
 ]);
 
 ?>
