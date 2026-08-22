@@ -12,11 +12,23 @@ title('User Dashboard');
 state([
     'user' => fn () => auth()->user(),
     'profile' => fn () => auth()->user()?->profile,
-    'account' => fn () => auth()->user()?->defaultTenant,
-    'totalProjects' => fn () => auth()->user()?->profile ? Project::where('profile_id', auth()->user()->profile->id)->count() : 0,
-    'totalExperiences' => fn () => auth()->user()?->profile ? Experience::where('profile_id', auth()->user()->profile->id)->count() : 0,
-    'totalSkills' => fn () => auth()->user()?->profile ? Skill::where('profile_id', auth()->user()->profile->id)->count() : 0,
-    'totalResumes' => fn () => auth()->user()?->profile ? ResumeGeneration::where('profile_id', auth()->user()->profile->id)->count() : 0,
+    'account' => fn () => auth()->user()?->defaultTenant ?? auth()->user()?->accounts->first(),
+    'totalProjects' => function () {
+        $p = auth()->user()?->profile;
+        return $p ? Project::where('profile_id', $p->id)->count() : 0;
+    },
+    'totalExperiences' => function () {
+        $p = auth()->user()?->profile;
+        return $p ? Experience::where('profile_id', $p->id)->count() : 0;
+    },
+    'totalSkills' => function () {
+        $p = auth()->user()?->profile;
+        return $p ? Skill::where('profile_id', $p->id)->count() : 0;
+    },
+    'totalResumes' => function () {
+        $p = auth()->user()?->profile;
+        return $p ? ResumeGeneration::where('profile_id', $p->id)->count() : 0;
+    },
 ]);
 
 ?>
