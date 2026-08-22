@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Bind custom LoginResponse for Filament
         $this->app->bind(
-            \Filament\Http\Responses\Auth\Contracts\LoginResponse::class,
+            \Filament\Auth\Http\Responses\Contracts\LoginResponse::class,
             \App\Http\Responses\LoginResponse::class
         );
     }
