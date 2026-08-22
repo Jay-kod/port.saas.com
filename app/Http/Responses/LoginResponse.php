@@ -2,13 +2,14 @@
 
 namespace App\Http\Responses;
 
-class LoginResponse
+use Filament\Http\Responses\Auth\Contracts\LoginResponse as LoginResponseContract;
+use Illuminate\Http\RedirectResponse;
+use Livewire\Features\SupportRedirects\Redirector;
+
+class LoginResponse implements LoginResponseContract
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+    public function toResponse($request): RedirectResponse|Redirector
     {
-        //
+        return redirect()->intended(route('dashboard'));
     }
 }
