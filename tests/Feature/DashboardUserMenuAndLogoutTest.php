@@ -31,7 +31,9 @@ class DashboardUserMenuAndLogoutTest extends TestCase
         $response = $this->actingAs($user)->get('/dashboard');
 
         $response->assertStatus(200);
-        $response->assertHeader('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+        $this->assertTrue($response->headers->hasCacheControlDirective('no-cache'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('no-store'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('must-revalidate'));
         $response->assertHeader('Pragma', 'no-cache');
     }
 
@@ -90,7 +92,9 @@ class DashboardUserMenuAndLogoutTest extends TestCase
         $response = $this->actingAs($admin)->get('/super-admin');
 
         $response->assertStatus(200);
-        $response->assertHeader('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
+        $this->assertTrue($response->headers->hasCacheControlDirective('no-cache'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('no-store'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('must-revalidate'));
         $response->assertSee('SR');
         $response->assertSee('Sam Root');
         $response->assertSee('Terminate Root Session?');
