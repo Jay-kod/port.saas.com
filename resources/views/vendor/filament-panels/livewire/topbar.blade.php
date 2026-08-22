@@ -11,6 +11,7 @@
     <nav
         aria-label="{{ __('filament-panels::layout.topbar.label') }}"
         class="fi-topbar"
+        style="width: 100% !important; max-width: 100% !important; left: auto !important; position: sticky; top: 0;"
     >
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::TOPBAR_START) }}
 
