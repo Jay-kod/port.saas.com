@@ -18,10 +18,14 @@ class AppServiceProvider extends ServiceProvider
         // pins this to a specific Profile for the request's lifetime.
         $this->app->scoped(CurrentProfileResolver::class);
 
-        // Bind custom LoginResponse for Filament
+        // Bind custom LoginResponse & LogoutResponse for Filament
         $this->app->bind(
             \Filament\Auth\Http\Responses\Contracts\LoginResponse::class,
             \App\Http\Responses\LoginResponse::class
+        );
+        $this->app->bind(
+            \Filament\Auth\Http\Responses\Contracts\LogoutResponse::class,
+            \App\Http\Responses\LogoutResponse::class
         );
     }
 
