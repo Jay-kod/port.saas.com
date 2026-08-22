@@ -261,7 +261,7 @@ with(fn () => [
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-rose-950/40 font-mono">
-                        @forelse($this->usersList as $userItem)
+                        @forelse($usersList as $userItem)
                         <tr class="hover:bg-rose-950/20 transition-colors">
                             <td class="px-4 py-3.5 whitespace-nowrap">
                                 <div class="font-bold text-white">{{ $userItem->name }}</div>
