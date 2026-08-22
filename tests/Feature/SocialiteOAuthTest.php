@@ -106,8 +106,8 @@ class SocialiteOAuthTest extends TestCase
 
         $response = $this->get('/auth/callback/github');
 
-        // Existing user redirects to /admin
-        $response->assertRedirect('/admin');
+        // Existing user redirects to dashboard
+        $response->assertRedirect(route('dashboard'));
 
         $this->assertAuthenticatedAs($user);
 
