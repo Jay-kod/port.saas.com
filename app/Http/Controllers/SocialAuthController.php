@@ -143,11 +143,19 @@ class SocialAuthController extends Controller
 
         Auth::login($user, remember: true);
 
-        // If new user, direct them to onboarding wizard, otherwise admin panel
+        // If new user, direct them to onboarding wizard, otherwise role-specific dashboard
         if ($isNewUser) {
             return redirect('/onboarding');
         }
 
-        return redirect()->intended('/admin');
+        if ($user->is_super_admin || $user->email === 'admin@example.com') {
+            return redirect()->to(route('super-admin.dashboard'));
+        }
+
+        if ($user->accounts()->where('plan_slug', 'agency')->exists() || $user->email === 'agency@example.com') {
+            return redirect()->to(route('agency'));
+        }
+
+        return redirect()->to(route('dashboard'));
     }
 }
