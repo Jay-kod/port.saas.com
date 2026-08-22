@@ -97,7 +97,7 @@ state([
                     <tr class="hover:bg-slate-900/40 transition-colors">
                         <td class="px-6 py-4 whitespace-nowrap font-medium text-white">
                             <div class="flex items-center gap-3">
-                                <div class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
+                                <div class="w-7 h-7 rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-xs">
                                     {{ strtoupper(substr($clientProfile->full_name ?: 'C', 0, 1)) }}
                                 </div>
                                 <div>
@@ -111,8 +111,8 @@ state([
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($clientProfile->is_published)
-                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                <span class="w-1 h-1 rounded-full bg-emerald-400"></span> Live
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                                <span class="w-1 h-1 rounded-full bg-teal-400"></span> Live
                             </span>
                             @else
                             <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400 border border-slate-700">
@@ -121,8 +121,8 @@ state([
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-                            <a href="{{ url('/' . $clientProfile->slug) }}" target="_blank" class="text-slate-400 hover:text-emerald-400 transition-colors">Preview</a>
-                            <a href="/admin/{{ $account?->id ?? 1 }}" class="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">Manage</a>
+                            <a href="{{ url('/' . $clientProfile->slug) }}" target="_blank" class="text-slate-400 hover:text-teal-400 transition-colors">Preview</a>
+                            <a href="/admin/{{ $account?->id ?? 1 }}" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">Manage</a>
                         </td>
                     </tr>
                     @empty
