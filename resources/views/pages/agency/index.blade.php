@@ -122,7 +122,7 @@ state([
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
                             <a href="{{ url('/' . $clientProfile->slug) }}" target="_blank" class="text-slate-400 hover:text-teal-400 transition-colors">Preview</a>
-                            <a href="/admin/{{ $account?->id ?? 1 }}" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">Manage</a>
+                            <a href="/admin/{{ $account?->id ?? 1 }}/profiles/{{ $clientProfile->id }}/edit" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">Manage</a>
                         </td>
                     </tr>
                     @empty
