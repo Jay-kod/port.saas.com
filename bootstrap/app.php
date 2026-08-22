@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'resolve.tenant' => \App\Http\Middleware\ResolveTenantFromSlug::class,
             'super_admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
+            'prevent.back' => \App\Http\Middleware\PreventBackHistory::class,
         ]);
         $middleware->redirectTo(guests: '/admin/login');
     })
