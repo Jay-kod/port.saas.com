@@ -323,7 +323,7 @@
                        class="flex items-center py-2 rounded-xl text-xs font-medium text-slate-300 hover:bg-slate-800/50 hover:text-yellow-300 transition-all"
                        title="Job Tracker Kanban">
                         <svg class="w-4 h-4 shrink-0 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
                         </svg>
                         <span x-show="!sidebarCollapsed" class="whitespace-nowrap">Job Tracker (Kanban)</span>
                     </a>
@@ -478,18 +478,16 @@
 
         <!-- Sidebar Footer (User info & Sign out) -->
         <div class="p-3 border-t border-white/5 bg-slate-950/60">
-            <form method="POST" action="{{ route('filament.admin.auth.logout') }}" class="block w-full">
-                @csrf
-                <button type="submit" 
-                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-3'" 
-                        class="w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-300 transition-all shadow-sm" 
-                        title="Sign Out">
-                    <svg class="w-4 h-4 shrink-0 text-slate-400 group-hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                    <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-medium">Sign Out</span>
-                </button>
-            </form>
+            <button type="button" 
+                    @click="showLogoutModal = true"
+                    :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-3'" 
+                    class="w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-300 transition-all shadow-sm group" 
+                    title="Sign Out">
+                <svg class="w-4 h-4 shrink-0 text-slate-400 group-hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-medium">Sign Out</span>
+            </button>
         </div>
     </aside>
 
@@ -534,12 +532,103 @@
                 </a>
                 @endif
 
-                <!-- User Profile Pill -->
-                <div class="flex items-center gap-2 pl-2 border-l border-white/10">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr {{ $logoGradient }} flex items-center justify-center text-slate-950 font-bold text-xs shadow-md">
-                        {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 1)) }}
+                <!-- User Profile Initials Dropdown Component -->
+                <div class="relative pl-2 border-l border-white/10" x-data="{ userMenuOpen: false }">
+                    <button @click="userMenuOpen = !userMenuOpen" 
+                            type="button" 
+                            class="flex items-center gap-2.5 p-1 sm:px-2 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 transition-all focus:outline-none group"
+                            id="user-menu-button" 
+                            aria-expanded="false" 
+                            aria-haspopup="true">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr {{ $logoGradient }} flex items-center justify-center text-slate-950 font-bold text-xs shadow-md shadow-black/40 border border-white/20 group-hover:scale-105 transition-transform">
+                            {{ $userInitials }}
+                        </div>
+                        <span class="text-sm font-semibold text-slate-200 hidden md:inline group-hover:text-white">{{ $user->name ?? 'User' }}</span>
+                        <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" :class="{ 'rotate-180': userMenuOpen }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="userMenuOpen" 
+                         @click.outside="userMenuOpen = false"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+                         class="absolute right-0 mt-2 w-64 rounded-2xl glass-card bg-slate-950/95 border border-white/10 shadow-2xl shadow-black/90 py-2 z-50 divide-y divide-white/5"
+                         style="display: none;">
+                        
+                        <!-- User Info Header -->
+                        <div class="px-4 py-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 shrink-0 rounded-full bg-gradient-to-tr {{ $logoGradient }} flex items-center justify-center text-slate-950 font-bold text-sm shadow-md border border-white/20">
+                                    {{ $userInitials }}
+                                </div>
+                                <div class="flex flex-col min-w-0">
+                                    <p class="text-sm font-bold text-white truncate">{{ $user->name ?? 'User' }}</p>
+                                    <p class="text-[11px] text-slate-400 truncate">{{ $user->email ?? '' }}</p>
+                                </div>
+                            </div>
+                            <div class="mt-2.5">
+                                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold panel-role-badge">
+                                    <span class="w-1 h-1 rounded-full animate-pulse" style="background-color: var(--panel-accent-dark);"></span>
+                                    {{ $panelBadge }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Menu Items: Profile & Settings -->
+                        <div class="py-1.5 px-1.5 space-y-0.5">
+                            <!-- Profile Link -->
+                            <a href="{{ $userProfile ? '/admin/' . $tenantId . '/profiles/' . $userProfile->id . '/edit' : '/admin/' . $tenantId . '/profiles' }}" 
+                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors group">
+                                <div class="w-7 h-7 rounded-lg bg-slate-900 border border-white/5 flex items-center justify-center text-slate-400 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-semibold text-slate-200 group-hover:text-white">Profile</span>
+                                    <span class="text-[10px] text-slate-400">Edit your portfolio details</span>
+                                </div>
+                            </a>
+
+                            <!-- Settings Link -->
+                            <a href="/admin/{{ $tenantId }}/billing-settings" 
+                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors group">
+                                <div class="w-7 h-7 rounded-lg bg-slate-900 border border-white/5 flex items-center justify-center text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-semibold text-slate-200 group-hover:text-white">Settings</span>
+                                    <span class="text-[10px] text-slate-400">Billing, domains & workspace</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Logout Button (triggers modal) -->
+                        <div class="py-1.5 px-1.5">
+                            <button @click="userMenuOpen = false; showLogoutModal = true" 
+                                    type="button" 
+                                    class="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-colors group text-left">
+                                <div class="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 group-hover:bg-red-500/20 transition-all">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                </div>
+                                <div class="flex flex-col text-left">
+                                    <span class="font-semibold text-red-400 group-hover:text-red-300">Sign Out</span>
+                                    <span class="text-[10px] text-red-400/70">Terminate active session</span>
+                                </div>
+                            </button>
+                        </div>
                     </div>
-                    <span class="text-sm font-semibold text-slate-200 hidden md:inline">{{ auth()->user()->name ?? 'User' }}</span>
                 </div>
             </div>
         </header>
@@ -553,6 +642,76 @@
         <footer class="py-6 border-t border-white/5 text-center text-xs text-slate-500 bg-slate-950/50 mt-auto">
             DevFolio SaaS Platform &bull; AI-Powered Portfolio & Resume Suite
         </footer>
+    </div>
+
+    <!-- Custom Logout Verification Modal -->
+    <div x-show="showLogoutModal" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" 
+         style="display: none;"
+         @keydown.escape.window="showLogoutModal = false">
+        
+        <!-- Modal Card -->
+        <div @click.outside="showLogoutModal = false"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             class="relative w-full max-w-md p-6 rounded-3xl glass-card bg-slate-900/95 border border-white/10 shadow-2xl shadow-black/90 overflow-hidden">
+            
+            <!-- Ambient Glow -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background-color: var(--panel-accent-glow);"></div>
+
+            <div class="relative flex flex-col items-center text-center">
+                <!-- Icon -->
+                <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 mb-4 shadow-lg shadow-red-500/10 animate-pulse">
+                    <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                </div>
+
+                <!-- Title & Description -->
+                <h3 class="text-xl font-bold font-heading text-white tracking-tight">
+                    Confirm Sign Out
+                </h3>
+                <p class="mt-2 text-xs leading-relaxed text-slate-400">
+                    Are you sure you want to log out? Your active authentication session will be securely terminated and you will need to log back in to access this dashboard.
+                </p>
+
+                <!-- User Pill inside Modal -->
+                <div class="mt-4 w-full py-2 px-3 rounded-xl bg-slate-950/60 border border-white/5 flex items-center justify-center gap-2 text-xs text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>Active account: <strong class="text-white">{{ $user->email ?? 'User' }}</strong></span>
+                </div>
+
+                <!-- Modal Action Buttons -->
+                <div class="mt-6 grid grid-cols-2 gap-3 w-full">
+                    <button type="button" 
+                            @click="showLogoutModal = false"
+                            class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-all">
+                        Cancel
+                    </button>
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                        @csrf
+                        <button type="submit" 
+                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 border border-red-500/40 shadow-lg shadow-red-600/20 transition-all flex items-center justify-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Sign Out</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
