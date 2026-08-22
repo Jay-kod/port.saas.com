@@ -110,11 +110,11 @@ $saveAndFinish = function () {
     }
 
     $this->saved = true;
-    return redirect()->to('/admin');
+    return redirect()->to(route('dashboard'));
 };
 
 $skipToDashboard = function () {
-    return redirect()->to('/admin');
+    return redirect()->to(route('dashboard'));
 };
 
 ?>
