@@ -28,6 +28,16 @@ Volt::route('/terms', 'marketing.terms')->name('terms');
 Volt::route('/privacy', 'marketing.privacy')->name('privacy');
 Volt::route('/onboarding', 'onboarding')->name('onboarding')->middleware('auth');
 
+// Custom Dashboards (must be registered before wildcard /{slug} routes)
+Route::middleware(['auth'])->group(function () {
+    Volt::route('/dashboard', 'dashboard.index')->name('dashboard');
+    Volt::route('/agency', 'agency.index')->name('agency');
+});
+
+Route::middleware(['auth', 'super_admin'])->group(function () {
+    Volt::route('/super-admin', 'super-admin.index')->name('super-admin.dashboard');
+});
+
 if (! config('saas.mode')) {
     Volt::route('/', 'home')->name('home');
     Volt::route('/about', 'about')->name('about');
@@ -53,7 +63,7 @@ if (! config('saas.mode')) {
     Volt::route('/discover', 'marketing.discover')->name('discover');
     Volt::route('/pricing', 'marketing.pricing')->name('pricing');
 
-    // Tenant slug routes (e.g. saas.com/{slug}/...)
+    // Tenant slug routes (e.g. saas.com/{slug}/...) - Catch-all wildcard at the bottom
     Route::middleware('resolve.tenant')->group(function () {
         Volt::route('/{slug}', 'home')->name('tenant.home');
         Volt::route('/{slug}/about', 'about')->name('about');
@@ -65,13 +75,3 @@ if (! config('saas.mode')) {
         Volt::route('/{slug}/contact', 'contact')->name('contact');
     });
 }
-
-// Custom Dashboards
-Route::middleware(['auth'])->group(function () {
-    Volt::route('/dashboard', 'dashboard.index')->name('dashboard');
-    Volt::route('/agency', 'agency.index')->name('agency');
-});
-
-Route::middleware(['auth', 'super_admin'])->group(function () {
-    Volt::route('/super-admin', 'super-admin.index')->name('super-admin.dashboard');
-});
