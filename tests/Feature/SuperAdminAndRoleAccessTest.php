@@ -131,11 +131,9 @@ class SuperAdminAndRoleAccessTest extends TestCase
         $account->members()->attach($editor->id, ['role' => 'editor']);
         $account->members()->attach($viewer->id, ['role' => 'viewer']);
 
-        // Set tenant context for Filament
-        Filament::setTenant($account);
-
         // Owner has access
         $this->actingAs($owner);
+        Filament::setTenant($account);
         $this->assertTrue(BillingSettings::canAccess());
         $this->assertTrue(TeamSettings::canAccess());
         $this->assertTrue(DomainSettings::canAccess());
@@ -143,6 +141,7 @@ class SuperAdminAndRoleAccessTest extends TestCase
 
         // Editor is blocked
         $this->actingAs($editor);
+        Filament::setTenant($account);
         $this->assertFalse(BillingSettings::canAccess());
         $this->assertFalse(TeamSettings::canAccess());
         $this->assertFalse(DomainSettings::canAccess());
@@ -150,6 +149,7 @@ class SuperAdminAndRoleAccessTest extends TestCase
 
         // Viewer is blocked
         $this->actingAs($viewer);
+        Filament::setTenant($account);
         $this->assertFalse(BillingSettings::canAccess());
         $this->assertFalse(TeamSettings::canAccess());
         $this->assertFalse(DomainSettings::canAccess());
@@ -183,21 +183,21 @@ class SuperAdminAndRoleAccessTest extends TestCase
             ->call('toggleSuperAdmin', $targetUser->id)
             ->assertSee("Successfully updated Super Admin privileges for {$targetUser->name}");
 
-        $this->assertTrue($targetUser->fresh()->is_super_admin);
+        $this->assertTrue((bool) $targetUser->fresh()->is_super_admin);
 
         // Test Demote target user back
         Volt::test('super-admin.index')
             ->call('toggleSuperAdmin', $targetUser->id)
             ->assertSee("Successfully updated Super Admin privileges for {$targetUser->name}");
 
-        $this->assertFalse($targetUser->fresh()->is_super_admin);
+        $this->assertFalse((bool) $targetUser->fresh()->is_super_admin);
 
         // Test Self-Demote Protection
         Volt::test('super-admin.index')
             ->call('toggleSuperAdmin', $superAdmin->id)
             ->assertSee('Security restriction: You cannot demote your own Super Admin root account');
 
-        $this->assertTrue($superAdmin->fresh()->is_super_admin);
+        $this->assertTrue((bool) $superAdmin->fresh()->is_super_admin);
 
         // Test Resolve Report action
         Volt::test('super-admin.index')
