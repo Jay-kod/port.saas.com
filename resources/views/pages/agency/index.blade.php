@@ -9,9 +9,9 @@ title('Agency Workspace');
 
 state([
     'user' => fn () => auth()->user(),
-    'account' => fn () => auth()->user()?->defaultTenant,
-    'members' => fn () => auth()->user()?->defaultTenant?->members()->get() ?? collect(),
-    'profiles' => fn () => auth()->user()?->defaultTenant?->profiles()->get() ?? collect(),
+    'account' => fn () => auth()->user()?->defaultTenant ?? auth()->user()?->accounts->first(),
+    'members' => fn () => (auth()->user()?->defaultTenant ?? auth()->user()?->accounts->first())?->members ?? collect(),
+    'profiles' => fn () => (auth()->user()?->defaultTenant ?? auth()->user()?->accounts->first())?->profiles ?? collect(),
 ]);
 
 ?>
