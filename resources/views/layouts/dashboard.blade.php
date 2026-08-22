@@ -14,7 +14,69 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    @php
+        $user = auth()->user();
+        $tenantId = $user?->defaultTenant?->id ?? $user?->accounts->first()?->id ?? 1;
+        $account = $user?->defaultTenant ?? $user?->accounts->first();
+        $userProfile = $user?->profile;
+        $userRole = $account ? $account->getUserRole($user) : 'owner';
+        $isAgencyRoute = request()->routeIs('agency*');
+        $isAgencyPlan = ($account?->plan_slug === 'agency');
+
+        if ($userRole === 'editor' || $userRole === 'viewer') {
+            $panelType = 'member';
+            $panelRole = $userRole;
+            $panelTitle = 'Team Member';
+            $panelBadge = ucfirst($userRole) . ' Seat';
+            $panelColor = 'slate';
+            $accent = '#475569'; // Slate blue
+            $accentDark = '#64748B';
+            $glowRgba = 'rgba(100, 116, 139, 0.16)';
+            $subtleRgba = 'rgba(100, 116, 139, 0.12)';
+            $badgeText = '#94a3b8';
+            $badgeBorder = 'rgba(100, 116, 139, 0.30)';
+            $logoGradient = 'from-slate-600 via-slate-500 to-slate-400';
+            $selectionBg = 'selection:bg-slate-600 selection:text-white';
+        } elseif ($isAgencyRoute || ($isAgencyPlan && $userRole === 'owner')) {
+            $panelType = 'agency';
+            $panelRole = 'agency_owner';
+            $panelTitle = 'Agency Hub';
+            $panelBadge = 'Agency Owner';
+            $panelColor = 'teal';
+            $accent = '#0D9488'; // Teal
+            $accentDark = '#14B8A6';
+            $glowRgba = 'rgba(20, 184, 166, 0.16)';
+            $subtleRgba = 'rgba(20, 184, 166, 0.12)';
+            $badgeText = '#2dd4bf';
+            $badgeBorder = 'rgba(20, 184, 166, 0.30)';
+            $logoGradient = 'from-teal-500 via-teal-400 to-cyan-300';
+            $selectionBg = 'selection:bg-teal-500 selection:text-slate-950';
+        } else {
+            $panelType = 'owner';
+            $panelRole = 'owner';
+            $panelTitle = 'Portfolio Studio';
+            $panelBadge = 'Portfolio Owner';
+            $panelColor = 'green';
+            $accent = '#16A34A'; // Green
+            $accentDark = '#22C55E';
+            $glowRgba = 'rgba(34, 197, 94, 0.16)';
+            $subtleRgba = 'rgba(34, 197, 94, 0.12)';
+            $badgeText = '#4ade80';
+            $badgeBorder = 'rgba(34, 197, 94, 0.30)';
+            $logoGradient = 'from-emerald-500 via-emerald-400 to-yellow-400';
+            $selectionBg = 'selection:bg-emerald-500 selection:text-white';
+        }
+    @endphp
+
     <style>
+        :root {
+            --panel-accent: {{ $accent }};
+            --panel-accent-dark: {{ $accentDark }};
+            --panel-accent-glow: {{ $glowRgba }};
+            --panel-accent-subtle: {{ $subtleRgba }};
+            --panel-badge-text: {{ $badgeText }};
+            --panel-badge-border: {{ $badgeBorder }};
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
@@ -22,8 +84,8 @@
             font-family: 'Outfit', sans-serif;
         }
         .dashboard-glow {
-            background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12), transparent 50%),
-                        radial-gradient(circle at 100% 100%, rgba(234, 179, 8, 0.08), transparent 40%);
+            background: radial-gradient(circle at 50% 0%, var(--panel-accent-glow), transparent 50%),
+                        radial-gradient(circle at 100% 100%, var(--panel-accent-subtle), transparent 40%);
         }
         .glass-card {
             background: rgba(15, 23, 42, 0.75);
@@ -35,9 +97,23 @@
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-card-hover:hover {
-            border-color: rgba(74, 222, 128, 0.3);
+            border-color: var(--panel-badge-border);
             transform: translateY(-2px);
-            box-shadow: 0 12px 24px -10px rgba(16, 185, 129, 0.15);
+            box-shadow: 0 12px 24px -10px var(--panel-accent-glow);
+        }
+        .panel-role-badge {
+            background-color: var(--panel-accent-subtle);
+            color: var(--panel-badge-text);
+            border: 1px solid var(--panel-badge-border);
+        }
+        .active-nav-pill {
+            background-color: var(--panel-accent-subtle) !important;
+            color: var(--panel-badge-text) !important;
+            border: 1px solid var(--panel-badge-border) !important;
+            box-shadow: 0 2px 8px -2px var(--panel-accent-glow) !important;
+        }
+        .active-nav-pill svg {
+            color: var(--panel-badge-text) !important;
         }
         /* Custom scrollbar for sidebar */
         aside nav::-webkit-scrollbar {
@@ -55,12 +131,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 selection:bg-emerald-500 selection:text-white" x-data="{ sidebarOpen: false, sidebarCollapsed: false }">
-
-    @php
-        $tenantId = auth()->user()?->defaultTenant?->id ?? auth()->user()?->accounts->first()?->id ?? 1;
-        $userProfile = auth()->user()?->profile;
-    @endphp
+<body class="bg-slate-950 {{ $selectionBg }}" x-data="{ sidebarOpen: false, sidebarCollapsed: false }">
 
     <!-- Mobile Sidebar Overlay -->
     <div x-show="sidebarOpen" 
@@ -73,27 +144,34 @@
          class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 lg:hidden" 
          @click="sidebarOpen = false" style="display: none;"></div>
 
-    <!-- Sidebar (Clima-style dark glass with Green/Yellow accents) -->
+    <!-- Sidebar (Multi-tier dark glass with dynamic accent cues) -->
     <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen, 'lg:w-20': sidebarCollapsed }" 
            class="w-64 fixed inset-y-0 left-0 z-50 glass-card border-r border-white/5 bg-slate-950/95 transition-all duration-300 ease-in-out lg:translate-x-0 flex flex-col h-screen overflow-hidden">
         
-        <!-- Sidebar Header / Logo -->
-        <div class="h-16 flex items-center border-b border-white/5 transition-all duration-300" :class="sidebarCollapsed ? 'justify-center px-0' : 'px-6'">
-            <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-emerald-500 to-yellow-500 flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-200">
-                    <svg class="w-5 h-5 text-slate-950 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <!-- Sidebar Header / Logo & Role Badge -->
+        <div class="h-20 flex flex-col justify-center border-b border-white/5 transition-all duration-300" :class="sidebarCollapsed ? 'items-center px-0' : 'px-5'">
+            <div class="flex items-center gap-3">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr {{ $logoGradient }} flex items-center justify-center shadow-md shadow-black/40 group-hover:scale-105 transition-transform duration-200" style="border: 1px solid var(--panel-badge-border);">
+                        <svg class="w-5 h-5 text-slate-950 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <div x-show="!sidebarCollapsed" class="flex flex-col">
+                        <span class="text-lg font-extrabold font-heading tracking-tight bg-gradient-to-r {{ $logoGradient }} bg-clip-text text-transparent whitespace-nowrap">
+                            DevFolio
+                        </span>
+                        <span class="text-[10px] font-mono font-bold tracking-wider uppercase" style="color: var(--panel-badge-text);">
+                            {{ $panelBadge }}
+                        </span>
+                    </div>
+                </a>
+                <button @click="sidebarOpen = false" class="ml-auto lg:hidden text-slate-400 hover:text-white shrink-0">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                </div>
-                <span x-show="!sidebarCollapsed" class="text-xl font-extrabold font-heading tracking-tight bg-gradient-to-r from-emerald-400 via-yellow-300 to-white bg-clip-text text-transparent whitespace-nowrap">
-                    DevFolio
-                </span>
-            </a>
-            <button @click="sidebarOpen = false" class="ml-auto lg:hidden text-slate-400 hover:text-white shrink-0">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+                </button>
+            </div>
         </div>
 
         <!-- Sidebar Navigation Links -->
@@ -108,9 +186,9 @@
                     <!-- Dashboard -->
                     <a href="{{ route('dashboard') }}" 
                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="flex items-center py-2 rounded-xl text-xs font-medium {{ request()->routeIs('dashboard') ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 shadow-sm shadow-emerald-500/10' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white' }} transition-all"
+                       class="flex items-center py-2 rounded-xl text-xs font-medium {{ request()->routeIs('dashboard') ? 'active-nav-pill font-semibold' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white' }} transition-all"
                        title="Dashboard">
-                        <svg class="w-4 h-4 shrink-0 {{ request()->routeIs('dashboard') ? 'text-emerald-400' : 'text-slate-400' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                         </svg>
                         <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-semibold">Dashboard</span>
@@ -119,9 +197,9 @@
                     <!-- Agency Workspace -->
                     <a href="{{ route('agency') }}" 
                        :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="flex items-center py-2 rounded-xl text-xs font-medium {{ request()->routeIs('agency') ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white' }} transition-all"
+                       class="flex items-center py-2 rounded-xl text-xs font-medium {{ request()->routeIs('agency') ? 'active-nav-pill font-semibold' : 'text-slate-300 hover:bg-slate-800/50 hover:text-white' }} transition-all"
                        title="Agency Hub">
-                        <svg class="w-4 h-4 shrink-0 {{ request()->routeIs('agency') ? 'text-emerald-400' : 'text-slate-400' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         <span x-show="!sidebarCollapsed" class="whitespace-nowrap">Agency Hub</span>
