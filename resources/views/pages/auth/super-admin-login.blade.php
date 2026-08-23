@@ -209,7 +209,6 @@ $login = function () {
                     <div class="relative">
                         <input
                             :type="showPassword ? 'text' : 'password'"
-                            type="password"
                             id="admin_password"
                             wire:model="password"
                             placeholder="••••••••"
