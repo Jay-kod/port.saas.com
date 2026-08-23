@@ -137,6 +137,48 @@
         .active-nav-pill svg {
             color: var(--panel-badge-text) !important;
         }
+        /* Dashboard Layout Architecture */
+        .dashboard-sidebar {
+            width: 16rem;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dashboard-main-shell {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 1024px) {
+            .dashboard-sidebar {
+                transform: translateX(0) !important;
+            }
+            .dashboard-sidebar.is-collapsed {
+                width: 5rem !important;
+            }
+            .dashboard-main-shell {
+                padding-left: 16rem !important;
+            }
+            .dashboard-main-shell.is-collapsed {
+                padding-left: 5rem !important;
+            }
+        }
+        @media (max-width: 1023px) {
+            .dashboard-sidebar {
+                transform: translateX(-100%);
+            }
+            .dashboard-sidebar.is-open {
+                transform: translateX(0) !important;
+            }
+            .dashboard-main-shell {
+                padding-left: 0 !important;
+            }
+        }
+
         /* SVG constraints */
         svg {
             max-width: 100%;
@@ -172,8 +214,8 @@
          @click="sidebarOpen = false" style="display: none;"></div>
 
     <!-- Sidebar (Multi-tier dark glass with dynamic accent cues) -->
-    <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen, 'lg:w-20': sidebarCollapsed }" 
-           class="w-64 fixed inset-y-0 left-0 z-50 glass-card border-r border-white/5 bg-slate-950/95 transition-all duration-300 ease-in-out lg:translate-x-0 flex flex-col h-screen overflow-hidden">
+    <aside :class="{ 'is-open': sidebarOpen, 'is-collapsed': sidebarCollapsed }" 
+           class="dashboard-sidebar glass-card border-r border-white/5 bg-slate-950/95 flex flex-col h-screen overflow-hidden">
         
         <!-- Sidebar Header / Logo & Role Badge -->
         <div class="h-20 flex flex-col justify-center border-b border-white/5 transition-all duration-300" :class="sidebarCollapsed ? 'items-center px-0' : 'px-5'">
