@@ -216,7 +216,7 @@ state([
                 <p class="text-xs text-slate-400 mt-1">Control your public profile, showcases, and technical credibility assets.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/profiles" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.profile') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
@@ -229,7 +229,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/projects" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.projects') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
@@ -242,7 +242,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/experiences" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.experiences') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
@@ -255,10 +255,10 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/skills" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.skills') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
                         </div>
                         <span class="text-slate-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all">&rarr;</span>
                     </div>
@@ -268,7 +268,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/certificates" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.certificates') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
@@ -281,7 +281,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/themes" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.themes') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
@@ -306,7 +306,7 @@ state([
                 <p class="text-xs text-slate-400 mt-1">Generate tailored assets and track opportunities with your integrated workflow.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/resume-generations" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.resumes') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -319,7 +319,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/cover-letter-generations" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.cover-letters') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
@@ -332,10 +332,10 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/job-tracker" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.job-tracker') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" /></svg>
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" /></svg>
                         </div>
                         <span class="text-slate-600 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all">&rarr;</span>
                     </div>
@@ -345,7 +345,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/resume-import" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.resume-import') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
@@ -358,20 +358,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/oauth-settings" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                        </div>
-                        <span class="text-slate-600 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all">&rarr;</span>
-                    </div>
-                    <div>
-                        <div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">OAuth Integrations</div>
-                        <div class="text-xs text-slate-400 mt-0.5">Connect Google & GitHub accounts</div>
-                    </div>
-                </a>
-
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/github-settings" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.github-sync') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
@@ -381,6 +368,19 @@ state([
                     <div>
                         <div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">GitHub Sync</div>
                         <div class="text-xs text-slate-400 mt-0.5">Automated repository synchronization</div>
+                    </div>
+                </a>
+
+                <a href="{{ route('developer.ai-settings') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-yellow-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                        </div>
+                        <span class="text-slate-600 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all">&rarr;</span>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">BYOK AI Provider</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Custom OpenAI & Anthropic API keys</div>
                     </div>
                 </a>
             </div>
@@ -397,7 +397,7 @@ state([
                     <p class="text-xs text-slate-400 mt-1">Configure your domain, themes, plan tier, and onboarding.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <a href="/admin/{{ $accountData?->id ?? 1 }}/theme-selector" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                    <a href="{{ route('developer.themes') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                         <div class="flex items-center justify-between">
                             <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
@@ -410,7 +410,7 @@ state([
                         </div>
                     </a>
 
-                    <a href="/admin/{{ $accountData?->id ?? 1 }}/domain-settings" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                    <a href="{{ route('developer.domains') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                         <div class="flex items-center justify-between">
                             <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
@@ -423,7 +423,7 @@ state([
                         </div>
                     </a>
 
-                    <a href="/admin/{{ $accountData?->id ?? 1 }}/billing-settings" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                    <a href="{{ route('developer.billing') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                         <div class="flex items-center justify-between">
                             <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
@@ -436,7 +436,7 @@ state([
                         </div>
                     </a>
 
-                    <a href="{{ route('onboarding') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                    <a href="{{ route('onboarding') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-cyan-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                         <div class="flex items-center justify-between">
                             <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -489,7 +489,7 @@ state([
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/privacy-and-data" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.privacy') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
@@ -502,20 +502,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/portfolio-reports" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                        </div>
-                        <span class="text-slate-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all">&rarr;</span>
-                    </div>
-                    <div>
-                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Abuse Reports</div>
-                        <div class="text-xs text-slate-400 mt-0.5">Trust, safety & reporting</div>
-                    </div>
-                </a>
-
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/templates" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.templates') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -528,7 +515,7 @@ state([
                     </div>
                 </a>
 
-                <a href="/admin/{{ $accountData?->id ?? 1 }}/ai-settings" class="group p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                <a href="{{ route('developer.ai-settings') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
                     <div class="flex items-center justify-between">
                         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -538,6 +525,19 @@ state([
                     <div>
                         <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">AI Provider Settings</div>
                         <div class="text-xs text-slate-400 mt-0.5">OpenAI/Anthropic BYOK keys</div>
+                    </div>
+                </a>
+
+                <a href="{{ route('developer.github-sync') }}" class="group p-5 rounded-2xl bg-slate-900/60 border border-emerald-500/50 hover:bg-slate-900/90 transition-all flex flex-col justify-between space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        </div>
+                        <span class="text-slate-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all">&rarr;</span>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">GitHub Sync</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Automated repo sync</div>
                     </div>
                 </a>
             </div>
