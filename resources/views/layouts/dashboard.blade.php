@@ -218,19 +218,19 @@
         /* Desktop Mode (>= 1024px) */
         @media (min-width: 1024px) {
             .dashboard-sidebar {
-                width: 16rem;
+                width: 16.5rem;
                 transform: translateX(0) !important;
             }
             .dashboard-main-shell {
-                padding-left: 16rem !important;
+                padding-left: 16.5rem !important;
             }
 
             /* Collapsed desktop state */
             .dashboard-sidebar.is-collapsed {
-                width: 5rem !important;
+                width: 5.25rem !important;
             }
             .dashboard-main-shell.is-collapsed {
-                padding-left: 5rem !important;
+                padding-left: 5.25rem !important;
             }
             .dashboard-sidebar.is-collapsed .sidebar-label {
                 display: none !important;
