@@ -457,8 +457,8 @@
                 </div>
                 <div class="space-y-1">
                     <!-- Profile Info -->
-                    <a href="/admin/{{ $tenantId }}/profiles" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.profile') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.profile') ? 'is-active' : '' }}"
                        title="Profile Details">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -467,8 +467,8 @@
                     </a>
 
                     <!-- Projects -->
-                    <a href="/admin/{{ $tenantId }}/projects" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.projects') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.projects') ? 'is-active' : '' }}"
                        title="Projects Showcase">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
@@ -477,8 +477,8 @@
                     </a>
 
                     <!-- Experience Timeline -->
-                    <a href="/admin/{{ $tenantId }}/experiences" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.experiences') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.experiences') ? 'is-active' : '' }}"
                        title="Career Experience">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -487,8 +487,8 @@
                     </a>
 
                     <!-- Skills Matrix -->
-                    <a href="/admin/{{ $tenantId }}/skills" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.skills') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.skills') ? 'is-active' : '' }}"
                        title="Technical Skills">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
@@ -497,8 +497,8 @@
                     </a>
 
                     <!-- Certificates -->
-                    <a href="/admin/{{ $tenantId }}/certificates" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.certificates') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.certificates') ? 'is-active' : '' }}"
                        title="Accreditations">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -515,8 +515,8 @@
                 </div>
                 <div class="space-y-1">
                     <!-- AI Resumes -->
-                    <a href="/admin/{{ $tenantId }}/resume-generations" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.resumes') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.resumes') ? 'is-active' : '' }}"
                        title="Tailored Resumes">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -525,8 +525,8 @@
                     </a>
 
                     <!-- Cover Letters -->
-                    <a href="/admin/{{ $tenantId }}/cover-letter-generations" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.cover-letters') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.cover-letters') ? 'is-active' : '' }}"
                        title="Cover Letters">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -535,8 +535,8 @@
                     </a>
 
                     <!-- Kanban Job Tracker -->
-                    <a href="/admin/{{ $tenantId }}/job-tracker" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.job-tracker') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.job-tracker') ? 'is-active' : '' }}"
                        title="Job Application Pipeline">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
@@ -545,8 +545,8 @@
                     </a>
 
                     <!-- Resume Import -->
-                    <a href="/admin/{{ $tenantId }}/resume-import" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.resume-import') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.resume-import') ? 'is-active' : '' }}"
                        title="PDF Parser & Importer">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -555,8 +555,8 @@
                     </a>
 
                     <!-- GitHub Sync -->
-                    <a href="/admin/{{ $tenantId }}/github-settings" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.github-sync') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.github-sync') ? 'is-active' : '' }}"
                        title="GitHub Repositories">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -565,8 +565,8 @@
                     </a>
 
                     <!-- AI BYOK Provider Settings -->
-                    <a href="/admin/{{ $tenantId }}/ai-settings" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.ai-settings') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.ai-settings') ? 'is-active' : '' }}"
                        title="OpenAI / Anthropic Keys">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -585,8 +585,8 @@
                 </div>
                 <div class="space-y-1">
                     <!-- Themes & Palettes -->
-                    <a href="/admin/{{ $tenantId }}/theme-selector" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.themes') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.themes') ? 'is-active' : '' }}"
                        title="Visual Themes & Modes">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014 4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
@@ -595,8 +595,8 @@
                     </a>
 
                     <!-- Custom Domains -->
-                    <a href="/admin/{{ $tenantId }}/domain-settings" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.domains') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.domains') ? 'is-active' : '' }}"
                        title="Custom Apex & CNAME Domains">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -605,8 +605,8 @@
                     </a>
 
                     <!-- Resume Blade Templates -->
-                    <a href="/admin/{{ $tenantId }}/templates" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.templates') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.templates') ? 'is-active' : '' }}"
                        title="Resume Templates Catalog">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
@@ -623,8 +623,8 @@
                 </div>
                 <div class="space-y-1">
                     <!-- Billing & Invoices -->
-                    <a href="/admin/{{ $tenantId }}/billing-settings" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.billing') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.billing') ? 'is-active' : '' }}"
                        title="Subscription & Invoices">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -633,8 +633,8 @@
                     </a>
 
                     <!-- Privacy & GDPR -->
-                    <a href="/admin/{{ $tenantId }}/privacy-and-data" 
-                       class="sidebar-nav-item group"
+                    <a href="{{ route('developer.privacy') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('developer.privacy') ? 'is-active' : '' }}"
                        title="Privacy & Data Export">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -644,7 +644,7 @@
 
                     <!-- Onboarding Setup Wizard -->
                     <a href="{{ route('onboarding') }}" 
-                       class="sidebar-nav-item group"
+                       class="sidebar-nav-item group {{ request()->routeIs('onboarding') ? 'is-active' : '' }}"
                        title="Setup Wizard">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 10V3L4 14h7v7l9-11h-7z" />
