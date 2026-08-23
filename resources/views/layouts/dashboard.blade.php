@@ -423,288 +423,232 @@
             
             <!-- SECTION 1: WORKSPACE HUBS -->
             <div>
-                <div class="nav-section-title" x-show="!sidebarCollapsed">
+                <div class="sidebar-nav-section-title" x-show="!sidebarCollapsed">
                     Workspace
                 </div>
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <!-- Dashboard -->
                     <a href="{{ route('dashboard') }}" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group {{ request()->routeIs('dashboard') ? 'is-active' : '' }}"
+                       class="sidebar-nav-item group {{ request()->routeIs('dashboard') ? 'is-active' : '' }}"
                        title="Dashboard">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Dashboard</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Dashboard</span>
                     </a>
 
                     <!-- Agency Workspace -->
                     <a href="{{ route('agency') }}" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group {{ request()->routeIs('agency') ? 'is-active' : '' }}"
+                       class="sidebar-nav-item group {{ request()->routeIs('agency') ? 'is-active' : '' }}"
                        title="Agency Hub">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Agency Hub</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Agency Hub</span>
                     </a>
                 </div>
             </div>
 
             <!-- SECTION 2: PORTFOLIO CONTENT (STUDIO) -->
             <div class="pt-3 border-t border-white/5">
-                <div class="nav-section-title" x-show="!sidebarCollapsed">
+                <div class="sidebar-nav-section-title" x-show="!sidebarCollapsed">
                     Portfolio Studio
                 </div>
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <!-- Profile Info -->
                     <a href="/admin/{{ $tenantId }}/profiles" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Profile Details">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Profile & Bio</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Profile & Bio</span>
                     </a>
 
                     <!-- Projects -->
                     <a href="/admin/{{ $tenantId }}/projects" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Projects Showcase">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Projects</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Projects</span>
                     </a>
 
                     <!-- Experience Timeline -->
                     <a href="/admin/{{ $tenantId }}/experiences" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Career Experience">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Experience</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Experience</span>
                     </a>
 
                     <!-- Skills Matrix -->
                     <a href="/admin/{{ $tenantId }}/skills" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Technical Skills">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Skills Matrix</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Skills Matrix</span>
                     </a>
 
                     <!-- Certificates -->
                     <a href="/admin/{{ $tenantId }}/certificates" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Accreditations">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Certificates</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Certificates</span>
                     </a>
                 </div>
             </div>
 
             <!-- SECTION 3: CAREER & AI PIPELINES -->
             <div class="pt-3 border-t border-white/5">
-                <div class="nav-section-title" x-show="!sidebarCollapsed">
+                <div class="sidebar-nav-section-title" x-show="!sidebarCollapsed">
                     Career & AI Suite
                 </div>
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <!-- AI Resumes -->
                     <a href="/admin/{{ $tenantId }}/resume-generations" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Tailored Resumes">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">AI Resumes</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">AI Resumes</span>
                     </a>
 
                     <!-- Cover Letters -->
                     <a href="/admin/{{ $tenantId }}/cover-letter-generations" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Cover Letters">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Cover Letters</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Cover Letters</span>
                     </a>
 
                     <!-- Kanban Job Tracker -->
                     <a href="/admin/{{ $tenantId }}/job-tracker" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Job Application Pipeline">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Job Tracker (Kanban)</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Job Tracker (Kanban)</span>
                     </a>
 
                     <!-- Resume Import -->
                     <a href="/admin/{{ $tenantId }}/resume-import" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="PDF Parser & Importer">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Import Resume PDF</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Import Resume PDF</span>
                     </a>
 
                     <!-- GitHub Sync -->
                     <a href="/admin/{{ $tenantId }}/github-settings" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="GitHub Repositories">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">GitHub Sync</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">GitHub Sync</span>
                     </a>
 
                     <!-- AI BYOK Provider Settings -->
                     <a href="/admin/{{ $tenantId }}/ai-settings" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="OpenAI / Anthropic Keys">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">AI Settings (BYOK)</span>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">AI Settings (BYOK)</span>
                     </a>
                 </div>
             </div>
 
             <!-- SECTION 4: PLATFORM CONFIGURATION -->
             <div class="pt-3 border-t border-white/5">
-                <div class="nav-section-title" x-show="!sidebarCollapsed">
+                <div class="sidebar-nav-section-title" x-show="!sidebarCollapsed">
                     Platform Design
                 </div>
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <!-- Themes & Palettes -->
                     <a href="/admin/{{ $tenantId }}/theme-selector" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Visual Themes & Modes">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014 4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Theme & Mode</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014 4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Theme & Mode</span>
                     </a>
 
                     <!-- Custom Domains -->
                     <a href="/admin/{{ $tenantId }}/domain-settings" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Custom Apex & CNAME Domains">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Custom Domains</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Custom Domains</span>
                     </a>
 
                     <!-- Resume Blade Templates -->
                     <a href="/admin/{{ $tenantId }}/templates" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Resume Templates Catalog">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Resume Templates</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Resume Templates</span>
                     </a>
                 </div>
             </div>
 
             <!-- SECTION 5: ACCOUNT & COMPLIANCE -->
             <div class="pt-3 border-t border-white/5">
-                <div class="nav-section-title" x-show="!sidebarCollapsed">
+                <div class="sidebar-nav-section-title" x-show="!sidebarCollapsed">
                     Account & Settings
                 </div>
-                <div class="space-y-1.5">
+                <div class="space-y-1">
                     <!-- Billing & Invoices -->
                     <a href="/admin/{{ $tenantId }}/billing-settings" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Subscription & Invoices">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Billing & Usage</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Billing & Usage</span>
                     </a>
 
                     <!-- Privacy & GDPR -->
                     <a href="/admin/{{ $tenantId }}/privacy-and-data" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Privacy & Data Export">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Privacy & GDPR</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Privacy & GDPR</span>
                     </a>
 
                     <!-- Onboarding Setup Wizard -->
                     <a href="{{ route('onboarding') }}" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                       class="nav-tile-link group"
+                       class="sidebar-nav-item group"
                        title="Setup Wizard">
-                        <div class="nav-tile-icon">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <span x-show="!sidebarCollapsed" class="nav-tile-text">Setup Wizard</span>
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Setup Wizard</span>
                     </a>
                 </div>
             </div>
@@ -712,20 +656,17 @@
             <!-- SECTION 6: SUPER ADMIN (If Elevated) -->
             @if(auth()->user()?->is_super_admin)
             <div class="pt-3 border-t border-rose-500/20">
-                <div class="nav-section-title text-rose-400 font-mono" x-show="!sidebarCollapsed">
+                <div class="sidebar-nav-section-title text-rose-400 font-mono" x-show="!sidebarCollapsed">
                     Root Privileges
                 </div>
 
                 <a href="{{ route('super-admin.dashboard') }}" 
-                    :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                    class="nav-tile-link group bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30"
+                    class="sidebar-nav-item group bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300"
                     title="Super Admin Master Control">
-                    <div class="nav-tile-icon bg-rose-500/20 text-rose-300 border-rose-500/40">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                    </div>
-                    <span x-show="!sidebarCollapsed" class="nav-tile-text text-rose-300 font-bold font-mono">SUPER ADMIN</span>
+                    <svg class="sidebar-nav-icon text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span x-show="!sidebarCollapsed" class="sidebar-nav-label font-bold font-mono">SUPER ADMIN</span>
                 </a>
             </div>
             @endif
@@ -735,15 +676,12 @@
         <div class="p-3 border-t border-white/5 bg-slate-950/60">
             <button type="button" 
                     @click="showLogoutModal = true"
-                    :class="sidebarCollapsed ? 'justify-center px-0' : 'px-2.5'" 
-                    class="nav-tile-link w-full group hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all cursor-pointer" 
+                    class="sidebar-nav-item w-full group hover:bg-red-500/10 hover:text-red-300 transition-all cursor-pointer" 
                     title="Sign Out">
-                <div class="nav-tile-icon group-hover:bg-red-500/20 group-hover:border-red-500/30 group-hover:text-red-300">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                </div>
-                <span x-show="!sidebarCollapsed" class="nav-tile-text group-hover:text-red-300 font-medium">Sign Out</span>
+                <svg class="sidebar-nav-icon group-hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span x-show="!sidebarCollapsed" class="sidebar-nav-label group-hover:text-red-300 font-medium">Sign Out</span>
             </button>
         </div>
     </aside>
