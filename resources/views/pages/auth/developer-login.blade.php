@@ -2,8 +2,9 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use function Livewire\Volt\{layout, rules, state};
+use function Livewire\Volt\{layout, mount, rules, state};
 
 layout('layouts.auth', ['title' => 'Developer Sign In | DevFolio.AI']);
 
@@ -17,6 +18,19 @@ rules([
     'email' => ['required', 'string', 'email'],
     'password' => ['required', 'string'],
 ]);
+
+mount(function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->isSuperAdmin()) {
+            return redirect()->route('super-admin.dashboard');
+        }
+        if ($user->isAgencyUser()) {
+            return redirect()->route('agency');
+        }
+        return redirect()->route('dashboard');
+    }
+});
 
 $fillDemo = function () {
     $this->email = 'developer@example.com';
@@ -39,10 +53,16 @@ $login = function () {
     // Check if user has completed onboarding / has profile
     $profile = $user->profile ?? $user->accounts()->first()?->profiles()->first();
     if (! $profile) {
-        return redirect()->intended('/onboarding');
+        return redirect()->to('/onboarding');
     }
 
-    return redirect()->intended(route('dashboard'));
+    // Sanitize intended URL to avoid redirecting back into login loops
+    $intended = session()->pull('url.intended');
+    if ($intended && ! Str::contains($intended, ['/login', '/logout', '/register', 'password'])) {
+        return redirect()->to($intended);
+    }
+
+    return redirect()->to(route('dashboard'));
 };
 ?>
 
