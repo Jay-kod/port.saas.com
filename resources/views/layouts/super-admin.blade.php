@@ -402,7 +402,7 @@
     </aside>
 
     <!-- Main Content Shell -->
-    <div :class="{ 'is-collapsed': sidebarCollapsed }" class="super-admin-main-shell flex-1 flex flex-col min-h-screen">
+    <div id="super-admin-main-shell" :class="{ 'is-collapsed': sidebarCollapsed }" class="super-admin-main-shell flex-1 flex flex-col min-h-screen">
         <div class="super-admin-glow flex-1 absolute inset-0 z-[-1] pointer-events-none"></div>
 
         <!-- Top Header (Amber & AMOLED Black with Hamburger & Title) -->
@@ -410,11 +410,13 @@
             <div class="flex items-center gap-3 sm:gap-4">
                 <!-- Hamburger Button -->
                 <button type="button"
+                        id="super-admin-hamburger-btn"
+                        onclick="window.toggleSuperAdminSidebar()"
                         @click="window.innerWidth < 1024 ? sidebarOpen = !sidebarOpen : sidebarCollapsed = !sidebarCollapsed" 
                         class="text-amber-400 hover:text-white focus:outline-none p-2 -ml-2 rounded-xl hover:bg-amber-950/50 transition-colors cursor-pointer"
                         title="Toggle Sidebar"
                         aria-label="Toggle Navigation Sidebar">
-                    <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-6 h-6 shrink-0 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
