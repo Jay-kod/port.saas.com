@@ -68,6 +68,59 @@ class DedicatedLoginPortalsTest extends TestCase
             ->assertSet('password', 'password');
     }
 
+    public function test_authenticated_developer_visiting_login_redirects_to_dashboard(): void
+    {
+        $developer = User::factory()->create([
+            'email' => 'developer@example.com',
+            'password' => bcrypt('password'),
+            'is_super_admin' => false,
+        ]);
+
+        $this->actingAs($developer)
+            ->get('/developer/login')
+            ->assertRedirect(route('dashboard'));
+    }
+
+    public function test_developer_login_clears_login_loop_intended_url_and_redirects_to_dashboard(): void
+    {
+        $developer = User::factory()->create([
+            'email' => 'developer@example.com',
+            'password' => bcrypt('password'),
+            'is_super_admin' => false,
+        ]);
+        $account = Account::factory()->create([
+            'owner_user_id' => $developer->id,
+            'plan_slug' => 'free',
+        ]);
+        Profile::create([
+            'account_id' => $account->id,
+            'user_id' => $developer->id,
+            'slug' => 'dev-john',
+            'full_name' => 'John Dev',
+            'is_published' => true,
+        ]);
+
+        session(['url.intended' => url('/developer/login')]);
+
+        Volt::test('auth.developer-login')
+            ->set('email', 'developer@example.com')
+            ->set('password', 'password')
+            ->call('login')
+            ->assertHasNoErrors()
+            ->assertRedirect(route('dashboard'));
+    }
+
+    public function test_developer_shortcut_route_redirects_to_dashboard(): void
+    {
+        $developer = User::factory()->create([
+            'is_super_admin' => false,
+        ]);
+
+        $this->actingAs($developer)
+            ->get('/developer')
+            ->assertRedirect(route('dashboard'));
+    }
+
     public function test_agency_login_page_renders_with_teal_tokens(): void
     {
         $response = $this->get('/agency/login');
