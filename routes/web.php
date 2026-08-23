@@ -164,6 +164,25 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
     Volt::route('/developer/dashboard', 'dashboard.index')->name('dashboard');
     Route::redirect('/dashboard', '/developer/dashboard', 302);
     Route::redirect('/developer', '/developer/dashboard', 302);
+
+    // Dedicated Developer Workspace Studios & Tools
+    Volt::route('/developer/profile', 'developer.profile')->name('developer.profile');
+    Volt::route('/developer/projects', 'developer.projects')->name('developer.projects');
+    Volt::route('/developer/experiences', 'developer.experiences')->name('developer.experiences');
+    Volt::route('/developer/skills', 'developer.skills')->name('developer.skills');
+    Volt::route('/developer/certificates', 'developer.certificates')->name('developer.certificates');
+    Volt::route('/developer/resumes', 'developer.resumes')->name('developer.resumes');
+    Volt::route('/developer/cover-letters', 'developer.cover-letters')->name('developer.cover-letters');
+    Volt::route('/developer/job-tracker', 'developer.job-tracker')->name('developer.job-tracker');
+    Volt::route('/developer/resume-import', 'developer.resume-import')->name('developer.resume-import');
+    Volt::route('/developer/github-sync', 'developer.github-sync')->name('developer.github-sync');
+    Volt::route('/developer/ai-settings', 'developer.ai-settings')->name('developer.ai-settings');
+    Volt::route('/developer/themes', 'developer.themes')->name('developer.themes');
+    Volt::route('/developer/domains', 'developer.domains')->name('developer.domains');
+    Volt::route('/developer/billing', 'developer.billing')->name('developer.billing');
+    Volt::route('/developer/privacy', 'developer.privacy')->name('developer.privacy');
+    Volt::route('/developer/templates', 'developer.templates')->name('developer.templates');
+
     Volt::route('/agency', 'agency.index')->name('agency');
 });
 
