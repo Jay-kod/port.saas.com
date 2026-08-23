@@ -175,12 +175,12 @@
         .sidebar-nav-item {
             display: flex;
             align-items: center;
-            gap: 0.875rem;
-            padding: 0.625rem 0.875rem;
-            border-radius: 0.625rem;
+            gap: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
             text-decoration: none;
             color: #94a3b8;
-            font-size: 0.875rem;
+            font-size: 0.8125rem; /* 13px */
             font-weight: 500;
             letter-spacing: -0.01em;
             background-color: transparent;
@@ -189,14 +189,15 @@
             position: relative;
         }
         .sidebar-nav-item .sidebar-nav-icon {
-            width: 1.25rem;
-            height: 1.25rem;
+            width: 1.125rem; /* 18px */
+            height: 1.125rem;
             color: #8b949e;
             flex-shrink: 0;
             transition: color 0.15s ease, transform 0.15s ease;
         }
         .sidebar-nav-item .sidebar-nav-label {
             white-space: nowrap;
+            line-height: 1.25;
             transition: color 0.15s ease;
         }
         
@@ -216,7 +217,7 @@
         .sidebar-nav-item.is-active {
             background-color: #24272d !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25) !important;
             color: #ffffff !important;
             font-weight: 600 !important;
         }
@@ -233,7 +234,7 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: #64748b;
-            padding: 0 0.875rem 0.375rem 0.875rem;
+            padding: 0 0.75rem 0.25rem 0.75rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
