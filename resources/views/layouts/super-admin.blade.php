@@ -421,12 +421,12 @@
             <button type="button" 
                     @click="showLogoutModal = true"
                     :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-3'" 
-                    class="w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-amber-950 bg-amber-950/30 text-amber-300 hover:bg-amber-900/60 hover:text-white transition-all shadow-sm font-mono group" 
+                    class="sidebar-footer-btn w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-amber-950 bg-amber-950/30 text-amber-300 hover:bg-amber-900/60 hover:text-white transition-all shadow-sm font-mono group" 
                     title="Sign Out">
                 <svg class="w-4 h-4 shrink-0 text-amber-400 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
-                <span x-show="!sidebarCollapsed" class="whitespace-nowrap font-bold">Terminate Session</span>
+                <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap font-bold">Terminate Session</span>
             </button>
         </div>
     </aside>
