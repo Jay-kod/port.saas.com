@@ -99,6 +99,9 @@
             --panel-badge-text: {{ $badgeText }};
             --panel-badge-border: {{ $badgeBorder }};
         }
+        [x-cloak] {
+            display: none !important;
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
