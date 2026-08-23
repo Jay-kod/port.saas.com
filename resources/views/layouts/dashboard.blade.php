@@ -301,8 +301,8 @@
                 padding-left: 0 !important;
                 padding-right: 0 !important;
                 gap: 0 !important;
-                width: 2.75rem !important;
-                height: 2.75rem !important;
+                width: 2.25rem !important;
+                height: 2.25rem !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
             }
