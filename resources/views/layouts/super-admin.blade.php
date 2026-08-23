@@ -301,82 +301,92 @@
         </div>
 
         <!-- Sidebar Navigation Links -->
-        <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-4 font-sans">
+        <nav class="flex-1 overflow-y-auto py-5 px-3.5 space-y-6 font-sans">
             <!-- SECTION 1: PLATFORM OVERVIEW -->
             <div>
-                <div class="sidebar-label px-3 mb-1.5" x-show="!sidebarCollapsed">
-                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-500/80 font-mono">Root Operations</span>
+                <div class="sidebar-label px-2 mb-2" x-show="!sidebarCollapsed">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-500/90 font-mono">Root Operations</span>
                 </div>
-                <div class="space-y-0.5">
+                <div class="space-y-1.5">
                     <!-- Master Dashboard -->
                     <a href="{{ route('super-admin.dashboard') }}" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2.5 rounded-xl text-xs font-semibold {{ request()->routeIs('super-admin.dashboard') ? 'active-nav-pill-amber' : 'text-slate-300 hover:bg-amber-950/30 hover:text-amber-200' }} transition-all"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold {{ request()->routeIs('super-admin.dashboard') ? 'active-nav-pill-amber' : 'text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 border border-transparent hover:border-amber-900/30' }} transition-all"
                        title="Master Overview">
-                        <svg class="w-4 h-4 shrink-0 {{ request()->routeIs('super-admin.dashboard') ? 'text-amber-400' : 'text-slate-500' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                        <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap font-mono">Platform Telemetry</span>
+                        <div class="w-8 h-8 shrink-0 rounded-lg {{ request()->routeIs('super-admin.dashboard') ? 'bg-amber-500/20 text-amber-300 border border-amber-400/40' : 'bg-amber-950/40 text-amber-500 border border-amber-900/40 group-hover:text-amber-300 group-hover:bg-amber-500/20 group-hover:border-amber-500/40' }} flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap font-mono font-bold">Platform Telemetry</span>
                     </a>
                 </div>
             </div>
 
             <!-- SECTION 2: GLOBAL AUDIT & GOVERNANCE -->
-            <div class="pt-2 border-t border-amber-950/70">
-                <div class="sidebar-label px-3 mb-1.5" x-show="!sidebarCollapsed">
-                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-500/80 font-mono">Platform Moderation</span>
+            <div class="pt-3 border-t border-amber-950/70">
+                <div class="sidebar-label px-2 mb-2" x-show="!sidebarCollapsed">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-amber-500/90 font-mono">Platform Moderation</span>
                 </div>
-                <div class="space-y-0.5">
+                <div class="space-y-1.5">
                     <!-- Abuse Reports -->
                     <a href="/admin/{{ $tenantId }}/portfolio-reports" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2 rounded-xl text-xs font-medium text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 transition-all"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 border border-transparent hover:border-amber-900/30 transition-all"
                        title="Moderation Queue">
-                        <svg class="w-4 h-4 shrink-0 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-amber-950/40 text-amber-400 border border-amber-900/40 group-hover:text-amber-300 group-hover:bg-amber-500/20 group-hover:border-amber-500/40 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
                         <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap">Moderation Queue</span>
                     </a>
 
                     <!-- Global Themes -->
                     <a href="/admin/{{ $tenantId }}/themes" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2 rounded-xl text-xs font-medium text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 transition-all"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 border border-transparent hover:border-amber-900/30 transition-all"
                        title="Global Themes">
-                        <svg class="w-4 h-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                        </svg>
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-amber-950/40 text-amber-400 border border-amber-900/40 group-hover:text-amber-300 group-hover:bg-amber-500/20 group-hover:border-amber-500/40 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4 4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                        </div>
                         <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap">Themes Catalog</span>
                     </a>
 
                     <!-- Global Templates -->
                     <a href="/admin/{{ $tenantId }}/templates" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2 rounded-xl text-xs font-medium text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 transition-all"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-amber-950/30 hover:text-amber-200 border border-transparent hover:border-amber-900/30 transition-all"
                        title="Resume Templates">
-                        <svg class="w-4 h-4 shrink-0 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-amber-950/40 text-amber-400 border border-amber-900/40 group-hover:text-amber-300 group-hover:bg-amber-500/20 group-hover:border-amber-500/40 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
                         <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap">Templates Catalog</span>
                     </a>
                 </div>
             </div>
 
             <!-- SECTION 3: TENANT WORKSPACES -->
-            <div class="pt-2 border-t border-amber-950/70">
-                <div class="sidebar-label px-3 mb-1.5" x-show="!sidebarCollapsed">
+            <div class="pt-3 border-t border-amber-950/70">
+                <div class="sidebar-label px-2 mb-2" x-show="!sidebarCollapsed">
                     <span class="text-[10px] uppercase font-bold tracking-wider text-slate-500 font-mono">Tenant Workspaces</span>
                 </div>
-                <div class="space-y-0.5">
+                <div class="space-y-1.5">
                     <!-- User Dashboard -->
                     <a href="{{ route('dashboard') }}" 
                        target="_blank" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-900 hover:text-emerald-400 transition-all group"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900 hover:text-emerald-400 border border-transparent hover:border-white/5 transition-all"
                        title="User Dashboard (New Tab)">
-                        <svg class="w-4 h-4 shrink-0 text-slate-500 group-hover:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-slate-900 text-slate-400 border border-white/5 group-hover:text-emerald-400 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                        </div>
                         <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap flex items-center justify-between flex-1">
                             <span>User Dashboard</span>
                             <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -386,12 +396,14 @@
                     <!-- Agency Hub -->
                     <a href="{{ route('agency') }}" 
                        target="_blank" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-900 hover:text-yellow-400 transition-all group"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900 hover:text-yellow-400 border border-transparent hover:border-white/5 transition-all"
                        title="Agency Workspace (New Tab)">
-                        <svg class="w-4 h-4 shrink-0 text-slate-500 group-hover:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-slate-900 text-slate-400 border border-white/5 group-hover:text-yellow-400 group-hover:bg-yellow-500/10 group-hover:border-yellow-500/20 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
                         <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap flex items-center justify-between flex-1">
                             <span>Agency Hub</span>
                             <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -401,12 +413,14 @@
                     <!-- Content Studio -->
                     <a href="/admin/{{ $tenantId }}" 
                        target="_blank" 
-                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3 px-3'" 
-                       class="sidebar-link flex items-center py-2 rounded-xl text-xs font-medium text-slate-400 hover:bg-slate-900 hover:text-white transition-all group"
+                       :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-3.5 px-3'" 
+                       class="sidebar-link group flex items-center py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900 hover:text-white border border-transparent hover:border-white/5 transition-all"
                        title="Content Studio (New Tab)">
-                        <svg class="w-4 h-4 shrink-0 text-slate-500 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-slate-900 text-slate-400 border border-white/5 group-hover:text-white group-hover:bg-slate-800 group-hover:border-white/10 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </div>
                         <span x-show="!sidebarCollapsed" class="sidebar-label whitespace-nowrap flex items-center justify-between flex-1">
                             <span>Content Studio</span>
                             <svg class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
