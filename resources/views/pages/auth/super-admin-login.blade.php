@@ -174,8 +174,10 @@ $login = function () {
                 </button>
             </div>
 
-            {{-- Livewire Login Form --}}
-            <form wire:submit="login" class="space-y-4">
+            {{-- Livewire & Standard POST Login Form --}}
+            <form method="POST" action="{{ route('super-admin.login.submit') }}" wire:submit="login" class="space-y-4">
+                @csrf
+
                 {{-- Email Address --}}
                 <div class="space-y-1.5">
                     <label for="admin_email" class="block text-xs font-semibold text-gray-300">
@@ -183,6 +185,7 @@ $login = function () {
                     </label>
                     <input
                         type="email"
+                        name="email"
                         id="admin_email"
                         wire:model="email"
                         placeholder="admin@devfolio.ai"
@@ -209,6 +212,7 @@ $login = function () {
                     <div class="relative">
                         <input
                             :type="showPassword ? 'text' : 'password'"
+                            name="password"
                             id="admin_password"
                             wire:model="password"
                             placeholder="••••••••"
@@ -242,6 +246,8 @@ $login = function () {
                     <label class="inline-flex items-center gap-2 cursor-pointer">
                         <input
                             type="checkbox"
+                            name="remember"
+                            value="1"
                             wire:model="remember"
                             class="w-4 h-4 rounded bg-gray-900 border-gray-700 text-amber-500 focus:ring-amber-500/30 focus:ring-offset-gray-950"
                         />
