@@ -83,6 +83,25 @@
         .active-nav-pill-amber svg {
             color: var(--panel-badge-text) !important;
         }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.2);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.4);
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(245, 158, 11, 0.2) transparent;
+        }
         /* Super Admin Layout Architecture */
         .super-admin-sidebar {
             width: 16rem;
