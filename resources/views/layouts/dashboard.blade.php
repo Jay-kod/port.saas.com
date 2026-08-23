@@ -632,7 +632,7 @@
             <button type="button" 
                     @click="showLogoutModal = true"
                     :class="sidebarCollapsed ? 'justify-center px-0' : 'gap-2 px-3'" 
-                    class="w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-300 transition-all shadow-sm group" 
+                    class="sidebar-footer-btn w-full flex items-center justify-center text-xs font-medium py-2 rounded-xl border border-slate-800 bg-slate-900/80 text-slate-300 hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-300 transition-all shadow-sm group" 
                     title="Sign Out">
                 <svg class="w-4 h-4 shrink-0 text-slate-400 group-hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
