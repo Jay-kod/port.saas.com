@@ -42,8 +42,6 @@ class DeveloperDashboardPagesTest extends TestCase
             'ai_generations_used_current_period' => 0,
         ]);
 
-        $this->user->accounts()->attach($this->account->id, ['role' => 'owner']);
-
         $this->profile = Profile::create([
             'account_id' => $this->account->id,
             'user_id' => $this->user->id,
