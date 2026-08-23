@@ -121,6 +121,79 @@ class DedicatedLoginPortalsTest extends TestCase
             ->assertRedirect(route('dashboard'));
     }
 
+    public function test_developer_can_authenticate_via_standard_post_form(): void
+    {
+        $developer = User::factory()->create([
+            'email' => 'developer@example.com',
+            'password' => bcrypt('password'),
+            'is_super_admin' => false,
+        ]);
+        $account = Account::factory()->create([
+            'owner_user_id' => $developer->id,
+            'plan_slug' => 'free',
+        ]);
+        Profile::create([
+            'account_id' => $account->id,
+            'user_id' => $developer->id,
+            'slug' => 'dev-john',
+            'full_name' => 'John Dev',
+            'is_published' => true,
+        ]);
+
+        $response = $this->post('/developer/login', [
+            'email' => 'developer@example.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect(route('dashboard'));
+        $this->assertAuthenticatedAs($developer);
+    }
+
+    public function test_agency_can_authenticate_via_standard_post_form(): void
+    {
+        $agency = User::factory()->create([
+            'email' => 'agency@example.com',
+            'password' => bcrypt('password'),
+            'is_super_admin' => false,
+        ]);
+        $account = Account::factory()->create([
+            'owner_user_id' => $agency->id,
+            'plan_slug' => 'agency',
+        ]);
+        Profile::create([
+            'account_id' => $account->id,
+            'user_id' => $agency->id,
+            'slug' => 'apex-agency',
+            'full_name' => 'Apex Agency',
+            'is_published' => true,
+        ]);
+
+        $response = $this->post('/agency/login', [
+            'email' => 'agency@example.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect(route('agency'));
+        $this->assertAuthenticatedAs($agency);
+    }
+
+    public function test_super_admin_can_authenticate_via_standard_post_form(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'is_super_admin' => true,
+        ]);
+
+        $response = $this->post('/super-admin/login', [
+            'email' => 'admin@example.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect(route('super-admin.dashboard'));
+        $this->assertAuthenticatedAs($admin);
+    }
+
     public function test_agency_login_page_renders_with_teal_tokens(): void
     {
         $response = $this->get('/agency/login');
