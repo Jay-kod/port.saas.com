@@ -35,8 +35,9 @@ class DeveloperDashboardPagesTest extends TestCase
             'name' => 'Alex Developer',
         ]);
 
-        $this->account = Account::create([
+        $this->account = Account::factory()->create([
             'name' => 'Alex Workspace',
+            'owner_user_id' => $this->user->id,
             'plan_slug' => 'free',
             'ai_resumes_monthly_limit' => 3,
             'ai_resumes_used_this_month' => 0,
