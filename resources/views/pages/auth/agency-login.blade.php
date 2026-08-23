@@ -2,8 +2,9 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use function Livewire\Volt\{layout, rules, state};
+use function Livewire\Volt\{layout, mount, rules, state};
 
 layout('layouts.auth', ['title' => 'Agency Admin Sign In | DevFolio.AI']);
 
@@ -17,6 +18,19 @@ rules([
     'email' => ['required', 'string', 'email'],
     'password' => ['required', 'string'],
 ]);
+
+mount(function () {
+    if (Auth::check()) {
+        $user = Auth::user();
+        if ($user->isSuperAdmin()) {
+            return redirect()->route('super-admin.dashboard');
+        }
+        if ($user->isAgencyUser()) {
+            return redirect()->route('agency');
+        }
+        return redirect()->route('dashboard');
+    }
+});
 
 $fillDemo = function () {
     $this->email = 'agency@example.com';
@@ -38,11 +52,16 @@ $login = function () {
 
     // If user is super admin, redirect to super-admin
     if ($user->isSuperAdmin()) {
-        return redirect()->intended(route('super-admin.dashboard'));
+        return redirect()->to(route('super-admin.dashboard'));
     }
 
     // Direct to agency workspace
-    return redirect()->intended(route('agency'));
+    $intended = session()->pull('url.intended');
+    if ($intended && ! Str::contains($intended, ['/login', '/logout', '/register', 'password'])) {
+        return redirect()->to($intended);
+    }
+
+    return redirect()->to(route('agency'));
 };
 ?>
 
