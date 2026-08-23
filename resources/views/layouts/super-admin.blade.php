@@ -83,20 +83,67 @@
         .active-nav-pill-amber svg {
             color: var(--panel-badge-text) !important;
         }
-        /* Custom scrollbar for sidebar */
-        aside nav::-webkit-scrollbar {
-            width: 4px;
+        /* Super Admin Layout Architecture */
+        .super-admin-sidebar {
+            width: 16rem;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        aside nav::-webkit-scrollbar-track {
-            background: transparent;
+        .super-admin-main-shell {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        aside nav::-webkit-scrollbar-thumb {
-            background: rgba(245, 158, 11, 0.2);
-            border-radius: 4px;
+        @media (min-width: 1024px) {
+            .super-admin-sidebar {
+                transform: translateX(0) !important;
+            }
+            .super-admin-sidebar.is-collapsed {
+                width: 5rem !important;
+            }
+            .super-admin-main-shell {
+                padding-left: 16rem !important;
+            }
+            .super-admin-main-shell.is-collapsed {
+                padding-left: 5rem !important;
+            }
         }
-        aside nav::-webkit-scrollbar-thumb:hover {
-            background: rgba(245, 158, 11, 0.4);
+        @media (max-width: 1023px) {
+            .super-admin-sidebar {
+                transform: translateX(-100%);
+            }
+            .super-admin-sidebar.is-open {
+                transform: translateX(0) !important;
+            }
+            .super-admin-main-shell {
+                padding-left: 0 !important;
+            }
         }
+
+        /* SVG constraints */
+        svg {
+            max-width: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .w-3\.5 { width: 0.875rem; }
+        .h-3\.5 { height: 0.875rem; }
+        .w-4 { width: 1rem; }
+        .h-4 { height: 1rem; }
+        .w-5 { width: 1.25rem; }
+        .h-5 { height: 1.25rem; }
+        .w-6 { width: 1.5rem; }
+        .h-6 { height: 1.5rem; }
+        .w-8 { width: 2rem; }
+        .h-8 { height: 2rem; }
+        .w-10 { width: 2.5rem; }
+        .h-10 { height: 2.5rem; }
     </style>
 </head>
 <body class="bg-black text-slate-100 selection:bg-amber-500 selection:text-black font-sans" x-data="{ sidebarOpen: false, sidebarCollapsed: false, showLogoutModal: false }">
@@ -113,8 +160,8 @@
          @click="sidebarOpen = false" style="display: none;"></div>
 
     <!-- Sidebar (Super Admin Master Control) -->
-    <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen, 'lg:w-20': sidebarCollapsed }" 
-           class="w-64 fixed inset-y-0 left-0 z-50 glass-card-dark border-r border-amber-950/70 bg-black transition-all duration-300 ease-in-out lg:translate-x-0 flex flex-col h-screen overflow-hidden">
+    <aside :class="{ 'is-open': sidebarOpen, 'is-collapsed': sidebarCollapsed }" 
+           class="super-admin-sidebar glass-card-dark border-r border-amber-950/70 bg-black flex flex-col h-screen overflow-hidden">
         
         <!-- Sidebar Header (Amber Shield) -->
         <div class="h-20 flex flex-col justify-center border-b border-amber-950/70 transition-all duration-300" :class="sidebarCollapsed ? 'items-center px-0' : 'px-5'">
