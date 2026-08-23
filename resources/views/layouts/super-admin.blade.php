@@ -49,6 +49,9 @@
             --panel-badge-text: #fbbf24;
             --panel-badge-border: rgba(245, 158, 11, 0.30);
         }
+        [x-cloak] {
+            display: none !important;
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #000000;
