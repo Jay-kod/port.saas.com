@@ -121,12 +121,12 @@
         .sidebar-nav-item {
             display: flex;
             align-items: center;
-            gap: 0.875rem;
-            padding: 0.625rem 0.875rem;
-            border-radius: 0.625rem;
+            gap: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.5rem;
             text-decoration: none;
             color: #94a3b8;
-            font-size: 0.875rem;
+            font-size: 0.8125rem; /* 13px */
             font-weight: 500;
             letter-spacing: -0.01em;
             background-color: transparent;
@@ -135,14 +135,15 @@
             position: relative;
         }
         .sidebar-nav-item .sidebar-nav-icon {
-            width: 1.25rem;
-            height: 1.25rem;
+            width: 1.125rem; /* 18px */
+            height: 1.125rem;
             color: #d97706;
             flex-shrink: 0;
             transition: color 0.15s ease, transform 0.15s ease;
         }
         .sidebar-nav-item .sidebar-nav-label {
             white-space: nowrap;
+            line-height: 1.25;
             transition: color 0.15s ease;
         }
         
@@ -162,7 +163,7 @@
         .sidebar-nav-item.is-active {
             background-color: #2b1f14 !important;
             border: 1px solid rgba(245, 158, 11, 0.3) !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
             color: #ffffff !important;
             font-weight: 600 !important;
         }
@@ -179,7 +180,7 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: #b45309;
-            padding: 0 0.875rem 0.375rem 0.875rem;
+            padding: 0 0.75rem 0.25rem 0.75rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
@@ -246,8 +247,8 @@
                 padding-left: 0 !important;
                 padding-right: 0 !important;
                 gap: 0 !important;
-                width: 2.75rem !important;
-                height: 2.75rem !important;
+                width: 2.25rem !important;
+                height: 2.25rem !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
             }
