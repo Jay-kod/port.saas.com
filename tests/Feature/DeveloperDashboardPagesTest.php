@@ -39,8 +39,7 @@ class DeveloperDashboardPagesTest extends TestCase
             'name' => 'Alex Workspace',
             'owner_user_id' => $this->user->id,
             'plan_slug' => 'free',
-            'ai_resumes_monthly_limit' => 3,
-            'ai_resumes_used_this_month' => 0,
+            'ai_generations_used_current_period' => 0,
         ]);
 
         $this->user->accounts()->attach($this->account->id, ['role' => 'owner']);
