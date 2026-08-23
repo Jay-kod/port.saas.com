@@ -542,23 +542,24 @@
     </aside>
 
     <!-- Main Content Shell -->
-    <div :class="sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'" class="flex flex-col min-h-screen transition-all duration-300">
-        <div :class="sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'" class="dashboard-glow flex-1 absolute inset-0 z-[-1] hidden lg:block transition-all duration-300"></div>
-        <div class="dashboard-glow flex-1 absolute inset-0 z-[-1] lg:hidden"></div>
+    <div :class="{ 'is-collapsed': sidebarCollapsed }" class="dashboard-main-shell flex-1 flex flex-col min-h-screen">
+        <div class="dashboard-glow flex-1 absolute inset-0 z-[-1] pointer-events-none"></div>
 
         <!-- Top Header (Clima-style with hamburger and page title) -->
         <header class="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 border-b border-white/5 glass-card bg-slate-950/80 backdrop-blur-md">
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 sm:gap-4">
                 <!-- Hamburger Button -->
-                <button @click="window.innerWidth < 1024 ? sidebarOpen = true : sidebarCollapsed = !sidebarCollapsed" 
-                        class="text-slate-300 hover:text-white focus:outline-none p-2 -ml-2 rounded-xl hover:bg-white/5 transition-colors"
-                        title="Toggle Sidebar">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button type="button"
+                        @click="window.innerWidth < 1024 ? sidebarOpen = !sidebarOpen : sidebarCollapsed = !sidebarCollapsed" 
+                        class="text-slate-300 hover:text-white focus:outline-none p-2 -ml-2 rounded-xl hover:bg-white/5 transition-colors cursor-pointer"
+                        title="Toggle Sidebar"
+                        aria-label="Toggle Navigation Sidebar">
+                    <svg class="w-6 h-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
                 <!-- Page Title -->
-                <h1 class="text-lg font-bold font-heading text-white tracking-tight">
+                <h1 class="text-base sm:text-lg font-bold font-heading text-white tracking-tight whitespace-nowrap">
                     @yield('title', 'Dashboard')
                 </h1>
             </div>
