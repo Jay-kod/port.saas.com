@@ -32,8 +32,107 @@ Volt::route('/onboarding', 'onboarding')->name('onboarding')->middleware(['auth'
 Volt::route('/developer/login', 'auth.developer-login')->name('developer.login');
 Route::redirect('/login', '/developer/login', 302)->name('login');
 
+Route::post('/developer/login', function (\Illuminate\Http\Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'string', 'email'],
+        'password' => ['required', 'string'],
+    ]);
+
+    $remember = $request->boolean('remember');
+
+    if (! \Illuminate\Support\Facades\Auth::attempt($credentials, $remember)) {
+        return back()->withInput($request->only('email', 'remember'))->withErrors([
+            'email' => 'These credentials do not match our records.',
+        ]);
+    }
+
+    $request->session()->regenerate();
+    $user = \Illuminate\Support\Facades\Auth::user();
+
+    $profile = $user->profile ?? $user->accounts()->first()?->profiles()->first();
+    if (! $profile) {
+        return redirect()->to('/onboarding');
+    }
+
+    $intended = session()->pull('url.intended');
+    if ($intended && ! \Illuminate\Support\Str::contains($intended, ['/login', '/logout', '/register', 'password'])) {
+        return redirect()->to($intended);
+    }
+
+    return redirect()->to(route('dashboard'));
+})->name('developer.login.submit');
+
+Route::post('/login', function (\Illuminate\Http\Request $request) {
+    return redirect()->route('developer.login.submit', $request->all());
+});
+
 Volt::route('/agency/login', 'auth.agency-login')->name('agency.login');
+Route::post('/agency/login', function (\Illuminate\Http\Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'string', 'email'],
+        'password' => ['required', 'string'],
+    ]);
+
+    $remember = $request->boolean('remember');
+
+    if (! \Illuminate\Support\Facades\Auth::attempt($credentials, $remember)) {
+        return back()->withInput($request->only('email', 'remember'))->withErrors([
+            'email' => 'These credentials do not match our records.',
+        ]);
+    }
+
+    $request->session()->regenerate();
+    $user = \Illuminate\Support\Facades\Auth::user();
+
+    if ($user->isSuperAdmin()) {
+        return redirect()->to(route('super-admin.dashboard'));
+    }
+
+    $intended = session()->pull('url.intended');
+    if ($intended && ! \Illuminate\Support\Str::contains($intended, ['/login', '/logout', '/register', 'password'])) {
+        return redirect()->to($intended);
+    }
+
+    return redirect()->to(route('agency'));
+})->name('agency.login.submit');
+
 Volt::route('/super-admin/login', 'auth.super-admin-login')->name('super-admin.login');
+Route::post('/super-admin/login', function (\Illuminate\Http\Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'string', 'email'],
+        'password' => ['required', 'string'],
+    ]);
+
+    $remember = $request->boolean('remember');
+
+    if (! \Illuminate\Support\Facades\Auth::attempt($credentials, $remember)) {
+        return back()->withInput($request->only('email', 'remember'))->withErrors([
+            'email' => 'These credentials do not match our records.',
+        ]);
+    }
+
+    $user = \Illuminate\Support\Facades\Auth::user();
+
+    if (! $user->isSuperAdmin()) {
+        \Illuminate\Support\Facades\Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return back()->withInput($request->only('email'))->withErrors([
+            'email' => 'Access Restricted: This master console is strictly reserved for Platform Super Administrators.',
+        ]);
+    }
+
+    $request->session()->regenerate();
+
+    $intended = session()->pull('url.intended');
+    if ($intended && ! \Illuminate\Support\Str::contains($intended, ['/login', '/logout', '/register', 'password'])) {
+        return redirect()->to($intended);
+    }
+
+    return redirect()->to(route('super-admin.dashboard'));
+})->name('super-admin.login.submit');
+
 Volt::route('/forgot-password', 'auth.forgot-password')->name('password.request');
 
 // Universal Logout Route with deliberate session invalidation & anti-cache headers
