@@ -782,7 +782,7 @@
                         <!-- Menu Items: Profile & Settings -->
                         <div class="py-1.5 px-1.5 space-y-0.5">
                             <!-- Profile Link -->
-                            <a href="{{ $userProfile ? '/admin/' . $tenantId . '/profiles/' . $userProfile->id . '/edit' : '/admin/' . $tenantId . '/profiles' }}" 
+                            <a href="{{ route('developer.profile') }}" 
                                class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors group">
                                 <div class="w-7 h-7 rounded-lg bg-slate-900 border border-white/5 flex items-center justify-center text-slate-400 group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-all">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -796,7 +796,7 @@
                             </a>
 
                             <!-- Settings Link -->
-                            <a href="/admin/{{ $tenantId }}/billing-settings" 
+                            <a href="{{ route('developer.billing') }}" 
                                class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors group">
                                 <div class="w-7 h-7 rounded-lg bg-slate-900 border border-white/5 flex items-center justify-center text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
