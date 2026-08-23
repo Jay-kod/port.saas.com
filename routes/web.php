@@ -64,6 +64,7 @@ Route::match(['get', 'post'], '/logout', function (\Illuminate\Http\Request $req
 Route::middleware(['auth', 'prevent.back'])->group(function () {
     Volt::route('/developer/dashboard', 'dashboard.index')->name('dashboard');
     Route::redirect('/dashboard', '/developer/dashboard', 302);
+    Route::redirect('/developer', '/developer/dashboard', 302);
     Volt::route('/agency', 'agency.index')->name('agency');
 });
 
