@@ -83,22 +83,22 @@ class DeveloperDashboardPagesTest extends TestCase
     public function test_authenticated_developer_can_access_all_16_pages_with_http_200(): void
     {
         $routes = [
-            'developer.profile' => 'Profile & Bio Editor',
-            'developer.projects' => 'Projects Showcase',
-            'developer.experiences' => 'Experience Timeline',
-            'developer.skills' => 'Skills Matrix',
+            'developer.profile' => 'Profile',
+            'developer.projects' => 'Projects',
+            'developer.experiences' => 'Experience',
+            'developer.skills' => 'Skills',
             'developer.certificates' => 'Certificates',
-            'developer.resumes' => 'AI Resumes',
+            'developer.resumes' => 'Resumes',
             'developer.cover-letters' => 'Cover Letters',
             'developer.job-tracker' => 'Job Tracker',
-            'developer.resume-import' => 'Import Resume PDF',
+            'developer.resume-import' => 'Import Resume',
             'developer.github-sync' => 'GitHub Sync',
-            'developer.ai-settings' => 'AI Settings (BYOK)',
-            'developer.themes' => 'Theme & Mode',
+            'developer.ai-settings' => 'AI Settings',
+            'developer.themes' => 'Theme',
             'developer.domains' => 'Custom Domains',
             'developer.templates' => 'Resume Templates',
-            'developer.billing' => 'Billing & Usage',
-            'developer.privacy' => 'Privacy & GDPR',
+            'developer.billing' => 'Billing',
+            'developer.privacy' => 'Privacy',
         ];
 
         foreach ($routes as $routeName => $needle) {
