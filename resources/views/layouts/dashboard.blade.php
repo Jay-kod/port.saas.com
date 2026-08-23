@@ -21,6 +21,46 @@
                 window.location.reload();
             }
         });
+
+        window.toggleDashboardSidebar = function() {
+            const isMobile = window.innerWidth < 1024;
+            const sidebar = document.getElementById('dashboard-sidebar');
+            const mainShell = document.getElementById('dashboard-main-shell');
+            const overlay = document.getElementById('mobile-sidebar-overlay');
+            
+            if (isMobile) {
+                if (!sidebar) return;
+                const isOpen = sidebar.classList.toggle('is-open');
+                if (overlay) {
+                    overlay.style.display = isOpen ? 'block' : 'none';
+                }
+            } else {
+                if (!sidebar || !mainShell) return;
+                const isCollapsed = sidebar.classList.toggle('is-collapsed');
+                mainShell.classList.toggle('is-collapsed', isCollapsed);
+                try {
+                    localStorage.setItem('devfolio_sidebar_collapsed', isCollapsed ? '1' : '0');
+                } catch (e) {}
+            }
+        };
+
+        window.closeMobileSidebar = function() {
+            const sidebar = document.getElementById('dashboard-sidebar');
+            const overlay = document.getElementById('mobile-sidebar-overlay');
+            if (sidebar) sidebar.classList.remove('is-open');
+            if (overlay) overlay.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                if (window.innerWidth >= 1024 && localStorage.getItem('devfolio_sidebar_collapsed') === '1') {
+                    const sidebar = document.getElementById('dashboard-sidebar');
+                    const mainShell = document.getElementById('dashboard-main-shell');
+                    if (sidebar) sidebar.classList.add('is-collapsed');
+                    if (mainShell) mainShell.classList.add('is-collapsed');
+                }
+            } catch (e) {}
+        });
     </script>
 
     @php
