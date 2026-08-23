@@ -20,6 +20,46 @@
                 window.location.reload();
             }
         });
+
+        window.toggleSuperAdminSidebar = function() {
+            const isMobile = window.innerWidth < 1024;
+            const sidebar = document.getElementById('super-admin-sidebar');
+            const mainShell = document.getElementById('super-admin-main-shell');
+            const overlay = document.getElementById('mobile-super-admin-overlay');
+            
+            if (isMobile) {
+                if (!sidebar) return;
+                const isOpen = sidebar.classList.toggle('is-open');
+                if (overlay) {
+                    overlay.style.display = isOpen ? 'block' : 'none';
+                }
+            } else {
+                if (!sidebar || !mainShell) return;
+                const isCollapsed = sidebar.classList.toggle('is-collapsed');
+                mainShell.classList.toggle('is-collapsed', isCollapsed);
+                try {
+                    localStorage.setItem('devfolio_superadmin_sidebar_collapsed', isCollapsed ? '1' : '0');
+                } catch (e) {}
+            }
+        };
+
+        window.closeMobileSuperAdminSidebar = function() {
+            const sidebar = document.getElementById('super-admin-sidebar');
+            const overlay = document.getElementById('mobile-super-admin-overlay');
+            if (sidebar) sidebar.classList.remove('is-open');
+            if (overlay) overlay.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                if (window.innerWidth >= 1024 && localStorage.getItem('devfolio_superadmin_sidebar_collapsed') === '1') {
+                    const sidebar = document.getElementById('super-admin-sidebar');
+                    const mainShell = document.getElementById('super-admin-main-shell');
+                    if (sidebar) sidebar.classList.add('is-collapsed');
+                    if (mainShell) mainShell.classList.add('is-collapsed');
+                }
+            } catch (e) {}
+        });
     </script>
 
     @php
