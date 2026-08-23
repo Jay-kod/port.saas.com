@@ -171,15 +171,77 @@
             color: var(--panel-badge-text);
             border: 1px solid var(--panel-badge-border);
         }
-        .active-nav-pill {
-            background-color: var(--panel-accent-subtle) !important;
-            color: var(--panel-badge-text) !important;
-            border: 1px solid var(--panel-badge-border) !important;
-            box-shadow: 0 2px 8px -2px var(--panel-accent-glow) !important;
+        /* Tactical Squircle Tile Navigation System (Linear/Raycast Design) */
+        .nav-tile-link {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.375rem 0.5rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
-        .active-nav-pill svg {
-            color: var(--panel-badge-text) !important;
+        .nav-tile-link:hover {
+            background-color: rgba(255, 255, 255, 0.05);
         }
+        .nav-tile-link.is-active {
+            background-color: rgba(255, 255, 255, 0.09) !important;
+        }
+        
+        .nav-tile-icon {
+            width: 2.375rem; /* 38px */
+            height: 2.375rem;
+            border-radius: 0.75rem; /* 12px squircle */
+            background-color: #1a1c20;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            flex-shrink: 0;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 2px 4px rgba(0, 0, 0, 0.4);
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-tile-link:hover .nav-tile-icon {
+            background-color: #25282e;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+        .nav-tile-link.is-active .nav-tile-icon {
+            background-color: #2d3138 !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+        }
+        
+        .nav-tile-text {
+            font-size: 0.84rem; /* 13.5px */
+            font-weight: 500;
+            color: #cbd5e1;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+            transition: color 0.15s ease;
+        }
+        .nav-tile-link:hover .nav-tile-text {
+            color: #ffffff;
+        }
+        .nav-tile-link.is-active .nav-tile-text {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        
+        .nav-section-title {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #64748b;
+            padding: 0 0.5rem 0.25rem 0.5rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
@@ -232,10 +294,13 @@
             .dashboard-main-shell.is-collapsed {
                 padding-left: 5.25rem !important;
             }
-            .dashboard-sidebar.is-collapsed .sidebar-label {
+            .dashboard-sidebar.is-collapsed .sidebar-label,
+            .dashboard-sidebar.is-collapsed .nav-tile-text,
+            .dashboard-sidebar.is-collapsed .nav-section-title {
                 display: none !important;
             }
-            .dashboard-sidebar.is-collapsed .sidebar-link {
+            .dashboard-sidebar.is-collapsed .sidebar-link,
+            .dashboard-sidebar.is-collapsed .nav-tile-link {
                 justify-content: center !important;
                 padding-left: 0 !important;
                 padding-right: 0 !important;
