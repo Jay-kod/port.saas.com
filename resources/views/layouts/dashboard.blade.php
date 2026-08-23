@@ -137,20 +137,25 @@
         .active-nav-pill svg {
             color: var(--panel-badge-text) !important;
         }
-        /* Custom scrollbar for sidebar */
-        aside nav::-webkit-scrollbar {
-            width: 4px;
+        /* SVG constraints */
+        svg {
+            max-width: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
         }
-        aside nav::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        aside nav::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-        aside nav::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .w-3\.5 { width: 0.875rem; }
+        .h-3\.5 { height: 0.875rem; }
+        .w-4 { width: 1rem; }
+        .h-4 { height: 1rem; }
+        .w-5 { width: 1.25rem; }
+        .h-5 { height: 1.25rem; }
+        .w-6 { width: 1.5rem; }
+        .h-6 { height: 1.5rem; }
+        .w-8 { width: 2rem; }
+        .h-8 { height: 2rem; }
+        .w-10 { width: 2.5rem; }
+        .h-10 { height: 2.5rem; }
     </style>
 </head>
 <body class="bg-slate-950 {{ $selectionBg }}" x-data="{ sidebarOpen: false, sidebarCollapsed: false, showLogoutModal: false }">
