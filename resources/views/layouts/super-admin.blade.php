@@ -187,6 +187,22 @@
             }
         }
 
+        /* Collapsed Sidebar Rules */
+        .super-admin-sidebar.is-collapsed .sidebar-label {
+            display: none !important;
+        }
+        .super-admin-sidebar.is-collapsed .sidebar-link {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            gap: 0 !important;
+        }
+        .super-admin-sidebar.is-collapsed .sidebar-header-box {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            justify-content: center !important;
+        }
+
         /* SVG constraints */
         svg {
             max-width: 100%;
@@ -211,7 +227,9 @@
 <body class="bg-black text-slate-100 selection:bg-amber-500 selection:text-black font-sans" x-data="{ sidebarOpen: false, sidebarCollapsed: false, showLogoutModal: false }">
 
     <!-- Mobile Sidebar Overlay -->
-    <div x-show="sidebarOpen" 
+    <div id="mobile-super-admin-overlay"
+         onclick="window.closeMobileSuperAdminSidebar()"
+         x-show="sidebarOpen" 
          x-transition:enter="transition-opacity ease-linear duration-300"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"
@@ -222,11 +240,12 @@
          @click="sidebarOpen = false" style="display: none;"></div>
 
     <!-- Sidebar (Super Admin Master Control) -->
-    <aside :class="{ 'is-open': sidebarOpen, 'is-collapsed': sidebarCollapsed }" 
+    <aside id="super-admin-sidebar"
+           :class="{ 'is-open': sidebarOpen, 'is-collapsed': sidebarCollapsed }" 
            class="super-admin-sidebar glass-card-dark border-r border-amber-950/70 bg-black flex flex-col h-screen overflow-hidden">
         
         <!-- Sidebar Header (Amber Shield) -->
-        <div class="h-20 flex flex-col justify-center border-b border-amber-950/70 transition-all duration-300" :class="sidebarCollapsed ? 'items-center px-0' : 'px-5'">
+        <div class="sidebar-header-box h-20 flex flex-col justify-center border-b border-amber-950/70 transition-all duration-300" :class="sidebarCollapsed ? 'items-center px-0' : 'px-5'">
             <div class="flex items-center gap-3">
                 <a href="{{ route('super-admin.dashboard') }}" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 shrink-0 rounded-xl bg-gradient-to-tr from-amber-600 via-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-900/40 border border-amber-400/40 group-hover:scale-105 transition-transform">
@@ -234,7 +253,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </div>
-                    <div x-show="!sidebarCollapsed" class="flex flex-col">
+                    <div x-show="!sidebarCollapsed" class="sidebar-label flex flex-col">
                         <span class="text-lg font-black font-heading tracking-tight bg-gradient-to-r from-amber-400 via-amber-200 to-orange-400 bg-clip-text text-transparent uppercase font-mono">
                             MASTER
                         </span>
@@ -243,7 +262,7 @@
                         </span>
                     </div>
                 </a>
-                <button @click="sidebarOpen = false" class="ml-auto lg:hidden text-amber-400 hover:text-white shrink-0">
+                <button type="button" onclick="window.closeMobileSuperAdminSidebar()" @click="sidebarOpen = false" class="ml-auto lg:hidden text-amber-400 hover:text-white shrink-0">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
