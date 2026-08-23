@@ -171,74 +171,69 @@
             color: var(--panel-badge-text);
             border: 1px solid var(--panel-badge-border);
         }
-        /* Tactical Squircle Tile Navigation System (Linear/Raycast Design) */
-        .nav-tile-link {
+        /* Ultra-Clean Modern Sidebar Navigation (Vercel / Linear Minimal Style) */
+        .sidebar-nav-item {
             display: flex;
             align-items: center;
             gap: 0.875rem;
-            padding: 0.375rem 0.5rem;
-            border-radius: 1rem;
+            padding: 0.625rem 0.875rem;
+            border-radius: 0.625rem;
             text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            background-color: transparent;
+            border: 1px solid transparent;
             transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
-        .nav-tile-link:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        .nav-tile-link.is-active {
-            background-color: rgba(255, 255, 255, 0.09) !important;
-        }
-        
-        .nav-tile-icon {
-            width: 2.375rem; /* 38px */
-            height: 2.375rem;
-            border-radius: 0.75rem; /* 12px squircle */
-            background-color: #1a1c20;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
+        .sidebar-nav-item .sidebar-nav-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #8b949e;
             flex-shrink: 0;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 2px 4px rgba(0, 0, 0, 0.4);
-            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: color 0.15s ease, transform 0.15s ease;
         }
-        .nav-tile-link:hover .nav-tile-icon {
-            background-color: #25282e;
-            color: #ffffff;
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: scale(1.02);
-        }
-        .nav-tile-link.is-active .nav-tile-icon {
-            background-color: #2d3138 !important;
-            border-color: rgba(255, 255, 255, 0.25) !important;
-            color: #ffffff !important;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 2px 6px rgba(0, 0, 0, 0.6) !important;
-        }
-        
-        .nav-tile-text {
-            font-size: 0.84rem; /* 13.5px */
-            font-weight: 500;
-            color: #cbd5e1;
+        .sidebar-nav-item .sidebar-nav-label {
             white-space: nowrap;
-            letter-spacing: -0.01em;
             transition: color 0.15s ease;
         }
-        .nav-tile-link:hover .nav-tile-text {
+        
+        /* Hover State */
+        .sidebar-nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
             color: #ffffff;
         }
-        .nav-tile-link.is-active .nav-tile-text {
+        .sidebar-nav-item:hover .sidebar-nav-icon {
+            color: #ffffff;
+        }
+        .sidebar-nav-item:hover .sidebar-nav-label {
+            color: #ffffff;
+        }
+        
+        /* Active State (As in reference screenshot) */
+        .sidebar-nav-item.is-active {
+            background-color: #24272d !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35) !important;
             color: #ffffff !important;
             font-weight: 600 !important;
         }
+        .sidebar-nav-item.is-active .sidebar-nav-icon {
+            color: #ffffff !important;
+        }
+        .sidebar-nav-item.is-active .sidebar-nav-label {
+            color: #ffffff !important;
+        }
         
-        .nav-section-title {
+        .sidebar-nav-section-title {
             font-size: 0.6875rem;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             color: #64748b;
-            padding: 0 0.5rem 0.25rem 0.5rem;
+            padding: 0 0.875rem 0.375rem 0.875rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
@@ -295,16 +290,20 @@
                 padding-left: 5.25rem !important;
             }
             .dashboard-sidebar.is-collapsed .sidebar-label,
-            .dashboard-sidebar.is-collapsed .nav-tile-text,
-            .dashboard-sidebar.is-collapsed .nav-section-title {
+            .dashboard-sidebar.is-collapsed .sidebar-nav-label,
+            .dashboard-sidebar.is-collapsed .sidebar-nav-section-title {
                 display: none !important;
             }
             .dashboard-sidebar.is-collapsed .sidebar-link,
-            .dashboard-sidebar.is-collapsed .nav-tile-link {
+            .dashboard-sidebar.is-collapsed .sidebar-nav-item {
                 justify-content: center !important;
                 padding-left: 0 !important;
                 padding-right: 0 !important;
                 gap: 0 !important;
+                width: 2.75rem !important;
+                height: 2.75rem !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
             }
             .dashboard-sidebar.is-collapsed .sidebar-header-box {
                 padding-left: 0 !important;
