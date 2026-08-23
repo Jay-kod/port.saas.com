@@ -117,15 +117,78 @@
             transform: translateY(-2px);
             box-shadow: 0 14px 28px -10px var(--panel-accent-glow);
         }
-        .active-nav-pill-amber {
-            background-color: var(--panel-accent-subtle) !important;
-            color: var(--panel-badge-text) !important;
-            border: 1px solid var(--panel-badge-border) !important;
-            box-shadow: 0 4px 12px -2px var(--panel-accent-glow) !important;
+        /* Tactical Squircle Tile Navigation System (Linear/Raycast Design) */
+        .nav-tile-link {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 0.375rem 0.5rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
-        .active-nav-pill-amber svg {
-            color: var(--panel-badge-text) !important;
+        .nav-tile-link:hover {
+            background-color: rgba(245, 158, 11, 0.08);
         }
+        .nav-tile-link.is-active {
+            background-color: rgba(245, 158, 11, 0.14) !important;
+            border: 1px solid rgba(245, 158, 11, 0.3) !important;
+        }
+        
+        .nav-tile-icon {
+            width: 2.375rem; /* 38px */
+            height: 2.375rem;
+            border-radius: 0.75rem; /* 12px squircle */
+            background-color: #1a1510;
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d97706;
+            flex-shrink: 0;
+            box-shadow: inset 0 1px 1px rgba(245, 158, 11, 0.1), 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-tile-link:hover .nav-tile-icon {
+            background-color: #2b1f14;
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.3);
+            transform: scale(1.02);
+        }
+        .nav-tile-link.is-active .nav-tile-icon {
+            background-color: #3b2816 !important;
+            border-color: rgba(245, 158, 11, 0.5) !important;
+            color: #fef3c7 !important;
+            box-shadow: inset 0 1px 1px rgba(245, 158, 11, 0.3), 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+        }
+        
+        .nav-tile-text {
+            font-size: 0.84rem; /* 13.5px */
+            font-weight: 500;
+            color: #e2e8f0;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+            transition: color 0.15s ease;
+        }
+        .nav-tile-link:hover .nav-tile-text {
+            color: #ffffff;
+        }
+        .nav-tile-link.is-active .nav-tile-text {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        
+        .nav-section-title {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #b45309;
+            padding: 0 0.5rem 0.25rem 0.5rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 5px;
@@ -178,10 +241,13 @@
             .super-admin-main-shell.is-collapsed {
                 padding-left: 5.25rem !important;
             }
-            .super-admin-sidebar.is-collapsed .sidebar-label {
+            .super-admin-sidebar.is-collapsed .sidebar-label,
+            .super-admin-sidebar.is-collapsed .nav-tile-text,
+            .super-admin-sidebar.is-collapsed .nav-section-title {
                 display: none !important;
             }
-            .super-admin-sidebar.is-collapsed .sidebar-link {
+            .super-admin-sidebar.is-collapsed .sidebar-link,
+            .super-admin-sidebar.is-collapsed .nav-tile-link {
                 justify-content: center !important;
                 padding-left: 0 !important;
                 padding-right: 0 !important;
