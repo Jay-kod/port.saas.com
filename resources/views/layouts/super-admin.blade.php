@@ -164,19 +164,19 @@
         /* Desktop Mode (>= 1024px) */
         @media (min-width: 1024px) {
             .super-admin-sidebar {
-                width: 16rem;
+                width: 16.5rem;
                 transform: translateX(0) !important;
             }
             .super-admin-main-shell {
-                padding-left: 16rem !important;
+                padding-left: 16.5rem !important;
             }
 
             /* Collapsed desktop state */
             .super-admin-sidebar.is-collapsed {
-                width: 5rem !important;
+                width: 5.25rem !important;
             }
             .super-admin-main-shell.is-collapsed {
-                padding-left: 5rem !important;
+                padding-left: 5.25rem !important;
             }
             .super-admin-sidebar.is-collapsed .sidebar-label {
                 display: none !important;
