@@ -150,7 +150,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 {{ $selectionBg }}" x-data="{ sidebarOpen: false, sidebarCollapsed: false }">
+<body class="bg-slate-950 {{ $selectionBg }}" x-data="{ sidebarOpen: false, sidebarCollapsed: false, showLogoutModal: false }">
 
     <!-- Mobile Sidebar Overlay -->
     <div x-show="sidebarOpen" 

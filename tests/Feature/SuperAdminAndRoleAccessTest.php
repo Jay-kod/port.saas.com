@@ -52,7 +52,7 @@ class SuperAdminAndRoleAccessTest extends TestCase
         $response = $this->get('/super-admin');
 
         $response->assertStatus(302);
-        $response->assertRedirect('/admin/login');
+        $response->assertRedirect(route('super-admin.login'));
     }
 
     public function test_single_user_can_access_multiple_dashboards_concurrently(): void
@@ -74,9 +74,9 @@ class SuperAdminAndRoleAccessTest extends TestCase
         ]);
 
         // Request 1: User Dashboard
-        $dashboardResponse = $this->actingAs($superAdmin)->get('/dashboard');
+        $dashboardResponse = $this->actingAs($superAdmin)->get('/developer/dashboard');
         $dashboardResponse->assertStatus(200);
-        $dashboardResponse->assertSee('AI Portfolio Engine Active');
+        $dashboardResponse->assertSee('TIER 1 / BUILDER ACCESS');
 
         // Request 2: Agency Hub
         $agencyResponse = $this->actingAs($superAdmin)->get('/agency');

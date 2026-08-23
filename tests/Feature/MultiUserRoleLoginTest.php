@@ -2,14 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Filament\Pages\Auth\Login;
 use App\Models\Account;
 use App\Models\Profile;
 use App\Models\User;
 use Database\Seeders\ThemeSeeder;
-use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
+use Livewire\Volt\Volt;
 use Tests\TestCase;
 
 class MultiUserRoleLoginTest extends TestCase
@@ -19,13 +17,7 @@ class MultiUserRoleLoginTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         $this->seed(ThemeSeeder::class);
-        Filament::setCurrentPanel(Filament::getPanel('admin'));
-
-        $router = app('router');
-        require base_path('routes/web.php');
-        $router->getRoutes()->refreshNameLookups();
     }
 
     public function test_developer_login_redirects_to_user_dashboard(): void
@@ -47,13 +39,11 @@ class MultiUserRoleLoginTest extends TestCase
             'is_published' => true,
         ]);
 
-        Livewire::test(Login::class)
-            ->fillForm([
-                'email' => 'developer@example.com',
-                'password' => 'password',
-            ])
-            ->call('authenticate')
-            ->assertHasNoFormErrors()
+        Volt::test('auth.developer-login')
+            ->set('email', 'developer@example.com')
+            ->set('password', 'password')
+            ->call('login')
+            ->assertHasNoErrors()
             ->assertRedirect(route('dashboard'));
 
         $this->assertAuthenticatedAs($developer);
@@ -78,13 +68,11 @@ class MultiUserRoleLoginTest extends TestCase
             'is_published' => true,
         ]);
 
-        Livewire::test(Login::class)
-            ->fillForm([
-                'email' => 'agency@example.com',
-                'password' => 'password',
-            ])
-            ->call('authenticate')
-            ->assertHasNoFormErrors()
+        Volt::test('auth.agency-login')
+            ->set('email', 'agency@example.com')
+            ->set('password', 'password')
+            ->call('login')
+            ->assertHasNoErrors()
             ->assertRedirect(route('agency'));
 
         $this->assertAuthenticatedAs($agency);
@@ -97,54 +85,20 @@ class MultiUserRoleLoginTest extends TestCase
             'password' => bcrypt('password'),
             'is_super_admin' => true,
         ]);
-        $account = Account::factory()->create([
-            'owner_user_id' => $admin->id,
-            'plan_slug' => 'agency',
-        ]);
-        Profile::create([
-            'account_id' => $account->id,
-            'user_id' => $admin->id,
-            'slug' => 'super-admin-user',
-            'full_name' => 'Super Admin User',
-            'is_published' => true,
-        ]);
 
-        Livewire::test(Login::class)
-            ->fillForm([
-                'email' => 'admin@example.com',
-                'password' => 'password',
-            ])
-            ->call('authenticate')
-            ->assertHasNoFormErrors()
+        Volt::test('auth.super-admin-login')
+            ->set('email', 'admin@example.com')
+            ->set('password', 'password')
+            ->call('login')
+            ->assertHasNoErrors()
             ->assertRedirect(route('super-admin.dashboard'));
 
         $this->assertAuthenticatedAs($admin);
     }
 
-    public function test_role_selector_updates_form_state_accurately(): void
+    public function test_admin_login_route_redirects_to_super_admin_login(): void
     {
-        $component = Livewire::test(Login::class);
-
-        // Default on mount should be developer
-        $component->assertFormSet([
-            'email' => 'developer@example.com',
-            'password' => 'password',
-        ]);
-
-        // Switch to admin / agency
-        $component->call('selectRole', 'admin', 'agency@example.com')
-            ->assertSet('selectedRole', 'admin')
-            ->assertFormSet([
-                'email' => 'agency@example.com',
-                'password' => 'password',
-            ]);
-
-        // Switch to super admin
-        $component->call('selectRole', 'super_admin', 'admin@example.com')
-            ->assertSet('selectedRole', 'super_admin')
-            ->assertFormSet([
-                'email' => 'admin@example.com',
-                'password' => 'password',
-            ]);
+        $response = $this->get('/admin/login');
+        $response->assertRedirect(route('super-admin.login'));
     }
 }

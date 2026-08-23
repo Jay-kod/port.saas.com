@@ -1,236 +1,277 @@
 <?php
 
 use function Livewire\Volt\{state, layout, title};
-use App\Models\Project;
+use App\Models\Certificate;
+use App\Models\CoverLetterGeneration;
 use App\Models\Experience;
-use App\Models\Skill;
+use App\Models\JobApplication;
+use App\Models\Project;
 use App\Models\ResumeGeneration;
+use App\Models\Skill;
+use Illuminate\Support\Facades\Auth;
 
 layout('layouts.dashboard');
 title('User Dashboard');
 
 state([
-    'user' => fn () => auth()->user(),
-    'profile' => fn () => auth()->user()?->profile,
-    'account' => fn () => auth()->user()?->defaultTenant ?? auth()->user()?->accounts->first(),
+    'activeTab' => 'telemetry',
+    'user' => fn () => Auth::user(),
+    'profile' => fn () => Auth::user()?->profile,
+    'account' => fn () => Auth::user()?->defaultTenant ?? Auth::user()?->accounts->first(),
     'totalProjects' => function () {
-        $p = auth()->user()?->profile;
+        $p = Auth::user()?->profile;
         return $p ? Project::where('profile_id', $p->id)->count() : 0;
     },
     'totalExperiences' => function () {
-        $p = auth()->user()?->profile;
+        $p = Auth::user()?->profile;
         return $p ? Experience::where('profile_id', $p->id)->count() : 0;
     },
     'totalSkills' => function () {
-        $p = auth()->user()?->profile;
+        $p = Auth::user()?->profile;
         return $p ? Skill::where('profile_id', $p->id)->count() : 0;
     },
     'totalResumes' => function () {
-        $p = auth()->user()?->profile;
+        $p = Auth::user()?->profile;
         return $p ? ResumeGeneration::where('profile_id', $p->id)->count() : 0;
+    },
+    'totalCertificates' => function () {
+        $p = Auth::user()?->profile;
+        return $p ? Certificate::where('profile_id', $p->id)->count() : 0;
+    },
+    'totalCoverLetters' => function () {
+        $p = Auth::user()?->profile;
+        return $p ? CoverLetterGeneration::where('profile_id', $p->id)->count() : 0;
+    },
+    'totalApplications' => function () {
+        $p = Auth::user()?->profile;
+        return $p ? JobApplication::where('profile_id', $p->id)->count() : 0;
     },
 ]);
 
 ?>
 
-<div class="space-y-8">
-    <!-- Header Banner (Clima Style) -->
+@php
+    $profileData = $this->profile;
+    $accountData = $this->account;
+@endphp
+
+<div class="space-y-8" x-data="{ activeTab: @entangle('activeTab') }">
+
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <div class="flex items-center gap-2 mb-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    AI Portfolio Engine Active
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-black bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50">
+                    DEVELOPER MASTER WORKSPACE
                 </span>
-                @if($profile && $profile->is_published)
-                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-300 border border-yellow-500/20">
-                    Publicly Discoverable
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-mono">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    TIER 1 / BUILDER ACCESS
                 </span>
-                @else
-                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-slate-400 border border-slate-700">
-                    Draft Mode
-                </span>
-                @endif
             </div>
             <h1 class="text-3xl sm:text-4xl font-extrabold font-heading text-white tracking-tight">
-                Hello, {{ $user->name }}
+                Portfolio Engineering Console
             </h1>
             <p class="text-sm text-slate-400 mt-1">
-                @if($profile)
-                    Your personal portfolio is configured as <span class="text-emerald-400 font-semibold">{{ $profile->headline ?: 'Professional Developer' }}</span>.
-                @else
-                    Get started by customizing your portfolio headline and experiences.
-                @endif
+                Developer operations shell for portfolio growth, AI job assets, and application tracking.
             </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-            @if($profile && $profile->slug)
-            <a href="{{ url('/' . $profile->slug) }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
-                <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                <span>View Portfolio</span>
-            </a>
+            @if($profileData && $profileData->slug)
+                <a href="{{ url('/' . $profileData->slug) }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>Live Portfolio</span>
+                    <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
             @endif
-            <a href="/admin/{{ $account?->id ?? 1 }}/profiles" class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/20 text-xs font-semibold transition-all flex items-center gap-2">
-                <svg class="w-4 h-4 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-                <span>Edit Content Studio</span>
+            <a href="/admin/{{ $accountData?->id ?? 1 }}/projects" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Projects Studio</span>
+                <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
         </div>
     </div>
 
-    <!-- Metric Status Cards (Clima Style) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <!-- Card 1: Active Plan -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                <span>Active Plan</span>
-                <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold uppercase text-[10px]">
-                    {{ $account?->plan_slug ? ucfirst($account->plan_slug) : 'Free Tier' }}
-                </span>
-            </div>
-            <div class="text-2xl font-bold font-heading text-white mb-1">
-                {{ $account?->plan_slug === 'agency' ? 'Agency Suite' : ($account?->plan_slug === 'pro' ? 'Pro Developer' : 'Free Standard') }}
-            </div>
-            <p class="text-xs text-slate-400">Unlimited themes & instant GitHub sync.</p>
-        </div>
-
-        <!-- Card 2: Total Projects -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                <span>Showcased Work</span>
-                <span class="px-2 py-0.5 rounded-md bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 font-bold text-[10px]">
-                    {{ $totalProjects }} Projects
-                </span>
-            </div>
-            <div class="text-2xl font-bold font-heading text-white mb-1">
-                {{ $totalProjects }} Listed
-            </div>
-            <p class="text-xs text-slate-400">{{ $totalSkills }} verified technical skills tagged.</p>
-        </div>
-
-        <!-- Card 3: Experience & Career -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                <span>Career History</span>
-                <span class="px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-bold text-[10px]">
-                    Verified
-                </span>
-            </div>
-            <div class="text-2xl font-bold font-heading text-white mb-1">
-                {{ $totalExperiences }} Positions
-            </div>
-            <p class="text-xs text-slate-400">Timeline milestones & achievements.</p>
-        </div>
-
-        <!-- Card 4: AI Resume Pipeline -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                <span>AI Generations</span>
-                <span class="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold text-[10px]">
-                    Ready
-                </span>
-            </div>
-            <div class="text-2xl font-bold font-heading text-white mb-1">
-                {{ $totalResumes }} Resumes
-            </div>
-            <p class="text-xs text-slate-400">Tailored PDFs exported with zero watermarks.</p>
+    <div class="p-4 rounded-2xl bg-black border border-emerald-950 text-emerald-300 text-xs flex items-center justify-between font-mono">
+        <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span><strong>DEVELOPER PROTOCOL ACTIVE:</strong> You can manage portfolio assets, generate AI career documents, and monitor application progress from one console.</span>
         </div>
     </div>
 
-    <!-- Quick Action Hubs -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Main Panel: Portfolio Hub -->
-        <div class="lg:col-span-2 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-            <div class="flex items-center justify-between">
-                <div class="space-y-1">
-                    <h3 class="text-xl font-bold font-heading text-white">Portfolio Command Center</h3>
-                    <p class="text-xs text-slate-400">Manage your publicly displayed projects, experiences, and theme.</p>
-                </div>
-                <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                </span>
+    <div class="flex flex-wrap items-center gap-2 border-b border-emerald-950/70 pb-3 font-mono text-xs">
+        <button @click="activeTab = 'telemetry'" :class="activeTab === 'telemetry' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+            <span>1. Telemetry & Health</span>
+        </button>
+
+        <button @click="activeTab = 'studio'" :class="activeTab === 'studio' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+            <span>2. Portfolio Studio</span>
+        </button>
+
+        <button @click="activeTab = 'career'" :class="activeTab === 'career' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+            <span>3. AI Career Suite</span>
+        </button>
+
+        <button @click="activeTab = 'ops'" :class="activeTab === 'ops' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.08a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.08a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.08a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
+            <span>4. Workspace Settings</span>
+        </button>
+
+        <button @click="activeTab = 'resources'" :class="activeTab === 'resources' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m-2-5H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V9l-6-6z" /></svg>
+            <span>5. Dev Resources</span>
+        </button>
+    </div>
+
+    <div x-show="activeTab === 'telemetry'" class="space-y-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-card glass-card-hover rounded-2xl p-5 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Active Plan</div>
+                <div class="text-3xl font-extrabold font-heading text-white">{{ $accountData?->plan_slug ? strtoupper($accountData->plan_slug) : 'FREE' }}</div>
+                <div class="text-[10px] text-slate-500 font-mono">Billing tier</div>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <a href="/admin/{{ $account?->id ?? 1 }}/projects" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all flex items-center justify-between group">
-                    <div class="space-y-1">
-                        <div class="font-bold text-sm text-white group-hover:text-emerald-400 transition-colors">Manage Projects</div>
-                        <div class="text-xs text-slate-400">Add GitHub repos and case studies</div>
-                    </div>
-                    <svg class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
-
-                <a href="/admin/{{ $account?->id ?? 1 }}/resume-generations" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all flex items-center justify-between group">
-                    <div class="space-y-1">
-                        <div class="font-bold text-sm text-white group-hover:text-yellow-400 transition-colors">AI Resume Tailor</div>
-                        <div class="text-xs text-slate-400">Generate targeted PDF resumes</div>
-                    </div>
-                    <svg class="w-5 h-5 text-slate-500 group-hover:text-yellow-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
-
-                <a href="/admin/{{ $account?->id ?? 1 }}/theme-selector" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all flex items-center justify-between group">
-                    <div class="space-y-1">
-                        <div class="font-bold text-sm text-white group-hover:text-emerald-400 transition-colors">Theme Customizer</div>
-                        <div class="text-xs text-slate-400">Switch palettes & light/dark mode</div>
-                    </div>
-                    <svg class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
-
-                <a href="/admin/{{ $account?->id ?? 1 }}/job-tracker" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-all flex items-center justify-between group">
-                    <div class="space-y-1">
-                        <div class="font-bold text-sm text-white group-hover:text-cyan-400 transition-colors">Job Application Kanban</div>
-                        <div class="text-xs text-slate-400">Track interviews and offers</div>
-                    </div>
-                    <svg class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </a>
+            <div class="glass-card glass-card-hover rounded-2xl p-5 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Projects</div>
+                <div class="text-3xl font-extrabold font-heading text-emerald-400">{{ $totalProjects }}</div>
+                <div class="text-[10px] text-slate-500 font-mono">Portfolio showcases</div>
+            </div>
+            <div class="glass-card glass-card-hover rounded-2xl p-5 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">Skills</div>
+                <div class="text-3xl font-extrabold font-heading text-cyan-300">{{ $totalSkills }}</div>
+                <div class="text-[10px] text-slate-500 font-mono">Tagged capabilities</div>
+            </div>
+            <div class="glass-card glass-card-hover rounded-2xl p-5 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wider">AI Assets</div>
+                <div class="text-3xl font-extrabold font-heading text-yellow-300">{{ $totalResumes + $totalCoverLetters }}</div>
+                <div class="text-[10px] text-slate-500 font-mono">Resumes + cover letters</div>
             </div>
         </div>
 
-        <!-- Side Panel: Account & Status Card -->
-        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 flex flex-col justify-between">
-            <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-lg font-bold font-heading text-white">Account Status</h3>
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <div class="p-6 rounded-3xl bg-black border border-emerald-950/80 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="flex h-3 w-3 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <div>
+                        <div class="text-sm font-bold text-white flex items-center gap-2 font-mono">
+                            <span>Developer Workflow State:</span>
+                            <span class="text-emerald-400 font-bold">ONLINE & SYNCED</span>
+                        </div>
+                        <div class="text-xs text-slate-400">
+                            Portfolio publishing &bull; AI generation &bull; job pipeline tracking
+                        </div>
+                    </div>
                 </div>
 
+                <div class="text-xs font-mono text-slate-400 bg-slate-950 px-3 py-1.5 rounded-xl border border-white/5">
+                    Server Clock: <span class="text-emerald-300 font-bold">{{ now()->toDateTimeString() }} UTC</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-emerald-950/50 text-xs font-mono">
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1">
+                    <div class="text-slate-500 uppercase text-[10px]">Profile Visibility</div>
+                    <div class="{{ $profileData?->is_published ? 'text-emerald-400' : 'text-yellow-300' }} font-bold">{{ $profileData?->is_published ? 'Published' : 'Draft' }}</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1">
+                    <div class="text-slate-500 uppercase text-[10px]">Certificates</div>
+                    <div class="text-white font-bold">{{ $totalCertificates }} credential records</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-white/5 space-y-1">
+                    <div class="text-slate-500 uppercase text-[10px]">Applications</div>
+                    <div class="text-emerald-400 font-bold">{{ $totalApplications }} tracked roles</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="activeTab === 'studio'" class="space-y-6">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold font-heading text-white">Portfolio Studio</h3>
+            <p class="text-xs text-slate-400">Control your public profile, showcases, and technical credibility assets.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/profiles" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Profile & Bio</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/projects" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Projects</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/experiences" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Experience</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/skills" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Skills Matrix</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/certificates" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Certificates</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/themes" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Theme Catalog</a>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="activeTab === 'career'" class="space-y-6">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+            <h3 class="text-xl font-bold font-heading text-white">AI Career Suite</h3>
+            <p class="text-xs text-slate-400">Generate tailored assets and track opportunities with your integrated workflow.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/resume-generations" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all text-sm font-semibold text-white">AI Resume Tailor</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/cover-letter-generations" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all text-sm font-semibold text-white">Cover Letters</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/job-tracker" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all text-sm font-semibold text-white">Job Tracker Kanban</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/resume-import" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all text-sm font-semibold text-white">Import Resume</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/oauth-settings" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all text-sm font-semibold text-white">OAuth Integrations</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/github-settings" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-yellow-500/40 transition-all text-sm font-semibold text-white">GitHub Sync</a>
+            </div>
+        </div>
+    </div>
+
+    <div x-show="activeTab === 'ops'" class="space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+                <h3 class="text-xl font-bold font-heading text-white">Workspace Settings</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a href="/admin/{{ $accountData?->id ?? 1 }}/theme-selector" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-all text-sm font-semibold text-white">Theme & Mode</a>
+                    <a href="/admin/{{ $accountData?->id ?? 1 }}/domain-settings" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-all text-sm font-semibold text-white">Custom Domains</a>
+                    <a href="/admin/{{ $accountData?->id ?? 1 }}/billing-settings" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-all text-sm font-semibold text-white">Billing & Usage</a>
+                    <a href="{{ route('onboarding') }}" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/40 transition-all text-sm font-semibold text-white">Setup Wizard</a>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4">
+                <h3 class="text-lg font-bold font-heading text-white">Status</h3>
                 <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
                     <div class="flex justify-between items-center text-xs">
-                        <span class="text-slate-400">Primary Tenant</span>
-                        <span class="font-semibold text-white font-mono">{{ $account?->name ?: 'Personal' }}</span>
+                        <span class="text-slate-400">Tenant</span>
+                        <span class="font-semibold text-white font-mono">{{ $accountData?->name ?: 'Personal' }}</span>
                     </div>
                     <div class="flex justify-between items-center text-xs">
-                        <span class="text-slate-400">Custom Domain</span>
-                        <span class="font-semibold text-yellow-400">
-                            {{ $profile?->customDomain?->domain ?: 'Subdomain only' }}
-                        </span>
+                        <span class="text-slate-400">Visibility</span>
+                        <span class="font-semibold {{ $profileData?->is_published ? 'text-emerald-400' : 'text-yellow-300' }}">{{ $profileData?->is_published ? 'Published' : 'Draft' }}</span>
                     </div>
                     <div class="flex justify-between items-center text-xs">
-                        <span class="text-slate-400">Monthly AI Meter</span>
-                        <span class="font-semibold text-emerald-400">Active</span>
+                        <span class="text-slate-400">Skills Tagged</span>
+                        <span class="font-semibold text-cyan-300">{{ $totalSkills }}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-slate-400">AI Resumes</span>
+                        <span class="font-semibold text-emerald-300">{{ $totalResumes }}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-slate-400">Cover Letters</span>
+                        <span class="font-semibold text-emerald-300">{{ $totalCoverLetters }}</span>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="pt-4 border-t border-white/5 space-y-2">
-                <a href="{{ route('onboarding') }}" class="w-full flex items-center justify-center py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-yellow-500 text-slate-950 font-bold text-xs shadow-md hover:opacity-95 transition-opacity">
-                    Re-run Setup Wizard
-                </a>
+    <div x-show="activeTab === 'resources'" class="space-y-6">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+            <h3 class="text-xl font-bold font-heading text-white">Developer Resources</h3>
+            <p class="text-xs text-slate-400">Operational links and controls used frequently during portfolio and job campaign cycles.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/privacy-and-data" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Privacy & Data Controls</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/portfolio-reports" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Abuse Reports</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/templates" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">Resume Templates</a>
+                <a href="/admin/{{ $accountData?->id ?? 1 }}/ai-settings" class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-all text-sm font-semibold text-white">AI Provider Settings</a>
             </div>
         </div>
     </div>

@@ -67,6 +67,17 @@ class User extends Authenticatable implements HasDefaultTenant, HasTenants
             ->withTimestamps();
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return (bool) $this->is_super_admin;
+    }
+
+    public function isAgencyUser(): bool
+    {
+        return $this->accounts()->where('plan_slug', 'agency')->exists()
+            || $this->memberAccounts()->where('accounts.plan_slug', 'agency')->exists();
+    }
+
     public function canAccessTenant(Model $tenant): bool
     {
         if (! ($tenant instanceof Account)) {

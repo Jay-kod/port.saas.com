@@ -349,6 +349,16 @@ deployment**).
 - Asset Bundling: verified Vite production bundle via `npm run build`.
 - **Transformation Status: 100% COMPLETE across all Phases (0 through 10).**
 
+**Dedicated Multi-Role Login Portals — ✅ COMPLETE.**
+- Built 3 dedicated, standalone full-screen Livewire Volt login pages matching the canonical 4-tier visual hierarchy in `01_AGENT_GUIDE.md`:
+  - **Developer / Portfolio Owner**: `/developer/login` & `/login` with Emerald Green theme (`#16A34A`), AI Resume highlights, Google/GitHub OAuth, 1-click demo autofill (`developer@example.com`), and redirect to `/developer/dashboard`.
+  - **Agency Admin / Owner**: `/agency/login` with Teal theme (`#0D9488`), multi-client studio highlights, 1-click demo autofill (`agency@example.com`), and redirect to `/agency`.
+  - **Super Admin (Platform Root)**: `/super-admin/login` & `/admin/login` with Amber Warning theme (`#D97706`), audit logging alerts, strict super-admin authorization guard (rejecting non-super-admins), 1-click demo autofill (`admin@example.com`), and redirect to `/super-admin`.
+- Smart guest redirection configured in `bootstrap/app.php` to direct unauthorized visits to the corresponding role login portal.
+- Universal logout in `routes/web.php` updated with role-aware redirection.
+- `tests/Feature/DedicatedLoginPortalsTest.php` and `tests/Feature/MultiUserRoleLoginTest.php` cover all 3 portals, authorization checks, demo autofill, and guest redirects.
+- Full test suite passes 100% (93 tests, 648 assertions).
+
 ---
 
 ## The four phase guides & design references

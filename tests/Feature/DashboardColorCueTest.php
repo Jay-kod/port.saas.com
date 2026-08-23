@@ -25,7 +25,7 @@ class DashboardColorCueTest extends TestCase
             'slug' => 'johndoe',
         ]);
 
-        $response = $this->actingAs($owner)->get('/dashboard');
+        $response = $this->actingAs($owner)->get('/developer/dashboard');
 
         $response->assertStatus(200);
         // Assert Green CSS Tokens
@@ -68,7 +68,7 @@ class DashboardColorCueTest extends TestCase
         $editor = User::factory()->create(['is_super_admin' => false]);
         $account->members()->attach($editor->id, ['role' => 'editor']);
 
-        $response = $this->actingAs($editor)->get('/dashboard');
+        $response = $this->actingAs($editor)->get('/developer/dashboard');
 
         $response->assertStatus(200);
         // Assert Slate Blue CSS Tokens

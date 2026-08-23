@@ -51,10 +51,10 @@ class AdminPanelProvider extends PanelProvider
             ->tenant(Account::class, slugAttribute: 'id')
             ->homeUrl(function (): string {
                 $user = auth()->user();
-                if ($user && ($user->is_super_admin || $user->email === 'admin@example.com')) {
+                if ($user && $user->isSuperAdmin()) {
                     return route('super-admin.dashboard');
                 }
-                if ($user && ($user->accounts()->where('plan_slug', 'agency')->exists() || $user->email === 'agency@example.com')) {
+                if ($user && $user->isAgencyUser()) {
                     return route('agency');
                 }
                 return route('dashboard');

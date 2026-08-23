@@ -139,8 +139,8 @@ use function Livewire\Volt\{state};
                 </div>
 
                 <div class="mt-8">
-                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-white text-xs font-bold transition">
-                        Start Agency Trial
+                    <a href="{{ route('agency.login') }}" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-600 text-gray-900 dark:text-white text-xs font-bold transition">
+                        Start Agency Hub
                     </a>
                 </div>
             </div>
@@ -153,10 +153,12 @@ use function Livewire\Volt\{state};
             <div>
                 &copy; {{ date('Y') }} DevFolio AI Platform. Built for developers with Laravel, Livewire Volt & Filament.
             </div>
-            <div class="flex items-center gap-6">
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5">
                 <a href="{{ route('home') }}#features" class="hover:text-gray-400">Features</a>
                 <a href="{{ route('pricing') }}" class="hover:text-gray-400">Pricing</a>
-                <a href="/admin/login" class="hover:text-gray-400">Admin Login</a>
+                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition">Developer Login</a>
+                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition">Agency Hub</a>
+                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition">Super Admin</a>
             </div>
         </div>
     </footer>

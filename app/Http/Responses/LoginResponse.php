@@ -20,16 +20,12 @@ class LoginResponse implements LoginResponseContract
         }
 
         // 1. Super Admin -> Super Admin Master Control
-        if ($user->is_super_admin || $user->email === 'admin@example.com') {
+        if ($user->isSuperAdmin()) {
             return redirect()->to(route('super-admin.dashboard'));
         }
 
         // 2. Agency Owner or Team Member -> Agency Client Hub
-        $isAgency = $user->accounts()->where('plan_slug', 'agency')->exists()
-            || $user->memberAccounts()->where('plan_slug', 'agency')->exists()
-            || $user->email === 'agency@example.com';
-
-        if ($isAgency) {
+        if ($user->isAgencyUser()) {
             return redirect()->to(route('agency'));
         }
 

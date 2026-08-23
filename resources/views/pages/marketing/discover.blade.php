@@ -180,11 +180,13 @@ $categories = computed(function () {
             <div>
                 &copy; {{ date('Y') }} DevFolio AI Platform.
             </div>
-            <div class="flex items-center gap-6">
+            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5">
                 <a href="{{ route('home') }}" class="hover:text-gray-900 dark:hover:text-gray-400">Home</a>
-                <a href="{{ route('discover') }}" class="text-amber-500 dark:text-amber-400">Discover</a>
+                <a href="{{ route('discover') }}" class="text-amber-500 dark:text-amber-400 font-semibold">Discover</a>
                 <a href="{{ route('pricing') }}" class="hover:text-gray-900 dark:hover:text-gray-400">Pricing</a>
-                <a href="/admin/login" class="hover:text-gray-900 dark:hover:text-gray-400">Admin Login</a>
+                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition">Developer Login</a>
+                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition">Agency Hub</a>
+                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition">Super Admin</a>
             </div>
         </div>
     </footer>

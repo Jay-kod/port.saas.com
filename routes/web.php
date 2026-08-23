@@ -28,13 +28,32 @@ Volt::route('/terms', 'marketing.terms')->name('terms');
 Volt::route('/privacy', 'marketing.privacy')->name('privacy');
 Volt::route('/onboarding', 'onboarding')->name('onboarding')->middleware(['auth', 'prevent.back']);
 
+// Dedicated Multi-Role Login Routes
+Volt::route('/developer/login', 'auth.developer-login')->name('developer.login');
+Route::redirect('/login', '/developer/login', 302)->name('login');
+
+Volt::route('/agency/login', 'auth.agency-login')->name('agency.login');
+Volt::route('/super-admin/login', 'auth.super-admin-login')->name('super-admin.login');
+Volt::route('/forgot-password', 'auth.forgot-password')->name('password.request');
+
 // Universal Logout Route with deliberate session invalidation & anti-cache headers
-Route::post('/logout', function (\Illuminate\Http\Request $request) {
+Route::match(['get', 'post'], '/logout', function (\Illuminate\Http\Request $request) {
+    $user = \Illuminate\Support\Facades\Auth::user();
+    $wasSuperAdmin = $user && $user->isSuperAdmin();
+    $wasAgency = $user && $user->isAgencyUser();
+
     \Illuminate\Support\Facades\Auth::guard('web')->logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
 
-    return redirect()->to('/admin/login')->withHeaders([
+    $redirectUrl = route('developer.login');
+    if ($wasSuperAdmin) {
+        $redirectUrl = route('super-admin.login');
+    } elseif ($wasAgency) {
+        $redirectUrl = route('agency.login');
+    }
+
+    return redirect()->to($redirectUrl)->withHeaders([
         'Cache-Control' => 'no-cache, no-store, must-revalidate, max-age=0',
         'Pragma' => 'no-cache',
         'Expires' => 'Sun, 02 Jan 1990 00:00:00 GMT',
@@ -43,7 +62,8 @@ Route::post('/logout', function (\Illuminate\Http\Request $request) {
 
 // Custom Dashboards (must be registered before wildcard /{slug} routes)
 Route::middleware(['auth', 'prevent.back'])->group(function () {
-    Volt::route('/dashboard', 'dashboard.index')->name('dashboard');
+    Volt::route('/developer/dashboard', 'dashboard.index')->name('dashboard');
+    Route::redirect('/dashboard', '/developer/dashboard', 302);
     Volt::route('/agency', 'agency.index')->name('agency');
 });
 

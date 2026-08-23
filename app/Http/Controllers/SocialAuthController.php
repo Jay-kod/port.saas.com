@@ -148,11 +148,11 @@ class SocialAuthController extends Controller
             return redirect('/onboarding');
         }
 
-        if ($user->is_super_admin || $user->email === 'admin@example.com') {
+        if ($user->isSuperAdmin()) {
             return redirect()->to(route('super-admin.dashboard'));
         }
 
-        if ($user->accounts()->where('plan_slug', 'agency')->exists() || $user->email === 'agency@example.com') {
+        if ($user->isAgencyUser()) {
             return redirect()->to(route('agency'));
         }
 

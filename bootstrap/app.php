@@ -17,7 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
             'super_admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
             'prevent.back' => \App\Http\Middleware\PreventBackHistory::class,
         ]);
-        $middleware->redirectTo(guests: '/admin/login');
+        $middleware->redirectTo(guests: function (Request $request) {
+            if ($request->is('super-admin*') || $request->is('admin*')) {
+                return route('super-admin.login');
+            }
+            if ($request->is('agency*')) {
+                return route('agency.login');
+            }
+            return route('developer.login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

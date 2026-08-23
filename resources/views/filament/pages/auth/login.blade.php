@@ -32,10 +32,10 @@
             }
         }
     }" 
-    class="w-full h-screen min-h-screen grid grid-cols-1 lg:grid-cols-12 m-0 p-0 rounded-none border-none overflow-hidden bg-gray-950"
+    class="w-full min-h-dvh md:min-h-screen grid grid-cols-1 md:grid-cols-12 m-0 p-0 rounded-none border-none overflow-y-auto bg-gray-950"
 >
     {{-- Left Side: Emerald Gradient Showcase & Feature Cards --}}
-    <div class="lg:col-span-6 p-8 sm:p-10 lg:p-14 flex flex-col justify-between relative overflow-hidden h-full" 
+    <div class="md:col-span-6 p-5 sm:p-8 lg:p-14 flex flex-col justify-between relative overflow-hidden min-h-[34dvh] md:min-h-dvh" 
          style="background: radial-gradient(circle at 20% 20%, #064e3b 0%, #022c22 50%, #03130d 100%);">
         
         {{-- Ambient Glowing Orb --}}
@@ -54,7 +54,7 @@
 
         {{-- Middle Hero Text --}}
         <div class="my-4 sm:my-6 relative z-10 space-y-2">
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
                 Welcome Back<br>to DevFolio
             </h1>
             <p class="text-xs sm:text-sm text-emerald-200/80 max-w-md leading-relaxed">
@@ -63,9 +63,9 @@
         </div>
 
         {{-- Bottom Step Cards (Exact 3-Card layout from design) --}}
-        <div class="grid grid-cols-3 gap-2.5 relative z-10">
+        <div class="grid grid-cols-1 min-[460px]:grid-cols-2 lg:grid-cols-3 gap-2.5 relative z-10 mt-3 sm:mt-0">
             {{-- Card 1 (Active White Card) --}}
-            <div class="p-3 rounded-2xl bg-white text-gray-950 shadow-xl flex flex-col justify-between min-h-[90px] transform transition hover:scale-[1.02]">
+            <div class="p-3 rounded-2xl bg-white text-gray-950 shadow-xl flex flex-col justify-between min-h-[84px] sm:min-h-[90px] transform transition hover:scale-[1.02]">
                 <div class="w-5 h-5 rounded-full bg-gray-950 text-white font-bold text-[10px] flex items-center justify-center">
                     🚀
                 </div>
@@ -75,7 +75,7 @@
             </div>
 
             {{-- Card 2 (Frosted Emerald Glass Card) --}}
-            <div class="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[90px] transform transition hover:scale-[1.02]">
+            <div class="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[84px] sm:min-h-[90px] transform transition hover:scale-[1.02]">
                 <div class="w-5 h-5 rounded-full bg-emerald-800/80 text-emerald-300 font-bold text-[10px] flex items-center justify-center border border-emerald-500/30">
                     🎨
                 </div>
@@ -85,7 +85,7 @@
             </div>
 
             {{-- Card 3 (Frosted Emerald Glass Card) --}}
-            <div class="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[90px] transform transition hover:scale-[1.02]">
+            <div class="p-3 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 text-emerald-100 backdrop-blur-md flex flex-col justify-between min-h-[84px] sm:min-h-[90px] transform transition hover:scale-[1.02]">
                 <div class="w-5 h-5 rounded-full bg-emerald-800/80 text-emerald-300 font-bold text-[10px] flex items-center justify-center border border-emerald-500/30">
                     📊
                 </div>
@@ -97,8 +97,8 @@
     </div>
 
     {{-- Right Side: Dark Elegant Login Form --}}
-    <div class="lg:col-span-6 p-8 sm:p-10 lg:p-14 flex flex-col justify-center bg-gray-950 border-t lg:border-t-0 lg:border-l border-gray-800/80 overflow-hidden h-full">
-        <div class="w-full max-w-md mx-auto space-y-3.5">
+    <div class="md:col-span-6 p-5 sm:p-8 lg:p-14 flex flex-col justify-center bg-gray-950 border-t md:border-t-0 md:border-l border-gray-800/80 overflow-visible">
+        <div class="w-full max-w-md lg:max-w-lg mx-auto space-y-3.5 pb-6 md:pb-0">
             {{-- Form Header --}}
             <div class="space-y-1 text-center lg:text-left">
                 <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
@@ -111,7 +111,7 @@
 
             {{-- Role Selection Tabs with Canonical 4-Tier Color Cues & Auto-Fill --}}
             <div class="space-y-2">
-                <div class="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-gray-900/90 border border-gray-800">
+                <div class="grid grid-cols-1 min-[520px]:grid-cols-3 gap-2 p-1.5 rounded-2xl bg-gray-900/90 border border-gray-800">
                     {{-- 1. Developer Tab (Green / Emerald - Portfolio Owner) --}}
                     <button
                         type="button"
@@ -157,26 +157,26 @@
 
                 {{-- Role Autofill Banners --}}
                 {{-- Developer Banner (Green / Emerald) --}}
-                <div x-show="activeRole === 'user' || $wire.selectedRole === 'user'" class="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-[11px] text-emerald-300 flex items-center justify-between">
-                    <span>Developer Demo: <code class="text-emerald-200 font-semibold">developer@example.com</code></span>
+                <div x-show="activeRole === 'user' || $wire.selectedRole === 'user'" class="p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-[11px] text-emerald-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+                    <span>Developer Demo: <code class="text-emerald-200 font-semibold break-all">developer@example.com</code></span>
                     <button type="button" wire:click="selectRole('user', 'developer@example.com')" @click="selectRole('user', 'developer@example.com')" class="underline text-emerald-400 font-bold hover:text-emerald-200 cursor-pointer">Auto-fill</button>
                 </div>
 
                 {{-- Agency Admin Banner (Teal) --}}
-                <div x-show="activeRole === 'admin' || $wire.selectedRole === 'admin'" class="p-2 rounded-xl bg-teal-950/40 border border-teal-500/30 text-[11px] text-teal-300 flex items-center justify-between">
-                    <span>Agency Admin Demo: <code class="text-teal-200 font-semibold">agency@example.com</code></span>
+                <div x-show="activeRole === 'admin' || $wire.selectedRole === 'admin'" class="p-2 rounded-xl bg-teal-950/40 border border-teal-500/30 text-[11px] text-teal-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+                    <span>Agency Admin Demo: <code class="text-teal-200 font-semibold break-all">agency@example.com</code></span>
                     <button type="button" wire:click="selectRole('admin', 'agency@example.com')" @click="selectRole('admin', 'agency@example.com')" class="underline text-teal-400 font-bold hover:text-teal-200 cursor-pointer">Auto-fill</button>
                 </div>
 
                 {{-- Super Admin Banner (Amber) --}}
-                <div x-show="activeRole === 'super_admin' || $wire.selectedRole === 'super_admin'" class="p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 text-[11px] text-amber-300 flex items-center justify-between">
-                    <span>Super Admin: <code class="text-amber-200 font-semibold">admin@example.com</code></span>
+                <div x-show="activeRole === 'super_admin' || $wire.selectedRole === 'super_admin'" class="p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 text-[11px] text-amber-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+                    <span>Super Admin: <code class="text-amber-200 font-semibold break-all">admin@example.com</code></span>
                     <button type="button" wire:click="selectRole('super_admin', 'admin@example.com')" @click="selectRole('super_admin', 'admin@example.com')" class="underline text-amber-400 font-bold hover:text-amber-200 cursor-pointer">Auto-fill</button>
                 </div>
             </div>
 
             {{-- Social Login Buttons --}}
-            <div class="grid grid-cols-2 gap-3 pt-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <a href="{{ route('social.redirect', 'google') }}" class="py-2.5 px-4 rounded-xl border border-gray-800 bg-gray-900/80 hover:bg-gray-800 hover:border-gray-700 text-gray-200 text-xs font-semibold flex items-center justify-center gap-2 transition">
                     <svg class="w-4 h-4" viewBox="0 0 24 24">
                         <path fill="#EA4335" d="M12 5c1.7 0 3 .7 3.7 1.3l2.8-2.8C16.8 1.9 14.6 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.4 2.6C6.2 6.9 8.8 5 12 5z"/>

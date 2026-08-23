@@ -28,7 +28,7 @@ class DashboardUserMenuAndLogoutTest extends TestCase
             'is_published' => true,
         ]);
 
-        $response = $this->actingAs($user)->get('/dashboard');
+        $response = $this->actingAs($user)->get('/developer/dashboard');
 
         $response->assertStatus(200);
         $this->assertTrue($response->headers->hasCacheControlDirective('no-cache'));
@@ -56,7 +56,7 @@ class DashboardUserMenuAndLogoutTest extends TestCase
             'is_published' => true,
         ]);
 
-        $response = $this->actingAs($user)->get('/dashboard');
+        $response = $this->actingAs($user)->get('/developer/dashboard');
 
         $response->assertStatus(200);
         // Initials for Alex Rivera -> AR
@@ -123,19 +123,19 @@ class DashboardUserMenuAndLogoutTest extends TestCase
 
         // 2. Perform deliberate logout
         $logoutResponse = $this->post('/logout');
-        $logoutResponse->assertRedirect('/admin/login');
+        $logoutResponse->assertRedirect(route('developer.login'));
         $this->assertGuest();
 
         // 3. Attempt to navigate back to dashboard without active session
         $backResponse = $this->get('/dashboard');
-        $backResponse->assertRedirect('/admin/login');
+        $backResponse->assertRedirect(route('developer.login'));
 
         // 4. Attempt to navigate back to agency without active session
         $agencyResponse = $this->get('/agency');
-        $agencyResponse->assertRedirect('/admin/login');
+        $agencyResponse->assertRedirect(route('agency.login'));
 
         // 5. Attempt to navigate to super-admin without active session
         $superAdminResponse = $this->get('/super-admin');
-        $superAdminResponse->assertRedirect('/admin/login');
+        $superAdminResponse->assertRedirect(route('super-admin.login'));
     }
 }
