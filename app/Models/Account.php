@@ -111,6 +111,11 @@ class Account extends Model
         return $this->hasMany(AiSetting::class);
     }
 
+    public function aiSetting()
+    {
+        return $this->hasOne(AiSetting::class)->latestOfMany();
+    }
+
     public function templates()
     {
         return $this->hasMany(Template::class);
