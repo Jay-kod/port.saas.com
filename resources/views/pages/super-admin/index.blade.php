@@ -8,9 +8,10 @@ use App\Models\ResumeGeneration;
 use App\Models\CoverLetterGeneration;
 use App\Models\PortfolioReport;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 layout('layouts.super-admin');
-title('Super Admin Master Control');
+title('SUPER ADMIN MASTER CONTROL - Global Platform Operations');
 
 state([
     'actionMessage' => '',
@@ -35,8 +36,8 @@ $recentAccounts = computed(function () {
     return Account::with('owner')->latest()->take(6)->get();
 });
 
-$recentReports = computed(function () {
-    return PortfolioReport::with('profile')->where('status', 'pending')->latest()->take(4)->get();
+$pendingReportsList = computed(function () {
+    return PortfolioReport::with('profile')->where('status', 'pending')->latest()->take(5)->get();
 });
 
 $purgeCache = function () {
@@ -50,6 +51,32 @@ $purgeCache = function () {
     }
 };
 
+$toggleSuperAdmin = function (int $userId) {
+    $this->actionMessage = '';
+
+    if (Auth::id() === $userId) {
+        $this->actionMessage = 'Security restriction: You cannot demote your own Super Admin root account';
+        $this->actionType = 'error';
+        return;
+    }
+
+    $target = User::findOrFail($userId);
+    $target->is_super_admin = ! $target->is_super_admin;
+    $target->save();
+
+    $this->actionMessage = "Successfully updated Super Admin privileges for {$target->name}";
+    $this->actionType = 'success';
+};
+
+$resolveReport = function ($reportId, $status) {
+    $report = PortfolioReport::findOrFail($reportId);
+    $report->status = $status;
+    $report->save();
+
+    $this->actionMessage = "Report #{$report->id} status updated to {$status}";
+    $this->actionType = 'success';
+};
+
 ?>
 
 <div class="space-y-8 max-w-7xl mx-auto pb-12">
@@ -59,17 +86,17 @@ $purgeCache = function () {
             <div class="flex items-center gap-2 mb-2">
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-black bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 shadow-sm shadow-amber-950">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                    ROOT ELEVATED
+                    SUPER ADMIN ROOT ELEVATED
                 </span>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-orange-500/10 text-orange-300 border border-orange-500/20">
                     TIER 0 MASTER CONTROL
                 </span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
-                Super Admin Master Control
+                SUPER ADMIN MASTER CONTROL
             </h1>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                Global platform telemetry, tenant governance, multi-schema accounts, and infrastructure operations.
+                Global Platform Operations, tenant governance, multi-schema accounts, and infrastructure telemetry.
             </p>
         </div>
 
@@ -227,6 +254,45 @@ $purgeCache = function () {
             </div>
         </a>
     </div>
+
+    <!-- Active Abuse Reports Queue Preview -->
+    @if($this->pendingReportsList->count() > 0)
+    <div class="glass-card-dark rounded-3xl overflow-hidden border border-red-500/30 shadow-xl">
+        <div class="px-6 py-5 border-b border-red-500/20 flex items-center justify-between bg-red-950/20">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-400 animate-ping"></span>
+                <h3 class="text-base font-bold font-heading text-white">Pending Moderation Investigations</h3>
+            </div>
+            <a href="{{ route('super-admin.reports') }}" class="text-xs text-red-400 hover:text-red-300 font-semibold font-mono flex items-center gap-1">
+                <span>Open Moderation Queue ({{ $this->pendingReportsCount }})</span>
+                <span>&rarr;</span>
+            </a>
+        </div>
+
+        <div class="divide-y divide-red-950/40 font-mono text-xs">
+            @foreach($this->pendingReportsList as $report)
+            <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-red-950/10 transition-colors">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-red-500/20 text-red-300">#{{ $report->id }} &bull; {{ $report->reason }}</span>
+                        <span class="font-bold text-white">{{ $report->profile?->full_name ?? 'Deleted Profile' }}</span>
+                    </div>
+                    <div class="text-[11px] text-slate-400 mt-1">{{ $report->details }}</div>
+                </div>
+
+                <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" wire:click="resolveReport({{ $report->id }}, 'resolved')" class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold hover:bg-emerald-500/30">
+                        Resolve
+                    </button>
+                    <button type="button" wire:click="resolveReport({{ $report->id }}, 'dismissed')" class="px-3 py-1 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
+                        Dismiss
+                    </button>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
 
     <!-- Recent Platform Workspaces & Portfolios Table -->
     <div class="glass-card-dark rounded-3xl overflow-hidden border border-amber-950/70 shadow-xl">
