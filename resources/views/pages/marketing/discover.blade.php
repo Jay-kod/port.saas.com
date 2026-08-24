@@ -68,7 +68,7 @@ $categories = computed(function () {
                         class="w-full pl-5 pr-12 py-3.5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 shadow-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     />
                     @if($search)
-                        <button type="button" wire:click="$set('search', '')" class="absolute right-4 top-3.5 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white text-sm">✕</button>
+                        <button type="button" wire:click="$set('search', '')" class="absolute right-4 top-3.5 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white text-sm cursor-pointer" data-tooltip="Clear search query">✕</button>
                     @endif
                 </div>
 
@@ -77,7 +77,8 @@ $categories = computed(function () {
                     <button
                         type="button"
                         wire:click="$set('selectedCategory', '')"
-                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {{ empty($selectedCategory) ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
+                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer {{ empty($selectedCategory) ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
+                        data-tooltip="Show all developer profiles"
                     >
                         All Developers
                     </button>
@@ -85,7 +86,8 @@ $categories = computed(function () {
                         <button
                             type="button"
                             wire:click="$set('selectedCategory', '{{ $cat }}')"
-                            class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition {{ $selectedCategory === $cat ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
+                            class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer {{ $selectedCategory === $cat ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
+                            data-tooltip="Filter directory by {{ $cat }}"
                         >
                             {{ $cat }}
                         </button>
@@ -149,7 +151,8 @@ $categories = computed(function () {
 
                             <a
                                 href="{{ route('tenant.home', ['slug' => $profile->slug]) }}"
-                                class="inline-flex items-center gap-1 font-bold text-amber-400 group-hover:text-amber-300 group-hover:translate-x-0.5 transition"
+                                class="inline-flex items-center gap-1 font-bold text-amber-400 group-hover:text-amber-300 group-hover:translate-x-0.5 transition cursor-pointer"
+                                data-tooltip="Open {{ $profile->full_name }}'s public portfolio"
                             >
                                 <span>View Portfolio</span>
                                 <span>&rarr;</span>
@@ -181,12 +184,12 @@ $categories = computed(function () {
                 &copy; {{ date('Y') }} DevFolio AI Platform.
             </div>
             <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5">
-                <a href="{{ route('home') }}" class="hover:text-gray-900 dark:hover:text-gray-400">Home</a>
-                <a href="{{ route('discover') }}" class="text-amber-500 dark:text-amber-400 font-semibold">Discover</a>
-                <a href="{{ route('pricing') }}" class="hover:text-gray-900 dark:hover:text-gray-400">Pricing</a>
-                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition">Developer Login</a>
-                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition">Agency Hub</a>
-                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition">Super Admin</a>
+                <a href="{{ route('home') }}" class="hover:text-gray-900 dark:hover:text-gray-400 cursor-pointer" data-tooltip="Return to DevFolio Homepage">Home</a>
+                <a href="{{ route('discover') }}" class="text-amber-500 dark:text-amber-400 font-semibold cursor-pointer" data-tooltip="Browse public developer directory">Discover</a>
+                <a href="{{ route('pricing') }}" class="hover:text-gray-900 dark:hover:text-gray-400 cursor-pointer" data-tooltip="View pricing tiers and features">Pricing</a>
+                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Developer Workspace">Developer Login</a>
+                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Agency Hub">Agency Hub</a>
+                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Super Admin Portal">Super Admin</a>
             </div>
         </div>
     </footer>
