@@ -65,7 +65,7 @@ $getThemes = function () {
             </p>
         </div>
 
-        <button wire:click="saveThemeSettings" type="button" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <button wire:click="saveThemeSettings" type="button" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Save theme design system and default mode to portfolio" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span>Apply Theme</span>
         </button>
@@ -78,7 +78,7 @@ $getThemes = function () {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -89,7 +89,7 @@ $getThemes = function () {
             <span>Default Light / Dark Mode Preference</span>
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <label class="p-4 rounded-2xl bg-slate-900/80 border transition-all cursor-pointer flex items-center gap-3 {{ $themeModeDefault === 'system' ? 'border-cyan-500 bg-cyan-950/20' : 'border-slate-800' }}">
+            <label class="p-4 rounded-2xl bg-slate-900/80 border transition-all cursor-pointer flex items-center gap-3 {{ $themeModeDefault === 'system' ? 'border-cyan-500 bg-cyan-950/20' : 'border-slate-800' }}" data-tooltip="Auto-detect visitor operating system light/dark mode">
                 <input type="radio" wire:model.live="themeModeDefault" value="system" class="text-cyan-500 focus:ring-cyan-500" />
                 <div>
                     <div class="text-xs font-bold text-white">System Preference</div>
@@ -97,7 +97,7 @@ $getThemes = function () {
                 </div>
             </label>
 
-            <label class="p-4 rounded-2xl bg-slate-900/80 border transition-all cursor-pointer flex items-center gap-3 {{ $themeModeDefault === 'dark' ? 'border-cyan-500 bg-cyan-950/20' : 'border-slate-800' }}">
+            <label class="p-4 rounded-2xl bg-slate-900/80 border transition-all cursor-pointer flex items-center gap-3 {{ $themeModeDefault === 'dark' ? 'border-cyan-500 bg-cyan-950/20' : 'border-slate-800' }}" data-tooltip="Default public portfolio to dark mode">
                 <input type="radio" wire:model.live="themeModeDefault" value="dark" class="text-cyan-500 focus:ring-cyan-500" />
                 <div>
                     <div class="text-xs font-bold text-white">Dark Mode First</div>
@@ -105,7 +105,7 @@ $getThemes = function () {
                 </div>
             </label>
 
-            <label class="p-4 rounded-2xl bg-slate-900/80 border transition-all cursor-pointer flex items-center gap-3 {{ $themeModeDefault === 'light' ? 'border-cyan-500 bg-cyan-950/20' : 'border-slate-800' }}">
+            <label class="p-4 rounded-2xl bg-slate-900/80 border transition-all cursor-pointer flex items-center gap-3 {{ $themeModeDefault === 'light' ? 'border-cyan-500 bg-cyan-950/20' : 'border-slate-800' }}" data-tooltip="Default public portfolio to light mode">
                 <input type="radio" wire:model.live="themeModeDefault" value="light" class="text-cyan-500 focus:ring-cyan-500" />
                 <div>
                     <div class="text-xs font-bold text-white">Light Mode First</div>
@@ -123,7 +123,7 @@ $getThemes = function () {
                 $darkColors = $colors['dark'] ?? $colors;
                 $isSelected = ($selectedThemeId == $theme->id);
             @endphp
-            <div wire:click="selectTheme({{ $theme->id }})" class="glass-card rounded-3xl p-5 border cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-4 {{ $isSelected ? 'border-emerald-500 ring-2 ring-emerald-500/30 bg-slate-900/90 shadow-xl shadow-emerald-950/40' : 'border-white/5 hover:border-slate-700 bg-slate-900/50' }}">
+            <div wire:click="selectTheme({{ $theme->id }})" class="glass-card rounded-3xl p-5 border cursor-pointer transition-all duration-200 flex flex-col justify-between space-y-4 {{ $isSelected ? 'border-emerald-500 ring-2 ring-emerald-500/30 bg-slate-900/90 shadow-xl shadow-emerald-950/40' : 'border-white/5 hover:border-slate-700 bg-slate-900/50' }}" data-tooltip="Activate {{ $theme->name }} design system">
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-bold font-heading text-white">{{ $theme->name }}</span>
@@ -159,4 +159,5 @@ $getThemes = function () {
             </div>
         @endforeach
     </div>
+
 </div>
