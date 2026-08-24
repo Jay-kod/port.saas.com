@@ -86,7 +86,7 @@ $toggleDiscoverable = function ($profileId) {
         </div>
 
         <div class="flex items-center gap-3">
-            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all">
+            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer" data-tooltip="Return to Super Admin Master Control Hub">
                 &larr; Telemetry Hub
             </a>
         </div>
@@ -99,7 +99,7 @@ $toggleDiscoverable = function ($profileId) {
             <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span>{{ $successMessage }}</span>
         </div>
-        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer">Dismiss</button>
+        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer" data-tooltip="Dismiss notification">Dismiss</button>
     </div>
     @endif
 
@@ -123,17 +123,20 @@ $toggleDiscoverable = function ($profileId) {
                 <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-amber-950/60">
                     <button type="button" 
                             wire:click="$set('statusFilter', 'all')"
-                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'all' ? 'bg-amber-600 text-slate-950' : 'text-slate-400 hover:text-white' }}">
+                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'all' ? 'bg-amber-600 text-slate-950' : 'text-slate-400 hover:text-white' }}"
+                            data-tooltip="View all portfolios">
                         All Status
                     </button>
                     <button type="button" 
                             wire:click="$set('statusFilter', 'published')"
-                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'published' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white' }}">
+                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'published' ? 'bg-emerald-600 text-white' : 'text-slate-400 hover:text-white' }}"
+                            data-tooltip="Filter by live published portfolios">
                         Live
                     </button>
                     <button type="button" 
                             wire:click="$set('statusFilter', 'draft')"
-                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'draft' ? 'bg-slate-800 text-slate-300' : 'text-slate-400 hover:text-white' }}">
+                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'draft' ? 'bg-slate-800 text-slate-300' : 'text-slate-400 hover:text-white' }}"
+                            data-tooltip="Filter by draft unpublished portfolios">
                         Draft
                     </button>
                 </div>
@@ -142,17 +145,20 @@ $toggleDiscoverable = function ($profileId) {
                 <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-amber-950/60">
                     <button type="button" 
                             wire:click="$set('discoverFilter', 'all')"
-                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $discoverFilter === 'all' ? 'bg-amber-600 text-slate-950' : 'text-slate-400 hover:text-white' }}">
+                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $discoverFilter === 'all' ? 'bg-amber-600 text-slate-950' : 'text-slate-400 hover:text-white' }}"
+                            data-tooltip="View all SEO statuses">
                         All SEO
                     </button>
                     <button type="button" 
                             wire:click="$set('discoverFilter', 'discoverable')"
-                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $discoverFilter === 'discoverable' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white' }}">
+                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $discoverFilter === 'discoverable' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white' }}"
+                            data-tooltip="Filter by discoverable profiles in /discover talent directory">
                         /discover Listed
                     </button>
                     <button type="button" 
                             wire:click="$set('discoverFilter', 'hidden')"
-                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $discoverFilter === 'hidden' ? 'bg-slate-800 text-slate-300' : 'text-slate-400 hover:text-white' }}">
+                            class="px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer {{ $discoverFilter === 'hidden' ? 'bg-slate-800 text-slate-300' : 'text-slate-400 hover:text-white' }}"
+                            data-tooltip="Filter by hidden from public talent directory">
                         Hidden
                     </button>
                 </div>
@@ -187,12 +193,12 @@ $toggleDiscoverable = function ($profileId) {
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-slate-300">
                             <div class="flex flex-col">
-                                <a href="{{ url('/' . $profile->slug) }}" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1">
+                                <a href="{{ url('/' . $profile->slug) }}" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1 cursor-pointer" data-tooltip="Open portfolio website in a new tab">
                                     <span>/{{ $profile->slug }}</span>
                                     <svg class="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                                 </a>
                                 @if($profile->domains->whereNotNull('verified_at')->first())
-                                <span class="text-[10px] text-emerald-400 font-mono">
+                                <span class="text-[10px] text-emerald-400 font-mono" data-tooltip="Verified custom domain">
                                     {{ $profile->domains->whereNotNull('verified_at')->first()->domain }} (Verified)
                                 </span>
                                 @endif
@@ -200,22 +206,22 @@ $toggleDiscoverable = function ($profileId) {
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($profile->is_published)
-                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40" data-tooltip="Live public site">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live
                             </span>
                             @else
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] text-slate-500 bg-slate-900 border border-slate-800">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] text-slate-500 bg-slate-900 border border-slate-800" data-tooltip="Draft mode (inaccessible to public)">
                                 Draft
                             </span>
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($profile->is_discoverable)
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40" data-tooltip="Discoverable on /discover directory">
                                 Indexed
                             </span>
                             @else
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] text-slate-500 bg-slate-900 border border-slate-800">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] text-slate-500 bg-slate-900 border border-slate-800" data-tooltip="Hidden from public talent directory">
                                 Hidden
                             </span>
                             @endif
@@ -223,12 +229,14 @@ $toggleDiscoverable = function ($profileId) {
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
                             <button type="button" 
                                     wire:click="togglePublish({{ $profile->id }})" 
-                                    class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer {{ $profile->is_published ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30' }}">
+                                    class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer {{ $profile->is_published ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30' }}"
+                                    data-tooltip="{{ $profile->is_published ? 'Unpublish portfolio (switch to draft)' : 'Publish portfolio to live web' }}">
                                 {{ $profile->is_published ? 'Unpublish' : 'Publish' }}
                             </button>
                             <button type="button" 
                                     wire:click="toggleDiscoverable({{ $profile->id }})" 
-                                    class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer {{ $profile->is_discoverable ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-500/30' }}">
+                                    class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer {{ $profile->is_discoverable ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-500/30' }}"
+                                    data-tooltip="{{ $profile->is_discoverable ? 'Hide from public /discover directory' : 'List profile on public /discover directory' }}">
                                 {{ $profile->is_discoverable ? 'Hide SEO' : 'List SEO' }}
                             </button>
                         </td>
