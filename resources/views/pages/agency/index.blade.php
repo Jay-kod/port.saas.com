@@ -118,11 +118,11 @@ $switchActiveProfile = function ($profileId) {
                     AGENCY STUDIO
                 </span>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-                    MULTI-TENANT HUB
+                    Agency Client Hub
                 </span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
-                Agency Client Hub & Command Center
+                Agency Client Command Center
             </h1>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
                 Manage multi-tenant developer portfolios, team seats, white-label branding, and client growth pipelines.
