@@ -27,12 +27,12 @@ $project = computed(fn () => Project::query()->where('slug', $this->projectSlug 
 
     <div class="mt-6 flex gap-4">
         @if ($this->project->repo_url)
-            <a href="{{ $this->project->repo_url }}" class="underline" target="_blank" rel="noopener">Repository</a>
+            <a href="{{ $this->project->repo_url }}" class="underline cursor-pointer" target="_blank" rel="noopener" data-tooltip="View source code on external repository">Repository</a>
         @endif
         @if ($this->project->live_url)
-            <a href="{{ $this->project->live_url }}" class="underline" target="_blank" rel="noopener">Live demo</a>
+            <a href="{{ $this->project->live_url }}" class="underline cursor-pointer" target="_blank" rel="noopener" data-tooltip="Open live deployment in new tab">Live demo</a>
         @endif
     </div>
 
-    <a href="{{ route('projects') }}" class="underline mt-10 inline-block">&larr; Back to projects</a>
+    <a href="{{ route('projects') }}" class="underline mt-10 inline-block cursor-pointer" data-tooltip="Return to projects showcase">&larr; Back to projects</a>
 </div>
