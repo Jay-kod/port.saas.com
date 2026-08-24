@@ -79,13 +79,13 @@ state([
 
         <div class="flex flex-wrap items-center gap-3">
             @if($profileData && $profileData->slug)
-                <a href="{{ url('/' . $profileData->slug) }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+                <a href="{{ url('/' . $profileData->slug) }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2" data-tooltip="View your public live portfolio website" data-tooltip-pos="bottom">
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     <span>Live Portfolio</span>
                     <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                 </a>
             @endif
-            <a href="{{ route('developer.projects') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+            <a href="{{ route('developer.projects') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2" data-tooltip="Manage showcased apps, GitHub repos, and live deployments" data-tooltip-pos="bottom">
                 <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <span>Projects Studio</span>
                 <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -107,35 +107,45 @@ state([
     <div class="flex flex-wrap items-center gap-2 border-b border-emerald-950/70 pb-3 font-mono text-xs">
         <button type="button" 
                 wire:click="$set('activeTab', 'telemetry')" 
-                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'telemetry' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}">
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'telemetry' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}"
+                data-tooltip="View system telemetry, health score, and quick launch triggers"
+                data-tooltip-pos="bottom">
             <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
             <span>1. Telemetry & Health</span>
         </button>
 
         <button type="button" 
                 wire:click="$set('activeTab', 'studio')" 
-                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'studio' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}">
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'studio' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}"
+                data-tooltip="Manage profile bio, projects, experience, skills, and certificates"
+                data-tooltip-pos="bottom">
             <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
             <span>2. Portfolio Studio</span>
         </button>
 
         <button type="button" 
                 wire:click="$set('activeTab', 'career')" 
-                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'career' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}">
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'career' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}"
+                data-tooltip="AI resume tailoring, cover letter generator, and Kanban job tracker"
+                data-tooltip-pos="bottom">
             <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
             <span>3. AI Career Suite</span>
         </button>
 
         <button type="button" 
                 wire:click="$set('activeTab', 'ops')" 
-                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'ops' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}">
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'ops' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}"
+                data-tooltip="BYOK AI settings, themes, custom domains, and billing"
+                data-tooltip-pos="bottom">
             <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.08a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h.08a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.08a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" /></svg>
             <span>4. Workspace Settings</span>
         </button>
 
         <button type="button" 
                 wire:click="$set('activeTab', 'resources')" 
-                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'resources' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}">
+                class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer {{ $activeTab === 'resources' ? 'bg-emerald-600 text-slate-950 shadow-md shadow-emerald-900/50 font-black' : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 font-bold' }}"
+                data-tooltip="Developer API tokens, exports, and GDPR privacy settings"
+                data-tooltip-pos="bottom">
             <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6m-2-5H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V9l-6-6z" /></svg>
             <span>5. Dev Resources</span>
         </button>
