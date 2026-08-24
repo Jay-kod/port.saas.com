@@ -54,7 +54,7 @@ use function Livewire\Volt\{state};
                 </div>
 
                 <div class="mt-8">
-                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-white text-xs font-bold transition">
+                    <a href="/admin/register" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-900 dark:text-white text-xs font-bold transition cursor-pointer" data-tooltip="Sign up for the free starter tier">
                         Get Started Free
                     </a>
                 </div>
@@ -100,7 +100,7 @@ use function Livewire\Volt\{state};
                 </div>
 
                 <div class="mt-8">
-                    <a href="/admin/register" class="w-full block text-center py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-xs font-extrabold transition shadow-lg shadow-amber-500/25">
+                    <a href="/admin/register" class="w-full block text-center py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-xs font-extrabold transition shadow-lg shadow-amber-500/25 cursor-pointer" data-tooltip="Select Pro plan for unlimited AI resume tailoring">
                         Upgrade to Pro
                     </a>
                 </div>
@@ -139,7 +139,7 @@ use function Livewire\Volt\{state};
                 </div>
 
                 <div class="mt-8">
-                    <a href="{{ route('agency.login') }}" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-600 text-gray-900 dark:text-white text-xs font-bold transition">
+                    <a href="{{ route('agency.login') }}" class="w-full block text-center py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800/80 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-600 text-gray-900 dark:text-white text-xs font-bold transition cursor-pointer" data-tooltip="Sign in to Agency Hub or configure team plan">
                         Start Agency Hub
                     </a>
                 </div>
@@ -154,11 +154,11 @@ use function Livewire\Volt\{state};
                 &copy; {{ date('Y') }} DevFolio AI Platform. Built for developers with Laravel, Livewire Volt & Filament.
             </div>
             <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5">
-                <a href="{{ route('home') }}#features" class="hover:text-gray-400">Features</a>
-                <a href="{{ route('pricing') }}" class="hover:text-gray-400">Pricing</a>
-                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition">Developer Login</a>
-                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition">Agency Hub</a>
-                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition">Super Admin</a>
+                <a href="{{ route('home') }}#features" class="hover:text-gray-400 cursor-pointer" data-tooltip="Jump to platform features">Features</a>
+                <a href="{{ route('pricing') }}" class="hover:text-gray-400 cursor-pointer" data-tooltip="View pricing tiers and features">Pricing</a>
+                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Developer Workspace">Developer Login</a>
+                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Agency Hub">Agency Hub</a>
+                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Super Admin Portal">Super Admin</a>
             </div>
         </div>
     </footer>
