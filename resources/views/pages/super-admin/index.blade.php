@@ -89,7 +89,7 @@ $resolveReport = function ($reportId, $status) {
                     SUPER ADMIN ROOT ELEVATED
                 </span>
                 <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-orange-500/10 text-orange-300 border border-orange-500/20">
-                    TIER 0 MASTER CONTROL
+                    TIER 0 / ROOT ELEVATED
                 </span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
