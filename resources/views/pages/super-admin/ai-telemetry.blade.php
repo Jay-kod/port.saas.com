@@ -202,7 +202,7 @@ $providerDistribution = computed(function () {
                 <h3 class="text-lg font-bold font-heading text-white">Top AI-Consuming Tenants</h3>
                 <p class="text-xs text-slate-400">Tenants with highest generation volume in current monthly billing cycle.</p>
             </div>
-            <a href="{{ route('super-admin.tenants') }}" class="text-xs text-amber-400 hover:text-amber-300 font-semibold font-mono flex items-center gap-1">
+            <a href="{{ route('super-admin.tenants') }}" class="text-xs text-amber-400 hover:text-amber-300 font-semibold font-mono flex items-center gap-1 cursor-pointer" data-tooltip="Open Tenant Accounts Manager">
                 <span>View All Tenants</span>
                 <span>&rarr;</span>
             </a>
