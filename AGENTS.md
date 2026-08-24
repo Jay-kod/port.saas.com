@@ -377,9 +377,21 @@ deployment**).
   15. **Billing & AI Usage Quota** (`/developer/billing`)
   16. **GDPR Data Rights & Privacy** (`/developer/privacy`)
   17. **Developer Operations & Analytics Center** (`/developer/analytics`)
-- Updated sidebar navigation (`resources/views/layouts/dashboard.blade.php`) and developer hub launcher cards (`resources/views/pages/dashboard/index.blade.php`) to seamlessly link to the new named `/developer/*` routes.
+- Updated sidebar navigation (`resources/views/layouts/dashboard.blade.php`) and developer hub launcher cards (`resources/views/pages/dashboard/index.blade.php`) to link to the new named `/developer/*` routes.
 - `tests/Feature/DeveloperDashboardPagesTest.php` provides 100% automated coverage across all 17 routes, guest redirects, Livewire CRUD actions, and telemetry analytics calculations.
-- Full test suite passes 100% (110 tests, 772 assertions).
+
+**Dedicated Agency Dashboard Workspace Pages — ✅ COMPLETE.**
+- Built 7 dedicated, standalone Livewire Volt multi-client management pages under the Teal theme (`#0D9488` / `#14B8A6` / `#2DD4BF`), rendering inside `resources/views/layouts/dashboard.blade.php`:
+  1. **Agency Overview Hub & Command Center** (`/agency` / `route('agency')`): multi-client command center, KPI ribbon (Managed Clients, Team Capacity, White-Label state, AI Usage meter), active client context banner with 1-click context switcher (`session(['active_profile_id' => ...])`), client developer profiles table with direct shortcuts, and quick modal to provision new client profiles.
+  2. **Client Portfolios Manager** (`/agency/clients` / `route('agency.clients')`): full CRUD for client developer profiles with search filter, slug validation, theme selector, 1-click publish/unpublish toggle, and active workspace context switching.
+  3. **Team & Seats Manager** (`/agency/team` / `route('agency.team')`): invite collaborators by email with role selector (*Owner*, *Editor*, *Viewer*), seat utilization progress meter (`X of 10 Seats Active`), roster table with role upgrade/downgrade dropdowns and access revocation, plus granular role capabilities matrix.
+  4. **White-Label & Agency Branding** (`/agency/branding` / `route('agency.branding')`): form for `custom_brand_name`, `custom_logo_path`, and `hide_platform_branding` toggle with real-time live preview of client portfolio footer badge.
+  5. **Client Custom Domains & DNS** (`/agency/domains` / `route('agency.domains')`): aggregated multi-client custom domain table with client filter, add custom domain modal mapping domain to specific client profile, DNS CNAME (`cname.devfolio.ai`) and Apex A record (`76.76.21.21`) configuration cards, and 1-click DNS verification action.
+  6. **Agency Billing & Multi-Client Quotas** (`/agency/billing` / `route('agency.billing')`): Agency Studio tier subscription summary ($79/mo, Unlimited clients, 10 team seats, 50 AI resumes/mo), aggregate multi-client AI resume generation usage meter with BYOK unlimited exemptions, owner-only billing permission guard and Stripe Customer Portal trigger.
+  7. **Agency Operations & Analytics Center** (`/agency/analytics` / `route('agency.analytics')`): multi-client portfolio health leaderboard ranking clients by completeness, projects count, and live status, aggregated Agency Tech Competency Radar tracking framework frequency across all client showcases, and 1-click "Open Studio" button to switch active client and jump straight to editing.
+- Updated sidebar navigation (`resources/views/layouts/dashboard.blade.php`) with dedicated **Agency Suite** section and active route indicators (`request()->routeIs('agency.*')`).
+- `tests/Feature/AgencyDashboardPagesTest.php` provides 100% automated coverage across all 7 agency routes, guest redirects, client profile provisioning, team invitations and role management, white-label branding persistence, custom domain verification, and multi-client analytics computations.
+- Full test suite passes 100% (117 tests, 818 assertions).
 
 ---
 
