@@ -532,7 +532,8 @@
                         onclick="window.toggleSuperAdminSidebar()"
                         @click="window.innerWidth < 1024 ? sidebarOpen = !sidebarOpen : sidebarCollapsed = !sidebarCollapsed" 
                         class="text-amber-400 hover:text-white focus:outline-none p-2 -ml-2 rounded-xl hover:bg-amber-950/50 transition-colors cursor-pointer"
-                        title="Toggle Sidebar"
+                        data-tooltip="Toggle super admin navigation sidebar (Ctrl+B)"
+                        data-tooltip-pos="bottom"
                         aria-label="Toggle Navigation Sidebar">
                     <svg class="w-6 h-6 shrink-0 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -546,7 +547,7 @@
                             Master Control Center
                         </h1>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 font-mono">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 font-mono" data-tooltip="Highest authorization level (Root Tier 0)" data-tooltip-pos="bottom">
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
                         ROOT / TIER 0
                     </span>
@@ -558,8 +559,10 @@
                 <div class="relative pl-2 border-l border-amber-950" x-data="{ userMenuOpen: false }">
                     <button @click="userMenuOpen = !userMenuOpen" 
                             type="button" 
-                            class="flex items-center gap-2.5 p-1 sm:px-2 rounded-xl hover:bg-amber-950/30 border border-transparent hover:border-amber-500/20 transition-all focus:outline-none group"
+                            class="flex items-center gap-2.5 p-1 sm:px-2 rounded-xl hover:bg-amber-950/30 border border-transparent hover:border-amber-500/20 transition-all focus:outline-none group cursor-pointer"
                             id="super-admin-menu-button" 
+                            data-tooltip="Super admin master user menu"
+                            data-tooltip-pos="bottom"
                             aria-expanded="false" 
                             aria-haspopup="true">
                         <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-600 to-orange-600 flex items-center justify-center text-slate-950 font-bold text-xs shadow-md shadow-amber-900/50 font-mono group-hover:scale-105 transition-transform border border-amber-400/40">
@@ -606,7 +609,9 @@
                         <div class="py-1.5 px-1.5 space-y-0.5 font-sans">
                             <!-- Profile Link -->
                             <a href="/admin/{{ $tenantId }}/profiles" 
-                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-amber-950/30 rounded-xl transition-colors group">
+                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-amber-950/30 rounded-xl transition-colors group"
+                               data-tooltip="View global profile configurations"
+                               data-tooltip-pos="left">
                                 <div class="w-7 h-7 rounded-lg bg-amber-950/30 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:bg-amber-950/60 transition-all">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -620,7 +625,9 @@
 
                             <!-- Settings Link -->
                             <a href="/admin/{{ $tenantId }}/billing-settings" 
-                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-amber-950/30 rounded-xl transition-colors group">
+                               class="flex items-center gap-3 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-amber-950/30 rounded-xl transition-colors group"
+                               data-tooltip="Platform billing, accounts & subscriptions"
+                               data-tooltip-pos="left">
                                 <div class="w-7 h-7 rounded-lg bg-amber-950/30 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:bg-amber-950/60 transition-all">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -638,7 +645,9 @@
                         <div class="py-1.5 px-1.5">
                             <button @click="userMenuOpen = false; showLogoutModal = true" 
                                     type="button" 
-                                    class="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-amber-400 hover:text-white hover:bg-red-500/10 rounded-xl transition-colors group text-left">
+                                    class="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-amber-400 hover:text-white hover:bg-red-500/10 rounded-xl transition-colors group text-left cursor-pointer"
+                                    data-tooltip="End super admin session and return to portal"
+                                    data-tooltip-pos="left">
                                 <div class="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 group-hover:bg-red-500/20 transition-all">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -718,13 +727,15 @@
                 <div class="mt-6 grid grid-cols-2 gap-3 w-full font-mono">
                     <button type="button" 
                             @click="showLogoutModal = false"
-                            class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all">
+                            class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all cursor-pointer"
+                            data-tooltip="Keep master session active and return">
                         Cancel
                     </button>
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <button type="submit" 
-                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 border border-amber-400/50 shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5">
+                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 border border-amber-400/50 shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                                data-tooltip="Confirm and terminate super admin session">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                             </svg>
