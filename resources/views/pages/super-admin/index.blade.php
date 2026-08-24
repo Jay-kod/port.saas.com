@@ -281,10 +281,10 @@ $resolveReport = function ($reportId, $status) {
                 </div>
 
                 <div class="flex items-center gap-2 shrink-0">
-                    <button type="button" wire:click="resolveReport({{ $report->id }}, 'resolved')" class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold hover:bg-emerald-500/30">
+                    <button type="button" wire:click="resolveReport({{ $report->id }}, 'resolved')" class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold hover:bg-emerald-500/30 cursor-pointer" data-tooltip="Mark report resolved and take corrective action">
                         Resolve
                     </button>
-                    <button type="button" wire:click="resolveReport({{ $report->id }}, 'dismissed')" class="px-3 py-1 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800">
+                    <button type="button" wire:click="resolveReport({{ $report->id }}, 'dismissed')" class="px-3 py-1 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800 cursor-pointer" data-tooltip="Dismiss abuse report as false positive">
                         Dismiss
                     </button>
                 </div>
