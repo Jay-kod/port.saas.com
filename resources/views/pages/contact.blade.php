@@ -93,7 +93,8 @@ $sendMessage = function () {
 
             <button
                 type="submit"
-                class="py-2.5 px-6 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md transition"
+                class="py-2.5 px-6 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md transition cursor-pointer"
+                data-tooltip="Send message to developer"
             >
                 Send Message &rarr;
             </button>
@@ -102,15 +103,15 @@ $sendMessage = function () {
 
     <div class="pt-6 border-t space-y-2 text-sm" style="border-color: var(--color-border);">
         @if ($this->profile?->email)
-            <p>Direct Email: <a href="mailto:{{ $this->profile->email }}" class="underline font-semibold" style="color: var(--color-primary);">{{ $this->profile->email }}</a></p>
+            <p>Direct Email: <a href="mailto:{{ $this->profile->email }}" class="underline font-semibold" style="color: var(--color-primary);" data-tooltip="Compose email to {{ $this->profile->email }}">{{ $this->profile->email }}</a></p>
         @endif
         @if ($this->profile?->phone)
             <p>Phone: {{ $this->profile->phone }}</p>
         @endif
         @foreach ($this->profile?->social_links ?? [] as $platform => $url)
-            <p>{{ ucfirst($platform) }}: <a href="{{ $url }}" class="underline font-semibold" target="_blank" rel="noopener" style="color: var(--color-primary);">{{ $url }}</a></p>
+            <p>{{ ucfirst($platform) }}: <a href="{{ $url }}" class="underline font-semibold" target="_blank" rel="noopener" style="color: var(--color-primary);" data-tooltip="Visit external {{ ucfirst($platform) }} profile">{{ $url }}</a></p>
         @endforeach
     </div>
 
-    <a href="{{ route('home') }}" class="underline mt-8 inline-block text-xs">&larr; Back to Portfolio</a>
+    <a href="{{ route('home') }}" class="underline mt-8 inline-block text-xs cursor-pointer" data-tooltip="Return to developer portfolio home">&larr; Back to Portfolio</a>
 </div>
