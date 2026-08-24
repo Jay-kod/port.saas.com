@@ -195,6 +195,12 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
 
 Route::middleware(['auth', 'super_admin', 'prevent.back'])->group(function () {
     Volt::route('/super-admin', 'super-admin.index')->name('super-admin.dashboard');
+    Volt::route('/super-admin/tenants', 'super-admin.tenants')->name('super-admin.tenants');
+    Volt::route('/super-admin/users', 'super-admin.users')->name('super-admin.users');
+    Volt::route('/super-admin/portfolios', 'super-admin.portfolios')->name('super-admin.portfolios');
+    Volt::route('/super-admin/reports', 'super-admin.reports')->name('super-admin.reports');
+    Volt::route('/super-admin/ai-telemetry', 'super-admin.ai-telemetry')->name('super-admin.ai-telemetry');
+    Volt::route('/super-admin/system', 'super-admin.system')->name('super-admin.system');
 });
 
 if (! config('saas.mode')) {
