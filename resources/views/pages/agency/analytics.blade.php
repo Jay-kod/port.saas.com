@@ -272,7 +272,7 @@ $switchActiveClient = function ($profileId) {
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-                                <button type="button" wire:click="switchActiveClient({{ $client['id'] }})" class="text-teal-400 hover:text-teal-300 font-semibold cursor-pointer">
+                                <button type="button" wire:click="switchActiveClient({{ $client['id'] }})" class="text-teal-400 hover:text-teal-300 font-semibold cursor-pointer" data-tooltip="Switch active workspace to this client and open studio">
                                     Open Studio &rarr;
                                 </button>
                             </td>
