@@ -88,7 +88,7 @@ $syncNow = function () {
             </p>
         </div>
 
-        <button wire:click="syncNow" wire:loading.attr="disabled" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <button wire:click="syncNow" wire:loading.attr="disabled" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Fetch and import latest public repositories from GitHub" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
             <span wire:loading.remove>Sync Now</span>
             <span wire:loading>Syncing Repositories...</span>
@@ -102,7 +102,7 @@ $syncNow = function () {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -112,7 +112,7 @@ $syncNow = function () {
                 <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -146,7 +146,7 @@ $syncNow = function () {
                 <p class="text-[11px] text-slate-500">Encrypted at rest with AES-256. Required only for private repos or 5,000 req/hr rate limits.</p>
             </div>
 
-            <label class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer">
+            <label class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer" data-tooltip="Run automated background sync nightly">
                 <input type="checkbox" wire:model="auto_sync" class="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500" />
                 <div>
                     <div class="text-xs font-semibold text-white">Enable Automated Nightly Synchronization</div>
@@ -155,10 +155,11 @@ $syncNow = function () {
             </label>
 
             <div class="flex justify-end gap-3 pt-2">
-                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Save username and access token configuration">
                     Save GitHub Settings
                 </button>
             </div>
         </form>
     </div>
 </div>
+
