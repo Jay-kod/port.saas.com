@@ -447,15 +447,83 @@
                         </svg>
                         <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Analytics & Insights</span>
                     </a>
+                </div>
+            </div>
 
-                    <!-- Agency Workspace -->
+            <!-- SECTION: AGENCY SUITE -->
+            <div class="pt-3 border-t border-teal-500/20">
+                <div class="sidebar-nav-section-title text-teal-400 font-mono" x-show="!sidebarCollapsed">
+                    Agency Suite
+                </div>
+                <div class="space-y-1">
+                    <!-- Agency Hub -->
                     <a href="{{ route('agency') }}" 
                        class="sidebar-nav-item group {{ request()->routeIs('agency') ? 'is-active' : '' }}"
-                       title="Agency Hub">
+                       title="Agency Command Center">
                         <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                         <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Agency Hub</span>
+                    </a>
+
+                    <!-- Client Portfolios -->
+                    <a href="{{ route('agency.clients') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('agency.clients') ? 'is-active' : '' }}"
+                       title="Client Portfolios">
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Client Roster</span>
+                    </a>
+
+                    <!-- Team Seats -->
+                    <a href="{{ route('agency.team') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('agency.team') ? 'is-active' : '' }}"
+                       title="Team Seats">
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Team & Seats</span>
+                    </a>
+
+                    <!-- White-Label Branding -->
+                    <a href="{{ route('agency.branding') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('agency.branding') ? 'is-active' : '' }}"
+                       title="White-Label Branding">
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">White-Label</span>
+                    </a>
+
+                    <!-- Client Domains -->
+                    <a href="{{ route('agency.domains') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('agency.domains') ? 'is-active' : '' }}"
+                       title="Client Custom Domains">
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Client Domains</span>
+                    </a>
+
+                    <!-- Agency Billing -->
+                    <a href="{{ route('agency.billing') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('agency.billing') ? 'is-active' : '' }}"
+                       title="Agency Quotas & Billing">
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Agency Billing</span>
+                    </a>
+
+                    <!-- Agency Analytics -->
+                    <a href="{{ route('agency.analytics') }}" 
+                       class="sidebar-nav-item group {{ request()->routeIs('agency.analytics') ? 'is-active' : '' }}"
+                       title="Multi-Client Analytics">
+                        <svg class="sidebar-nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="sidebar-nav-label">Agency Radar</span>
                     </a>
                 </div>
             </div>
