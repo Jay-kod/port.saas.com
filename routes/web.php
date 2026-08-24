@@ -182,6 +182,7 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
     Volt::route('/developer/billing', 'developer.billing')->name('developer.billing');
     Volt::route('/developer/privacy', 'developer.privacy')->name('developer.privacy');
     Volt::route('/developer/templates', 'developer.templates')->name('developer.templates');
+    Volt::route('/developer/analytics', 'developer.analytics')->name('developer.analytics');
 
     Volt::route('/agency', 'agency.index')->name('agency');
 });
