@@ -75,7 +75,7 @@ $toggleSuperAdmin = function (int $userId) {
         </div>
 
         <div class="flex items-center gap-3">
-            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all">
+            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer" data-tooltip="Return to Super Admin Master Control Hub">
                 &larr; Telemetry Hub
             </a>
         </div>
@@ -88,7 +88,7 @@ $toggleSuperAdmin = function (int $userId) {
             <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span>{{ $successMessage }}</span>
         </div>
-        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer">Dismiss</button>
+        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer" data-tooltip="Dismiss notification">Dismiss</button>
     </div>
     @endif
 
@@ -98,7 +98,7 @@ $toggleSuperAdmin = function (int $userId) {
             <svg class="w-4 h-4 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
             <span>{{ $errorMessage }}</span>
         </div>
-        <button wire:click="$set('errorMessage', '')" class="text-red-400 hover:text-white underline text-xs cursor-pointer">Dismiss</button>
+        <button wire:click="$set('errorMessage', '')" class="text-red-400 hover:text-white underline text-xs cursor-pointer" data-tooltip="Dismiss error notification">Dismiss</button>
     </div>
     @endif
 
@@ -120,17 +120,20 @@ $toggleSuperAdmin = function (int $userId) {
             <div class="flex items-center gap-1.5 font-mono text-xs overflow-x-auto pb-1 sm:pb-0">
                 <button type="button" 
                         wire:click="$set('roleFilter', 'all')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $roleFilter === 'all' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $roleFilter === 'all' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="View all platform users">
                     All Users
                 </button>
                 <button type="button" 
                         wire:click="$set('roleFilter', 'super_admin')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $roleFilter === 'super_admin' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $roleFilter === 'super_admin' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by Super Admin elevated users only">
                     Super Admins
                 </button>
                 <button type="button" 
                         wire:click="$set('roleFilter', 'standard')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $roleFilter === 'standard' ? 'bg-slate-800 text-white border border-slate-700' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $roleFilter === 'standard' ? 'bg-slate-800 text-white border border-slate-700' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by standard non-admin users">
                     Standard Users
                 </button>
             </div>
@@ -159,12 +162,12 @@ $toggleSuperAdmin = function (int $userId) {
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($userItem->is_super_admin)
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm shadow-amber-950">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm shadow-amber-950" data-tooltip="User has full Super Admin root privileges">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                                 SUPER ADMIN
                             </span>
                             @else
-                            <span class="px-2.5 py-0.5 rounded-full text-[10px] text-slate-500 bg-slate-900 border border-slate-800">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] text-slate-500 bg-slate-900 border border-slate-800" data-tooltip="Standard tenant user">
                                 Standard User
                             </span>
                             @endif
@@ -180,7 +183,7 @@ $toggleSuperAdmin = function (int $userId) {
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-slate-300">
                             @if($userItem->profile && $userItem->profile->slug)
-                            <a href="{{ url('/' . $userItem->profile->slug) }}" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1">
+                            <a href="{{ url('/' . $userItem->profile->slug) }}" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1 cursor-pointer" data-tooltip="Open user public portfolio in a new tab">
                                 <span>/{{ $userItem->profile->slug }}</span>
                                 <svg class="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                             </a>
@@ -191,7 +194,8 @@ $toggleSuperAdmin = function (int $userId) {
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
                             <button type="button" 
                                     wire:click="toggleSuperAdmin({{ $userItem->id }})" 
-                                    class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer {{ $userItem->is_super_admin ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30' }}">
+                                    class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer {{ $userItem->is_super_admin ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800' : 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30' }}"
+                                    data-tooltip="{{ $userItem->is_super_admin ? 'Revoke Super Admin privileges' : 'Grant Super Admin root access' }}">
                                 {{ $userItem->is_super_admin ? 'Demote from SA' : 'Promote to SA' }}
                             </button>
                         </td>
