@@ -390,8 +390,20 @@ deployment**).
   6. **Agency Billing & Multi-Client Quotas** (`/agency/billing` / `route('agency.billing')`): Agency Studio tier subscription summary ($79/mo, Unlimited clients, 10 team seats, 50 AI resumes/mo), aggregate multi-client AI resume generation usage meter with BYOK unlimited exemptions, owner-only billing permission guard and Stripe Customer Portal trigger.
   7. **Agency Operations & Analytics Center** (`/agency/analytics` / `route('agency.analytics')`): multi-client portfolio health leaderboard ranking clients by completeness, projects count, and live status, aggregated Agency Tech Competency Radar tracking framework frequency across all client showcases, and 1-click "Open Studio" button to switch active client and jump straight to editing.
 - Updated sidebar navigation (`resources/views/layouts/dashboard.blade.php`) with dedicated **Agency Suite** section and active route indicators (`request()->routeIs('agency.*')`).
-- `tests/Feature/AgencyDashboardPagesTest.php` provides 100% automated coverage across all 7 agency routes, guest redirects, client profile provisioning, team invitations and role management, white-label branding persistence, custom domain verification, and multi-client analytics computations.
-- Full test suite passes 100% (117 tests, 818 assertions).
+**Dedicated Super Admin Master Control Pages — ✅ COMPLETE.**
+- Built 7 dedicated, standalone Livewire Volt platform governance pages under the Amber Warning theme (`#D97706` / `#F59E0B` / `#FBBF24`), rendering inside `resources/views/layouts/super-admin.blade.php`:
+  1. **Master Control Command Center** (`/super-admin` / `route('super-admin.dashboard')`): platform telemetry KPI ribbon (Tenant Accounts, Registered Users, Live Portfolios, AI Generations, Estimated MRR), SaaS engine watcher heartbeat, active abuse moderation investigations queue with 1-click resolve/dismiss, recent tenant registrations table, and quick launcher cards.
+  2. **Tenant Accounts Manager** (`/super-admin/tenants` / `route('super-admin.tenants')`): search workspaces by name/owner, plan tier filters (`all`/`free`/`pro`/`agency`), plan override modal directly upgrading accounts without billing triggers, and 1-click monthly AI quota resets.
+  3. **Users & Role Privileges** (`/super-admin/users` / `route('super-admin.users')`): identity registry, user search, Super Admin root elevation/demotion toggle with self-demotion lockout security protection, and portfolio links.
+  4. **Global Portfolios Directory** (`/super-admin/portfolios` / `route('super-admin.portfolios')`): search all portfolios across every tenant, live/draft toggle, custom domain inspection, and `/discover` SEO index toggle.
+  5. **Abuse Moderation Queue** (`/super-admin/reports` / `route('super-admin.reports')`): review user incident reports, filter by reason (`spam`, `harassment`, `copyright`, `malicious_links`), report detail inspection modal, and 1-click "Suspend & Unpublish Portfolio" action.
+  6. **Platform AI & LLM Telemetry Center** (`/super-admin/ai-telemetry` / `route('super-admin.ai-telemetry')`): total requests and tailored resumes/cover letters metrics, OpenAI vs Anthropic provider distribution bars, top AI-consuming tenants table, and BYOK adoption tracker.
+  7. **System Diagnostics & Operations** (`/super-admin/system` / `route('super-admin.system')`): runtime telemetry (PHP/Laravel versions, SQLite storage size, filesystem permissions), non-sensitive environment configuration viewer, and 1-click maintenance operations (`optimize:clear`, `view:cache`).
+- Updated sidebar navigation (`resources/views/layouts/super-admin.blade.php`) with all 7 routes and active route indicators (`request()->routeIs(...)`).
+- Registered all 7 routes in `routes/web.php` under `['auth', 'super_admin', 'prevent.back']`.
+- Added `aiSetting()` relation helper in `app/Models/Account.php`.
+- `tests/Feature/SuperAdminDashboardPagesTest.php` covers guest redirects, 403 authorization guards, HTTP 200 responses across all 7 pages, plan overrides, quota resets, user promotion/demotion with self-protection, publishing toggles, report moderation with suspension, and cache purging.
+- Full test suite passes 100% (**125 tests, 870 assertions** across all 16 test suites with 0 failures).
 
 ---
 
