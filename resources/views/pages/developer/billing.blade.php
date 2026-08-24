@@ -79,7 +79,7 @@ $upgradePlan = function ($targetPlan) {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -139,7 +139,7 @@ $upgradePlan = function ($targetPlan) {
             </div>
 
             @if($planSlug !== 'free')
-                <button wire:click="upgradePlan('free')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-800">
+                <button wire:click="upgradePlan('free')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-bold border border-slate-800 cursor-pointer" data-tooltip="Switch account plan to Free tier">
                     Downgrade to Free
                 </button>
             @endif
@@ -165,7 +165,7 @@ $upgradePlan = function ($targetPlan) {
             </div>
 
             @if($planSlug !== 'pro')
-                <button wire:click="upgradePlan('pro')" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold shadow-md">
+                <button wire:click="upgradePlan('pro')" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold shadow-md cursor-pointer" data-tooltip="Upgrade to Pro for unlimited AI & custom domains">
                     Upgrade to Pro ($12/mo)
                 </button>
             @endif
@@ -190,10 +190,11 @@ $upgradePlan = function ($targetPlan) {
             </div>
 
             @if($planSlug !== 'agency')
-                <button wire:click="upgradePlan('agency')" class="w-full py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-slate-950 text-xs font-bold shadow-md">
+                <button wire:click="upgradePlan('agency')" class="w-full py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-slate-950 text-xs font-bold shadow-md cursor-pointer" data-tooltip="Upgrade to Agency for 25 client portfolios & team seats">
                     Upgrade to Agency ($49/mo)
                 </button>
             @endif
         </div>
     </div>
 </div>
+
