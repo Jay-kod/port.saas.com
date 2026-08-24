@@ -113,7 +113,7 @@ $deleteCertificate = function ($id) {
             </p>
         </div>
 
-        <button wire:click="openCreateModal" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <button wire:click="openCreateModal" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Add a verified license or certification" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
             <span>Add Certificate</span>
         </button>
@@ -126,7 +126,7 @@ $deleteCertificate = function ($id) {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -141,7 +141,7 @@ $deleteCertificate = function ($id) {
             </div>
             <h3 class="text-lg font-bold text-white font-heading">No Certificates Added Yet</h3>
             <p class="text-xs text-slate-400 max-w-md mx-auto">Add your AWS, Google Cloud, Kubernetes, or other engineering credentials to demonstrate verified domain expertise.</p>
-            <button wire:click="openCreateModal" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2 cursor-pointer">
+            <button wire:click="openCreateModal" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2 cursor-pointer" data-tooltip="Add your first verified certificate">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                 <span>Add First Certificate</span>
             </button>
@@ -156,10 +156,10 @@ $deleteCertificate = function ($id) {
                                 {{ $cert->issuer }}
                             </span>
                             <div class="flex items-center gap-1.5">
-                                <button wire:click="openEditModal({{ $cert->id }})" class="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Edit">
+                                <button wire:click="openEditModal({{ $cert->id }})" class="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer" data-tooltip="Edit certificate details">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                 </button>
-                                <button wire:click="deleteCertificate({{ $cert->id }})" wire:confirm="Are you sure you want to delete this certificate?" class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors" title="Delete">
+                                <button wire:click="deleteCertificate({{ $cert->id }})" wire:confirm="Are you sure you want to delete this certificate?" class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors cursor-pointer" data-tooltip="Delete certificate from portfolio">
                                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                 </button>
                             </div>
@@ -174,7 +174,7 @@ $deleteCertificate = function ($id) {
                         </span>
 
                         @if($cert->credential_url)
-                            <a href="{{ $cert->credential_url }}" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+                            <a href="{{ $cert->credential_url }}" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1" data-tooltip="Open external credential badge / verification page">
                                 <span>Verify &rarr;</span>
                             </a>
                         @endif
@@ -192,7 +192,7 @@ $deleteCertificate = function ($id) {
                     <h3 class="text-lg font-bold font-heading text-white">
                         {{ $editingId ? 'Edit Certificate' : 'Add Certificate' }}
                     </h3>
-                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit.prevent="saveCertificate" class="space-y-4">
@@ -225,10 +225,10 @@ $deleteCertificate = function ($id) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs">
+                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs cursor-pointer" data-tooltip="Discard changes">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Save certificate to portfolio">
                             {{ $editingId ? 'Update Certificate' : 'Save Certificate' }}
                         </button>
                     </div>
@@ -237,3 +237,4 @@ $deleteCertificate = function ($id) {
         </div>
     @endif
 </div>
+
