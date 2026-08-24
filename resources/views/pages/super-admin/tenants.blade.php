@@ -92,7 +92,7 @@ $resetAiUsage = function ($accountId) {
         </div>
 
         <div class="flex items-center gap-3">
-            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all">
+            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer" data-tooltip="Return to Super Admin Master Control Hub">
                 &larr; Telemetry Hub
             </a>
         </div>
@@ -105,7 +105,7 @@ $resetAiUsage = function ($accountId) {
             <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span>{{ $successMessage }}</span>
         </div>
-        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer">Dismiss</button>
+        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer" data-tooltip="Dismiss notification">Dismiss</button>
     </div>
     @endif
 
@@ -115,7 +115,7 @@ $resetAiUsage = function ($accountId) {
             <svg class="w-4 h-4 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
             <span>{{ $errorMessage }}</span>
         </div>
-        <button wire:click="$set('errorMessage', '')" class="text-red-400 hover:text-white underline text-xs cursor-pointer">Dismiss</button>
+        <button wire:click="$set('errorMessage', '')" class="text-red-400 hover:text-white underline text-xs cursor-pointer" data-tooltip="Dismiss error notification">Dismiss</button>
     </div>
     @endif
 
@@ -137,22 +137,26 @@ $resetAiUsage = function ($accountId) {
             <div class="flex items-center gap-1.5 font-mono text-xs overflow-x-auto pb-1 sm:pb-0">
                 <button type="button" 
                         wire:click="$set('planFilter', 'all')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'all' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'all' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="View all workspace accounts">
                     All
                 </button>
                 <button type="button" 
                         wire:click="$set('planFilter', 'free')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'free' ? 'bg-slate-800 text-white border border-slate-700' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'free' ? 'bg-slate-800 text-white border border-slate-700' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by Free tier accounts">
                     Free
                 </button>
                 <button type="button" 
                         wire:click="$set('planFilter', 'pro')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'pro' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'pro' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by Pro tier accounts">
                     Pro
                 </button>
                 <button type="button" 
                         wire:click="$set('planFilter', 'agency')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'agency' ? 'bg-teal-600 text-white shadow-md shadow-teal-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $planFilter === 'agency' ? 'bg-teal-600 text-white shadow-md shadow-teal-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by Agency tier accounts">
                     Agency
                 </button>
             </div>
@@ -203,13 +207,14 @@ $resetAiUsage = function ($accountId) {
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
                             <button type="button" 
                                     wire:click="openEditPlanModal({{ $account->id }})" 
-                                    class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-bold transition-all cursor-pointer">
+                                    class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-bold transition-all cursor-pointer"
+                                    data-tooltip="Manually override workspace tier entitlements">
                                 Override Plan
                             </button>
                             <button type="button" 
                                     wire:click="resetAiUsage({{ $account->id }})" 
                                     class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 text-[10px] transition-all cursor-pointer"
-                                    title="Reset monthly AI quota">
+                                    data-tooltip="Reset monthly AI generation usage counter to 0">
                                 Reset Quota
                             </button>
                         </td>
@@ -234,7 +239,7 @@ $resetAiUsage = function ($accountId) {
         <div class="relative w-full max-w-md p-6 rounded-3xl glass-card-dark bg-black/95 border border-amber-500/40 shadow-2xl space-y-5" @click.outside="$set('showEditPlanModal', false)">
             <div class="flex items-center justify-between border-b border-amber-950/60 pb-3">
                 <h3 class="text-base font-bold text-white">Override Tenant Plan</h3>
-                <button type="button" wire:click="$set('showEditPlanModal', false)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                <button type="button" wire:click="$set('showEditPlanModal', false)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close modal">&times;</button>
             </div>
 
             <div class="space-y-4 text-xs">
@@ -251,10 +256,10 @@ $resetAiUsage = function ($accountId) {
             </div>
 
             <div class="flex items-center justify-end gap-3 pt-3 border-t border-amber-950/60">
-                <button type="button" wire:click="$set('showEditPlanModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 text-xs font-semibold hover:bg-slate-800">
+                <button type="button" wire:click="$set('showEditPlanModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 text-xs font-semibold hover:bg-slate-800 cursor-pointer" data-tooltip="Cancel without saving">
                     Cancel
                 </button>
-                <button type="button" wire:click="updatePlan" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-950">
+                <button type="button" wire:click="updatePlan" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs shadow-lg shadow-amber-950 cursor-pointer" data-tooltip="Apply new plan tier entitlements immediately">
                     Save Plan Override
                 </button>
             </div>
