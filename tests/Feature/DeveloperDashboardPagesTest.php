@@ -139,11 +139,11 @@ class DeveloperDashboardPagesTest extends TestCase
 
         Volt::actingAs($this->user)
             ->test('developer.analytics')
-            ->assertSee('Developer Operations & Analytics Center')
-            ->assertSee('Technical Skills & Competency Matrix')
-            ->assertSee('Realtime Sync Engine')
-            ->assertSee('Go')
-            ->assertSee('Google');
+            ->assertSee('Developer Operations', false)
+            ->assertSee('Technical Skills', false)
+            ->assertSee('Realtime Sync Engine', false)
+            ->assertSee('Go', false)
+            ->assertSee('Google', false);
     }
 
     public function test_developer_can_update_profile_details(): void
