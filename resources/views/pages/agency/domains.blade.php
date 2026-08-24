@@ -117,7 +117,7 @@ $deleteDomain = function ($domainId) {
             </p>
         </div>
 
-        <button type="button" wire:click="$set('showAddModal', true)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer">
+        <button type="button" wire:click="$set('showAddModal', true)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer" data-tooltip="Assign and connect custom domain to a client" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
             <span>+ Connect Client Domain</span>
         </button>
@@ -130,7 +130,7 @@ $deleteDomain = function ($domainId) {
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $successMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -140,7 +140,7 @@ $deleteDomain = function ($domainId) {
                 <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -148,7 +148,7 @@ $deleteDomain = function ($domainId) {
     <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-3 w-full sm:w-auto">
             <span class="text-xs text-slate-400 font-semibold">Filter by Client:</span>
-            <select wire:model.live="selectedClientFilter" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none">
+            <select wire:model.live="selectedClientFilter" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none cursor-pointer" data-tooltip="Filter domain list by client profile">
                 <option value="all">All Managed Clients</option>
                 @foreach($this->profiles as $p)
                     <option value="{{ $p->id }}">{{ $p->full_name ?: $p->slug }}</option>
@@ -195,11 +195,11 @@ $deleteDomain = function ($domainId) {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($domainItem->isVerified())
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20" data-tooltip="Domain verified and SSL provisioned">
                                         <span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> ACTIVE / SSL
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-300 border border-amber-500/20" data-tooltip="Awaiting DNS verification">
                                         PENDING DNS
                                     </span>
                                 @endif
@@ -209,11 +209,11 @@ $deleteDomain = function ($domainId) {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
                                 @if(!$domainItem->isVerified())
-                                    <button type="button" wire:click="verifyDomain({{ $domainItem->id }})" class="text-xs text-teal-400 hover:text-teal-300 font-semibold cursor-pointer">
+                                    <button type="button" wire:click="verifyDomain({{ $domainItem->id }})" class="text-xs text-teal-400 hover:text-teal-300 font-semibold cursor-pointer" data-tooltip="Query DNS records to verify domain ownership">
                                         Verify DNS &rarr;
                                     </button>
                                 @endif
-                                <button type="button" wire:click="deleteDomain({{ $domainItem->id }})" wire:confirm="Disconnect this custom domain?" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer">
+                                <button type="button" wire:click="deleteDomain({{ $domainItem->id }})" wire:confirm="Disconnect this custom domain?" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer" data-tooltip="Disconnect domain from client portfolio">
                                     Disconnect
                                 </button>
                             </td>
@@ -264,7 +264,7 @@ $deleteDomain = function ($domainId) {
                         <h3 class="text-lg font-bold font-heading text-white">Connect Client Domain</h3>
                         <p class="text-xs text-slate-400 mt-0.5">Assign a custom domain to a managed client portfolio.</p>
                     </div>
-                    <button type="button" wire:click="$set('showAddModal', false)" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+                    <button type="button" wire:click="$set('showAddModal', false)" class="text-slate-400 hover:text-white text-xl font-bold cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit="addDomain" class="space-y-4">
@@ -286,10 +286,10 @@ $deleteDomain = function ($domainId) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showAddModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold">
+                        <button type="button" wire:click="$set('showAddModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold cursor-pointer" data-tooltip="Cancel without connecting">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50 cursor-pointer" data-tooltip="Connect domain to selected client">
                             Register Domain
                         </button>
                     </div>
@@ -298,3 +298,4 @@ $deleteDomain = function ($domainId) {
         </div>
     @endif
 </div>
+
