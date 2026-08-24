@@ -52,7 +52,7 @@ $exportData = function (GdprService $gdpr) {
             </p>
         </div>
 
-        <button wire:click="exportData" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <button wire:click="exportData" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Stream downloadable JSON archive of all portfolio data" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             <span>Download Data Archive</span>
         </button>
@@ -65,7 +65,7 @@ $exportData = function (GdprService $gdpr) {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -86,12 +86,13 @@ $exportData = function (GdprService $gdpr) {
         </p>
 
         <div class="pt-2">
-            <button wire:click="exportData" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-semibold inline-flex items-center gap-2">
+            <button wire:click="exportData" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-semibold inline-flex items-center gap-2 cursor-pointer" data-tooltip="Stream downloadable JSON archive of all portfolio data">
                 <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 <span>Export JSON Data Package</span>
             </button>
         </div>
     </div>
+
 
     {{-- Section 2: Privacy Guarantee --}}
     <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-4 border border-white/5">
