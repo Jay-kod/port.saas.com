@@ -74,7 +74,7 @@ $saveBranding = function () {
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $successMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -84,7 +84,7 @@ $saveBranding = function () {
                 <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -110,7 +110,7 @@ $saveBranding = function () {
                 </div>
 
                 <div class="p-5 rounded-2xl bg-slate-950/70 border border-white/5 space-y-3">
-                    <label class="flex items-start gap-3 cursor-pointer">
+                    <label class="flex items-start gap-3 cursor-pointer" data-tooltip="Hide DevFolio badge across all client portfolios">
                         <input type="checkbox" wire:model.live="hidePlatformBranding" class="mt-0.5 w-4 h-4 rounded text-teal-500 bg-slate-900 border-slate-800 focus:ring-teal-500" />
                         <div>
                             <span class="text-xs font-bold text-white block">Suppress Platform Branding</span>
@@ -122,7 +122,7 @@ $saveBranding = function () {
                 </div>
 
                 <div class="pt-4 border-t border-white/5 flex justify-end">
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/40 cursor-pointer">
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/40 cursor-pointer" data-tooltip="Save custom brand name and logo configuration">
                         Save White-Label Settings
                     </button>
                 </div>
@@ -175,3 +175,4 @@ $saveBranding = function () {
         </div>
     </div>
 </div>
+
