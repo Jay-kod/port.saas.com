@@ -141,9 +141,9 @@ class DeveloperDashboardPagesTest extends TestCase
             ->test('developer.analytics')
             ->assertSee('Developer Operations', false)
             ->assertSee('Technical Skills', false)
-            ->assertSee('Realtime Sync Engine', false)
+            ->assertSee('Laravel', false)
             ->assertSee('Go', false)
-            ->assertSee('Google', false);
+            ->assertSee('Backend', false);
     }
 
     public function test_developer_can_update_profile_details(): void
