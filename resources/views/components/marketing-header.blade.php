@@ -12,14 +12,14 @@
             {{-- Desktop Navigation --}}
             <div class="hidden md:flex items-center gap-6 lg:gap-8">
                 <nav class="flex items-center gap-6 lg:gap-8 text-sm font-medium text-gray-600 dark:text-gray-300">
-                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-amber-500 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} transition">Home</a>
+                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-amber-500 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} transition" data-tooltip="DevFolio Homepage">Home</a>
                     @if(request()->routeIs('home'))
-                        <a href="#features" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                        <a href="#features" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition" data-tooltip="Explore platform features">Features</a>
                     @else
-                        <a href="{{ route('home') }}#features" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                        <a href="{{ route('home') }}#features" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition" data-tooltip="Explore platform features">Features</a>
                     @endif
-                    <a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'text-amber-500 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} transition">Pricing</a>
-                    <a href="{{ route('discover') }}" class="{{ request()->routeIs('discover') ? 'text-amber-500 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} transition">Discover</a>
+                    <a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'text-amber-500 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} transition" data-tooltip="Subscription plans and pricing tiers">Pricing</a>
+                    <a href="{{ route('discover') }}" class="{{ request()->routeIs('discover') ? 'text-amber-500 dark:text-amber-400 font-semibold' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white' }} transition" data-tooltip="Browse public verified developer portfolios">Discover</a>
                 </nav>
 
                 {{-- Dynamic Get Started Dropdown Launcher --}}
@@ -29,6 +29,8 @@
                         id="get-started-dropdown-btn"
                         onclick="toggleGetStartedDropdown(event)"
                         class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-extrabold transition-all duration-200 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer select-none"
+                        data-tooltip="Select a workspace portal or create account"
+                        data-tooltip-pos="bottom"
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
