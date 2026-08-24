@@ -76,7 +76,7 @@ $login = function () {
 
         {{-- Top Brand Header --}}
         <div class="relative z-10 flex items-center justify-between">
-            <a href="/" class="inline-flex items-center gap-2.5 group">
+            <a href="/" class="inline-flex items-center gap-2.5 group cursor-pointer" data-tooltip="Return to DevFolio Homepage">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-400 to-cyan-300 text-gray-950 flex items-center justify-center font-black text-base shadow-lg shadow-teal-500/25 group-hover:scale-105 transition-transform">
                     ⚡
                 </div>
@@ -163,6 +163,7 @@ $login = function () {
                     wire:click="fillDemo"
                     onclick="autofillForm('agency@example.com', 'password', 'agency_email', 'agency_password')"
                     class="py-1.5 px-3 rounded-xl bg-teal-500/20 hover:bg-teal-500/30 border border-teal-500/40 text-teal-300 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                    data-tooltip="Autofill demo agency administrator credentials"
                 >
                     <span>Auto-fill</span>
                     <span>&rarr;</span>
@@ -198,7 +199,7 @@ $login = function () {
                         <label for="agency_password" class="block text-xs font-semibold text-gray-300">
                             Password
                         </label>
-                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-teal-400 hover:text-teal-300 hover:underline transition">
+                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-teal-400 hover:text-teal-300 hover:underline transition cursor-pointer" data-tooltip="Reset your account password">
                             Forgot password?
                         </a>
                     </div>
@@ -217,6 +218,7 @@ $login = function () {
                             @click="showPassword = !showPassword"
                             class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 focus:outline-none cursor-pointer"
                             aria-label="Toggle password visibility"
+                            data-tooltip="Toggle password visibility"
                         >
                             {{-- Eye Open (when password is masked: showPassword is false) --}}
                             <svg x-show="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +238,7 @@ $login = function () {
 
                 {{-- Remember Me --}}
                 <div class="flex items-center justify-between pt-1">
-                    <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <label class="inline-flex items-center gap-2 cursor-pointer" data-tooltip="Persist agency login session across browser restarts">
                         <input
                             type="checkbox"
                             name="remember"
@@ -252,6 +254,7 @@ $login = function () {
                 <button
                     type="submit"
                     class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-gray-950 font-extrabold text-sm shadow-lg shadow-teal-500/20 hover:shadow-teal-500/35 transition transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-2"
+                    data-tooltip="Sign in and open Agency Hub"
                 >
                     <span wire:loading.remove>Sign In to Agency Hub &rarr;</span>
                     <span wire:loading class="inline-flex items-center gap-2">
@@ -268,7 +271,7 @@ $login = function () {
             <div class="p-3 rounded-xl bg-gray-900/60 border border-gray-800 text-center">
                 <p class="text-xs text-gray-400">
                     Want to manage client portfolios under your own brand?
-                    <a href="/pricing" class="font-semibold text-teal-400 hover:text-teal-300 hover:underline transition ml-1">
+                    <a href="/pricing" class="font-semibold text-teal-400 hover:text-teal-300 hover:underline transition ml-1 cursor-pointer" data-tooltip="View Agency plan pricing and features">
                         Explore Agency Plan &rarr;
                     </a>
                 </p>
@@ -280,11 +283,11 @@ $login = function () {
             <div class="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-gray-500">
                 <span>Looking for a different portal?</span>
                 <div class="flex items-center gap-3">
-                    <a href="/developer/login" class="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline transition font-medium">
+                    <a href="/developer/login" class="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline transition font-medium cursor-pointer" data-tooltip="Switch to Developer Portal">
                         <span>👤 Developer Portal</span>
                     </a>
                     <span>&bull;</span>
-                    <a href="/super-admin/login" class="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 hover:underline transition font-medium">
+                    <a href="/super-admin/login" class="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 hover:underline transition font-medium cursor-pointer" data-tooltip="Switch to Super Admin Root Portal">
                         <span>👑 Super Admin</span>
                     </a>
                 </div>
