@@ -18,8 +18,8 @@ $certificate = computed(fn () => Certificate::query()->where('slug', $this->cert
     <p class="mt-2 text-sm">Issued {{ $this->certificate->issue_date?->format('M Y') }}</p>
 
     @if ($this->certificate->credential_url)
-        <a href="{{ $this->certificate->credential_url }}" class="underline mt-4 inline-block" target="_blank" rel="noopener">View credential</a>
+        <a href="{{ $this->certificate->credential_url }}" class="underline mt-4 inline-block cursor-pointer" target="_blank" rel="noopener" data-tooltip="Open official verification page">View credential</a>
     @endif
 
-    <a href="{{ route('certificates') }}" class="underline mt-10 inline-block block">&larr; Back to certificates</a>
+    <a href="{{ route('certificates') }}" class="underline mt-10 inline-block block cursor-pointer" data-tooltip="Return to certificates list">&larr; Back to certificates</a>
 </div>
