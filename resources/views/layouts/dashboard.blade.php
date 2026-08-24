@@ -989,7 +989,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!-- Universal Right-Middle Alert Pill System -->
+    <x-alert-pill />
 
     @livewireScripts
 </body>
