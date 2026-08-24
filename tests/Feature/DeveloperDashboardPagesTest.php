@@ -72,6 +72,7 @@ class DeveloperDashboardPagesTest extends TestCase
             'developer.templates',
             'developer.billing',
             'developer.privacy',
+            'developer.analytics',
         ];
 
         foreach ($routes as $routeName) {
@@ -80,7 +81,7 @@ class DeveloperDashboardPagesTest extends TestCase
         }
     }
 
-    public function test_authenticated_developer_can_access_all_16_pages_with_http_200(): void
+    public function test_authenticated_developer_can_access_all_pages_with_http_200(): void
     {
         $routes = [
             'developer.profile' => 'Profile',
@@ -99,6 +100,7 @@ class DeveloperDashboardPagesTest extends TestCase
             'developer.templates' => 'Resume Templates',
             'developer.billing' => 'Billing',
             'developer.privacy' => 'Privacy',
+            'developer.analytics' => 'Analytics',
         ];
 
         foreach ($routes as $routeName => $needle) {
@@ -106,6 +108,42 @@ class DeveloperDashboardPagesTest extends TestCase
             $response->assertOk();
             $response->assertSee($needle);
         }
+    }
+
+    public function test_analytics_computes_telemetry_and_health_scores(): void
+    {
+        // Seed projects & skills
+        Project::create([
+            'profile_id' => $this->profile->id,
+            'title' => 'Realtime Sync Engine',
+            'slug' => 'realtime-sync',
+            'is_featured' => true,
+            'tech_stack' => ['Laravel', 'Vue', 'Redis'],
+            'live_url' => 'https://sync.example.com',
+            'repo_url' => 'https://github.com/alex/sync',
+        ]);
+
+        Skill::create([
+            'profile_id' => $this->profile->id,
+            'name' => 'Go',
+            'category' => 'Backend',
+            'proficiency' => 90,
+        ]);
+
+        JobApplication::create([
+            'profile_id' => $this->profile->id,
+            'company' => 'Google',
+            'role' => 'Software Engineer',
+            'status' => 'interviewing',
+        ]);
+
+        Volt::actingAs($this->user)
+            ->test('developer.analytics')
+            ->assertSee('Developer Operations & Analytics Center')
+            ->assertSee('Technical Skills & Competency Matrix')
+            ->assertSee('Realtime Sync Engine')
+            ->assertSee('Go')
+            ->assertSee('Google');
     }
 
     public function test_developer_can_update_profile_details(): void
