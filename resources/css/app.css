@@ -10,3 +10,9 @@
 }
 
 @custom-variant dark (&:where([data-theme-mode="dark"], [data-theme-mode="dark"] *));
+
+/* Universal Global Floating Tooltip Styling */
+#global-tooltip-container {
+    transition: opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
