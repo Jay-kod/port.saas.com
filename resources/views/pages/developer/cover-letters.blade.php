@@ -115,7 +115,7 @@ $deleteCoverLetter = function ($id) {
             </p>
         </div>
 
-        <button wire:click="openCreateModal" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <button wire:click="openCreateModal" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Generate an AI-tailored cover letter for a job opening" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
             <span>Write Cover Letter</span>
         </button>
@@ -128,7 +128,7 @@ $deleteCoverLetter = function ($id) {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -138,7 +138,7 @@ $deleteCoverLetter = function ($id) {
                 <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -154,7 +154,7 @@ $deleteCoverLetter = function ($id) {
             </div>
             <h3 class="text-lg font-bold text-white font-heading">No Cover Letters Created</h3>
             <p class="text-xs text-slate-400 max-w-md mx-auto">Generate tailored, persuasive cover letters that emphasize your relevant skills for any specific target role.</p>
-            <button wire:click="openCreateModal" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2 cursor-pointer">
+            <button wire:click="openCreateModal" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2 cursor-pointer" data-tooltip="Generate your first tailored cover letter">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 <span>Generate First Cover Letter</span>
             </button>
@@ -168,7 +168,7 @@ $deleteCoverLetter = function ($id) {
                             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
                                 {{ $letter->company_name }}
                             </span>
-                            <button wire:click="deleteCoverLetter({{ $letter->id }})" wire:confirm="Are you sure you want to delete this cover letter?" class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors" title="Delete">
+                            <button wire:click="deleteCoverLetter({{ $letter->id }})" wire:confirm="Are you sure you want to delete this cover letter?" class="p-1.5 rounded-lg bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors cursor-pointer" data-tooltip="Delete cover letter archive">
                                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             </button>
                         </div>
@@ -183,7 +183,7 @@ $deleteCoverLetter = function ($id) {
 
                     <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
                         <span class="text-slate-500 text-[11px]">{{ $letter->created_at->format('M d, Y') }}</span>
-                        <button wire:click="viewCoverLetter({{ $letter->id }})" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+                        <button wire:click="viewCoverLetter({{ $letter->id }})" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1 cursor-pointer" data-tooltip="Read full letter and copy text">
                             <span>Read Full &rarr;</span>
                         </button>
                     </div>
@@ -201,7 +201,7 @@ $deleteCoverLetter = function ($id) {
                         <span class="text-[10px] font-mono font-bold text-yellow-400 uppercase tracking-wider">{{ $activeLetter->company_name }}</span>
                         <h3 class="text-lg font-bold font-heading text-white">{{ $activeLetter->job_title }} Cover Letter</h3>
                     </div>
-                    <button wire:click="$set('viewingId', null)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                    <button wire:click="$set('viewingId', null)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close viewer">&times;</button>
                 </div>
 
                 <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-sans">
@@ -209,7 +209,7 @@ $deleteCoverLetter = function ($id) {
                 </div>
 
                 <div class="flex justify-end gap-3 pt-2">
-                    <button type="button" wire:click="$set('viewingId', null)" class="px-5 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs">
+                    <button type="button" wire:click="$set('viewingId', null)" class="px-5 py-2.5 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs cursor-pointer" data-tooltip="Close cover letter">
                         Close
                     </button>
                 </div>
@@ -225,7 +225,7 @@ $deleteCoverLetter = function ($id) {
                     <h3 class="text-lg font-bold font-heading text-white">
                         AI Cover Letter Engine
                     </h3>
-                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit.prevent="generateCoverLetter" class="space-y-4">
@@ -250,10 +250,10 @@ $deleteCoverLetter = function ($id) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs">
+                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs cursor-pointer" data-tooltip="Discard changes">
                             Cancel
                         </button>
-                        <button type="submit" wire:loading.attr="disabled" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md flex items-center gap-2">
+                        <button type="submit" wire:loading.attr="disabled" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md flex items-center gap-2 cursor-pointer" data-tooltip="Run AI generation pipeline to write cover letter">
                             <span wire:loading.remove>Generate Cover Letter</span>
                             <span wire:loading>Writing Cover Letter...</span>
                         </button>
@@ -263,3 +263,4 @@ $deleteCoverLetter = function ($id) {
         </div>
     @endif
 </div>
+
