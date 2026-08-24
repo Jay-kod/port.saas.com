@@ -40,7 +40,7 @@ $sendResetLink = function () {
     <div class="w-full max-w-md relative z-10 space-y-6">
         {{-- Brand Header --}}
         <div class="text-center space-y-2">
-            <a href="/" class="inline-flex items-center gap-2.5 group">
+            <a href="/" class="inline-flex items-center gap-2.5 group cursor-pointer" data-tooltip="Return to DevFolio Homepage">
                 <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center font-black text-xl shadow-lg shadow-amber-500/10 group-hover:scale-105 transition-transform">
                     ⚡
                 </div>
@@ -92,6 +92,7 @@ $sendResetLink = function () {
                 <button
                     type="submit"
                     class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-gray-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 transition transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-2"
+                    data-tooltip="Send password recovery email instructions"
                 >
                     <span wire:loading.remove>Send Reset Instructions &rarr;</span>
                     <span wire:loading class="inline-flex items-center gap-2">
@@ -108,15 +109,15 @@ $sendResetLink = function () {
             <div class="pt-4 border-t border-gray-800/80 space-y-2 text-center text-xs">
                 <div class="text-gray-400">Return to sign in:</div>
                 <div class="flex items-center justify-center gap-3 text-xs">
-                    <a href="{{ route('developer.login') }}" class="font-semibold text-emerald-400 hover:text-emerald-300 transition">
+                    <a href="{{ route('developer.login') }}" class="font-semibold text-emerald-400 hover:text-emerald-300 transition cursor-pointer" data-tooltip="Return to Developer Login">
                         Developer Portal
                     </a>
                     <span class="text-gray-700">&bull;</span>
-                    <a href="{{ route('agency.login') }}" class="font-semibold text-teal-400 hover:text-teal-300 transition">
+                    <a href="{{ route('agency.login') }}" class="font-semibold text-teal-400 hover:text-teal-300 transition cursor-pointer" data-tooltip="Return to Agency Login">
                         Agency Hub
                     </a>
                     <span class="text-gray-700">&bull;</span>
-                    <a href="{{ route('super-admin.login') }}" class="font-semibold text-amber-400 hover:text-amber-300 transition">
+                    <a href="{{ route('super-admin.login') }}" class="font-semibold text-amber-400 hover:text-amber-300 transition cursor-pointer" data-tooltip="Return to Super Admin Login">
                         Super Admin
                     </a>
                 </div>
