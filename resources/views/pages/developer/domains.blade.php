@@ -117,7 +117,7 @@ $deleteDomain = function ($domainId) {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -127,7 +127,7 @@ $deleteDomain = function ($domainId) {
                 <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -142,7 +142,7 @@ $deleteDomain = function ($domainId) {
             <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
                 On the Free tier, your portfolio is served at <span class="text-emerald-400 font-mono">/{{ Auth::user()?->profile?->slug }}</span>. Upgrade to Pro to attach your own branded domain name with automatic SSL certification.
             </p>
-            <a href="{{ route('developer.billing') }}" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2">
+            <a href="{{ route('developer.billing') }}" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2" data-tooltip="Unlock custom domain attachment on Pro plan">
                 <span>Upgrade to Pro Plan &rarr;</span>
             </a>
         </div>
@@ -160,7 +160,7 @@ $deleteDomain = function ($domainId) {
                 <input type="text" wire:model="newDomain" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs font-mono focus:border-cyan-500 focus:outline-none" placeholder="e.g. portfolio.alexmorgan.dev or alexmorgan.com" required />
                 @error('newDomain') <span class="text-xs text-rose-400">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md shrink-0">
+            <button type="submit" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md shrink-0 cursor-pointer" data-tooltip="Attach and register domain to your portfolio">
                 Connect Domain
             </button>
         </form>
@@ -180,11 +180,11 @@ $deleteDomain = function ($domainId) {
                             <div class="flex items-center gap-3">
                                 <h4 class="text-base font-bold font-mono text-white">{{ $dom->domain }}</h4>
                                 @if($dom->isVerified())
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" data-tooltip="Domain verified and resolving live">
                                         &check; VERIFIED & LIVE
                                     </span>
                                 @else
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/30">
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-yellow-500/10 text-yellow-400 border border-yellow-500/30" data-tooltip="Awaiting DNS propagation">
                                         PENDING DNS
                                     </span>
                                 @endif
@@ -196,15 +196,16 @@ $deleteDomain = function ($domainId) {
 
                         <div class="flex items-center gap-2">
                             @if(! $dom->isVerified())
-                                <button wire:click="verifyDomain({{ $dom->id }})" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                                <button wire:click="verifyDomain({{ $dom->id }})" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Query DNS records to verify domain ownership">
                                     Check & Verify DNS
                                 </button>
                             @endif
-                            <button wire:click="deleteDomain({{ $dom->id }})" wire:confirm="Are you sure you want to disconnect this domain?" class="p-2 rounded-xl bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors" title="Delete">
+                            <button wire:click="deleteDomain({{ $dom->id }})" wire:confirm="Are you sure you want to disconnect this domain?" class="p-2 rounded-xl bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors cursor-pointer" data-tooltip="Disconnect domain from portfolio">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             </button>
                         </div>
                     </div>
+
 
                     {{-- DNS Configuration Box --}}
                     @if(! $dom->isVerified())
