@@ -29,7 +29,7 @@ state([
             </p>
         </div>
 
-        <a href="{{ route('developer.resumes') }}" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <a href="{{ route('developer.resumes') }}" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Open AI resume tailor studio" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
             <span>Tailor a Resume</span>
         </a>
@@ -43,7 +43,7 @@ state([
                         <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                             {{ strtoupper($template->slug) }}
                         </span>
-                        <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+                        <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5" data-tooltip="Production DomPDF rendering engine">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                             <span>ACTIVE PDF ENGINE</span>
                         </span>
@@ -74,7 +74,7 @@ state([
 
                 <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
                     <span class="text-slate-500 text-[11px]">View: {{ $template->blade_view }}</span>
-                    <a href="{{ route('developer.resumes') }}" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+                    <a href="{{ route('developer.resumes') }}" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1" data-tooltip="Select this template to generate a tailored resume">
                         <span>Use in Generator &rarr;</span>
                     </a>
                 </div>
@@ -82,3 +82,4 @@ state([
         @endforeach
     </div>
 </div>
+
