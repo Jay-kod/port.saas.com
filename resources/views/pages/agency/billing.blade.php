@@ -84,7 +84,7 @@ $redirectToPortal = function () {
         </div>
 
         @if($this->isOwner)
-            <button type="button" wire:click="redirectToPortal" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer">
+            <button type="button" wire:click="redirectToPortal" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer" data-tooltip="Open Stripe customer portal to manage payment methods" data-tooltip-pos="bottom">
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
                 <span>Stripe Customer Portal</span>
             </button>
@@ -98,7 +98,7 @@ $redirectToPortal = function () {
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $successMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -108,7 +108,7 @@ $redirectToPortal = function () {
                 <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -159,10 +159,11 @@ $redirectToPortal = function () {
 
             <div class="flex justify-between items-center text-[11px] text-slate-500">
                 <span>Cycles reset on the 1st of every month</span>
-                <a href="{{ route('developer.ai-settings') }}" class="text-teal-400 hover:underline">Configure BYOK Keys &rarr;</a>
+                <a href="{{ route('developer.ai-settings') }}" class="text-teal-400 hover:underline cursor-pointer" data-tooltip="Configure custom OpenAI or Anthropic API keys">Configure BYOK Keys &rarr;</a>
             </div>
         </div>
     </div>
+
 
     {{-- Plan Comparison Card --}}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
