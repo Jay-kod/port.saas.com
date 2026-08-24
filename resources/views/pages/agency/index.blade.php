@@ -130,15 +130,15 @@ $switchActiveProfile = function ($profileId) {
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-            <a href="{{ route('agency.team') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+            <a href="{{ route('agency.team') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer" data-tooltip="Manage agency team members and permissions" data-tooltip-pos="bottom">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                 <span>Team & Seats</span>
             </a>
-            <a href="{{ route('agency.branding') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+            <a href="{{ route('agency.branding') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer" data-tooltip="Configure custom agency branding and logo" data-tooltip-pos="bottom">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                 <span>White-Label</span>
             </a>
-            <button type="button" wire:click="$set('showCreateModal', true)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer">
+            <button type="button" wire:click="$set('showCreateModal', true)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer" data-tooltip="Provision a new client developer portfolio under your agency" data-tooltip-pos="bottom">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                 <span>+ Provision Client</span>
             </button>
@@ -152,7 +152,7 @@ $switchActiveProfile = function ($profileId) {
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $successMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -162,7 +162,7 @@ $switchActiveProfile = function ($profileId) {
                 <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -239,7 +239,7 @@ $switchActiveProfile = function ($profileId) {
             </div>
             <div class="mt-3 text-[11px] text-slate-400 flex justify-between">
                 <span>Tier: <strong class="text-white">{{ strtoupper($this->account?->plan_slug ?: 'agency') }}</strong></span>
-                <a href="{{ route('agency.billing') }}" class="text-teal-400 hover:underline">Manage &rarr;</a>
+                <a href="{{ route('agency.billing') }}" class="text-teal-400 hover:underline cursor-pointer" data-tooltip="Manage agency subscription and seats">Manage &rarr;</a>
             </div>
         </div>
     </div>
@@ -267,14 +267,14 @@ $switchActiveProfile = function ($profileId) {
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2">
-                    <a href="{{ route('developer.profile') }}" class="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 hover:border-teal-500/40 text-slate-300 text-xs font-semibold transition-all">
+                    <a href="{{ route('developer.profile') }}" class="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 hover:border-teal-500/40 text-slate-300 text-xs font-semibold transition-all cursor-pointer" data-tooltip="Switch active workspace and edit this client's profile">
                         Edit Content Studio
                     </a>
-                    <a href="{{ route('developer.resumes') }}" class="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 hover:border-teal-500/40 text-slate-300 text-xs font-semibold transition-all">
+                    <a href="{{ route('developer.resumes') }}" class="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 hover:border-teal-500/40 text-slate-300 text-xs font-semibold transition-all cursor-pointer" data-tooltip="Tailor resumes for this client">
                         AI Resumes
                     </a>
                     @if($this->activeProfile->is_published)
-                        <a href="{{ url('/' . $this->activeProfile->slug) }}" target="_blank" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5">
+                        <a href="{{ url('/' . $this->activeProfile->slug) }}" target="_blank" class="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer" data-tooltip="View this client's live portfolio in new tab">
                             <span>Live Site</span>
                             <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                         </a>
@@ -291,7 +291,7 @@ $switchActiveProfile = function ($profileId) {
                 <h3 class="text-lg font-bold font-heading text-white">Managed Client Portfolios</h3>
                 <p class="text-xs text-slate-400">All developer profiles registered under this agency tenant.</p>
             </div>
-            <a href="{{ route('agency.clients') }}" class="text-xs text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1">
+            <a href="{{ route('agency.clients') }}" class="text-xs text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1 cursor-pointer" data-tooltip="Open full client portfolio manager">
                 <span>View Full Client Manager</span>
                 <span>&rarr;</span>
             </a>
@@ -335,11 +335,11 @@ $switchActiveProfile = function ($profileId) {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if($profileItem->is_published)
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20" data-tooltip="Public portfolio live and accessible">
                                         <span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Live
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400 border border-slate-700">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400 border border-slate-700" data-tooltip="Draft mode - not visible to public">
                                         Draft
                                     </span>
                                 @endif
@@ -348,14 +348,14 @@ $switchActiveProfile = function ($profileId) {
                                 @if($isActive)
                                     <span class="text-xs text-teal-400 font-semibold font-mono">Current Workspace</span>
                                 @else
-                                    <button type="button" wire:click="switchActiveProfile({{ $profileItem->id }})" class="text-xs text-slate-400 hover:text-teal-300 font-semibold transition-colors cursor-pointer">
+                                    <button type="button" wire:click="switchActiveProfile({{ $profileItem->id }})" class="text-xs text-slate-400 hover:text-teal-300 font-semibold transition-colors cursor-pointer" data-tooltip="Switch active workspace context to {{ $profileItem->full_name ?: $profileItem->slug }}">
                                         Switch Active &rarr;
                                     </button>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-                                <a href="{{ url('/' . $profileItem->slug) }}" target="_blank" class="text-slate-400 hover:text-teal-400 transition-colors">Preview</a>
-                                <a href="{{ route('agency.clients') }}" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">Manage</a>
+                                <a href="{{ url('/' . $profileItem->slug) }}" target="_blank" class="text-slate-400 hover:text-teal-400 transition-colors cursor-pointer" data-tooltip="Preview public portfolio">Preview</a>
+                                <a href="{{ route('agency.clients') }}" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors cursor-pointer" data-tooltip="Open full client manager">Manage</a>
                             </td>
                         </tr>
                     @empty
@@ -379,7 +379,7 @@ $switchActiveProfile = function ($profileId) {
                         <h3 class="text-lg font-bold font-heading text-white">Provision New Client Portfolio</h3>
                         <p class="text-xs text-slate-400 mt-0.5">Add a new developer profile under your agency account.</p>
                     </div>
-                    <button type="button" wire:click="$set('showCreateModal', false)" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+                    <button type="button" wire:click="$set('showCreateModal', false)" class="text-slate-400 hover:text-white text-xl font-bold cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit="createClient" class="space-y-4">
@@ -413,10 +413,10 @@ $switchActiveProfile = function ($profileId) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showCreateModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold">
+                        <button type="button" wire:click="$set('showCreateModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold cursor-pointer" data-tooltip="Cancel without provisioning">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50 cursor-pointer" data-tooltip="Provision client profile with selected theme">
                             Provision Client Portfolio
                         </button>
                     </div>
@@ -425,3 +425,4 @@ $switchActiveProfile = function ($profileId) {
         </div>
     @endif
 </div>
+
