@@ -235,7 +235,7 @@ $deleteProject = function ($id) {
                     <h3 class="text-lg font-bold font-heading text-white">
                         {{ $editingId ? 'Edit Project' : 'Add New Project' }}
                     </h3>
-                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit.prevent="saveProject" class="space-y-4">
@@ -281,7 +281,7 @@ $deleteProject = function ($id) {
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <label class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer">
+                        <label class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer" data-tooltip="Feature this project on your main portfolio hero/highlights">
                             <input type="checkbox" wire:model="is_featured" class="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500" />
                             <span class="text-xs font-semibold text-white">Feature on Portfolio Home</span>
                         </label>
@@ -293,10 +293,10 @@ $deleteProject = function ($id) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs">
+                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs cursor-pointer" data-tooltip="Discard changes">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Save and commit project details">
                             {{ $editingId ? 'Update Project' : 'Create Project' }}
                         </button>
                     </div>
@@ -305,3 +305,4 @@ $deleteProject = function ($id) {
         </div>
     @endif
 </div>
+
