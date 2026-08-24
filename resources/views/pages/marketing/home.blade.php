@@ -52,11 +52,11 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
 
             {{-- CTA Buttons --}}
             <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <a href="/admin/register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm sm:text-base font-bold transition-all duration-200 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0">
+                <a href="/admin/register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm sm:text-base font-bold transition-all duration-200 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" data-tooltip="Get started and create your developer portfolio">
                     <span>Create Your Portfolio Free</span>
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
-                <a href="{{ route('pricing') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50/60 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 text-gray-900 dark:text-white text-sm sm:text-base font-semibold transition-all duration-200">
+                <a href="{{ route('pricing') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50/60 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 text-gray-900 dark:text-white text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer" data-tooltip="View pricing tiers and features">
                     View Pricing & Plans
                 </a>
             </div>
