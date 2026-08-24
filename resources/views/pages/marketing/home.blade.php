@@ -175,7 +175,7 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
                 Join developers creating high-impact personal portfolios and landing roles with AI-tailored applications.
             </p>
             <div class="mt-6 sm:mt-8 flex justify-center relative">
-                <a href="/admin/register" class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold text-sm sm:text-base transition-all duration-200 shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0">
+                <a href="/admin/register" class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold text-sm sm:text-base transition-all duration-200 shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" data-tooltip="Get started and create your developer portfolio">
                     <span>Create Your Free Portfolio Now</span>
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
@@ -190,11 +190,11 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
                 &copy; {{ date('Y') }} DevFolio AI Platform. Built for developers with Laravel, Livewire Volt & Filament.
             </div>
             <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5">
-                <a href="#features" class="hover:text-gray-400 transition">Features</a>
-                <a href="{{ route('pricing') }}" class="hover:text-gray-400 transition">Pricing</a>
-                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition">Developer Login</a>
-                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition">Agency Hub</a>
-                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition">Super Admin</a>
+                <a href="#features" class="hover:text-gray-400 transition cursor-pointer" data-tooltip="Jump to platform features">Features</a>
+                <a href="{{ route('pricing') }}" class="hover:text-gray-400 transition cursor-pointer" data-tooltip="View pricing tiers and features">Pricing</a>
+                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Developer Workspace">Developer Login</a>
+                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Agency Hub">Agency Hub</a>
+                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Super Admin Portal">Super Admin</a>
             </div>
         </div>
     </footer>
