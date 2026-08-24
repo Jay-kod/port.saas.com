@@ -31,7 +31,10 @@ $ownerUser = computed(function () {
     return $this->account?->owner;
 });
 
-$seatLimit = 10;
+$seatLimit = computed(function () {
+    return 10;
+});
+
 $usedSeats = computed(function () {
     return $this->members->count() + 1; // +1 for owner
 });
