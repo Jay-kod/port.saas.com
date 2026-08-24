@@ -96,6 +96,8 @@ $saveClient = function () {
         'isPublished' => ['boolean'],
     ]);
 
+    $validThemeId = Theme::find($this->themeId)?->id;
+
     if ($this->editingProfileId) {
         $profile = Profile::where('account_id', $this->account->id)->findOrFail($this->editingProfileId);
         
@@ -110,7 +112,7 @@ $saveClient = function () {
             'headline' => $this->headline ?: 'Software Engineer',
             'slug' => $slug,
             'bio' => $this->bio,
-            'theme_id' => $this->themeId,
+            'theme_id' => $validThemeId,
             'is_published' => $this->isPublished,
         ]);
 
@@ -134,7 +136,7 @@ $saveClient = function () {
             'headline' => $this->headline ?: 'Software Engineer',
             'slug' => $slug,
             'bio' => $this->bio,
-            'theme_id' => $this->themeId,
+            'theme_id' => $validThemeId,
             'theme_mode_default' => 'dark',
             'is_published' => $this->isPublished,
         ]);
