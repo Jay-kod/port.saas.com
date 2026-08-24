@@ -293,12 +293,12 @@ $analytics = computed(function () {
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-            <a href="{{ route('developer.profile') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+            <a href="{{ route('developer.profile') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer" data-tooltip="Open developer bio & profile studio" data-tooltip-pos="bottom">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                 <span>Edit Portfolio</span>
             </a>
             @if($this->analytics['seo']['isPublished'] && $this->analytics['hasProfile'])
-                <a href="{{ url('/' . $this->analytics['profile']->slug) }}" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-emerald-950/40">
+                <a href="{{ url('/' . $this->analytics['profile']->slug) }}" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-emerald-950/40 cursor-pointer" data-tooltip="Open public portfolio in new tab" data-tooltip-pos="bottom">
                     <span class="w-2 h-2 rounded-full bg-slate-950 animate-pulse"></span>
                     <span>View Live Site</span>
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -310,7 +310,7 @@ $analytics = computed(function () {
     {{-- PRIMARY KPI RIBBON --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {{-- Health Score Card --}}
-        <div class="glass-card rounded-3xl p-6 relative overflow-hidden group">
+        <div class="glass-card rounded-3xl p-6 relative overflow-hidden group cursor-pointer" data-tooltip="Weighted developer readiness score">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-mono font-semibold text-slate-400">ENGINEERING HEALTH</span>
                 <div class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
@@ -423,7 +423,7 @@ $analytics = computed(function () {
                                 {{ $rec['desc'] }}
                             </p>
                         </div>
-                        <a href="{{ route($rec['route']) }}" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors pt-2 border-t border-white/5">
+                        <a href="{{ route($rec['route']) }}" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors pt-2 border-t border-white/5 cursor-pointer" data-tooltip="Execute recommended action">
                             <span>{{ $rec['action_label'] }}</span>
                             <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
                         </a>
@@ -445,7 +445,7 @@ $analytics = computed(function () {
                     </h3>
                     <p class="text-xs text-slate-400 mt-1">Distribution and proficiency across engineering disciplines.</p>
                 </div>
-                <a href="{{ route('developer.skills') }}" class="text-xs text-emerald-400 hover:underline">Manage Skills</a>
+                <a href="{{ route('developer.skills') }}" class="text-xs text-emerald-400 hover:underline cursor-pointer" data-tooltip="Open skills studio to add competencies">Manage Skills</a>
             </div>
 
             {{-- Category Breakdown Bars --}}
@@ -489,7 +489,7 @@ $analytics = computed(function () {
                     </h3>
                     <p class="text-xs text-slate-400 mt-1">Conversion stages across active job search campaigns.</p>
                 </div>
-                <a href="{{ route('developer.job-tracker') }}" class="text-xs text-purple-400 hover:underline">Open Kanban</a>
+                <a href="{{ route('developer.job-tracker') }}" class="text-xs text-purple-400 hover:underline cursor-pointer" data-tooltip="Open Kanban job application tracker">Open Kanban</a>
             </div>
 
             {{-- 5-Stage Funnel Flow --}}
@@ -544,7 +544,7 @@ $analytics = computed(function () {
                     </h3>
                     <p class="text-xs text-slate-400 mt-1">Breakdown of technology stacks used across your featured work.</p>
                 </div>
-                <a href="{{ route('developer.projects') }}" class="text-xs text-cyan-400 hover:underline">View Projects</a>
+                <a href="{{ route('developer.projects') }}" class="text-xs text-cyan-400 hover:underline cursor-pointer" data-tooltip="Open projects studio to add showcase work">View Projects</a>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -635,7 +635,7 @@ $analytics = computed(function () {
             </div>
 
             <div class="pt-2">
-                <a href="{{ route('developer.domains') }}" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+                <a href="{{ route('developer.domains') }}" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer" data-tooltip="Configure custom domain and DNS verification">
                     <span>Manage Custom Domains & DNS</span>
                     <span>&rarr;</span>
                 </a>
@@ -643,3 +643,4 @@ $analytics = computed(function () {
         </div>
     </div>
 </div>
+
