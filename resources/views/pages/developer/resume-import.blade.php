@@ -157,7 +157,7 @@ $importToPortfolio = function () {
         </div>
 
         @if($step === 2)
-            <button wire:click="$set('step', 1)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold">
+            <button wire:click="$set('step', 1)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold cursor-pointer" data-tooltip="Return to document upload step">
                 &larr; Re-upload File
             </button>
         @endif
@@ -170,7 +170,7 @@ $importToPortfolio = function () {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -180,7 +180,7 @@ $importToPortfolio = function () {
                 <svg class="w-4 h-4 text-rose-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('errorMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -199,7 +199,7 @@ $importToPortfolio = function () {
                 <div class="p-6 rounded-2xl border-2 border-dashed border-slate-800 hover:border-emerald-500/50 transition-colors bg-slate-900/50 text-center space-y-3">
                     <svg class="w-8 h-8 text-slate-400 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
                     <div>
-                        <label class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 cursor-pointer">
+                        <label class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 cursor-pointer" data-tooltip="Select PDF file from your device">
                             <span>Click to choose PDF file</span>
                             <input type="file" wire:model="resumeFile" accept=".pdf" class="hidden" />
                         </label>
@@ -223,7 +223,7 @@ $importToPortfolio = function () {
                 </div>
 
                 <div class="flex justify-end">
-                    <button wire:click="parseResume" wire:loading.attr="disabled" type="button" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md flex items-center gap-2 cursor-pointer">
+                    <button wire:click="parseResume" wire:loading.attr="disabled" type="button" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md flex items-center gap-2 cursor-pointer" data-tooltip="Extract bio, experiences, skills, and projects using AI">
                         <span wire:loading.remove>Parse & Review Data &rarr;</span>
                         <span wire:loading>Extracting Resume Entities...</span>
                     </button>
@@ -240,7 +240,7 @@ $importToPortfolio = function () {
                         <h3 class="text-base font-bold font-heading text-white">Step 2: Review & Confirm Extracted Portfolio Data</h3>
                         <p class="text-xs text-slate-400 mt-0.5">Verify the parsed records before saving them to your live portfolio.</p>
                     </div>
-                    <button wire:click="importToPortfolio" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                    <button wire:click="importToPortfolio" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Commit extracted data into your portfolio">
                         Import to Portfolio &check;
                     </button>
                 </div>
@@ -285,14 +285,15 @@ $importToPortfolio = function () {
                 </div>
 
                 <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                    <button wire:click="$set('step', 1)" class="text-xs text-slate-400 hover:text-white">
+                    <button wire:click="$set('step', 1)" class="text-xs text-slate-400 hover:text-white cursor-pointer" data-tooltip="Discard preview and upload another file">
                         &larr; Back to Upload
                     </button>
-                    <button wire:click="importToPortfolio" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                    <button wire:click="importToPortfolio" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Commit extracted data into your portfolio">
                         Import to Portfolio &check;
                     </button>
                 </div>
             </div>
         </div>
     @endif
+
 </div>
