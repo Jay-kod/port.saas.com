@@ -197,7 +197,7 @@ $deleteProfile = function ($profileId) {
             </p>
         </div>
 
-        <button type="button" wire:click="openCreateModal" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer">
+        <button type="button" wire:click="openCreateModal" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer" data-tooltip="Provision a new client developer portfolio under your agency" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
             <span>+ Provision Client</span>
         </button>
@@ -210,7 +210,7 @@ $deleteProfile = function ($profileId) {
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $successMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -220,7 +220,7 @@ $deleteProfile = function ($profileId) {
                 <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -262,7 +262,7 @@ $deleteProfile = function ($profileId) {
                             @if($isActive)
                                 <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">ACTIVE</span>
                             @endif
-                            <button type="button" wire:click="togglePublish({{ $profile->id }})" class="cursor-pointer">
+                            <button type="button" wire:click="togglePublish({{ $profile->id }})" class="cursor-pointer" data-tooltip="Toggle public publishing state">
                                 @if($profile->is_published)
                                     <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">LIVE</span>
                                 @else
@@ -291,18 +291,18 @@ $deleteProfile = function ($profileId) {
                 <div class="pt-4 border-t border-white/5 space-y-3">
                     <div class="flex items-center justify-between text-xs">
                         @if($isActive)
-                            <span class="text-teal-400 font-bold flex items-center gap-1 font-mono text-[11px]">
+                            <span class="text-teal-400 font-bold flex items-center gap-1 font-mono text-[11px]" data-tooltip="Currently selected active editing context">
                                 <span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Active Workspace
                             </span>
                         @else
-                            <button type="button" wire:click="switchProfile({{ $profile->id }})" class="text-slate-300 hover:text-teal-300 font-semibold flex items-center gap-1 transition-colors cursor-pointer">
+                            <button type="button" wire:click="switchProfile({{ $profile->id }})" class="text-slate-300 hover:text-teal-300 font-semibold flex items-center gap-1 transition-colors cursor-pointer" data-tooltip="Switch active workspace context to {{ $profile->full_name ?: $profile->slug }}">
                                 <span>Switch Context</span>
                                 <span>&rarr;</span>
                             </button>
                         @endif
 
                         @if($profile->is_published)
-                            <a href="{{ url('/' . $profile->slug) }}" target="_blank" class="text-slate-400 hover:text-white flex items-center gap-1">
+                            <a href="{{ url('/' . $profile->slug) }}" target="_blank" class="text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer" data-tooltip="Open public portfolio in new tab">
                                 <span>Preview</span>
                                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                             </a>
@@ -310,10 +310,10 @@ $deleteProfile = function ($profileId) {
                     </div>
 
                     <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/5">
-                        <button type="button" wire:click="openEditModal({{ $profile->id }})" class="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-semibold text-center transition-all cursor-pointer">
+                        <button type="button" wire:click="openEditModal({{ $profile->id }})" class="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-semibold text-center transition-all cursor-pointer" data-tooltip="Edit client name, headline, slug, bio, and theme">
                             Edit Details
                         </button>
-                        <button type="button" wire:click="deleteProfile({{ $profile->id }})" wire:confirm="Are you sure you want to delete this client profile? All associated projects and data will be permanently removed." class="py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 text-xs font-semibold text-center transition-all cursor-pointer">
+                        <button type="button" wire:click="deleteProfile({{ $profile->id }})" wire:confirm="Are you sure you want to delete this client profile? All associated projects and data will be permanently removed." class="py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 text-xs font-semibold text-center transition-all cursor-pointer" data-tooltip="Permanently delete this client profile">
                             Delete
                         </button>
                     </div>
@@ -338,7 +338,7 @@ $deleteProfile = function ($profileId) {
                         </h3>
                         <p class="text-xs text-slate-400 mt-0.5">Configure client identity, custom slug, and design theme.</p>
                     </div>
-                    <button type="button" wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+                    <button type="button" wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-xl font-bold cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit="saveClient" class="space-y-4">
@@ -384,10 +384,10 @@ $deleteProfile = function ($profileId) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold">
+                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold cursor-pointer" data-tooltip="Cancel without saving">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50 cursor-pointer" data-tooltip="Save client profile configuration">
                             {{ $editingProfileId ? 'Save Changes' : 'Provision Client' }}
                         </button>
                     </div>
@@ -395,4 +395,5 @@ $deleteProfile = function ($profileId) {
             </div>
         </div>
     @endif
+
 </div>
