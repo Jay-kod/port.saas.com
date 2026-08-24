@@ -77,7 +77,7 @@ $login = function () {
 
         {{-- Top Brand Header --}}
         <div class="relative z-10 flex items-center justify-between">
-            <a href="/" class="inline-flex items-center gap-2.5 group">
+            <a href="/" class="inline-flex items-center gap-2.5 group cursor-pointer" data-tooltip="Return to DevFolio Homepage">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-400 to-teal-300 text-gray-950 flex items-center justify-center font-black text-base shadow-lg shadow-emerald-500/25 group-hover:scale-105 transition-transform">
                     ⚡
                 </div>
@@ -164,6 +164,7 @@ $login = function () {
                     wire:click="fillDemo"
                     onclick="autofillForm('developer@example.com', 'password', 'email', 'password')"
                     class="py-1.5 px-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                    data-tooltip="Autofill demo developer credentials"
                 >
                     <span>Auto-fill</span>
                     <span>&rarr;</span>
@@ -172,7 +173,7 @@ $login = function () {
 
             {{-- Social Auth Buttons --}}
             <div class="grid grid-cols-2 gap-3">
-                <a href="{{ route('social.redirect', 'google') }}" class="py-2.5 px-3 rounded-xl border border-gray-800 bg-gray-900/90 hover:bg-gray-850 hover:border-gray-700 text-gray-200 text-xs font-semibold flex items-center justify-center gap-2 transition">
+                <a href="{{ route('social.redirect', 'google') }}" class="py-2.5 px-3 rounded-xl border border-gray-800 bg-gray-900/90 hover:bg-gray-850 hover:border-gray-700 text-gray-200 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer" data-tooltip="Continue with Google OAuth">
                     <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                         <path fill="#EA4335" d="M12 5c1.7 0 3 .7 3.7 1.3l2.8-2.8C16.8 1.9 14.6 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.4 2.6C6.2 6.9 8.8 5 12 5z"/>
                         <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/>
@@ -182,7 +183,7 @@ $login = function () {
                     <span>Google</span>
                 </a>
 
-                <a href="{{ route('social.redirect', 'github') }}" class="py-2.5 px-3 rounded-xl border border-gray-800 bg-gray-900/90 hover:bg-gray-850 hover:border-gray-700 text-gray-200 text-xs font-semibold flex items-center justify-center gap-2 transition">
+                <a href="{{ route('social.redirect', 'github') }}" class="py-2.5 px-3 rounded-xl border border-gray-800 bg-gray-900/90 hover:bg-gray-850 hover:border-gray-700 text-gray-200 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer" data-tooltip="Continue with GitHub OAuth">
                     <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                     </svg>
@@ -226,7 +227,7 @@ $login = function () {
                         <label for="password" class="block text-xs font-semibold text-gray-300">
                             Password
                         </label>
-                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 hover:underline transition">
+                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 hover:underline transition cursor-pointer" data-tooltip="Reset your account password">
                             Forgot password?
                         </a>
                     </div>
@@ -245,6 +246,7 @@ $login = function () {
                             @click="showPassword = !showPassword"
                             class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 focus:outline-none cursor-pointer"
                             aria-label="Toggle password visibility"
+                            data-tooltip="Toggle password visibility"
                         >
                             {{-- Eye Open (when password is masked: showPassword is false) --}}
                             <svg x-show="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -264,7 +266,7 @@ $login = function () {
 
                 {{-- Remember Me --}}
                 <div class="flex items-center justify-between pt-1">
-                    <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <label class="inline-flex items-center gap-2 cursor-pointer" data-tooltip="Persist login session across browser restarts">
                         <input
                             type="checkbox"
                             name="remember"
@@ -280,6 +282,7 @@ $login = function () {
                 <button
                     type="submit"
                     class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-gray-950 font-extrabold text-sm shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/35 transition transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-2"
+                    data-tooltip="Sign in and open Developer Workspace"
                 >
                     <span wire:loading.remove>Sign In to Developer Workspace &rarr;</span>
                     <span wire:loading class="inline-flex items-center gap-2">
@@ -296,7 +299,7 @@ $login = function () {
             <div class="text-center pt-2">
                 <p class="text-xs text-gray-400">
                     Don't have a developer portfolio yet?
-                    <a href="/admin/register" class="font-bold text-emerald-400 hover:text-emerald-300 hover:underline transition ml-1">
+                    <a href="/admin/register" class="font-bold text-emerald-400 hover:text-emerald-300 hover:underline transition ml-1 cursor-pointer" data-tooltip="Create a new developer portfolio account">
                         Create one for free &rarr;
                     </a>
                 </p>
@@ -308,11 +311,11 @@ $login = function () {
             <div class="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-gray-500">
                 <span>Looking for a different portal?</span>
                 <div class="flex items-center gap-3">
-                    <a href="/agency/login" class="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 hover:underline transition font-medium">
+                    <a href="/agency/login" class="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 hover:underline transition font-medium cursor-pointer" data-tooltip="Switch to Agency Admin Portal">
                         <span>🏢 Agency Hub</span>
                     </a>
                     <span>&bull;</span>
-                    <a href="/super-admin/login" class="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 hover:underline transition font-medium">
+                    <a href="/super-admin/login" class="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 hover:underline transition font-medium cursor-pointer" data-tooltip="Switch to Super Admin Root Portal">
                         <span>👑 Super Admin</span>
                     </a>
                 </div>
