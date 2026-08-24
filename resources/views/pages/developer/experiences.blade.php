@@ -116,7 +116,7 @@ $deleteExperience = function ($id) {
             </p>
         </div>
 
-        <button wire:click="openCreateModal" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0">
+        <button wire:click="openCreateModal" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer shrink-0" data-tooltip="Add career role and employment history" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
             <span>Add Experience</span>
         </button>
@@ -129,7 +129,7 @@ $deleteExperience = function ($id) {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -145,7 +145,7 @@ $deleteExperience = function ($id) {
             </div>
             <h3 class="text-lg font-bold text-white font-heading">No Experience History Added</h3>
             <p class="text-xs text-slate-400 max-w-md mx-auto">Add your previous software engineering roles, company impact, and responsibilities to power your AI resume generations.</p>
-            <button wire:click="openCreateModal" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2 cursor-pointer">
+            <button wire:click="openCreateModal" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-md inline-flex items-center gap-2 cursor-pointer" data-tooltip="Add your first career experience">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                 <span>Add First Role</span>
             </button>
@@ -159,7 +159,7 @@ $deleteExperience = function ($id) {
                             <div class="flex items-center gap-2">
                                 <h3 class="text-lg font-bold text-white font-heading">{{ $exp->title }}</h3>
                                 @if($exp->is_current)
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" data-tooltip="Active current employment">
                                         CURRENT
                                     </span>
                                 @endif
@@ -178,10 +178,10 @@ $deleteExperience = function ($id) {
                                 {{ $exp->start_date?->format('M Y') }} &mdash; {{ $exp->is_current ? 'Present' : ($exp->end_date?->format('M Y') ?: 'Present') }}
                             </span>
                             <div class="flex items-center gap-1.5">
-                                <button wire:click="openEditModal({{ $exp->id }})" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Edit">
+                                <button wire:click="openEditModal({{ $exp->id }})" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer" data-tooltip="Edit role details and achievements">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                                 </button>
-                                <button wire:click="deleteExperience({{ $exp->id }})" wire:confirm="Are you sure you want to delete this experience record?" class="p-2 rounded-xl bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors" title="Delete">
+                                <button wire:click="deleteExperience({{ $exp->id }})" wire:confirm="Are you sure you want to delete this experience record?" class="p-2 rounded-xl bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition-colors cursor-pointer" data-tooltip="Permanently delete this role">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                 </button>
                             </div>
@@ -206,7 +206,7 @@ $deleteExperience = function ($id) {
                     <h3 class="text-lg font-bold font-heading text-white">
                         {{ $editingId ? 'Edit Experience' : 'Add Experience Record' }}
                     </h3>
-                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                    <button wire:click="$set('showModal', false)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit.prevent="saveExperience" class="space-y-4">
@@ -242,7 +242,7 @@ $deleteExperience = function ($id) {
                         </div>
                     </div>
 
-                    <label class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer">
+                    <label class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer" data-tooltip="Set role as current active position">
                         <input type="checkbox" wire:model.live="is_current" class="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500" />
                         <span class="text-xs font-semibold text-white">I currently work here</span>
                     </label>
@@ -253,10 +253,10 @@ $deleteExperience = function ($id) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs">
+                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 text-slate-300 hover:text-white text-xs cursor-pointer" data-tooltip="Discard changes">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Save role to career timeline">
                             {{ $editingId ? 'Update Experience' : 'Save Experience' }}
                         </button>
                     </div>
@@ -265,3 +265,4 @@ $deleteExperience = function ($id) {
         </div>
     @endif
 </div>
+
