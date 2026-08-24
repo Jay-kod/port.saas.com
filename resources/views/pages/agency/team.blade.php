@@ -127,7 +127,7 @@ $removeMember = function ($userId) {
             </p>
         </div>
 
-        <button type="button" wire:click="$set('showInviteModal', true)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer">
+        <button type="button" wire:click="$set('showInviteModal', true)" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 via-teal-400 to-cyan-400 hover:opacity-95 text-slate-950 font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-teal-950/40 cursor-pointer" data-tooltip="Invite collaborator to join your agency team" data-tooltip-pos="bottom">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" /></svg>
             <span>+ Invite Team Member</span>
         </button>
@@ -140,7 +140,7 @@ $removeMember = function ($userId) {
                 <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $successMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('successMessage', '')" class="text-teal-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -150,7 +150,7 @@ $removeMember = function ($userId) {
                 <svg class="w-4 h-4 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>{{ $errorMessage }}</span>
             </div>
-            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white">&times;</button>
+            <button type="button" wire:click="$set('errorMessage', '')" class="text-rose-400 hover:text-white cursor-pointer" data-tooltip="Dismiss error notification">&times;</button>
         </div>
     @endif
 
@@ -210,7 +210,7 @@ $removeMember = function ($userId) {
                                     <div>
                                         <div class="font-bold text-white flex items-center gap-2">
                                             <span>{{ $this->ownerUser->name }}</span>
-                                            <span class="px-1.5 py-0.2 rounded text-[9px] font-mono bg-teal-500/30 text-teal-300 border border-teal-500/40 font-bold">PRIMARY OWNER</span>
+                                            <span class="px-1.5 py-0.2 rounded text-[9px] font-mono bg-teal-500/30 text-teal-300 border border-teal-500/40 font-bold" data-tooltip="Permanent workspace owner">PRIMARY OWNER</span>
                                         </div>
                                         <div class="text-[10px] text-slate-400">Account Creator</div>
                                     </div>
@@ -266,12 +266,12 @@ $removeMember = function ($userId) {
                                 {{ $role === 'owner' ? 'Full Control' : ($role === 'editor' ? 'Client & Content Management' : 'Read-Only Analytics') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-                                <select wire:change="updateRole({{ $member->id }}, $event.target.value)" class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-[11px] focus:outline-none">
+                                <select wire:change="updateRole({{ $member->id }}, $event.target.value)" class="px-2 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 text-[11px] focus:outline-none cursor-pointer" data-tooltip="Change member permission role">
                                     <option value="owner" {{ $role === 'owner' ? 'selected' : '' }}>Owner</option>
                                     <option value="editor" {{ $role === 'editor' ? 'selected' : '' }}>Editor</option>
                                     <option value="viewer" {{ $role === 'viewer' ? 'selected' : '' }}>Viewer</option>
                                 </select>
-                                <button type="button" wire:click="removeMember({{ $member->id }})" wire:confirm="Revoke team access for this member?" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer">
+                                <button type="button" wire:click="removeMember({{ $member->id }})" wire:confirm="Revoke team access for this member?" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer" data-tooltip="Revoke team member seat and access">
                                     Revoke
                                 </button>
                             </td>
@@ -351,7 +351,7 @@ $removeMember = function ($userId) {
                         <h3 class="text-lg font-bold font-heading text-white">Invite Team Collaborator</h3>
                         <p class="text-xs text-slate-400 mt-0.5">Grant access to manage client developer portfolios.</p>
                     </div>
-                    <button type="button" wire:click="$set('showInviteModal', false)" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+                    <button type="button" wire:click="$set('showInviteModal', false)" class="text-slate-400 hover:text-white text-xl font-bold cursor-pointer" data-tooltip="Close modal">&times;</button>
                 </div>
 
                 <form wire:submit="inviteMember" class="space-y-4">
@@ -371,10 +371,10 @@ $removeMember = function ($userId) {
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-white/5">
-                        <button type="button" wire:click="$set('showInviteModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold">
+                        <button type="button" wire:click="$set('showInviteModal', false)" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold cursor-pointer" data-tooltip="Cancel invitation">
                             Cancel
                         </button>
-                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50">
+                        <button type="submit" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-teal-950/50 cursor-pointer" data-tooltip="Send invitation email to collaborator">
                             Send Invitation
                         </button>
                     </div>
@@ -382,4 +382,5 @@ $removeMember = function ($userId) {
             </div>
         </div>
     @endif
+
 </div>
