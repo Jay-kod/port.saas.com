@@ -266,6 +266,7 @@ $skipToDashboard = function () {
                             <div
                                 wire:click="$set('selected_theme_id', {{ $t->id }})"
                                 class="cursor-pointer relative flex flex-col p-4 rounded-2xl border transition-all {{ $selected_theme_id === $t->id ? 'border-amber-500 bg-amber-500/10 ring-2 ring-amber-500/20 shadow-lg shadow-amber-500/5' : 'border-gray-800 bg-gray-950/40 hover:border-gray-700' }}"
+                                data-tooltip="Select {{ $t->name }} theme for your portfolio"
                             >
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="font-semibold text-sm text-white">{{ $t->name }}</span>
@@ -328,7 +329,8 @@ $skipToDashboard = function () {
                     <button
                         wire:click="prevStep"
                         type="button"
-                        class="px-4 py-2.5 rounded-xl border border-gray-700 bg-gray-800/60 hover:bg-gray-800 text-sm font-medium text-gray-300 transition"
+                        class="px-4 py-2.5 rounded-xl border border-gray-700 bg-gray-800/60 hover:bg-gray-800 text-sm font-medium text-gray-300 transition cursor-pointer"
+                        data-tooltip="Return to previous onboarding step"
                     >
                         Back
                     </button>
@@ -336,7 +338,8 @@ $skipToDashboard = function () {
                     <button
                         wire:click="skipToDashboard"
                         type="button"
-                        class="text-xs text-gray-500 hover:text-gray-400 transition"
+                        class="text-xs text-gray-500 hover:text-gray-400 transition cursor-pointer"
+                        data-tooltip="Skip onboarding setup and jump directly to developer dashboard"
                     >
                         Skip to Dashboard →
                     </button>
@@ -346,7 +349,8 @@ $skipToDashboard = function () {
                     <button
                         wire:click="nextStep"
                         type="button"
-                        class="ml-auto inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-semibold transition shadow-md shadow-amber-500/20"
+                        class="ml-auto inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-semibold transition shadow-md shadow-amber-500/20 cursor-pointer"
+                        data-tooltip="Proceed to next onboarding step"
                     >
                         <span>Continue</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -357,7 +361,8 @@ $skipToDashboard = function () {
                     <button
                         wire:click="saveAndFinish"
                         type="button"
-                        class="ml-auto inline-flex items-center gap-1.5 px-8 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition shadow-lg shadow-emerald-500/20"
+                        class="ml-auto inline-flex items-center gap-1.5 px-8 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition shadow-lg shadow-emerald-500/20 cursor-pointer"
+                        data-tooltip="Save preferences, publish portfolio, and open developer workspace"
                     >
                         <span>Complete Setup & Open Dashboard</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
