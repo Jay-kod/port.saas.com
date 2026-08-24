@@ -185,6 +185,12 @@ Route::middleware(['auth', 'prevent.back'])->group(function () {
     Volt::route('/developer/analytics', 'developer.analytics')->name('developer.analytics');
 
     Volt::route('/agency', 'agency.index')->name('agency');
+    Volt::route('/agency/clients', 'agency.clients')->name('agency.clients');
+    Volt::route('/agency/team', 'agency.team')->name('agency.team');
+    Volt::route('/agency/branding', 'agency.branding')->name('agency.branding');
+    Volt::route('/agency/domains', 'agency.domains')->name('agency.domains');
+    Volt::route('/agency/billing', 'agency.billing')->name('agency.billing');
+    Volt::route('/agency/analytics', 'agency.analytics')->name('agency.analytics');
 });
 
 Route::middleware(['auth', 'super_admin', 'prevent.back'])->group(function () {
