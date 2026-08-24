@@ -65,9 +65,10 @@
                 document.documentElement.setAttribute('data-theme-mode', current);
                 localStorage.setItem('theme-mode', current);
             })()"
-            class="p-2.5 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 hover:scale-105"
+            class="p-2.5 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 hover:scale-105 cursor-pointer"
             style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
-            title="Toggle Light/Dark Mode"
+            data-tooltip="Toggle Dark and Light interface theme"
+            data-tooltip-pos="left"
             aria-label="Toggle Theme Mode"
         >
             {{-- Moon icon (shown in light mode to switch to dark) --}}
@@ -91,12 +92,12 @@
     @if(! $hidePlatformBranding && config('saas.mode'))
         <footer class="py-6 text-center text-xs opacity-75 border-t" style="border-color: var(--color-border); color: var(--color-text-muted);">
             <p>
-                Powered by <a href="{{ route('home') }}" class="font-bold underline hover:opacity-100 transition" style="color: var(--color-primary);">DevFolio.AI</a>
+                Powered by <a href="{{ route('home') }}" class="font-bold underline hover:opacity-100 transition" style="color: var(--color-primary);" data-tooltip="Visit DevFolio SaaS Platform Homepage">DevFolio.AI</a>
                 @if(Route::has('terms'))
-                    &bull; <a href="{{ route('terms') }}" class="hover:underline">Terms</a>
+                    &bull; <a href="{{ route('terms') }}" class="hover:underline" data-tooltip="Read Terms of Service">Terms</a>
                 @endif
                 @if(Route::has('privacy'))
-                    &bull; <a href="{{ route('privacy') }}" class="hover:underline">Privacy</a>
+                    &bull; <a href="{{ route('privacy') }}" class="hover:underline" data-tooltip="Read Privacy Policy">Privacy</a>
                 @endif
             </p>
         </footer>
@@ -121,7 +122,8 @@
                             localStorage.setItem('cookie-consent', 'accepted');
                             document.getElementById('cookie-consent-banner').classList.add('hidden');
                         })()"
-                        class="py-1.5 px-3 rounded-lg text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 transition"
+                        class="py-1.5 px-3 rounded-lg text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 transition cursor-pointer"
+                        data-tooltip="Accept essential cookies and preference tracking"
                     >
                         Accept All
                     </button>
@@ -131,8 +133,9 @@
                             localStorage.setItem('cookie-consent', 'essential');
                             document.getElementById('cookie-consent-banner').classList.add('hidden');
                         })()"
-                        class="py-1.5 px-3 rounded-lg text-xs font-semibold hover:opacity-80 transition"
+                        class="py-1.5 px-3 rounded-lg text-xs font-semibold hover:opacity-80 transition cursor-pointer"
                         style="color: var(--color-text-muted);"
+                        data-tooltip="Only save essential theme and session cookies"
                     >
                         Essential Only
                     </button>
