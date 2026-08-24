@@ -77,13 +77,15 @@ $createClient = function () {
         $counter++;
     }
 
+    $validThemeId = Theme::find($this->newClientThemeId)?->id;
+
     $newProfile = Profile::create([
         'account_id' => $this->account->id,
         'user_id' => Auth::id(),
         'full_name' => $this->newClientName,
         'headline' => $this->newClientHeadline ?: 'Software Engineer',
         'slug' => $slug,
-        'theme_id' => $this->newClientThemeId ?: 1,
+        'theme_id' => $validThemeId,
         'theme_mode_default' => 'dark',
         'is_published' => false,
     ]);
