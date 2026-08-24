@@ -81,7 +81,7 @@ $login = function () {
 
         {{-- Top Brand Header with Warning Badge --}}
         <div class="relative z-10 flex items-center justify-between">
-            <a href="/" class="inline-flex items-center gap-2.5 group">
+            <a href="/" class="inline-flex items-center gap-2.5 group cursor-pointer" data-tooltip="Return to DevFolio Homepage">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-400 to-orange-500 text-gray-950 flex items-center justify-center font-black text-base shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform">
                     👑
                 </div>
@@ -168,6 +168,7 @@ $login = function () {
                     wire:click="fillDemo"
                     onclick="autofillForm('admin@example.com', 'password', 'admin_email', 'admin_password')"
                     class="py-1.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                    data-tooltip="Autofill demo super-admin credentials"
                 >
                     <span>Auto-fill</span>
                     <span>&rarr;</span>
@@ -205,7 +206,7 @@ $login = function () {
                         <label for="admin_password" class="block text-xs font-semibold text-gray-300">
                             Root Password
                         </label>
-                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-amber-400 hover:text-amber-300 hover:underline transition">
+                        <a href="{{ route('password.request') }}" class="text-xs font-semibold text-amber-400 hover:text-amber-300 hover:underline transition cursor-pointer" data-tooltip="Reset your root administrator password">
                             Forgot password?
                         </a>
                     </div>
@@ -224,6 +225,7 @@ $login = function () {
                             @click="showPassword = !showPassword"
                             class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-200 focus:outline-none cursor-pointer"
                             aria-label="Toggle password visibility"
+                            data-tooltip="Toggle password visibility"
                         >
                             {{-- Eye Open (when password is masked: showPassword is false) --}}
                             <svg x-show="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,7 +245,7 @@ $login = function () {
 
                 {{-- Remember Me --}}
                 <div class="flex items-center justify-between pt-1">
-                    <label class="inline-flex items-center gap-2 cursor-pointer">
+                    <label class="inline-flex items-center gap-2 cursor-pointer" data-tooltip="Persist admin session across browser restarts">
                         <input
                             type="checkbox"
                             name="remember"
@@ -259,6 +261,7 @@ $login = function () {
                 <button
                     type="submit"
                     class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-gray-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 transition transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-2"
+                    data-tooltip="Authenticate and enter Super Admin Master Control Hub"
                 >
                     <span wire:loading.remove>Sign In to Master Control &rarr;</span>
                     <span wire:loading class="inline-flex items-center gap-2">
@@ -284,11 +287,11 @@ $login = function () {
             <div class="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-gray-500">
                 <span>Looking for user workspaces?</span>
                 <div class="flex items-center gap-3">
-                    <a href="/developer/login" class="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline transition font-medium">
+                    <a href="/developer/login" class="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline transition font-medium cursor-pointer" data-tooltip="Switch to Developer Portal">
                         <span>👤 Developer Portal</span>
                     </a>
                     <span>&bull;</span>
-                    <a href="/agency/login" class="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 hover:underline transition font-medium">
+                    <a href="/agency/login" class="inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 hover:underline transition font-medium cursor-pointer" data-tooltip="Switch to Agency Admin Portal">
                         <span>🏢 Agency Hub</span>
                     </a>
                 </div>
