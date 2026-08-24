@@ -78,7 +78,7 @@ $saveSettings = function () {
         </div>
 
         @if($hasExistingKey)
-            <div class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 shrink-0">
+            <div class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 shrink-0" data-tooltip="Your account is exempt from AI usage limits" data-tooltip-pos="bottom">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>BYOK ACTIVE (UNLIMITED)</span>
             </div>
@@ -92,7 +92,7 @@ $saveSettings = function () {
                 <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>{{ $savedMessage }}</span>
             </div>
-            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white">&times;</button>
+            <button wire:click="$set('savedMessage', '')" class="text-slate-400 hover:text-white cursor-pointer" data-tooltip="Dismiss notification">&times;</button>
         </div>
     @endif
 
@@ -137,7 +137,7 @@ $saveSettings = function () {
                 <p class="text-[11px] text-slate-500">Stored using Laravel AES-256 encryption. Never exposed to public users or client-side scripts.</p>
             </div>
 
-            <label class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer">
+            <label class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center gap-3 cursor-pointer" data-tooltip="Toggle BYOK key for generation pipelines">
                 <input type="checkbox" wire:model="is_active" class="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500" />
                 <div>
                     <div class="text-xs font-semibold text-white">Enable BYOK Key for Generations</div>
@@ -146,10 +146,11 @@ $saveSettings = function () {
             </label>
 
             <div class="flex justify-end gap-3 pt-2">
-                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer" data-tooltip="Encrypt and save API credentials">
                     Save AI Settings
                 </button>
             </div>
         </form>
     </div>
 </div>
+
