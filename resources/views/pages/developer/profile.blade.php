@@ -229,7 +229,7 @@ $save = function () {
             </h3>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <label class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/30 transition-all flex items-start gap-3 cursor-pointer">
+                <label class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/30 transition-all flex items-start gap-3 cursor-pointer" data-tooltip="Make your portfolio website accessible on the internet">
                     <input type="checkbox" wire:model="is_published" class="mt-1 rounded border-slate-700 text-emerald-500 focus:ring-emerald-500" />
                     <div>
                         <div class="text-xs font-bold text-white">Publish Portfolio Publicly</div>
@@ -237,7 +237,7 @@ $save = function () {
                     </div>
                 </label>
 
-                <label class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/30 transition-all flex items-start gap-3 cursor-pointer">
+                <label class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/30 transition-all flex items-start gap-3 cursor-pointer" data-tooltip="Feature your profile in the public talent directory">
                     <input type="checkbox" wire:model="is_discoverable" class="mt-1 rounded border-slate-700 text-emerald-500 focus:ring-emerald-500" />
                     <div>
                         <div class="text-xs font-bold text-white">List in Developer Directory</div>
@@ -254,10 +254,11 @@ $save = function () {
         </div>
 
         <div class="flex justify-end">
-            <button wire:click="save" type="button" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer">
+            <button wire:click="save" type="button" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-950/50 flex items-center gap-2 cursor-pointer" data-tooltip="Commit and publish all profile details immediately">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                 <span>Save All Profile Changes</span>
             </button>
         </div>
     </form>
 </div>
+
