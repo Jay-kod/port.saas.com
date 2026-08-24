@@ -102,17 +102,17 @@ $resolveReport = function ($reportId, $status) {
 
         <!-- Quick Jump Workspace Actions -->
         <div class="flex flex-wrap items-center gap-3">
-            <a href="{{ route('dashboard') }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+            <a href="{{ route('dashboard') }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer" data-tooltip="Open Developer Studio workspace in a new tab">
                 <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                 <span>Developer Studio</span>
                 <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
-            <a href="{{ route('agency') }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 text-xs font-semibold transition-all flex items-center gap-2">
+            <a href="{{ route('agency') }}" target="_blank" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-teal-400 hover:border-teal-500/40 text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer" data-tooltip="Open Agency Multi-Client Hub in a new tab">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>
                 <span>Agency Hub</span>
                 <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
             </a>
-            <button type="button" wire:click="purgeCache" class="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-mono font-bold text-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-amber-950/50">
+            <button type="button" wire:click="purgeCache" class="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-mono font-bold text-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-amber-950/50" data-tooltip="Flush application cache, config, routes, and views">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                 <span>Purge Cache</span>
             </button>
@@ -128,7 +128,7 @@ $resolveReport = function ($reportId, $status) {
             </svg>
             <span>{{ $actionMessage }}</span>
         </div>
-        <button wire:click="$set('actionMessage', '')" class="text-amber-400 hover:text-white text-xs underline cursor-pointer">Dismiss</button>
+        <button wire:click="$set('actionMessage', '')" class="text-amber-400 hover:text-white text-xs underline cursor-pointer" data-tooltip="Dismiss notification">Dismiss</button>
     </div>
     @endif
 
