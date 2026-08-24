@@ -87,7 +87,7 @@ $suspendAndUnpublish = function ($reportId) {
         </div>
 
         <div class="flex items-center gap-3">
-            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all">
+            <a href="{{ route('super-admin.dashboard') }}" class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white text-xs font-semibold transition-all cursor-pointer" data-tooltip="Return to Super Admin Master Control Hub">
                 &larr; Telemetry Hub
             </a>
         </div>
@@ -100,7 +100,7 @@ $suspendAndUnpublish = function ($reportId) {
             <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
             <span>{{ $successMessage }}</span>
         </div>
-        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer">Dismiss</button>
+        <button wire:click="$set('successMessage', '')" class="text-amber-400 hover:text-white underline text-xs cursor-pointer" data-tooltip="Dismiss notification">Dismiss</button>
     </div>
     @endif
 
@@ -111,22 +111,26 @@ $suspendAndUnpublish = function ($reportId) {
             <div class="flex items-center gap-1.5 font-mono text-xs overflow-x-auto pb-1 sm:pb-0">
                 <button type="button" 
                         wire:click="$set('statusFilter', 'all')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'all' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'all' ? 'bg-amber-600 text-slate-950 shadow-md shadow-amber-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="View all abuse reports">
                     All Reports
                 </button>
                 <button type="button" 
                         wire:click="$set('statusFilter', 'pending')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'pending' ? 'bg-red-600 text-white shadow-md shadow-red-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'pending' ? 'bg-red-600 text-white shadow-md shadow-red-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by pending open reports">
                     Pending
                 </button>
                 <button type="button" 
                         wire:click="$set('statusFilter', 'resolved')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'resolved' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'resolved' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-950' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by resolved reports">
                     Resolved
                 </button>
                 <button type="button" 
                         wire:click="$set('statusFilter', 'dismissed')"
-                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'dismissed' ? 'bg-slate-800 text-slate-300 border border-slate-700' : 'bg-slate-900 text-slate-400 hover:text-white' }}">
+                        class="px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer {{ $statusFilter === 'dismissed' ? 'bg-slate-800 text-slate-300 border border-slate-700' : 'bg-slate-900 text-slate-400 hover:text-white' }}"
+                        data-tooltip="Filter by dismissed false positives">
                     Dismissed
                 </button>
             </div>
@@ -134,7 +138,7 @@ $suspendAndUnpublish = function ($reportId) {
             <!-- Category Selector -->
             <div class="flex items-center gap-2 font-mono text-xs">
                 <span class="text-slate-500">Reason:</span>
-                <select wire:model.live="reasonFilter" class="px-3 py-1.5 rounded-xl bg-black border border-amber-950 text-white focus:outline-none focus:border-amber-500 text-xs">
+                <select wire:model.live="reasonFilter" class="px-3 py-1.5 rounded-xl bg-black border border-amber-950 text-white focus:outline-none focus:border-amber-500 text-xs cursor-pointer" data-tooltip="Filter reports by violation category">
                     <option value="all">All Violation Types</option>
                     <option value="spam">Commercial Spam</option>
                     <option value="harassment">Harassment / Abusive</option>
@@ -166,7 +170,7 @@ $suspendAndUnpublish = function ($reportId) {
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="font-bold text-white text-sm">Report #{{ $report->id }}</div>
                             @if($report->profile)
-                            <a href="{{ url('/' . $report->profile->slug) }}" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1 text-[11px]">
+                            <a href="{{ url('/' . $report->profile->slug) }}" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1 text-[11px] cursor-pointer" data-tooltip="Open reported portfolio site in a new tab">
                                 <span>/{{ $report->profile->slug }}</span>
                                 <svg class="w-3 h-3 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                             </a>
@@ -192,18 +196,21 @@ $suspendAndUnpublish = function ($reportId) {
                         <td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
                             <button type="button" 
                                     wire:click="openDetail({{ $report->id }})" 
-                                    class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-bold transition-all cursor-pointer">
+                                    class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-bold transition-all cursor-pointer"
+                                    data-tooltip="Open incident investigation and evidence panel">
                                 Inspect
                             </button>
                             @if($report->status === 'pending')
                             <button type="button" 
                                     wire:click="resolveReport({{ $report->id }}, 'resolved')" 
-                                    class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold transition-all cursor-pointer">
+                                    class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold transition-all cursor-pointer"
+                                    data-tooltip="Mark report resolved and close investigation">
                                 Resolve
                             </button>
                             <button type="button" 
                                     wire:click="resolveReport({{ $report->id }}, 'dismissed')" 
-                                    class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 text-[10px] transition-all cursor-pointer">
+                                    class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 text-[10px] transition-all cursor-pointer"
+                                    data-tooltip="Dismiss abuse report as false positive">
                                 Dismiss
                             </button>
                             @endif
@@ -232,7 +239,7 @@ $suspendAndUnpublish = function ($reportId) {
                     <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-300 text-xs font-bold uppercase">Report #{{ $selectedReport->id }}</span>
                     <h3 class="text-base font-bold text-white">Incident Investigation</h3>
                 </div>
-                <button type="button" wire:click="$set('showDetailModal', false)" class="text-slate-400 hover:text-white text-lg">&times;</button>
+                <button type="button" wire:click="$set('showDetailModal', false)" class="text-slate-400 hover:text-white text-lg cursor-pointer" data-tooltip="Close investigation modal">&times;</button>
             </div>
 
             <div class="space-y-4 text-xs text-slate-300">
@@ -265,19 +272,22 @@ $suspendAndUnpublish = function ($reportId) {
             <div class="flex items-center justify-between gap-3 pt-3 border-t border-amber-950/60">
                 <button type="button" 
                         wire:click="suspendAndUnpublish({{ $selectedReport->id }})" 
-                        class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-950 transition-all cursor-pointer">
+                        class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-950 transition-all cursor-pointer"
+                        data-tooltip="Take down and unpublish reported portfolio immediately">
                     Suspend & Unpublish Portfolio
                 </button>
 
                 <div class="flex items-center gap-2">
                     <button type="button" 
                             wire:click="resolveReport({{ $selectedReport->id }}, 'dismissed')" 
-                            class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white text-xs font-semibold">
+                            class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white text-xs font-semibold cursor-pointer"
+                            data-tooltip="Dismiss report without taking enforcement action">
                         Dismiss
                     </button>
                     <button type="button" 
                             wire:click="resolveReport({{ $selectedReport->id }}, 'resolved')" 
-                            class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-950">
+                            class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-950 cursor-pointer"
+                            data-tooltip="Mark investigation as resolved">
                         Mark Resolved
                     </button>
                 </div>
