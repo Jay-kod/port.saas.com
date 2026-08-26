@@ -11,7 +11,7 @@
             <button
                 type="button"
                 wire:click="openAddModal('saved')"
-                class="inline-flex items-center gap-2 py-2.5 px-5 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md shadow-amber-500/20 transition"
+                class="min-h-[44px] inline-flex items-center justify-center gap-2 py-2.5 px-6 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md shadow-amber-500/20 transition cursor-pointer"
             >
                 <span>+ Add Application</span>
             </button>
