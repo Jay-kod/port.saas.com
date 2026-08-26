@@ -46,25 +46,26 @@ $certificatesCount = computed(fn () => Certificate::query()->count());
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                             <span>Available</span>
                         </span>
+            {{-- Profile Header Layout --}}
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold"
+                         style="background: var(--color-background); border: 1px solid var(--color-border); color: var(--color-primary);">
+                        <span class="w-2 h-2 rounded-full animate-pulse" style="background: var(--color-primary);"></span>
+                        <span>Available for Opportunities</span>
                     </div>
-
-                    <p class="text-sm sm:text-lg font-medium leading-relaxed" style="color: var(--color-primary);">
-                        {{ $this->profile->headline }}
+                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight" style="color: var(--color-text);">
+                        {{ $this->profile?->full_name }}
+                    </h1>
+                    <p class="text-base sm:text-xl font-medium" style="color: var(--color-primary);">
+                        {{ $this->profile?->headline }}
                     </p>
-
-                    @if ($this->profile->location)
-                        <p class="text-xs sm:text-sm flex items-center justify-center sm:justify-start gap-1.5 opacity-75" style="color: var(--color-text-muted);">
+                    @if ($this->profile?->location)
+                        <p class="text-xs sm:text-sm flex items-center gap-1.5 pt-1" style="color: var(--color-text-muted);">
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                             <span>{{ $this->profile->location }}</span>
                         </p>
                     @endif
-
-                    <p class="text-xs sm:text-sm leading-relaxed pt-1" style="color: var(--color-text-muted);">
-                        {{ $this->profile->bio }}
-                    </p>
-                </div>
-            </div>
-
             {{-- Navigation Pill Bar (Scrollable on mobile) --}}
             <div class="mt-8 pt-6 border-t flex items-center justify-center sm:justify-start gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-none"
                  style="border-color: var(--color-border);">
