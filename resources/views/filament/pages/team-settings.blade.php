@@ -16,7 +16,7 @@
                             wire:model="inviteName"
                             required
                             placeholder="Alex Morgan"
-                            class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2.5 text-gray-900 dark:text-white"
+                            class="w-full min-h-[48px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base px-3.5 text-gray-900 dark:text-white"
                         />
                     </div>
 
@@ -27,7 +27,7 @@
                             wire:model="inviteEmail"
                             required
                             placeholder="alex@example.com"
-                            class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2.5 text-gray-900 dark:text-white"
+                            class="w-full min-h-[48px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base px-3.5 text-gray-900 dark:text-white"
                         />
                     </div>
 
@@ -35,7 +35,7 @@
                         <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Role *</label>
                         <select
                             wire:model="inviteRole"
-                            class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2.5 text-gray-900 dark:text-white"
+                            class="w-full min-h-[48px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base px-3 text-gray-900 dark:text-white"
                         >
                             <option value="editor">Editor (Can edit data)</option>
                             <option value="viewer">Viewer (Read-only)</option>
@@ -46,7 +46,7 @@
                     <div>
                         <button
                             type="submit"
-                            class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md shadow-amber-500/20 transition"
+                            class="w-full min-h-[48px] px-5 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md shadow-amber-500/20 transition inline-flex items-center justify-center cursor-pointer"
                         >
                             + Add Member
                         </button>
