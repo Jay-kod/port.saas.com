@@ -18,8 +18,7 @@ $project = computed(fn () => Project::query()->where('slug', $this->projectSlug 
         @php
             $slug = $this->profile?->slug ?? request()->route('slug') ?? request('slug');
             $slugParam = $slug ? ['slug' => $slug] : [];
-            $hasSlugRoute = \Illuminate\Support\Facades\Route::has('tenant.projects');
-            $backRoute = $hasSlugRoute && $slug ? route('tenant.projects', $slugParam) : (Route::has('projects') ? route('projects') : url('/projects'));
+            $backRoute = Route::has('projects') ? route('projects', $slugParam) : url('/projects');
         @endphp
         <a href="{{ $backRoute }}" class="inline-flex items-center gap-1.5 font-nav font-bold hover:underline mb-6 min-h-[44px]" style="color: var(--color-primary);">
             <span>&larr;</span>
