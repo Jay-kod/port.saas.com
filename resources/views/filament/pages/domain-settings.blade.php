@@ -41,14 +41,14 @@
                         wire:model="newDomain"
                         placeholder="portfolio.yourname.com"
                         {{ ! $this->canUseCustomDomains() ? 'disabled' : '' }}
-                        class="w-full pl-20 pr-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="w-full pl-20 pr-4 min-h-[48px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 
                 <button
                     type="submit"
                     {{ ! $this->canUseCustomDomains() ? 'disabled' : '' }}
-                    class="py-2.5 px-6 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-amber-500/20 transition"
+                    class="min-h-[48px] px-8 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-amber-500/20 transition inline-flex items-center justify-center cursor-pointer"
                 >
                     Connect Domain
                 </button>
@@ -90,7 +90,7 @@
                                 <button
                                     type="button"
                                     wire:click="verifyDomain({{ $domain->id }})"
-                                    class="py-1.5 px-4 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-sm transition"
+                                    class="min-h-[44px] px-5 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-sm transition inline-flex items-center justify-center cursor-pointer"
                                 >
                                     Verify DNS Now
                                 </button>
@@ -99,7 +99,7 @@
                             <button
                                 type="button"
                                 wire:click="removeDomain({{ $domain->id }})"
-                                class="p-2 rounded-xl text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
+                                class="min-h-[44px] px-4 rounded-xl text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition inline-flex items-center justify-center cursor-pointer"
                                 title="Disconnect Domain"
                             >
                                 Disconnect
