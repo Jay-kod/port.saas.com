@@ -48,7 +48,7 @@ $certificates = computed(fn () => Certificate::query()->orderBy('sort_order')->g
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
         @forelse ($this->certificates as $certificate)
             @php
-                $certRoute = $hasSlugRoute && $slug ? route('tenant.certificate.detail', ['slug' => $slug, 'certSlug' => $certificate->slug]) : (Route::has('certificates.show') ? route('certificates.show', $certificate->slug) : '#');
+                $certRoute = Route::has('certificates.show') ? route('certificates.show', $hasSlugRoute && $slug ? ['slug' => $slug, 'certSlug' => $certificate->slug] : ['slug' => $certificate->slug]) : '#';
             @endphp
             <a href="{{ $certRoute }}"
                class="p-6 sm:p-8 rounded-3xl border transition duration-200 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between group"
