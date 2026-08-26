@@ -7,32 +7,72 @@ use function Livewire\Volt\{state, computed};
 state(['slug' => null, 'projectSlug' => null]);
 
 $profile = computed(fn () => app(CurrentProfileResolver::class)->resolve());
-
 $project = computed(fn () => Project::query()->where('slug', $this->projectSlug ?: $this->slug)->firstOrFail());
 
 ?>
 
-<div class="max-w-3xl mx-auto px-6 py-16">
-    <h1 class="text-3xl font-bold">{{ $this->project->title }}</h1>
-    <p class="mt-2" style="color: var(--color-text-muted)">{{ $this->project->summary }}</p>
-    <p class="mt-6">{{ $this->project->description }}</p>
+<div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16 space-y-6 w-full overflow-x-hidden">
+    {{-- Header Card --}}
+    <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border relative overflow-hidden backdrop-blur-xl transition-all shadow-xl"
+         style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text);">
+        <a href="{{ route('projects') }}" class="inline-flex items-center gap-1 text-xs font-semibold hover:underline mb-4 opacity-75" style="color: var(--color-primary);">
+            &larr; Back to Projects
+        </a>
 
-    @if ($this->project->tech_stack)
-        <div class="mt-6 flex gap-2 flex-wrap">
-            @foreach ($this->project->tech_stack as $tech)
-                <span class="text-xs px-2 py-1 rounded" style="background: var(--color-surface); border: 1px solid var(--color-border)">{{ $tech }}</span>
-            @endforeach
+        <div class="space-y-3">
+            <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight" style="color: var(--color-text);">
+                {{ $this->project->title }}
+            </h1>
+            <p class="text-sm sm:text-base leading-relaxed" style="color: var(--color-text-muted);">
+                {{ $this->project->summary }}
+            </p>
         </div>
-    @endif
 
-    <div class="mt-6 flex gap-4">
-        @if ($this->project->repo_url)
-            <a href="{{ $this->project->repo_url }}" class="underline cursor-pointer" target="_blank" rel="noopener" data-tooltip="View source code on external repository">Repository</a>
+        {{-- Tech Stack Pills --}}
+        @if ($this->project->tech_stack)
+            <div class="mt-6 flex gap-2 flex-wrap pt-4 border-t" style="border-color: var(--color-border);">
+                @foreach (is_array($this->project->tech_stack) ? $this->project->tech_stack : explode(',', $this->project->tech_stack) as $tech)
+                    <span class="text-xs px-3 py-1 rounded-lg font-medium" style="background: var(--color-background); border: 1px solid var(--color-border); color: var(--color-text);">
+                        {{ trim($tech) }}
+                    </span>
+                @endforeach
+            </div>
         @endif
-        @if ($this->project->live_url)
-            <a href="{{ $this->project->live_url }}" class="underline cursor-pointer" target="_blank" rel="noopener" data-tooltip="Open live deployment in new tab">Live demo</a>
-        @endif
+
+        {{-- Action Links --}}
+        <div class="mt-6 flex flex-wrap gap-3">
+            @if ($this->project->live_url)
+                <a href="{{ $this->project->live_url }}"
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-md transition hover:scale-105"
+                   target="_blank" rel="noopener"
+                   style="background: var(--color-primary); color: #000000;">
+                    <span>Live Demo</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+            @endif
+
+            @if ($this->project->repo_url)
+                <a href="{{ $this->project->repo_url }}"
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition hover:opacity-80"
+                   target="_blank" rel="noopener"
+                   style="background: var(--color-background); border-color: var(--color-border); color: var(--color-text);">
+                    <span>GitHub Repository</span>
+                    <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+            @endif
+        </div>
     </div>
 
-    <a href="{{ route('projects') }}" class="underline mt-10 inline-block cursor-pointer" data-tooltip="Return to projects showcase">&larr; Back to projects</a>
+    {{-- Detailed Description Card --}}
+    @if ($this->project->description)
+        <div class="p-6 sm:p-8 rounded-2xl sm:rounded-3xl border space-y-4"
+             style="background: var(--color-surface); border-color: var(--color-border); color: var(--color-text);">
+            <h2 class="text-lg sm:text-xl font-bold tracking-tight" style="color: var(--color-text);">
+                Project Overview & Architecture
+            </h2>
+            <div class="text-xs sm:text-sm leading-relaxed whitespace-pre-line" style="color: var(--color-text-muted);">
+                {{ $this->project->description }}
+            </div>
+        </div>
+    @endif
 </div>
