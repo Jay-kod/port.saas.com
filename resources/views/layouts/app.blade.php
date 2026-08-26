@@ -59,9 +59,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen antialiased relative w-full overflow-x-hidden">
-    {{-- Floating Theme Light/Dark Mode Switcher --}}
-    <div class="fixed bottom-20 right-3.5 sm:bottom-auto sm:top-20 sm:right-4 z-[55]">
+<body class="min-h-screen antialiased relative w-full overflow-x-hidden font-body">
+    {{-- Floating Theme Light/Dark Mode Switcher (≥44px Touch Target) --}}
+    <div class="fixed bottom-20 right-4 sm:bottom-auto sm:top-20 sm:right-6 z-[55]">
         <button
             type="button"
             id="theme-mode-toggle"
@@ -70,7 +70,7 @@
                 document.documentElement.setAttribute('data-theme-mode', current);
                 localStorage.setItem('theme-mode', current);
             })()"
-            class="p-2.5 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 hover:scale-105 cursor-pointer"
+            class="touch-target p-3 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300 hover:scale-105 cursor-pointer min-h-[48px] min-w-[48px]"
             style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
             data-tooltip="Toggle Dark and Light interface theme"
             data-tooltip-pos="left"
@@ -95,29 +95,31 @@
     @endphp
 
     @if(! $hidePlatformBranding && config('saas.mode'))
-        <footer class="py-6 text-center text-xs opacity-75 border-t" style="border-color: var(--color-border); color: var(--color-text-muted);">
-            <p>
-                Powered by <a href="{{ route('home') }}" class="font-bold underline hover:opacity-100 transition" style="color: var(--color-primary);" data-tooltip="Visit DevFolio SaaS Platform Homepage">DevFolio.AI</a>
-                @if(Route::has('terms'))
-                    &bull; <a href="{{ route('terms') }}" class="hover:underline" data-tooltip="Read Terms of Service">Terms</a>
-                @endif
-                @if(Route::has('privacy'))
-                    &bull; <a href="{{ route('privacy') }}" class="hover:underline" data-tooltip="Read Privacy Policy">Privacy</a>
-                @endif
-            </p>
+        <footer class="py-6 sm:py-8 text-center font-caption opacity-75 border-t" style="border-color: var(--color-border); color: var(--color-text-muted);">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <p>
+                    Powered by <a href="{{ route('home') }}" class="font-bold underline hover:opacity-100 transition" style="color: var(--color-primary);" data-tooltip="Visit DevFolio SaaS Platform Homepage">DevFolio.AI</a>
+                    @if(Route::has('terms'))
+                        &bull; <a href="{{ route('terms') }}" class="hover:underline" data-tooltip="Read Terms of Service">Terms</a>
+                    @endif
+                    @if(Route::has('privacy'))
+                        &bull; <a href="{{ route('privacy') }}" class="hover:underline" data-tooltip="Read Privacy Policy">Privacy</a>
+                    @endif
+                </p>
+            </div>
         </footer>
     @endif
 
     {{-- Cookie Consent Banner --}}
     <div
         id="cookie-consent-banner"
-        class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 max-w-md p-4 rounded-2xl shadow-2xl border backdrop-blur-xl z-50 transition-all duration-300 hidden"
+        class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 max-w-md p-5 rounded-2xl shadow-2xl border backdrop-blur-xl z-50 transition-all duration-300 hidden"
         style="background-color: var(--color-surface); border-color: var(--color-border); color: var(--color-text);"
     >
         <div class="flex items-start gap-3">
-            <div class="text-xl">🍪</div>
-            <div class="space-y-2 flex-1">
-                <p class="text-xs leading-relaxed" style="color: var(--color-text-muted);">
+            <div class="text-2xl shrink-0">🍪</div>
+            <div class="space-y-3 flex-1">
+                <p class="font-caption leading-relaxed" style="color: var(--color-text-muted);">
                     We use cookies and storage to manage theme preferences and sessions per our <a href="{{ Route::has('privacy') ? route('privacy') : '#' }}" class="underline font-bold" style="color: var(--color-primary);">Privacy Policy</a>.
                 </p>
                 <div class="flex items-center gap-2">
@@ -127,7 +129,7 @@
                             localStorage.setItem('cookie-consent', 'accepted');
                             document.getElementById('cookie-consent-banner').classList.add('hidden');
                         })()"
-                        class="py-1.5 px-3 rounded-lg text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 transition cursor-pointer"
+                        class="min-h-[44px] px-4 rounded-xl text-sm font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 transition cursor-pointer inline-flex items-center justify-center"
                         data-tooltip="Accept essential cookies and preference tracking"
                     >
                         Accept All
@@ -138,8 +140,8 @@
                             localStorage.setItem('cookie-consent', 'essential');
                             document.getElementById('cookie-consent-banner').classList.add('hidden');
                         })()"
-                        class="py-1.5 px-3 rounded-lg text-xs font-semibold hover:opacity-80 transition cursor-pointer"
-                        style="color: var(--color-text-muted);"
+                        class="min-h-[44px] px-4 rounded-xl text-sm font-semibold hover:opacity-80 transition cursor-pointer inline-flex items-center justify-center border"
+                        style="border-color: var(--color-border); color: var(--color-text-muted);"
                         data-tooltip="Only save essential theme and session cookies"
                     >
                         Essential Only
