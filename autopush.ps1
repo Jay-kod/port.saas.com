@@ -4,6 +4,10 @@ param(
     [string]$Remote = "origin"
 )
 
+if ($env:PATH -notlike "*Git\cmd*") {
+    $env:PATH = "C:\Program Files\Git\cmd;$env:PATH"
+}
+
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host "   DevFolio.AI - Git Auto-Push Watcher Active" -ForegroundColor Green
 Write-Host "   Branch: $Branch | Remote: $Remote | Interval: ${IntervalSeconds}s" -ForegroundColor Yellow
