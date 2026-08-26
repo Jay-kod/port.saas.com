@@ -16,8 +16,15 @@ $certificatesCount = computed(fn () => Certificate::query()->count());
 ?>
 
 @php
-    $slugParam = config('saas.mode') && $this->profile ? ['slug' => $this->profile->slug] : [];
-    $homeRoute = config('saas.mode') && $this->profile ? route('tenant.home', $slugParam) : route('home');
+    $slug = $this->profile?->slug ?? request()->route('slug') ?? request('slug');
+    $slugParam = $slug ? ['slug' => $slug] : [];
+    $hasSlugRoute = \Illuminate\Support\Facades\Route::has('tenant.home');
+    $homeRoute = $hasSlugRoute && $slug ? route('tenant.home', $slugParam) : (Route::has('home') ? route('home') : url('/'));
+    $aboutRoute = $hasSlugRoute && $slug ? route('about', $slugParam) : (Route::has('about') && !config('saas.mode') ? route('about') : '#about');
+    $projectsRoute = $hasSlugRoute && $slug ? route('projects', $slugParam) : (Route::has('projects') && !config('saas.mode') ? route('projects') : '#projects');
+    $skillsRoute = $hasSlugRoute && $slug ? route('skills', $slugParam) : (Route::has('skills') && !config('saas.mode') ? route('skills') : '#skills');
+    $certsRoute = $hasSlugRoute && $slug ? route('certificates', $slugParam) : (Route::has('certificates') && !config('saas.mode') ? route('certificates') : '#certificates');
+    $contactRoute = $hasSlugRoute && $slug ? route('contact', $slugParam) : (Route::has('contact') && !config('saas.mode') ? route('contact') : '#contact');
 @endphp
 
 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16 space-y-8 sm:space-y-12 w-full overflow-x-hidden">
@@ -78,27 +85,27 @@ $certificatesCount = computed(fn () => Certificate::query()->count());
                    style="background: var(--color-primary); color: #000000;">
                     Overview
                 </a>
-                <a href="{{ route('about', $slugParam) }}"
+                <a href="{{ $aboutRoute }}"
                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-80 transition shrink-0"
                    style="color: var(--color-text); background: var(--color-background);">
                     About
                 </a>
-                <a href="{{ route('projects', $slugParam) }}"
+                <a href="{{ $projectsRoute }}"
                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-80 transition shrink-0"
                    style="color: var(--color-text); background: var(--color-background);">
                     Projects
                 </a>
-                <a href="{{ route('skills', $slugParam) }}"
+                <a href="{{ $skillsRoute }}"
                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-80 transition shrink-0"
                    style="color: var(--color-text); background: var(--color-background);">
                     Skills
                 </a>
-                <a href="{{ route('certificates', $slugParam) }}"
+                <a href="{{ $certsRoute }}"
                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-80 transition shrink-0"
                    style="color: var(--color-text); background: var(--color-background);">
                     Certificates
                 </a>
-                <a href="{{ route('contact', $slugParam) }}"
+                <a href="{{ $contactRoute }}"
                    class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-80 transition shrink-0"
                    style="color: var(--color-text); background: var(--color-background);">
                     Contact
