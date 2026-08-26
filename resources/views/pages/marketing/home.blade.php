@@ -22,22 +22,27 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
         </nav>
     </div>
 @else
-<div class="min-h-screen text-gray-100 flex flex-col justify-between" style="background-color: var(--color-background, #0a0e14);">
+<div class="min-h-screen text-gray-100 flex flex-col justify-between overflow-x-hidden w-full" style="background-color: var(--color-background, #0a0e14);">
     <x-marketing-header />
 
     {{-- Hero Section --}}
-    <section class="relative pt-12 sm:pt-20 lg:pt-28 pb-16 sm:pb-24 lg:pb-32 px-4 sm:px-6 overflow-hidden">
-        {{-- Background glow effects --}}
-        <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] rounded-full bg-amber-500/8 blur-3xl animate-pulse" style="animation-duration: 6s;"></div>
-            <div class="absolute top-1/3 left-1/4 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-emerald-500/6 blur-3xl animate-pulse" style="animation-duration: 8s;"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] rounded-full bg-cyan-500/5 blur-3xl animate-pulse" style="animation-duration: 10s;"></div>
+    <section class="relative pt-8 sm:pt-16 lg:pt-24 pb-12 sm:pb-20 lg:pb-28 px-4 sm:px-6 overflow-hidden w-full">
+        {{-- Background glow effects with max-width containment --}}
+        <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none max-w-full">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] lg:w-[800px] h-[300px] sm:h-[500px] lg:h-[800px] rounded-full bg-amber-500/10 blur-3xl animate-pulse" style="animation-duration: 6s;"></div>
+            <div class="absolute top-1/3 left-1/4 w-[200px] sm:w-[350px] h-[200px] sm:h-[350px] rounded-full bg-emerald-500/8 blur-3xl animate-pulse" style="animation-duration: 8s;"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-[180px] sm:w-[280px] h-[180px] sm:h-[280px] rounded-full bg-cyan-500/8 blur-3xl animate-pulse" style="animation-duration: 10s;"></div>
         </div>
 
-        <div class="max-w-5xl mx-auto text-center">
+        <div class="max-w-5xl mx-auto text-center px-1 sm:px-0">
+            {{-- Platform Badge --}}
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-bold mb-6 sm:mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                <span>The Next-Gen SaaS Developer Portfolio</span>
+            </div>
 
             {{-- Heading --}}
-            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
+            <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-gray-900 dark:text-white leading-[1.15] sm:leading-tight">
                 Turn your code into an
                 <br class="hidden sm:inline"/>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-emerald-400 to-cyan-400">
@@ -46,38 +51,38 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
             </h1>
 
             {{-- Subheading --}}
-            <p class="mt-5 sm:mt-8 text-sm sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed px-2">
+            <p class="mt-4 sm:mt-6 text-sm sm:text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-2">
                 Effortlessly showcase your projects with automated GitHub sync, create tailored ATS-optimized resumes for any job description in seconds, and share your personal developer website.
             </p>
 
             {{-- CTA Buttons --}}
-            <div class="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <a href="/admin/register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm sm:text-base font-bold transition-all duration-200 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" data-tooltip="Get started and create your developer portfolio">
+            <div class="mt-6 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
+                <a href="/admin/register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm sm:text-base font-bold transition-all duration-200 shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" data-tooltip="Get started and create your developer portfolio">
                     <span>Create Your Portfolio Free</span>
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                 </a>
-                <a href="{{ route('pricing') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50/60 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 text-gray-900 dark:text-white text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer" data-tooltip="View pricing tiers and features">
+                <a href="{{ route('pricing') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50/60 dark:bg-gray-900/60 hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 text-gray-900 dark:text-white text-sm sm:text-base font-semibold transition-all duration-200 cursor-pointer" data-tooltip="View pricing tiers and features">
                     View Pricing & Plans
                 </a>
             </div>
 
             {{-- Metric Highlights --}}
-            <div class="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-8 sm:pt-10 border-t border-gray-200 dark:border-gray-800/80 max-w-4xl mx-auto">
-                <div class="text-center sm:text-left p-3 sm:p-0">
-                    <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white">100%</p>
-                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">ATS-Optimized Resumes</p>
+            <div class="mt-10 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 pt-6 sm:pt-10 border-t border-gray-200 dark:border-gray-800/80 max-w-4xl mx-auto">
+                <div class="p-3 sm:p-4 rounded-xl bg-white/40 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 text-center sm:text-left">
+                    <p class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-gray-900 dark:text-white">100%</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5">ATS-Optimized Resumes</p>
                 </div>
-                <div class="text-center sm:text-left p-3 sm:p-0">
-                    <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400">&lt; 30s</p>
-                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">AI Tailoring Time</p>
+                <div class="p-3 sm:p-4 rounded-xl bg-white/40 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 text-center sm:text-left">
+                    <p class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-amber-400">&lt; 30s</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5">AI Tailoring Time</p>
                 </div>
-                <div class="text-center sm:text-left p-3 sm:p-0">
-                    <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-emerald-400">GitHub</p>
-                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Auto Repo Sync</p>
+                <div class="p-3 sm:p-4 rounded-xl bg-white/40 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 text-center sm:text-left">
+                    <p class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-emerald-400">GitHub</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5">Auto Repo Sync</p>
                 </div>
-                <div class="text-center sm:text-left p-3 sm:p-0">
-                    <p class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-cyan-400">Multi-Tenant</p>
-                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">Custom URLs & Domains</p>
+                <div class="p-3 sm:p-4 rounded-xl bg-white/40 dark:bg-gray-900/40 border border-gray-200/60 dark:border-gray-800/60 text-center sm:text-left">
+                    <p class="text-lg sm:text-2xl lg:text-3xl font-extrabold text-cyan-400">Custom</p>
+                    <p class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5">URLs & Domains</p>
                 </div>
             </div>
         </div>
