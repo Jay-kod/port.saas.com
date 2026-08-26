@@ -40,44 +40,48 @@ $categories = computed(function () {
 
 ?>
 
-<div class="min-h-screen text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+<div class="min-h-screen text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-950 flex flex-col justify-between overflow-x-hidden w-full">
     <x-marketing-header />
 
     {{-- Hero & Search Header --}}
-    <section class="relative pt-16 pb-12 px-6">
-        <div class="max-w-5xl mx-auto text-center space-y-4">
+    <section class="relative pt-10 sm:pt-16 pb-8 sm:pb-12 px-4 sm:px-6 w-full">
+        <div class="max-w-5xl mx-auto text-center space-y-3 sm:space-y-4">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 border border-amber-500/30 text-amber-500 dark:text-amber-400 mb-2">
+                <span>🌐</span>
+                <span>Verified Developer Directory</span>
+            </div>
 
-            <h1 class="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white tracking-tight">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
                 Discover world-class <br class="hidden sm:inline" />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-emerald-500 to-cyan-500 dark:from-amber-400 dark:via-emerald-400 dark:to-cyan-400">
                     software engineers & designers
                 </span>
             </h1>
 
-            <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p class="text-xs sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-2">
                 Explore portfolios, verifiable project implementations, and verified developer skillsets built on DevFolio.
             </p>
 
             {{-- Search & Filter Controls --}}
-            <div class="pt-6 max-w-2xl mx-auto space-y-4">
+            <div class="pt-4 sm:pt-6 max-w-2xl mx-auto space-y-3 sm:space-y-4">
                 <div class="relative">
                     <input
                         type="text"
                         wire:model.live.debounce.300ms="search"
-                        placeholder="Search by name, skill (e.g. React, Laravel, Docker), role or location..."
-                        class="w-full pl-5 pr-12 py-3.5 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 shadow-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                        placeholder="Search by name, skill (e.g. React, Laravel), role or location..."
+                        class="w-full pl-4 sm:pl-5 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 text-xs sm:text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 shadow-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     />
                     @if($search)
-                        <button type="button" wire:click="$set('search', '')" class="absolute right-4 top-3.5 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white text-sm cursor-pointer" data-tooltip="Clear search query">✕</button>
+                        <button type="button" wire:click="$set('search', '')" class="absolute right-3.5 top-3 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white text-xs sm:text-sm cursor-pointer" data-tooltip="Clear search query">✕</button>
                     @endif
                 </div>
 
                 {{-- Category Tags --}}
-                <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+                <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-1 sm:pt-2">
                     <button
                         type="button"
                         wire:click="$set('selectedCategory', '')"
-                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer {{ empty($selectedCategory) ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
+                        class="px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold transition cursor-pointer {{ empty($selectedCategory) ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
                         data-tooltip="Show all developer profiles"
                     >
                         All Developers
@@ -86,7 +90,7 @@ $categories = computed(function () {
                         <button
                             type="button"
                             wire:click="$set('selectedCategory', '{{ $cat }}')"
-                            class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer {{ $selectedCategory === $cat ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
+                            class="px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold transition cursor-pointer {{ $selectedCategory === $cat ? 'bg-amber-500 text-gray-950 shadow-md shadow-amber-500/20' : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }}"
                             data-tooltip="Filter directory by {{ $cat }}"
                         >
                             {{ $cat }}
@@ -98,7 +102,7 @@ $categories = computed(function () {
     </section>
 
     {{-- Developer Profiles Grid --}}
-    <main class="max-w-7xl mx-auto px-6 py-8 flex-1 w-full">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full">
         @if($this->profiles->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($this->profiles as $profile)
