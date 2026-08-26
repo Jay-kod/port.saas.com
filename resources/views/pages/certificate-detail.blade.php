@@ -17,8 +17,7 @@ $certificate = computed(fn () => Certificate::query()->where('slug', $this->cert
         @php
             $slug = $this->profile?->slug ?? request()->route('slug') ?? request('slug');
             $slugParam = $slug ? ['slug' => $slug] : [];
-            $hasSlugRoute = \Illuminate\Support\Facades\Route::has('tenant.certificates');
-            $backRoute = $hasSlugRoute && $slug ? route('tenant.certificates', $slugParam) : (Route::has('certificates') ? route('certificates') : url('/certificates'));
+            $backRoute = Route::has('certificates') ? route('certificates', $slugParam) : url('/certificates');
         @endphp
         <a href="{{ $backRoute }}" class="inline-flex items-center gap-1.5 font-nav font-bold hover:underline mb-6 min-h-[44px]" style="color: var(--color-primary);">
             <span>&larr;</span>
