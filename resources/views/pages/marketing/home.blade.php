@@ -167,20 +167,20 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
     </section>
 
     {{-- Bottom CTA Banner --}}
-    <section class="py-12 sm:py-20 px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto rounded-2xl sm:rounded-3xl p-8 sm:p-10 lg:p-16 border border-amber-500/30 bg-gradient-to-br from-amber-500/5 via-gray-100 to-gray-200 dark:from-amber-500/10 dark:via-gray-900 dark:to-gray-950 text-center relative overflow-hidden shadow-2xl">
+    <section class="py-10 sm:py-16 lg:py-20 px-4 sm:px-6 w-full">
+        <div class="max-w-5xl mx-auto rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-16 border border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-gray-900 to-gray-950 text-center relative overflow-hidden shadow-2xl">
             {{-- Decorative glow --}}
             <div class="absolute -top-20 -right-20 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-white relative">
+            <h2 class="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white relative leading-tight">
                 Ready to elevate your developer career?
             </h2>
-            <p class="mt-3 sm:mt-4 text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-xs sm:text-sm lg:text-base relative">
+            <p class="mt-3 sm:mt-4 text-gray-300 max-w-xl mx-auto text-xs sm:text-sm lg:text-base relative leading-relaxed px-2">
                 Join developers creating high-impact personal portfolios and landing roles with AI-tailored applications.
             </p>
             <div class="mt-6 sm:mt-8 flex justify-center relative">
-                <a href="/admin/register" class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold text-sm sm:text-base transition-all duration-200 shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" data-tooltip="Get started and create your developer portfolio">
+                <a href="/admin/register" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 rounded-xl sm:rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold text-sm sm:text-base transition-all duration-200 shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" data-tooltip="Get started and create your developer portfolio">
                     <span>Create Your Free Portfolio Now</span>
                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
@@ -189,17 +189,18 @@ $customDomainProfile = computed(fn () => app(CurrentProfileResolver::class)->res
     </section>
 
     {{-- Footer --}}
-    <footer class="border-t border-gray-200 dark:border-gray-800/80 py-8 sm:py-10 px-4 sm:px-6 bg-gray-50 dark:bg-gray-950 text-xs text-gray-600 dark:text-gray-500">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div>
+    <footer class="border-t border-gray-800/80 py-8 px-4 sm:px-6 bg-gray-950 text-xs text-gray-400 w-full">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
+            <div class="text-xs text-gray-400">
                 &copy; {{ date('Y') }} DevFolio AI Platform. Built for developers with Laravel, Livewire Volt & Filament.
             </div>
-            <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-5">
-                <a href="#features" class="hover:text-gray-400 transition cursor-pointer" data-tooltip="Jump to platform features">Features</a>
-                <a href="{{ route('pricing') }}" class="hover:text-gray-400 transition cursor-pointer" data-tooltip="View pricing tiers and features">Pricing</a>
-                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-500 hover:text-emerald-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Developer Workspace">Developer Login</a>
-                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:text-teal-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Agency Hub">Agency Hub</a>
-                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:text-amber-400 font-medium transition cursor-pointer" data-tooltip="Sign in to Super Admin Portal">Super Admin</a>
+            <div class="flex flex-wrap items-center justify-center md:justify-end gap-x-4 gap-y-2">
+                <a href="#features" class="hover:text-white transition cursor-pointer" data-tooltip="Jump to platform features">Features</a>
+                <a href="{{ route('pricing') }}" class="hover:text-white transition cursor-pointer" data-tooltip="View pricing tiers and features">Pricing</a>
+                <a href="{{ route('discover') }}" class="hover:text-white transition cursor-pointer" data-tooltip="Browse public verified developer portfolios">Discover</a>
+                <a href="{{ route('developer.login') }}" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 font-semibold transition cursor-pointer" data-tooltip="Sign in to Developer Workspace">Developer Login</a>
+                <a href="{{ route('agency.login') }}" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:text-teal-300 font-semibold transition cursor-pointer" data-tooltip="Sign in to Agency Hub">Agency Hub</a>
+                <a href="{{ route('super-admin.login') }}" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:text-amber-300 font-semibold transition cursor-pointer" data-tooltip="Sign in to Super Admin Portal">Super Admin</a>
             </div>
         </div>
     </footer>
