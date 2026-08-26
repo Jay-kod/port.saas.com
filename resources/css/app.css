@@ -7,12 +7,217 @@
 @theme {
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Locked Typography Tokens (rem only, 16px root default) */
+    --text-h1-mobile: 2rem;       /* 32px */
+    --text-h1-desktop: 3rem;      /* 48px */
+    --text-h1-hero: 3.5rem;       /* 56px */
+    --text-h2-mobile: 1.5rem;     /* 24px */
+    --text-h2-desktop: 2.25rem;   /* 36px */
+    --text-h3-mobile: 1.25rem;    /* 20px */
+    --text-h3-desktop: 1.625rem;  /* 26px */
+    --text-h4-mobile: 1.125rem;   /* 18px */
+    --text-h4-desktop: 1.25rem;   /* 20px */
+    --text-body: 1rem;            /* 16px floor */
+    --text-body-lg: 1.0625rem;    /* 17px */
+    --text-caption: 0.875rem;     /* 14px */
+    --text-nav-mobile: 1rem;      /* 16px */
+    --text-nav-desktop: 1.125rem; /* 18px */
+    --text-cta-mobile: 1.125rem;  /* 18px */
+    --text-cta-desktop: 1.25rem;  /* 20px */
+    --text-hero-sub: 1.125rem;    /* 18px */
+    --text-hero-sub-lg: 1.25rem;  /* 20px */
+
+    /* 8px Rhythm Spacing System Tokens */
+    --spacing-1: 0.5rem;   /* 8px */
+    --spacing-2: 1rem;     /* 16px */
+    --spacing-3: 1.5rem;   /* 24px */
+    --spacing-4: 2rem;     /* 32px */
+    --spacing-5: 2.5rem;   /* 40px */
+    --spacing-6: 3rem;     /* 48px */
+    --spacing-8: 4rem;     /* 64px */
+    --spacing-12: 6rem;    /* 96px */
+    --spacing-16: 8rem;    /* 128px */
 }
 
 @custom-variant dark (&:where([data-theme-mode="dark"], [data-theme-mode="dark"] *));
+
+/* Standard Typography Token Utility Classes */
+.font-h1 {
+    font-size: var(--text-h1-mobile);
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+}
+@media (min-width: 640px) {
+    .font-h1 {
+        font-size: var(--text-h1-desktop);
+    }
+}
+@media (min-width: 1024px) {
+    .font-h1-hero {
+        font-size: var(--text-h1-hero);
+    }
+}
+
+.font-h2 {
+    font-size: var(--text-h2-mobile);
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+@media (min-width: 640px) {
+    .font-h2 {
+        font-size: var(--text-h2-desktop);
+    }
+}
+
+.font-h3 {
+    font-size: var(--text-h3-mobile);
+    line-height: 1.35;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+@media (min-width: 640px) {
+    .font-h3 {
+        font-size: var(--text-h3-desktop);
+    }
+}
+
+.font-h4 {
+    font-size: var(--text-h4-mobile);
+    line-height: 1.4;
+    font-weight: 700;
+}
+@media (min-width: 640px) {
+    .font-h4 {
+        font-size: var(--text-h4-desktop);
+    }
+}
+
+.font-body {
+    font-size: var(--text-body);
+    line-height: 1.6;
+}
+@media (min-width: 640px) {
+    .font-body-lg {
+        font-size: var(--text-body-lg);
+    }
+}
+
+.font-caption {
+    font-size: var(--text-caption);
+    line-height: 1.5;
+}
+
+.font-hero-sub {
+    font-size: var(--text-hero-sub);
+    line-height: 1.5;
+}
+@media (min-width: 640px) {
+    .font-hero-sub {
+        font-size: var(--text-hero-sub-lg);
+    }
+}
+
+.font-nav {
+    font-size: var(--text-nav-mobile);
+    line-height: 1.5;
+    font-weight: 600;
+}
+@media (min-width: 640px) {
+    .font-nav {
+        font-size: var(--text-nav-desktop);
+    }
+}
+
+.font-cta {
+    font-size: var(--text-cta-mobile);
+    line-height: 1.25;
+    font-weight: 700;
+}
+@media (min-width: 640px) {
+    .font-cta {
+        font-size: var(--text-cta-desktop);
+    }
+}
+
+/* Paragraph max line-length constraint (70–80 characters) */
+.prose-text, .max-line-length {
+    max-width: 72ch;
+}
+
+/* Touch targets ≥44px (Standardized at 48px height) */
+.touch-target {
+    min-height: 2.75rem; /* 44px */
+    min-width: 2.75rem;  /* 44px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    min-height: 3rem; /* 48px */
+    padding: 0.75rem 1.5rem; /* 12px 24px */
+    font-size: var(--text-cta-mobile);
+    font-weight: 700;
+    border-radius: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 150ms ease-in-out;
+}
+@media (min-width: 640px) {
+    .btn-primary {
+        font-size: var(--text-cta-desktop);
+    }
+}
+
+.btn-secondary {
+    min-height: 3rem; /* 48px */
+    padding: 0.75rem 1.5rem;
+    font-size: var(--text-cta-mobile);
+    font-weight: 600;
+    border-radius: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 150ms ease-in-out;
+}
+@media (min-width: 640px) {
+    .btn-secondary {
+        font-size: var(--text-cta-desktop);
+    }
+}
+
+/* Section vertical spacing rhythms */
+.section-marketing {
+    padding-top: 3.5rem;  /* 56px */
+    padding-bottom: 3.5rem;
+}
+@media (min-width: 640px) {
+    .section-marketing {
+        padding-top: 6rem;   /* 96px */
+        padding-bottom: 6rem;
+    }
+}
+
+.section-app {
+    padding-top: 2.5rem;  /* 40px */
+    padding-bottom: 2.5rem;
+}
+@media (min-width: 640px) {
+    .section-app {
+        padding-top: 4rem;   /* 64px */
+        padding-bottom: 4rem;
+    }
+}
 
 /* Universal Global Floating Tooltip Styling */
 #global-tooltip-container {
     transition: opacity 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
 }
+
