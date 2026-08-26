@@ -47,7 +47,7 @@
                         <button
                             type="submit"
                             wire:loading.attr="disabled"
-                            class="inline-flex items-center gap-2 py-3 px-6 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md shadow-amber-500/20 transition disabled:opacity-50"
+                            class="min-h-[48px] inline-flex items-center justify-center gap-2 py-3 px-8 rounded-2xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 shadow-md shadow-amber-500/20 transition disabled:opacity-50 cursor-pointer"
                         >
                             <span wire:loading.remove wire:target="parseResume">⚡ Parse with AI</span>
                             <span wire:loading wire:target="parseResume">Parsing Resume...</span>
@@ -68,7 +68,7 @@
                     <button
                         type="button"
                         wire:click="resetForm"
-                        class="text-xs font-bold text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+                        class="min-h-[44px] px-4 rounded-xl text-xs font-bold text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 inline-flex items-center cursor-pointer"
                     >
                         &larr; Start Over
                     </button>
@@ -79,40 +79,38 @@
                     <h4 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300">Profile Information</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="text-xs text-gray-500">Full Name</label>
-                            <input type="text" wire:model="parsedData.full_name" class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2 text-gray-900 dark:text-white" />
+                            <label class="text-xs text-gray-500 font-semibold">Full Name</label>
+                            <input type="text" wire:model="parsedData.full_name" class="w-full min-h-[44px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base p-2.5 text-gray-900 dark:text-white" />
                         </div>
                         <div>
-                            <label class="text-xs text-gray-500">Headline</label>
-                            <input type="text" wire:model="parsedData.headline" class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2 text-gray-900 dark:text-white" />
+                            <label class="text-xs text-gray-500 font-semibold">Headline</label>
+                            <input type="text" wire:model="parsedData.headline" class="w-full min-h-[44px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base p-2.5 text-gray-900 dark:text-white" />
                         </div>
                         <div>
-                            <label class="text-xs text-gray-500">Email</label>
-                            <input type="text" wire:model="parsedData.email" class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2 text-gray-900 dark:text-white" />
+                            <label class="text-xs text-gray-500 font-semibold">Email</label>
+                            <input type="text" wire:model="parsedData.email" class="w-full min-h-[44px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base p-2.5 text-gray-900 dark:text-white" />
                         </div>
                         <div>
-                            <label class="text-xs text-gray-500">Location</label>
-                            <input type="text" wire:model="parsedData.location" class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2 text-gray-900 dark:text-white" />
+                            <label class="text-xs text-gray-500 font-semibold">Location</label>
+                            <input type="text" wire:model="parsedData.location" class="w-full min-h-[44px] rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base p-2.5 text-gray-900 dark:text-white" />
                         </div>
                     </div>
                     <div>
-                        <label class="text-xs text-gray-500">Professional Bio</label>
-                        <textarea wire:model="parsedData.bio" rows="3" class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2 text-gray-900 dark:text-white"></textarea>
+                        <label class="text-xs text-gray-500 font-semibold">Professional Bio</label>
+                        <textarea wire:model="parsedData.bio" rows="3" class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base p-3 text-gray-900 dark:text-white"></textarea>
                     </div>
                 </div>
 
                 {{-- Experience Review --}}
                 @if(!empty($parsedData['experiences']))
                     <div class="p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm space-y-4">
-                        <h4 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300">Extracted Experiences ({{ count($parsedData['experiences']) }})</h4>
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300">Extracted Work Experience ({{ count($parsedData['experiences']) }})</h4>
                         <div class="space-y-3">
                             @foreach($parsedData['experiences'] as $index => $exp)
-                                <div class="p-4 rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 text-xs">
-                                    <div class="flex items-center justify-between font-bold text-sm text-gray-900 dark:text-white">
-                                        <span>{{ $exp['role'] ?? 'Role' }} @ {{ $exp['company'] ?? 'Company' }}</span>
-                                        <span class="text-xs font-normal text-gray-500">{{ $exp['start_date'] ?? '' }} - {{ $exp['end_date'] ?? 'Present' }}</span>
-                                    </div>
-                                    <p class="mt-2 text-gray-600 dark:text-gray-400">{{ $exp['description'] ?? '' }}</p>
+                                <div class="p-4 rounded-xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/40 space-y-2">
+                                    <div class="font-bold text-sm text-gray-900 dark:text-white">{{ $exp['title'] ?? '' }} at {{ $exp['company'] ?? '' }}</div>
+                                    <div class="text-xs text-gray-500">{{ $exp['start_date'] ?? '' }} - {{ $exp['is_current'] ? 'Present' : ($exp['end_date'] ?? '') }}</div>
+                                    <p class="text-xs text-gray-600 dark:text-gray-300">{{ $exp['description'] ?? '' }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -138,7 +136,7 @@
                     <button
                         type="button"
                         wire:click="resetForm"
-                        class="py-2.5 px-5 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                        class="min-h-[48px] py-2.5 px-6 rounded-xl text-xs font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition inline-flex items-center justify-center cursor-pointer"
                     >
                         Discard & Cancel
                     </button>
@@ -146,7 +144,7 @@
                     <button
                         type="button"
                         wire:click="importParsedData"
-                        class="py-3 px-8 rounded-xl text-xs font-bold text-gray-950 bg-emerald-400 hover:bg-emerald-300 shadow-md shadow-emerald-400/20 transition"
+                        class="min-h-[48px] py-3 px-8 rounded-xl text-xs font-bold text-gray-950 bg-emerald-400 hover:bg-emerald-300 shadow-md shadow-emerald-400/20 transition inline-flex items-center justify-center cursor-pointer"
                     >
                         ✓ Import All into Portfolio
                     </button>
