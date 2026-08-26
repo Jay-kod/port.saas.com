@@ -173,13 +173,13 @@
 
                     <div class="mt-8">
                         @if($account?->plan_slug === 'pro')
-                            <button disabled class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 cursor-not-allowed">
+                            <button disabled class="w-full min-h-[44px] py-2.5 px-4 rounded-xl text-xs font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 cursor-not-allowed inline-flex items-center justify-center">
                                 Current Plan
                             </button>
                         @else
                             <button
                                 wire:click="upgradeToPlan('pro')"
-                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-md shadow-amber-500/20 transition"
+                                class="w-full min-h-[44px] py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-md shadow-amber-500/20 transition inline-flex items-center justify-center cursor-pointer"
                             >
                                 Upgrade to Pro
                             </button>
@@ -208,13 +208,13 @@
 
                     <div class="mt-8">
                         @if($account?->plan_slug === 'agency')
-                            <button disabled class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 cursor-not-allowed">
+                            <button disabled class="w-full min-h-[44px] py-2.5 px-4 rounded-xl text-xs font-bold text-gray-400 bg-gray-100 dark:bg-gray-800 cursor-not-allowed inline-flex items-center justify-center">
                                 Current Plan
                             </button>
                         @else
                             <button
                                 wire:click="upgradeToPlan('agency')"
-                                class="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-gray-900 dark:text-white bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition"
+                                class="w-full min-h-[44px] py-2.5 px-4 rounded-xl text-xs font-bold text-gray-900 dark:text-white bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition inline-flex items-center justify-center cursor-pointer"
                             >
                                 Upgrade to Agency
                             </button>
