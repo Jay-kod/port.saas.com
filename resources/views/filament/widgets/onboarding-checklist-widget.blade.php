@@ -56,9 +56,9 @@
                                 {{ $item['description'] }}
                             </p>
                             <div class="mt-2.5">
-                                <a href="{{ $item['url'] }}" class="inline-flex items-center text-xs font-medium text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300 gap-1">
+                                <a href="{{ $item['url'] }}" class="min-h-[44px] inline-flex items-center text-xs font-semibold text-amber-600 hover:text-amber-500 dark:text-amber-400 dark:hover:text-amber-300 gap-1">
                                     <span>{{ $item['action'] }}</span>
-                                    <x-filament::icon icon="heroicon-m-arrow-right" class="w-3 h-3" />
+                                    <x-filament::icon icon="heroicon-m-arrow-right" class="w-3.5 h-3.5" />
                                 </a>
                             </div>
                         </div>
