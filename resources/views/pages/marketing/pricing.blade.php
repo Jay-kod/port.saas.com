@@ -4,23 +4,26 @@ use function Livewire\Volt\{state};
 
 ?>
 
-<div class="min-h-screen text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-950 flex flex-col justify-between">
+<div class="min-h-screen text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-950 flex flex-col justify-between overflow-x-hidden w-full">
     <x-marketing-header />
 
     {{-- Pricing Header --}}
-    <section class="pt-20 pb-16 px-6 text-center max-w-4xl mx-auto">
-
-        <h1 class="text-4xl sm:text-6xl font-black text-gray-900 dark:text-white tracking-tight">
+    <section class="pt-10 sm:pt-20 pb-8 sm:pb-16 px-4 sm:px-6 text-center max-w-4xl mx-auto w-full">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 border border-amber-500/30 text-amber-500 dark:text-amber-400 mb-4">
+            <span>⚡</span>
+            <span>Transparent Pricing</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
             Simple plans for ambitious developers
         </h1>
-        <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        <p class="mt-4 sm:mt-6 text-sm sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
             Choose the plan that fits your career goals. Start free and upgrade whenever you need unlimited AI tailoring and custom domains.
         </p>
     </section>
 
     {{-- Pricing Cards --}}
-    <section class="pb-24 px-6 max-w-7xl mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section class="pb-16 sm:pb-24 px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {{-- Free Tier --}}
             <div class="p-8 rounded-3xl border border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 flex flex-col justify-between">
                 <div>
