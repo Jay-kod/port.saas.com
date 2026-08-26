@@ -324,12 +324,12 @@ $skipToDashboard = function () {
             @endif
 
             {{-- Navigation Buttons --}}
-            <div class="mt-8 pt-6 border-t border-gray-800/80 flex items-center justify-between">
+            <div class="mt-8 pt-6 border-t border-gray-800/80 flex items-center justify-between gap-4">
                 @if ($step > 1)
                     <button
                         wire:click="prevStep"
                         type="button"
-                        class="px-4 py-2.5 rounded-xl border border-gray-700 bg-gray-800/60 hover:bg-gray-800 text-sm font-medium text-gray-300 transition cursor-pointer"
+                        class="min-h-[48px] px-6 rounded-xl border border-gray-700 bg-gray-800/60 hover:bg-gray-800 text-sm font-medium text-gray-300 transition cursor-pointer inline-flex items-center justify-center"
                         data-tooltip="Return to previous onboarding step"
                     >
                         Back
@@ -338,7 +338,7 @@ $skipToDashboard = function () {
                     <button
                         wire:click="skipToDashboard"
                         type="button"
-                        class="text-xs text-gray-500 hover:text-gray-400 transition cursor-pointer"
+                        class="min-h-[44px] px-2 text-xs text-gray-500 hover:text-gray-400 transition cursor-pointer inline-flex items-center"
                         data-tooltip="Skip onboarding setup and jump directly to developer dashboard"
                     >
                         Skip to Dashboard →
@@ -349,7 +349,7 @@ $skipToDashboard = function () {
                     <button
                         wire:click="nextStep"
                         type="button"
-                        class="ml-auto inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-semibold transition shadow-md shadow-amber-500/20 cursor-pointer"
+                        class="ml-auto min-h-[48px] inline-flex items-center justify-center gap-1.5 px-8 rounded-xl bg-amber-500 hover:bg-amber-400 text-gray-950 text-sm font-semibold transition shadow-md shadow-amber-500/20 cursor-pointer"
                         data-tooltip="Proceed to next onboarding step"
                     >
                         <span>Continue</span>
@@ -361,7 +361,7 @@ $skipToDashboard = function () {
                     <button
                         wire:click="saveAndFinish"
                         type="button"
-                        class="ml-auto inline-flex items-center gap-1.5 px-8 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition shadow-lg shadow-emerald-500/20 cursor-pointer"
+                        class="ml-auto min-h-[48px] inline-flex items-center justify-center gap-1.5 px-8 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-semibold transition shadow-lg shadow-emerald-500/20 cursor-pointer"
                         data-tooltip="Save preferences, publish portfolio, and open developer workspace"
                     >
                         <span>Complete Setup & Open Dashboard</span>
