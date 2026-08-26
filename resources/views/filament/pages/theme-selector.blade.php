@@ -9,26 +9,26 @@
                 </p>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex flex-wrap items-center gap-4">
                 <div class="inline-flex rounded-xl p-1 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                     <button
                         type="button"
                         wire:click="$set('themeModeDefault', 'system')"
-                        class="px-3 py-1.5 rounded-lg text-xs font-semibold transition {{ $themeModeDefault === 'system' ? 'bg-white dark:bg-gray-900 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900' }}"
+                        class="min-h-[44px] px-3.5 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center cursor-pointer {{ $themeModeDefault === 'system' ? 'bg-white dark:bg-gray-900 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900' }}"
                     >
                         🖥 System
                     </button>
                     <button
                         type="button"
                         wire:click="$set('themeModeDefault', 'dark')"
-                        class="px-3 py-1.5 rounded-lg text-xs font-semibold transition {{ $themeModeDefault === 'dark' ? 'bg-white dark:bg-gray-900 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900' }}"
+                        class="min-h-[44px] px-3.5 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center cursor-pointer {{ $themeModeDefault === 'dark' ? 'bg-white dark:bg-gray-900 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900' }}"
                     >
                         🌙 Dark
                     </button>
                     <button
                         type="button"
                         wire:click="$set('themeModeDefault', 'light')"
-                        class="px-3 py-1.5 rounded-lg text-xs font-semibold transition {{ $themeModeDefault === 'light' ? 'bg-white dark:bg-gray-900 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900' }}"
+                        class="min-h-[44px] px-3.5 py-1.5 rounded-lg text-xs font-semibold transition inline-flex items-center justify-center cursor-pointer {{ $themeModeDefault === 'light' ? 'bg-white dark:bg-gray-900 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900' }}"
                     >
                         ☀️ Light
                     </button>
@@ -37,12 +37,12 @@
                 <button
                     type="button"
                     wire:click="save"
-                    class="py-2 px-5 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-md shadow-amber-500/20 transition flex items-center gap-1.5"
+                    class="min-h-[44px] py-2 px-6 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-md shadow-amber-500/20 transition inline-flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    Save Preferences
+                    <span>Save Preferences</span>
                 </button>
             </div>
         </div>
