@@ -48,7 +48,7 @@ $projects = computed(fn () => Project::query()->orderBy('sort_order')->get());
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
         @forelse ($this->projects as $project)
             @php
-                $projRoute = $hasSlugRoute && $slug ? route('tenant.project.detail', ['slug' => $slug, 'projectSlug' => $project->slug]) : (Route::has('projects.show') ? route('projects.show', $project->slug) : '#');
+                $projRoute = Route::has('projects.show') ? route('projects.show', $hasSlugRoute && $slug ? ['slug' => $slug, 'projectSlug' => $project->slug] : ['slug' => $project->slug]) : '#';
             @endphp
             <a href="{{ $projRoute }}"
                class="p-6 sm:p-8 rounded-3xl border transition duration-200 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between group"
