@@ -31,9 +31,9 @@
                 Replace platform branding with your agency or coaching organization details.
             </p>
 
-            <form wire:submit="saveBranding" class="space-y-4">
+            <form wire:submit="saveBranding" class="space-y-5">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
                         Agency / Brand Name
                     </label>
                     <input
@@ -41,12 +41,12 @@
                         wire:model="custom_brand_name"
                         placeholder="e.g. Apex Talent Bootcamp"
                         {{ ! $this->canUseWhiteLabel() ? 'disabled' : '' }}
-                        class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2.5 text-gray-900 dark:text-white disabled:opacity-50"
+                        class="w-full min-h-[48px] px-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base text-gray-900 dark:text-white disabled:opacity-50"
                     />
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                    <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">
                         Custom Logo Image URL
                     </label>
                     <input
@@ -54,17 +54,17 @@
                         wire:model="custom_logo_path"
                         placeholder="https://example.com/logo.png"
                         {{ ! $this->canUseWhiteLabel() ? 'disabled' : '' }}
-                        class="w-full rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm p-2.5 text-gray-900 dark:text-white disabled:opacity-50"
+                        class="w-full min-h-[48px] px-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-base text-gray-900 dark:text-white disabled:opacity-50"
                     />
                 </div>
 
                 <div class="pt-2">
-                    <label class="flex items-center gap-3 cursor-pointer">
+                    <label class="flex items-center gap-3 cursor-pointer min-h-[44px]">
                         <input
                             type="checkbox"
                             wire:model="hide_platform_branding"
                             {{ ! $this->canUseWhiteLabel() ? 'disabled' : '' }}
-                            class="w-4 h-4 rounded text-amber-500 focus:ring-amber-500 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 disabled:opacity-50"
+                            class="w-5 h-5 rounded text-amber-500 focus:ring-amber-500 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 disabled:opacity-50 cursor-pointer"
                         />
                         <div>
                             <span class="text-xs font-bold text-gray-900 dark:text-white block">
@@ -81,7 +81,7 @@
                     <button
                         type="submit"
                         {{ ! $this->canUseWhiteLabel() ? 'disabled' : '' }}
-                        class="py-2.5 px-6 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 disabled:opacity-50 shadow-md transition"
+                        class="min-h-[48px] px-8 rounded-xl text-xs font-bold text-gray-950 bg-amber-500 hover:bg-amber-400 disabled:opacity-50 shadow-md transition inline-flex items-center justify-center cursor-pointer"
                     >
                         Save Branding Settings
                     </button>
