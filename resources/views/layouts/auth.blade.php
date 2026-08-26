@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen antialiased bg-gray-950 text-gray-100 flex flex-col justify-between overflow-x-hidden w-full">
+<body class="min-h-screen antialiased bg-gray-950 text-gray-100 flex flex-col justify-between overflow-x-hidden w-full font-body">
     {{ $slot }}
     @livewireScripts
 
